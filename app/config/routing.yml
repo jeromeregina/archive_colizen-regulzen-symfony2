@@ -1,0 +1,5 @@
+novactive_interface:
+    resource: "@NovactiveInterfaceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
