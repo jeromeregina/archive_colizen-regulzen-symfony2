@@ -94,3 +94,11 @@ braincrafted_bootstrap:
         variables_file: ~
         bootstrap_output: %kernel.root_dir%/Resources/less/bootstrap.less
         bootstrap_template: BraincraftedBootstrapBundle:Bootstrap:bootstrap.less.twig
+        
+ivory_google_map:
+    directions:
+        enabled: true
+        adapter: "widop_http_adapter.curl"
+        url: "http://maps.googleapis.com/maps/api/directions"
+        https: false
+        format: "json"

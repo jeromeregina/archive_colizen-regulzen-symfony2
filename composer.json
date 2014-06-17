@@ -22,7 +22,9 @@
         "braincrafted/bootstrap-bundle": "v2.0.1",
         "twbs/bootstrap": "v3.1.1",
         "oyejorge/less.php": "~1.5",
-        "jquery/jquery":  "1.11.*"
+        "jquery/jquery":  "1.11.*",
+        "egeloen/google-map-bundle": "~2.1",
+        "widop/http-adapter-bundle": "1.1.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
