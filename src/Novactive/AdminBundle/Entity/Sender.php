@@ -38,9 +38,9 @@ class Sender
     /**
      * @var integer
      *
-     * @ORM\Column(name="satus", type="integer", nullable=false, options={"default" = 0})
+     * @ORM\Column(name="status", type="integer", nullable=false, options={"default" = 0})
      */
-    private $satus = 0;
+    private $status = 0;
 
 
 
@@ -103,23 +103,23 @@ class Sender
     /**
      * Set satus
      *
-     * @param integer $satus
+     * @param integer $tatus
      * @return Sender
      */
-    public function setSatus($satus)
+    public function setStatus($status)
     {
-        $this->satus = (int) $satus;
+        $this->status = (int) $status;
 
         return $this;
     }
 
     /**
-     * Get satus
+     * Get status
      *
      * @return integer 
      */
-    public function getSatus()
+    public function getStatus()
     {
-        return $this->satus;
+        return $this->status;
     }
 }
