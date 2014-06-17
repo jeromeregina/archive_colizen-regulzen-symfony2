@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Novactive\InterfaceBundle\NovactiveInterfaceBundle(),
             new Novactive\AdminBundle\NovactiveAdminBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
