@@ -24,7 +24,8 @@
         "oyejorge/less.php": "~1.5",
         "jquery/jquery":  "1.11.*",
         "egeloen/google-map-bundle": "~2.1",
-        "widop/http-adapter-bundle": "1.1.*"
+        "widop/http-adapter-bundle": "1.1.*",
+        "friendsofsymfony/user-bundle": "v1.3.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
