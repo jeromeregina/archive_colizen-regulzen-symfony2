@@ -1,3 +1,8 @@
+novactive_admin:
+    resource: "@NovactiveAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 novactive_interface:
     resource: "@NovactiveInterfaceBundle/Controller/"
     type:     annotation
