@@ -90,7 +90,7 @@ stof_doctrine_extensions:
 braincrafted_bootstrap:
     output_dir: bootstrap
     assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
-    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.11.1.js
+    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-2.0.0.js
     less_filter: lessphp
     auto_configure:
         assetic: true

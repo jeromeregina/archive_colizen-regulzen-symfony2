@@ -63,6 +63,12 @@ class Parcel
      * @ORM\Column(name="PRCL_customer_email", type="string", length=255, nullable=true)
      */
     private $customerEmail;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PRCL_customer_address", type="string", length=255, nullable=true)
+     */
+    private $customerAddress;
 
     /**
      * @var integer
@@ -350,5 +356,74 @@ class Parcel
     public function getShpmnt()
     {
         return $this->shpmnt;
+    }
+
+    /**
+     * Set customerAddress
+     *
+     * @param string $customerAddress
+     * @return Parcel
+     */
+    public function setCustomerAddress($customerAddress)
+    {
+        $this->customerAddress = $customerAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get customerAddress
+     *
+     * @return string 
+     */
+    public function getCustomerAddress()
+    {
+        return $this->customerAddress;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Parcel
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Parcel
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

@@ -1,0 +1,4 @@
+regulzen:
+    info:
+        import_last_started_at: Dernier import lancé le %date% à %time%
+        content_last_updated_at: Dernier contenu mis à jour le %date% à %time%

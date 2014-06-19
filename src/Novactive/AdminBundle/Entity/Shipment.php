@@ -26,16 +26,9 @@ class Shipment
     /**
      * @var string
      *
-     * @ORM\Column(name="SHPMNT_cargopass_event", type="string", length=12, nullable=false)
+     * @ORM\Column(name="SHPMNT_cargopass", type="string", length=16, nullable=false)
      */
-    private $cargopassEvent;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="SHPMNT_cargopass_parcel", type="string", length=12, nullable=false)
-     */
-    private $cargopassParcel;
+    private $cargopass;
 
     /**
      * @var string
@@ -131,49 +124,26 @@ class Shipment
     }
 
     /**
-     * Set cargopassEvent
+     * Set cargopass
      *
      * @param string $cargopassEvent
      * @return Shipment
      */
-    public function setCargopassEvent($cargopassEvent)
+    public function setCargopass($cargopass)
     {
-        $this->cargopassEvent = $cargopassEvent;
+        $this->cargopass = $cargopass;
 
         return $this;
     }
 
     /**
-     * Get cargopassEvent
+     * Get cargopass
      *
      * @return string 
      */
-    public function getCargopassEvent()
+    public function getCargopass()
     {
-        return $this->cargopassEvent;
-    }
-
-    /**
-     * Set cargopassParcel
-     *
-     * @param string $cargopassParcel
-     * @return Shipment
-     */
-    public function setCargopassParcel($cargopassParcel)
-    {
-        $this->cargopassParcel = $cargopassParcel;
-
-        return $this;
-    }
-
-    /**
-     * Get cargopassParcel
-     *
-     * @return string 
-     */
-    public function getCargopassParcel()
-    {
-        return $this->cargopassParcel;
+        return $this->cargopass;
     }
 
     /**
@@ -381,5 +351,50 @@ class Shipment
     public function getSite()
     {
         return $this->site;
+    }
+      /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Parcel
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Parcel
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

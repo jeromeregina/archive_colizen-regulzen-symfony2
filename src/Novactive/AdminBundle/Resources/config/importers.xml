@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="novactive_admin.importer.tour_planning.class">Novactive\AdminBundle\Importer\TourPlanning</parameter>
+        <parameter key="novactive_admin.importer.tour_planning.filepattern">*.xlsx</parameter>
+        <parameter key="novactive_admin.importer.parcel_details.class">Novactive\AdminBundle\Importer\ParcelDetails</parameter>
+        <parameter key="novactive_admin.importer.parcel_details.filepattern">*.txt</parameter>
+    </parameters>
+
+    <services>
+        <service id="novactive_admin.importer.tour_planning" class="%novactive_admin.importer.tour_planning.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument>%file_import.after_routeur.location%</argument>
+            <argument>%novactive_admin.importer.tour_planning.filepattern%</argument>
+            <argument type="service" id="phpexcel" />
+        </service>
+        <service id="novactive_admin.importer.parcel_details" class="%novactive_admin.importer.parcel_details.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument>%file_import.parcels_planned.location%</argument>
+            <argument>%novactive_admin.importer.parcel_details.filepattern%</argument>
+        </service>
+    </services>
+</container>

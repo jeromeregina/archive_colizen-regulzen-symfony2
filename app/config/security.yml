@@ -2,7 +2,8 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_REGUL:       ROLE_USER
+        ROLE_ADMIN:       ROLE_REGUL
         ROLE_SUPER_ADMIN: ROLE_ADMIN
     session_fixation_strategy: none
     providers:
@@ -22,5 +23,5 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/, role: IS_AUTHENTICATED_FULLY }
-#        - { path: ^/admin/, role: ROLE_ADMIN }

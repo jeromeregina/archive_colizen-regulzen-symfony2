@@ -6,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet" media="screen">
-    <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
-    {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
 
 </head>
 
 <body>
-    {% block body %}{% endblock %}
+   {% block header %}
+       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+           {% include 'NovactiveAdminBundle::_page_header.html.twig' %}
+       {% endif %}
+   {% endblock %}
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
     {% block javascripts %}
     <script src="{{ asset('bootstrap/js/jquery.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>

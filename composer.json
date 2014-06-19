@@ -22,10 +22,11 @@
         "braincrafted/bootstrap-bundle": "v2.0.1",
         "twbs/bootstrap": "v3.1.1",
         "oyejorge/less.php": "~1.5",
-        "jquery/jquery":  "1.11.*",
+        "jquery/jquery":  "2.0.*",
         "egeloen/google-map-bundle": "~2.1",
         "widop/http-adapter-bundle": "1.1.*",
-        "friendsofsymfony/user-bundle": "v1.3.4"
+        "friendsofsymfony/user-bundle": "v1.3.4",
+        "liuggio/ExcelBundle": "2.0.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -71,9 +72,9 @@
             "type": "package",
             "package": {
                 "name": "jquery/jquery",
-                "version": "1.11.1",
+                "version": "2.0.0",
                 "dist": {
-                    "url": "http://code.jquery.com/jquery-1.11.1.js",
+                    "url": "http://code.jquery.com/jquery-2.0.0.js",
                     "type": "file"
                 }
             }
