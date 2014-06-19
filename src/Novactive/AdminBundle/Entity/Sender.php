@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TblSender
  *
  * @ORM\Table(name="TBL_sender")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\Sender")
  */
 class Sender
 {

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TblEvent
  *
  * @ORM\Table(name="TBL_event")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\Event")
  */
 class Event
 {

@@ -8,7 +8,7 @@ use Novactive\AdminBundle\Entity\Site;
  * TblZone
  *
  * @ORM\Table(name="TBL_zone", indexes={@ORM\Index(name="fk_zone_site1_idx", columns={"SITE_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\Zone")
  */
 class Zone
 {

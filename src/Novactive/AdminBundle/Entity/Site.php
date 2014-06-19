@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TblSite
  *
  * @ORM\Table(name="TBL_site")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\Site")
  */
 class Site
 {

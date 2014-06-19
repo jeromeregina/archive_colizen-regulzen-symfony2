@@ -8,7 +8,7 @@ use Novactive\AdminBundle\Entity\Site;
  * TblShipment
  *
  * @ORM\Table(name="TBL_shipment", indexes={@ORM\Index(name="fk_shipment_site1_idx", columns={"SITE_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\Shipment")
  */
 class Shipment
 {

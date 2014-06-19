@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TblCycle
  *
  * @ORM\Table(name="TBL_cycle")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\Cycle")
  */
 class Cycle
 {
