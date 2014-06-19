@@ -3,6 +3,7 @@
 namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * TblCycle
@@ -24,24 +25,39 @@ class Cycle
     /**
      * @var integer
      *
-     * @ORM\Column(name="number", type="integer", nullable=false)
+     * @ORM\Column(name="CYCLE_number", type="integer", nullable=false)
      */
     private $number;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=45, nullable=false)
+     * @ORM\Column(name="CYCLE_name", type="string", length=45, nullable=false)
      */
     private $name;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_excluded", type="boolean", nullable=false, options={"default"=true})
+     * @ORM\Column(name="CYCLE_is_excluded", type="boolean", nullable=false, options={"default"=true})
      */
     private $isExcluded = true;
 
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="create")
+    * @ORM\Column(name="CYCLE_created", type="datetime")
+    */
+   private $created;
+   
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="update")
+    * @ORM\Column(name="CYCLE_updated", type="datetime")
+    */
+   private $updated;
 
 
     /**

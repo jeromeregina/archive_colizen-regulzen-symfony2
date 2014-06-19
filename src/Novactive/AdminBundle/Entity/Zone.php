@@ -4,6 +4,8 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Novactive\AdminBundle\Entity\Site;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * TblZone
  *
@@ -24,14 +26,14 @@ class Zone
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="ZONE_name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="travel_time", type="integer", nullable=false, options={"default" = 45})
+     * @ORM\Column(name="ZONE_travel_time", type="integer", nullable=false, options={"default" = 45})
      */
     private $travelTime = 45;
 
@@ -45,6 +47,21 @@ class Zone
      */
     private $site;
 
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="create")
+    * @ORM\Column(name="ZONE_created", type="datetime")
+    */
+   private $created;
+   
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="update")
+    * @ORM\Column(name="ZONE_updated", type="datetime")
+    */
+   private $updated;
 
 
     /**

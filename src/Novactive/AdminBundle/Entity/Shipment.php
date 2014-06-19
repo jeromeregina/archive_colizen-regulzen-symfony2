@@ -4,6 +4,8 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Novactive\AdminBundle\Entity\Site;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * TblShipment
  *
@@ -24,70 +26,70 @@ class Shipment
     /**
      * @var string
      *
-     * @ORM\Column(name="cargopass_event", type="string", length=12, nullable=false)
+     * @ORM\Column(name="SHPMNT_cargopass_event", type="string", length=12, nullable=false)
      */
     private $cargopassEvent;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cargopass_parcel", type="string", length=12, nullable=false)
+     * @ORM\Column(name="SHPMNT_cargopass_parcel", type="string", length=12, nullable=false)
      */
     private $cargopassParcel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="shipper_id", type="string", length=8, nullable=false)
+     * @ORM\Column(name="SHPMNT_shipper_id", type="string", length=8, nullable=false)
      */
     private $shipperId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="delivery_address", type="text", nullable=false)
+     * @ORM\Column(name="SHPMNT_delivery_address", type="text", nullable=false)
      */
     private $deliveryAddress;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="parcel_quantity", type="integer", nullable=false)
+     * @ORM\Column(name="SHPMNT_parcel_quantity", type="integer", nullable=false)
      */
     private $parcelQuantity;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="delivery_date", type="date", nullable=true)
+     * @ORM\Column(name="SHPMNT_delivery_date", type="date", nullable=true)
      */
     private $deliveryDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="delivery_slot_start", type="time", nullable=true)
+     * @ORM\Column(name="SHPMNT_delivery_slot_start", type="time", nullable=true)
      */
     private $deliverySlotStart;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="delivery_slot_end", type="time", nullable=true)
+     * @ORM\Column(name="SHPMNT_delivery_slot_end", type="time", nullable=true)
      */
     private $deliverySlotEnd;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="service_id", type="integer", nullable=true)
+     * @ORM\Column(name="SHPMNT_service_id", type="integer", nullable=true)
      */
     private $serviceId;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
+     * @ORM\Column(name="SHPMNT_creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
@@ -101,6 +103,21 @@ class Shipment
      */
     private $site;
 
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="create")
+    * @ORM\Column(name="SHPMNT_created", type="datetime")
+    */
+   private $created;
+   
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="update")
+    * @ORM\Column(name="SHPMNT_updated", type="datetime")
+    */
+   private $updated;
 
 
     /**

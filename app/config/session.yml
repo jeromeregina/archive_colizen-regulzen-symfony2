@@ -2,8 +2,8 @@ parameters:
     pdo.db_options:
         db_table:    TBL_session
         db_id_col:   SESSION_id
-        db_data_col: value
-        db_time_col: time
+        db_data_col: SESSION_value
+        db_time_col: SESSION_time
 
 services:
     pdo:

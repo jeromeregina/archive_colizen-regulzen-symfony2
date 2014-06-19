@@ -22,13 +22,13 @@ class Session {
     /**
      *
      * @var string
-     * @ORM\Column(name="value", type="text",nullable=false) 
+     * @ORM\Column(name="SESSION_value", type="text",nullable=false) 
      */
     private $value;
     /**
      *
      * @var integer
-     * @ORM\Column(name="time", type="integer",nullable=false) 
+     * @ORM\Column(name="SESSION_time", type="integer",nullable=false) 
      */
     private $time;
     /**

@@ -3,6 +3,7 @@
 namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * TblSite
@@ -24,38 +25,53 @@ class Site
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="SITE_name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=3, nullable=false)
+     * @ORM\Column(name="SITE_code", type="string", length=3, nullable=false)
      */
     private $code;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_active", type="boolean", nullable=false, options={"default" = true})
+     * @ORM\Column(name="SITE_is_active", type="boolean", nullable=false, options={"default" = true})
      */
     private $isActive = true;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="decimal", precision=9, scale=6, nullable=true)
+     * @ORM\Column(name="SITE_longitude", type="decimal", precision=9, scale=6, nullable=true)
      */
     private $longitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="decimal", precision=8, scale=6, nullable=true)
+     * @ORM\Column(name="SITE_latitude", type="decimal", precision=8, scale=6, nullable=true)
      */
     private $latitude;
 
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="create")
+    * @ORM\Column(name="SITE_created", type="datetime")
+    */
+   private $created;
+   
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="update")
+    * @ORM\Column(name="SITE_updated", type="datetime")
+    */
+   private $updated;
 
 
     /**

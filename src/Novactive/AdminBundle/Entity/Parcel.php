@@ -4,6 +4,7 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Novactive\AdminBundle\Entity\Shipment;
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * TblParcel
  *
@@ -24,63 +25,63 @@ class Parcel
     /**
      * @var string
      *
-     * @ORM\Column(name="cargopass_parcel", type="string", length=8, nullable=false)
+     * @ORM\Column(name="PRCL_cargopass_parcel", type="string", length=8, nullable=false)
      */
     private $cargopassParcel;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="premium", type="boolean", nullable=false, options={"default" = false})
+     * @ORM\Column(name="PRCL_premium", type="boolean", nullable=false, options={"default" = false})
      */
     private $premium = false;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="shipper_id", type="string", length=8, nullable=false)
+     * @ORM\Column(name="PRCL_shipper_id", type="string", length=8, nullable=false)
      */
     private $shipperId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="customer_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="PRCL_customer_name", type="string", length=255, nullable=true)
      */
     private $customerName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="customer_phone", type="string", length=12, nullable=true)
+     * @ORM\Column(name="PRCL_customer_phone", type="string", length=12, nullable=true)
      */
     private $customerPhone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="customer_email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="PRCL_customer_email", type="string", length=255, nullable=true)
      */
     private $customerEmail;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="shipper_status", type="integer", nullable=false, options={"default" = 0})
+     * @ORM\Column(name="PRCL_shipper_status", type="integer", nullable=false, options={"default" = 0})
      */
     private $shipperStatus = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="nb_presentations", type="integer", nullable=false, options={"default" = 1})
+     * @ORM\Column(name="PRCL_nb_presentations", type="integer", nullable=false, options={"default" = 1})
      */
     private $nbPresentations = 1;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="parcel_status", type="integer", nullable=false)
+     * @ORM\Column(name="PRCL_parcel_status", type="integer", nullable=false)
      */
     private $parcelStatus;
 
@@ -94,6 +95,21 @@ class Parcel
      */
     private $shpmnt;
 
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="create")
+    * @ORM\Column(name="PRCL_created", type="datetime")
+    */
+   private $created;
+   
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="update")
+    * @ORM\Column(name="PRCL_updated", type="datetime")
+    */
+   private $updated;
 
 
     /**

@@ -3,6 +3,7 @@
 namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * TblSender
@@ -24,24 +25,39 @@ class Sender
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="SNDR_name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="short_name", type="string", length=3, nullable=false)
+     * @ORM\Column(name="SNDR_short_name", type="string", length=3, nullable=false)
      */
     private $shortName;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer", nullable=false, options={"default" = 0})
+     * @ORM\Column(name="SNDR_status", type="integer", nullable=false, options={"default" = 0})
      */
     private $status = 0;
 
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="create")
+    * @ORM\Column(name="SNDR_created", type="datetime")
+    */
+   private $created;
+   
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="update")
+    * @ORM\Column(name="SNDR_updated", type="datetime")
+    */
+   private $updated;
 
 
     /**
