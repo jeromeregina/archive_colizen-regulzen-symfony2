@@ -19,8 +19,11 @@ parameters:
     use_assetic_controller: true
 #paramètre déterminant le temps pour la libération du lock sur la session en minutes
     session_login_lock_time: 10 
-#emplacement du WSDL du webservice
-    czn_webservices_wsdl_location: http://92.103.148.116/czn-webservices/webtrace_service.asmx?WSDL
+#info webservice
+    czn_webservice:
+        wsdl_location: ~
+        customer: ~
+        password: ~
 #répertoire pour les fichiers excels "après routeur"
     file_import.after_routeur.location: %kernel.root_dir%/../imports/apres_routeur 
 #répertoire pour les fichiers txt listant les colis plannifiés

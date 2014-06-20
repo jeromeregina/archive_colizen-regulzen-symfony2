@@ -17,14 +17,6 @@ class TourPlanning extends AbstractImporter  {
         parent::__construct($em, $sourceDirectory, $filenamePattern);
     }
 
-    public function execute() {
-        foreach ($this->findFiles() as $file){
-            /* @var $file SplFileInfo */
-            foreach ($this->getLinesFromFile($file) as $line){
-                $this->persistLine($line);
-            }
-        }
-    }
     /**
      * 
      * @param SplFileInfo $file (or string for filename)
@@ -34,7 +26,7 @@ class TourPlanning extends AbstractImporter  {
         $peo=$this->phpExcel->createPHPExcelObject($file);
         $sheetData=$peo->getActiveSheet()->toArray(null,true,true,true);
         // suppression de la ligne d'entête (meilleure solution?)
-        unset($sheetData[0]);
+        array_shift( $sheetData);
         return $sheetData;
     }
 /**
@@ -65,7 +57,7 @@ class TourPlanning extends AbstractImporter  {
  * @param array $line
  */
     protected function persistLine($line) {
-        
+        var_dump($line);
     }
 
 
