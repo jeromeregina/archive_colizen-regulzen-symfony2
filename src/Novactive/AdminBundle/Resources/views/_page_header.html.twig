@@ -19,7 +19,7 @@
                     <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                 </li>
             </ul>
-            <ul class="navbar navbar-right">
+            <ul class="nav navbar-right">
                 <li>
                   {% if latest_import_action_date %}
                       {{ 'regulzen.info.import_last_started_at'|trans({'%date%':latest_import_action_date|date('d/m/Y'),'%time%':latest_import_action_date|date('H:i:s')}) }}  

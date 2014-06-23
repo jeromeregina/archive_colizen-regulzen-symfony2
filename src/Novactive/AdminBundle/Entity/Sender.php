@@ -35,6 +35,13 @@ class Sender
      * @ORM\Column(name="SNDR_short_name", type="string", length=3, nullable=false)
      */
     private $shortName;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="SNDR_code", type="string", length=6, nullable=false)
+     */
+    private $code;
 
     /**
      * @var integer
@@ -42,6 +49,12 @@ class Sender
      * @ORM\Column(name="SNDR_status", type="integer", nullable=false, options={"default" = 0})
      */
     private $status = 0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="SNDR_sensitivity", type="integer", nullable=false, options={"default" = 2})
+     */
+    private $sensitivity = 2;
 
     /**
     * @var datetime $created
@@ -183,4 +196,39 @@ class Sender
     {
         return $this->updated;
     }
+    /**
+     * 
+     * @return string
+     */
+    public function getCode() {
+        return $this->code;
+    }
+    /**
+     * 
+     * @param string $code
+     * @return \Novactive\AdminBundle\Entity\Sender
+     */
+    public function setCode($code) {
+        $this->code = $code;
+        return $this;
+    }
+    /**
+     * 
+     * @return int
+     */
+    public function getSensitivity() {
+        return $this->sensitivity;
+    }
+    
+    /**
+     * 
+     * @param int $sensitivity
+     * @return \Novactive\AdminBundle\Entity\Sender
+     */
+    public function setSensitivity($sensitivity) {
+        $this->sensitivity = $sensitivity;
+        return $this;
+    }
+
+
 }

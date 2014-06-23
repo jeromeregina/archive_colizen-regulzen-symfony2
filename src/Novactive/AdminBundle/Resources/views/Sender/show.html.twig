@@ -2,7 +2,7 @@
 {% from "NovactiveAdminBundle:Form:_macros.html.twig" import btn %}
 
 {% block body -%}
-    <h1>Site</h1>
+    <h1>Sender</h1>
 
     <table class="record_properties table-hover table-striped">
         <tbody>
@@ -15,20 +15,20 @@
                 <td>{{ entity.name }}</td>
             </tr>
             <tr>
+                <th>Shortname</th>
+                <td>{{ entity.shortName }}</td>
+            </tr>
+            <tr>
                 <th>Code</th>
                 <td>{{ entity.code }}</td>
             </tr>
             <tr>
-                <th>Isactive</th>
-                <td>{{ entity.isActive }}</td>
+                <th>Status</th>
+                <td>{{ entity.status }}</td>
             </tr>
             <tr>
-                <th>Longitude</th>
-                <td>{{ entity.longitude }}</td>
-            </tr>
-            <tr>
-                <th>Latitude</th>
-                <td>{{ entity.latitude }}</td>
+                <th>Sensitivity</th>
+                <td>{{ entity.sensitivity }}</td>
             </tr>
             <tr>
                 <th>Created</th>
@@ -43,10 +43,10 @@
 
         <ul class="record_actions">
     <li>
-        {{ btn('site','list') }}
+        {{ btn('sender','list') }}
     </li>
     <li>
-        {{ btn('site','edit',entity.id) }}
+        {{ btn('sender','edit',entity.id) }}
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
