@@ -4,17 +4,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="novactive_interface.example.class">Novactive\InterfaceBundle\Example</parameter>
+        <parameter key="novactive_interface.twig.extension.class">Novactive\InterfaceBundle\Twig\InterfaceExtension</parameter>
     </parameters>
 
     <services>
-        <service id="novactive_interface.example" class="%novactive_interface.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
-        </service>
+       <service id="novactive_interface.twig.extension" class="%novactive_interface.twig.extension.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+           <tag name="twig.extension" />
+       </service>
     </services>
-    -->
 </container>

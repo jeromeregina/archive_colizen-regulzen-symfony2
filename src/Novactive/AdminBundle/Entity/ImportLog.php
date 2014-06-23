@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * TblCycle
  *
  * @ORM\Table(name="TBL_import_log")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\ImportLog")
  */
 class ImportLog {
 

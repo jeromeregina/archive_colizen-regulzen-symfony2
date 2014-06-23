@@ -13,10 +13,18 @@
         <div class="col-md-5 col-md-offset-5">
             <ul>
                 <li>
-                  {{ 'regulzen.info.import_last_started_at'|trans({'%date%':'now'|date('d/m/Y'),'%time%':'now'|date('H:i:s')}) }}  
+                  {% if latest_import_action_date %}
+                      {{ 'regulzen.info.import_last_started_at'|trans({'%date%':latest_import_action_date|date('d/m/Y'),'%time%':latest_import_action_date|date('H:i:s')}) }}  
+                  {% else %}
+                      {{ 'regulzen.info.no_existing_import_logs'|trans }}
+                  {% endif %}
                 </li>
                 <li>
-                  {{ 'regulzen.info.content_last_updated_at'|trans({'%date%':'now'|date('d/m/Y'),'%time%':'now'|date('H:i:s')}) }}  
+                  {% if latest_content_update_date %}
+                      {{ 'regulzen.info.content_last_updated_at'|trans({'%date%':latest_content_update_date|date('d/m/Y'),'%time%':latest_content_update_date|date('H:i:s')}) }}  
+                  {% else %}
+                      {{ 'regulzen.info.no_content_updated'|trans }}
+                  {% endif %}
                 </li>
             </ul>
         </div>

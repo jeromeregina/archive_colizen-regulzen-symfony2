@@ -1,4 +1,6 @@
 regulzen:
     info:
         import_last_started_at: Dernier import lancé le %date% à %time%
+        no_existing_import_logs: Aucun log d'import
         content_last_updated_at: Dernier contenu mis à jour le %date% à %time%
+        no_content_updated: Aucun log de mise à jour de contenu
