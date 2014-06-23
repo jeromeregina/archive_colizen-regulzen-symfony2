@@ -58,7 +58,7 @@ class TourPlanning extends AbstractImporter  {
  */
     protected function persistLine($line) {
         var_dump($line);
-    }
+            }
 
 
 }
