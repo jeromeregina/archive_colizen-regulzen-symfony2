@@ -1,4 +1,5 @@
 {% extends "NovactiveAdminBundle::admin_layout.html.twig" %}
+{% from "NovactiveAdminBundle:Form:_macros.html.twig" import btn %}
 
 {% block body -%}
     <h1>Site edit</h1>
@@ -7,9 +8,7 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('admin_site_list') }}" class="btn btn-default">
-            Back to the list
-        </a>
+        {{ btn('site','list') }}
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>

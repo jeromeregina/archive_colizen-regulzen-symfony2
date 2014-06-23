@@ -1,4 +1,5 @@
 {% extends "NovactiveAdminBundle::admin_layout.html.twig" %}
+{% from "NovactiveAdminBundle:Form:_macros.html.twig" import btn %}
 
 {% block body -%}
     <h1>Site list</h1>
@@ -29,8 +30,8 @@
                 <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                        <a href="{{ path('admin_site_show', { 'id': entity.id }) }}" class="btn btn-default btn-sm">show</a>
-                        <a href="{{ path('admin_site_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-sm">{{ icon('pencil') }} edit</a>
+                        {{ btn('site','show',entity.id,true) }}
+                        {{ btn('site','edit',entity.id,true) }}
                 </td>
             </tr>
         {% endfor %}
@@ -39,9 +40,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('admin_site_new') }}" class="btn btn-primary">
-                Create a new entry
-            </a>
+            {{ btn('site','new') }}
         </li>
     </ul>
     {% endblock %}

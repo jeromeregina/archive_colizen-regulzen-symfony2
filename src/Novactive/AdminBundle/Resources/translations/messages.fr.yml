@@ -4,3 +4,11 @@ regulzen:
         no_existing_import_logs: Aucun log d'import
         content_last_updated_at: Dernier contenu mis à jour le %date% à %time%
         no_content_updated: Aucun log de mise à jour de contenu
+    admin:
+        list: Retourner à la liste
+        edit: Editer
+        show: Aperçu
+        new: Créer une nouvelle entrée
+        create: Créer
+        update: Enregistrer
+        delete: Supprimer
