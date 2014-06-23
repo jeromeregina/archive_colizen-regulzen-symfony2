@@ -4,6 +4,7 @@ namespace Novactive\AdminBundle\Importer;
 use Liuggio\ExcelBundle\Factory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\SplFileInfo;
+use Novactive\AdminBundle\Command\OutputHandler\OutputHandler;
 
 class TourPlanning extends AbstractImporter  {
     /**
@@ -22,7 +23,7 @@ class TourPlanning extends AbstractImporter  {
      * @param SplFileInfo $file (or string for filename)
      * @return array
      */
-    protected function getLinesFromFile($file){
+    protected function getLinesFromFile(SplFileInfo $file){
         $peo=$this->phpExcel->createPHPExcelObject($file);
         $sheetData=$peo->getActiveSheet()->toArray(null,true,true,true);
         // suppression de la ligne d'entête (meilleure solution?)
@@ -56,9 +57,13 @@ class TourPlanning extends AbstractImporter  {
  * 
  * @param array $line
  */
-    protected function persistLine($line) {
-        var_dump($line);
+    protected function persistLine($line,SplFileInfo $file,OutputHandler $output) {
+        if ($output)
+            $output->write('importing "'.$line['C'].'" from file "'.$file->getFilename().'"');
+//        var_dump($line);
             }
 
-
+            protected function getActionName() {
+                return 'Excels liste camionage après routeur';
+            }
 }

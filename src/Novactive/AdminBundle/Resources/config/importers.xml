@@ -9,6 +9,7 @@
         <parameter key="novactive_admin.importer.tour_planning.filepattern">*.xlsx</parameter>
         <parameter key="novactive_admin.importer.parcel_details.class">Novactive\AdminBundle\Importer\ParcelDetails</parameter>
         <parameter key="novactive_admin.importer.parcel_details.filepattern">*.txt</parameter>
+        <parameter key="novactive_admin.importer.output_handler.class">Novactive\AdminBundle\Command\OutputHandler\OutputHandler</parameter>
     </parameters>
 
     <services>
@@ -22,6 +23,9 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument>%file_import.parcels_planned.location%</argument>
             <argument>%novactive_admin.importer.parcel_details.filepattern%</argument>
+        </service>
+        <service id="novactive_admin.importer.output_handler" class="%novactive_admin.importer.output_handler.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
         </service>
     </services>
 </container>

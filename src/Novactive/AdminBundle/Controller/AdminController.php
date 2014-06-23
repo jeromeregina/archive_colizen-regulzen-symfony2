@@ -26,10 +26,10 @@ class AdminController extends Controller
      */
     public function soapAction(Request $request)
     {
-        echo "<pre>";
-        $this->get('novactive_admin.importer.tour_planning')->execute();
-//        $this->get('novactive_admin.importer.parcel_details')->execute();
-        echo "</pre>";die;
+//        echo "<pre>";
+//        $this->get('novactive_admin.importer.tour_planning')->execute();
+////        $this->get('novactive_admin.importer.parcel_details')->execute();
+//        echo "</pre>";die;
 //        $wsParams=$this->container->getParameter('czn_webservice');
 //        $client=new \SoapClient($wsParams['wsdl_location']);
 //        
@@ -42,11 +42,11 @@ class AdminController extends Controller
         echo "<pre>";
 //        var_dump($client->__getFunctions());
 //        var_dump($client->__getTypes());
-        foreach (array('250750002545289467','250750002608611068','250750002583059329','250750002583060295','250750002583061261','250750002583062237')as $ssp){
-            foreach (array($ssp,substr($ssp,0,-3),substr($ssp,0,-4),substr($ssp,0,-5)) as $sp){
-            echo ("env : ".$sp. " <br/>");
-            echo ("ret : ".$this->get('webservice')->getShipmentTrace(750,$sp)->ShipmentNumber. " <br/>");
-            }
+        foreach (array('250750002545289','2507502583059')as $ssp){
+//            foreach (array($ssp,substr($ssp,0,-3),substr($ssp,0,-4),substr($ssp,0,-5)) as $sp){
+            echo ("env : ".$ssp. " <br/>");
+            echo ("ret : ".var_dump($this->get('webservice')->getShipmentTrace(750,$ssp)). " <br/>");
+//            }
             echo ('---------<br/>');
         }
         echo "</pre>";

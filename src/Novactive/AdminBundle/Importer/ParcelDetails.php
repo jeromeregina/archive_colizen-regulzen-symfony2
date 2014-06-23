@@ -3,6 +3,7 @@ namespace Novactive\AdminBundle\Importer;
 
 use Doctrine\ORM\EntityManagerInterface; 
 use Symfony\Component\Finder\SplFileInfo;
+use Novactive\AdminBundle\Command\OutputHandler\OutputHandler;
 
 class ParcelDetails extends AbstractImporter {
     /**
@@ -23,7 +24,7 @@ class ParcelDetails extends AbstractImporter {
      * 
      * @param string $line
      */
-    protected function persistLine($line) {
+    protected function persistLine($line,SplFileInfo $file,OutputHandler $output) {
         $array=split('\|',$line);
         var_dump($array);die;
     }
@@ -31,11 +32,13 @@ class ParcelDetails extends AbstractImporter {
  * 
  * @param SplFileInfo $file
  */
-    protected function getLinesFromFile($file) {
+    protected function getLinesFromFile(SplFileInfo $file) {
         $ar=split("\r\n",$file->getContents());
         if ($ar[count($ar)-1]=="")
             array_pop($ar);
        return $ar;
     }
-
+    protected function getActionName() {
+                return 'Text fichier planification imtech';
+   }
 }
