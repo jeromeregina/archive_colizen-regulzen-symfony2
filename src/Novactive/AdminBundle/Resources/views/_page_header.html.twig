@@ -10,8 +10,16 @@
             </button>
             <a class="navbar-brand regulzen_logo" href="{{ path('regulzen_interface_index') }}">&nbsp;</a>
         </div>
-        <div class="col-md-5 col-md-offset-5">
-            <ul>
+        
+        
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            {{ menu is defined ? menu|raw }}
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                </li>
+            </ul>
+            <ul class="navbar navbar-right">
                 <li>
                   {% if latest_import_action_date %}
                       {{ 'regulzen.info.import_last_started_at'|trans({'%date%':latest_import_action_date|date('d/m/Y'),'%time%':latest_import_action_date|date('H:i:s')}) }}  
@@ -27,13 +35,6 @@
                   {% endif %}
                 </li>
             </ul>
-        </div>
-        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
-                </li>
-            </ul>
-        </na>
+        </nav>
     </div>
 </header>    
