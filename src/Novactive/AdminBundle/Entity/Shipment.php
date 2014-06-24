@@ -5,7 +5,7 @@ namespace Novactive\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Novactive\AdminBundle\Entity\Site;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Novactive\AdminBundle\Entity\DeliveryAddress;
 /**
  * TblShipment
  *
@@ -37,10 +37,11 @@ class Shipment
      */
     private $shipperId;
 
-    /**
+     /**
      * @var string
      *
-     * @ORM\Column(name="SHPMNT_delivery_address", type="text", nullable=false)
+     * @ORM\OneToOne(targetEntity="DeliveryAddress", cascade={"persist"}, inversedBy="shipment")
+     * @ORM\JoinColumn(name="DLVRADDR_id", referencedColumnName="DLVRADDR_id")
      */
     private $deliveryAddress;
 
@@ -85,7 +86,13 @@ class Shipment
      * @ORM\Column(name="SHPMNT_creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="SHPMNT_weight", type="decimal", precision=5, scale=1, nullable=false)
+     */
+    private $weight;
+    
     /**
      * @var Site
      *
@@ -112,7 +119,9 @@ class Shipment
     */
    private $updated;
 
-
+   public function __construct() {
+       $this->deliveryAddress = new DeliveryAddress();
+   }
     /**
      * Get id
      *
@@ -137,13 +146,25 @@ class Shipment
     }
 
     /**
-     * Get cargopass
+     * Get cargopass format 123-123-123456789 123
      *
      * @return string 
      */
     public function getCargopass()
     {
         return $this->cargopass;
+    }
+    
+    /**
+     * Get cargopass format 12312323456789
+     *
+     * @return string 
+     */
+    public function getCargopassFormatted()
+    {
+        $pattern = '/(\d{3})-(\d{3})-(\d)(\d{8}) (\d{3})/';
+        $replacement = '$1$3$4';
+        return preg_replace($pattern, $replacement,$this->cargopass);
     }
 
     /**
@@ -167,29 +188,6 @@ class Shipment
     public function getShipperId()
     {
         return $this->shipperId;
-    }
-
-    /**
-     * Set deliveryAddress
-     *
-     * @param string $deliveryAddress
-     * @return Shipment
-     */
-    public function setDeliveryAddress($deliveryAddress)
-    {
-        $this->deliveryAddress = $deliveryAddress;
-
-        return $this;
-    }
-
-    /**
-     * Get deliveryAddress
-     *
-     * @return string 
-     */
-    public function getDeliveryAddress()
-    {
-        return $this->deliveryAddress;
     }
 
     /**
@@ -396,5 +394,51 @@ class Shipment
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set deliveryAddress
+     *
+     * @param \Novactive\AdminBundle\Entity\DeliveryAddress $deliveryAddress
+     * @return Shipment
+     */
+    public function setDeliveryAddress(DeliveryAddress $deliveryAddress)
+    {
+        $this->deliveryAddress = $deliveryAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get deliveryAddress
+     *
+     * @return \Novactive\AdminBundle\Entity\DeliveryAddress 
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->deliveryAddress;
+    }
+
+    /**
+     * Set weight
+     *
+     * @param string $weight
+     * @return Shipment
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get weight
+     *
+     * @return string 
+     */
+    public function getWeight()
+    {
+        return $this->weight;
     }
 }

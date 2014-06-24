@@ -24,7 +24,7 @@ class ParcelDetails extends AbstractImporter {
      * 
      * @param string $line
      */
-    protected function persistLine($line,SplFileInfo $file,OutputHandler $output) {
+    protected function persistLine($line,SplFileInfo $file,OutputHandler $output = null) {
         $array=split('\|',$line);
         var_dump($array);die;
     }
@@ -33,9 +33,7 @@ class ParcelDetails extends AbstractImporter {
  * @param SplFileInfo $file
  */
     protected function getLinesFromFile(SplFileInfo $file) {
-        $ar=split("\r\n",$file->getContents());
-        if ($ar[count($ar)-1]=="")
-            array_pop($ar);
+        $ar=split("\r\n",trim($file->getContents()));
        return $ar;
     }
     protected function getActionName() {

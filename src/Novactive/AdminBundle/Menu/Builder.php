@@ -12,7 +12,7 @@ class Builder extends ContainerAware{
 
         $menu->addChild('Retour à l\'interface', array('route' => 'regulzen_interface_index'));
         $menu->addChild('Logs imports');
-        $menu['Logs imports']->addChild('Logs imports de fichiers', array('route' => 'regulzen_interface_index'));
+        $menu['Logs imports']->addChild('Logs imports de fichiers', array('route' => 'admin_logs_imports_list'));
         $menu['Logs imports']->addChild('Logs imports webservices', array('route' => 'regulzen_interface_index'));
         $menu->addChild('Créneaux', array('route' => 'regulzen_interface_index'));
         $menu->addChild('Comptes chargeurs', array('route' => 'admin_sender_list'));

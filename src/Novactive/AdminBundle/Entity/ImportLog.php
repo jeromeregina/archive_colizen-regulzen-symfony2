@@ -29,7 +29,7 @@ class ImportLog {
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPRT_message", type="string", length=80, nullable=false)
+     * @ORM\Column(name="IMPRT_message", type="string", length=255, nullable=false)
      */
     private $message;
 

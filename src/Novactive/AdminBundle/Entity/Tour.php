@@ -27,12 +27,7 @@ class Tour {
      * @ORM\Column(name="TOUR_number", type="integer", nullable=false)
      */
     private $number;
-   /**
-     * @var string
-     *
-     * @ORM\Column(name="TOUR_name", type="string", length=45, nullable=false)
-     */
-    private $name;
+    
      /**
      * @var boolean
      *
@@ -93,29 +88,6 @@ class Tour {
     public function getNumber()
     {
         return $this->number;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Tour
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

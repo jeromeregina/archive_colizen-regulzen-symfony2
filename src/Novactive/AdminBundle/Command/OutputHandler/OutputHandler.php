@@ -5,7 +5,9 @@ namespace Novactive\AdminBundle\Command\OutputHandler;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
 use Novactive\AdminBundle\Entity\ImportLog;
-
+/**
+ *  permet l'écriture simultané vers la ligne de commande & la table ImportLog
+ */
 class OutputHandler 
 {
 
