@@ -19,20 +19,30 @@ class InterfaceController extends Controller
      */
     public function indexAction(Request $request)
     {
-//        $shipmentRepository = $this->getDoctrine()
-//            ->getEntityManager()
-//            ->getRepository('NovactiveAdminBundle:Shipment');
-
         $shipments = array();
-
         $dateCycleForm = $this->createForm('date_cycle', new DateCycleFormModel());
+
+        $cycles = $this->getDoctrine()
+            ->getRepository('NovactiveAdminBundle:Cycle')
+            ->findAll();
+
+        $currentDateTime = new \DateTime('now');
+        foreach ($cycles as $cycle)
+        {
+            if ($cycle->getStart() < $currentDateTime && $currentDateTime < $cycle->getEnd())
+            {
+                $currentCycle = $cycle;
+            }
+        }
+
+        $dateCycleForm->get('cycle')->setData($currentCycle);
+
 
         $dateCycleForm->handleRequest($request);
         if ($dateCycleForm->isValid())
         {
             $dateCycle = $dateCycleForm->getData();
 
-            //$shipments = $shipmentRepository->findShipments($dateCycle->getDate(), $dateCycle->getCycle());
         }
 
         return array(

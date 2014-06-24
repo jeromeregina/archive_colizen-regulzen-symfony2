@@ -11,6 +11,7 @@ namespace Novactive\InterfaceBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class DateCycleFormType extends AbstractType
 {
@@ -20,6 +21,9 @@ class DateCycleFormType extends AbstractType
         ->add('cycle', 'entity', array(
                 'class' => 'NovactiveAdminBundle:Cycle',
                 'property' => 'name',
+                    'query_builder' => function(EntityRepository $er) {
+                            return $er->getCyclesQueryBuilder();
+                        },
             ))
         ->add('valider', 'submit')
         ;

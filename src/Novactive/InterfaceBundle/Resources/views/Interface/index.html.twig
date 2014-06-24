@@ -2,13 +2,19 @@
 
 {% block body %}
     <div class="row">
+        {{ form_start(dateCycleForm) }}
         <div class="col-md-3 col-md-offset-3">
             {{ form_widget(dateCycleForm.date) }}
 
             </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             {{ form_widget(dateCycleForm.cycle) }}
         </div>
+        <div class="col-md-2">
+            {{ form_widget(dateCycleForm.valider) }}
+        </div>
+        {{ form_rest(dateCycleForm) }}
+        {{ form_end(dateCycleForm) }}
     </div>
         <br />
 
