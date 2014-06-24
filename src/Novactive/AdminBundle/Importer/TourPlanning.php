@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\SplFileInfo;
 use Novactive\AdminBundle\Command\OutputHandler\OutputHandler;
 use Novactive\AdminBundle\Entity\Shipment;
+use Novactive\AdminBundle\Entity\DeliveryAddress;
+
 class TourPlanning extends AbstractImporter  {
     /**
      *
@@ -65,21 +67,21 @@ class TourPlanning extends AbstractImporter  {
                $shipment= $this->getShipmentRepository()->findOneBy(array('cargopass'=>$line['C']));
                $shipment=($shipment instanceof Shipment)?$shipment:new Shipment();
                
-               /*
-                * ne marcheras pas
-                */
-               $site= $this->getSiteRepository()->findOneBy(array('code'=>$line['L']));
+               $site= $this->getSiteRepository()->findOneBy(array('number'=>$line['L']));
                
                $shipment->setCargopass($line['C'])
                         ->setShipperId($line['D'])
                        ->setCreationDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
                        ->setDeliveryDate(\DateTime::createFromFormat('H:i',$line['AC']))
                        ->setParcelQuantity($line['H'])
-                       ->setSite(new \Novactive\AdminBundle\Entity\Site())
+                       ->setSite($site)
                        ->setWeight($line['G'])
                        ;
                
-               $shipment->getDeliveryAddress()
+               $deliveryAddress=($shipment->getDeliveryAddress() instanceof DeliveryAddress)?$shipment->getDeliveryAddress():new DeliveryAddress();
+               
+               
+               $deliveryAddress
                        ->setAddress($line['V'])
                        ->setAdditionalInformations(($line['R']=='<?>')?null:$line['R'])
                        ->setCountry($line['S'])
@@ -90,11 +92,13 @@ class TourPlanning extends AbstractImporter  {
                        ->setEmail(($line['Y']=='<?>')?null:$line['Y'])
                        ->setLatitude($line['Z'])
                        ->setLongitude($line['AA'])
+                       ->setShipment($shipment)
                        ;
-               
-               var_dump($shipment);die;
+               $shipment->setDeliveryAddress($deliveryAddress);
+//               var_dump($shipment);die;
 //               $this->em->persist($shipment);
-//               $this->em->flush();
+               $this->em->persist($shipment);
+               $this->em->flush();
 //               $sender = $this->getSenderRepository()->findOneBy(array(''))
                
                

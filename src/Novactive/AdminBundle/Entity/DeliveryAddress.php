@@ -87,7 +87,7 @@ class DeliveryAddress {
      * @var string
      *
      * @ORM\OneToOne(targetEntity="Shipment", cascade={"persist"})
-     * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", nullable=false)
+     * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", onDelete="CASCADE")
      */
     protected $shipment;
     
@@ -340,8 +340,10 @@ class DeliveryAddress {
      */
     public function setShipment(Shipment $shipment)
     {
+        $shipment->setDeliveryAddress($this);
+        
         $this->shipment = $shipment;
-
+        
         return $this;
     }
 

@@ -35,6 +35,13 @@ class Site
      * @ORM\Column(name="SITE_code", type="string", length=3, nullable=false)
      */
     private $code;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="SITE_number", type="string", length=3, nullable=false)
+     */
+    private $number;
 
     /**
      * @var boolean
@@ -242,5 +249,28 @@ class Site
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set number
+     *
+     * @param string $number
+     * @return Site
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return string 
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 }

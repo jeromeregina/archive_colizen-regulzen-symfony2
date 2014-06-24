@@ -41,7 +41,7 @@ class Shipment
      * @var string
      *
      * @ORM\OneToOne(targetEntity="DeliveryAddress", cascade={"persist"}, inversedBy="shipment")
-     * @ORM\JoinColumn(name="DLVRADDR_id", referencedColumnName="DLVRADDR_id")
+     * @ORM\JoinColumn(name="DLVRADDR_id", referencedColumnName="DLVRADDR_id", onDelete="SET NULL")
      */
     private $deliveryAddress;
 
@@ -119,9 +119,6 @@ class Shipment
     */
    private $updated;
 
-   public function __construct() {
-       $this->deliveryAddress = new DeliveryAddress();
-   }
     /**
      * Get id
      *

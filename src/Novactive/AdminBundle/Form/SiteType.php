@@ -17,6 +17,7 @@ class SiteType extends AbstractType
         $builder
             ->add('name')
             ->add('code')
+            ->add('number')
             ->add('isActive')
             ->add('longitude')
             ->add('latitude')
