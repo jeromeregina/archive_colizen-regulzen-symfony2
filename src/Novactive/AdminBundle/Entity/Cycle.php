@@ -39,6 +39,19 @@ class Cycle
    private $created;
    
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="CYCLE_start", type="time", nullable=false)
+     */
+    private $start;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="CYCLE_end", type="time", nullable=false)
+     */
+    private $end;
+    /**
     * @var datetime $created
     *
     * @Gedmo\Timestampable(on="update")
@@ -178,5 +191,51 @@ class Cycle
         $this->tours = $tours;
         
         return $this;
+    }
+
+    /**
+     * Set start
+     *
+     * @param \DateTime $start
+     * @return Cycle
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    /**
+     * Get start
+     *
+     * @return \DateTime 
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * Set end
+     *
+     * @param \DateTime $end
+     * @return Cycle
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
+    /**
+     * Get end
+     *
+     * @return \DateTime 
+     */
+    public function getEnd()
+    {
+        return $this->end;
     }
 }

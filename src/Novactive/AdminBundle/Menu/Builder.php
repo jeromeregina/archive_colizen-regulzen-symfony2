@@ -17,6 +17,7 @@ class Builder extends ContainerAware{
         $menu->addChild('Créneaux', array('route' => 'regulzen_interface_index'));
         $menu->addChild('Comptes chargeurs', array('route' => 'admin_sender_list'));
         $menu->addChild('Sites', array('route' => 'admin_site_list'));
+        $menu->addChild('Cycles', array('route' => 'admin_cycle_list'));
 
         return $menu;
     }
