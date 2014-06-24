@@ -57,10 +57,8 @@ class Tour {
      /**
      * @var Cycle
      *
-     * @ORM\ManyToOne(targetEntity="Cycle")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="CYCLE_id", referencedColumnName="CYCLE_id", nullable=false)
-     * })
+     * @ORM\ManyToOne(targetEntity="Cycle", inversedBy="tours")
+     * @ORM\JoinColumn(name="CYCLE_id", referencedColumnName="CYCLE_id", nullable=false)
      */
     private $cycle;
 

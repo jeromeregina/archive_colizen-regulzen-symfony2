@@ -4,7 +4,8 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Novactive\AdminBundle\Entity\Tour;
 /**
  * TblCycle
  *
@@ -44,8 +45,15 @@ class Cycle
     * @ORM\Column(name="CYCLE_updated", type="datetime")
     */
    private $updated;
-
-
+   
+    /**
+     * @ORM\OneToMany(targetEntity="Tour", mappedBy="cycle")
+     */
+    private $tours;
+    
+    public function __construct() {
+        $this->tours = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -125,5 +133,50 @@ class Cycle
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add tours
+     *
+     * @param \Novactive\AdminBundle\Entity\Tour $tours
+     * @return Cycle
+     */
+    public function addTour(Tour $tours)
+    {
+        $this->tours[] = $tours;
+
+        return $this;
+    }
+
+    /**
+     * Remove tours
+     *
+     * @param \Novactive\AdminBundle\Entity\Tour $tours
+     */
+    public function removeTour(Tour $tours)
+    {
+        $this->tours->removeElement($tours);
+    }
+
+    /**
+     * Get tours
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTours()
+    {
+        return $this->tours;
+    }
+    /**
+     * set tours
+     *
+     *  @param \Doctrine\Common\Collections\Collection  $tours
+     * @return Cycle 
+     */
+    public function setTours($tours)
+    {
+        $this->tours = $tours;
+        
+        return $this;
     }
 }
