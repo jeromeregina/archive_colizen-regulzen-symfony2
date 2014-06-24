@@ -99,7 +99,7 @@ class Parcel
      *   @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", nullable=false)
      * })
      */
-    private $shpmnt;
+    private $shipment;
 
     /**
     * @var datetime $created
@@ -341,9 +341,9 @@ class Parcel
      * @param \Novactive\AdminBundle\Entity\Shipment $shpmnt
      * @return Parcel
      */
-    public function setShpmnt(Shipment $shpmnt)
+    public function setShipment(Shipment $shpmnt)
     {
-        $this->shpmnt = $shpmnt;
+        $this->shipment = $shpmnt;
 
         return $this;
     }
@@ -353,9 +353,9 @@ class Parcel
      *
      * @return \Novactive\AdminBundle\Entity\Shipment 
      */
-    public function getShpmnt()
+    public function getShipment()
     {
-        return $this->shpmnt;
+        return $this->shipment;
     }
 
     /**
