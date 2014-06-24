@@ -4,7 +4,7 @@
 {% block body -%}
     <h1>Cycle</h1>
 
-    <table class="record_properties">
+    <table class="record_properties table-hover table-striped">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -16,7 +16,7 @@
             </tr>
             <tr>
                 <th>Starts at / Ends at</th>
-                <td>{{ entity.start|date('H') }}h/ {{ entity.end|date('H') }}h</td>
+                <td>{{ entity.start|date('H\\hi') }}/{{ entity.end|date('H\\hi') }}</td>
             </tr>
         </tbody>
     </table>
