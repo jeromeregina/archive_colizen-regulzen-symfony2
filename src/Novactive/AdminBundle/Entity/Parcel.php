@@ -101,11 +101,10 @@ class Parcel
      * })
      */
     private $shipment;
-
     /**
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="parcel")
+     * @ORM\ManyToMany(targetEntity="Event", mappedBy="parcels")
      */
-    private $events;
+    private  $events;
 
     /**
      * @var datetime $created
@@ -462,7 +461,7 @@ class Parcel
         $this->events[] = $events;
 
         return $this;
-    }
+}
 
     /**
      * Remove events

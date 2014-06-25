@@ -110,10 +110,12 @@ class Shipment
     private $site;
 
     /**
-     *
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="shipment")
-     */
-    private $events;
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="create")
+    * @ORM\Column(name="SHPMNT_created", type="datetime")
+    */
+   private $created;
 
     /**
     * @var datetime $created
