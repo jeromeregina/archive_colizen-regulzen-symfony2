@@ -2,6 +2,7 @@
 
 namespace Novactive\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Novactive\AdminBundle\Entity\Cycle;
@@ -46,7 +47,14 @@ class Tour {
     * @ORM\Column(name="TOUR_date", type="datetime")
     */
    protected $date;
-    
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="tour")
+     */
+    protected $events;
+
+
    /**
     * @var datetime $created
     *
@@ -62,6 +70,11 @@ class Tour {
     * @ORM\Column(name="TOUR_updated", type="datetime")
     */
    protected $updated;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     /**
      * Get id

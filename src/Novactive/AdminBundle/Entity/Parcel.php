@@ -2,6 +2,7 @@
 
 namespace Novactive\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Novactive\AdminBundle\Entity\Shipment;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -101,6 +102,13 @@ class Parcel
      */
     private $shipment;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="parcel")
+     */
+    private $events;
+
+
     /**
     * @var datetime $created
     *
@@ -117,6 +125,11 @@ class Parcel
     */
    private $updated;
 
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     /**
      * Get id
