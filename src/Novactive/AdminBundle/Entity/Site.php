@@ -2,6 +2,7 @@
 
 namespace Novactive\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -70,6 +71,13 @@ class Site
      */
     private $latitude = 0;
 
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Tour", mappedBy="site")
+     */
+    private $tours;
+
     /**
     * @var datetime $created
     *
@@ -85,6 +93,11 @@ class Site
     * @ORM\Column(name="SITE_updated", type="datetime")
     */
    private $updated;
+
+    public function __construct()
+    {
+        $this->tours = new ArrayCollection();
+    }
 
 
     /**
