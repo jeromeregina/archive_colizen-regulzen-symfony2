@@ -38,7 +38,7 @@ class Site
     /**
      * @var string
      *
-     * @ORM\Column(name="SITE_code_imtech", type="string", length=3, nullable=false)
+     * @ORM\Column(name="SITE_code_imtech", type="string", length=5, nullable=false)
      */
     private $codeImtech;
     
