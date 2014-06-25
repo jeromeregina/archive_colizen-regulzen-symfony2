@@ -90,4 +90,25 @@ abstract class AbstractImporter {
     protected function getSiteRepository(){
        return $this->em->getRepository('NovactiveAdminBundle:Site');
     }
+    /**
+     * 
+     * @return \Novactive\AdminBundle\Repository\TourCode
+     */
+    protected function getTourCodeRepository(){
+       return $this->em->getRepository('NovactiveAdminBundle:TourCode');
+    }
+    /**
+     * 
+     * @return \Novactive\AdminBundle\Repository\Tour
+     */
+    protected function getTourRepository(){
+       return $this->em->getRepository('NovactiveAdminBundle:Tour');
+    }
+    /**
+     * 
+     * @return \Novactive\AdminBundle\Repository\Event
+     */
+    protected function getEventRepository(){
+       return $this->em->getRepository('NovactiveAdminBundle:Event');
+    }
 }

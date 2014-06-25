@@ -35,12 +35,12 @@ class TourPlanning extends AbstractImporter  {
 /**
     * C -> cargopass
     * D -> code client -> shipper id
- * E -> code agence expediteur ?
+    * E -> code agence expediteur
     * F -> date d'expedition
     * G -> poids
     * H -> nombre de colis
  * K -> priorité de la livraison (?)
- * L -> code agence ? = 750
+ * L -> code agence ? = 750 ? à importer ?
  * M -> code tournée
  * N -> position du bordereau
  * O -> date tournée
@@ -64,13 +64,12 @@ class TourPlanning extends AbstractImporter  {
             { 
             $output->write('importing "'.$line['C'].'" from file "'.$file->getFilename().'"');
             }
-               $shipment= $this->getShipmentRepository()->findOneBy(array('cargopass'=>$line['C']));
-               $shipment=($shipment instanceof Shipment)?$shipment:new Shipment();
+               $shipment= $this->getShipmentRepository()->resolveByCargopass($line['C']);
                
-               $site= $this->getSiteRepository()->findOneBy(array('number'=>$line['L']));
+               $site= $this->getSiteRepository()->findOneByAnyCode($line['E']);
                
                $shipment->setCargopass($line['C'])
-                        ->setShipperId($line['D'])
+                       ->setShipperId($line['D'])
                        ->setCreationDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
                        ->setDeliveryDate(\DateTime::createFromFormat('H:i',$line['AC']))
                        ->setParcelQuantity($line['H'])
@@ -78,7 +77,7 @@ class TourPlanning extends AbstractImporter  {
                        ->setWeight($line['G'])
                        ;
                
-               $deliveryAddress=($shipment->getDeliveryAddress() instanceof DeliveryAddress)?$shipment->getDeliveryAddress():new DeliveryAddress();
+               $deliveryAddress=($shipment->hasDeliveryAddress())?$shipment->getDeliveryAddress():new DeliveryAddress();
                
                
                $deliveryAddress
@@ -94,16 +93,30 @@ class TourPlanning extends AbstractImporter  {
                        ->setLongitude($line['AA'])
                        ->setShipment($shipment)
                        ;
+               
                $shipment->setDeliveryAddress($deliveryAddress);
-//               var_dump($shipment);die;
-//               $this->em->persist($shipment);
+               // à afiner
+               $tourCode =  new \Novactive\AdminBundle\Entity\TourCode();
+               
+               //
                $this->em->persist($shipment);
                $this->em->flush();
+               
+               
+                       
+//           * K -> priorité de la livraison (?)
+// * L -> code agence ? = 750 ? à importer ?
+// * M -> code tournée
+// * N -> position du bordereau
+// * O -> date tournée
+// * P -> créneau horaire     
+//               var_dump($shipment);die;
+//               $this->em->persist($shipment);
+               
 //               $sender = $this->getSenderRepository()->findOneBy(array(''))
-               
-               
+                              
             }
-
+        
             protected function getActionName() {
                 return 'Excels liste camionage après routeur';
             }
