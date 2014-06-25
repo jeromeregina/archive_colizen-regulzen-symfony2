@@ -4,8 +4,10 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Novactive\AdminBundle\Entity\Site;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Novactive\AdminBundle\Entity\DeliveryAddress;
+use Novactive\AdminBundle\Entity\Event;
 /**
  * TblShipment
  *
@@ -44,6 +46,13 @@ class Shipment
      * @ORM\JoinColumn(name="DLVRADDR_id", referencedColumnName="DLVRADDR_id", onDelete="SET NULL")
      */
     private $deliveryAddress;
+    
+     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Event", cascade={"persist"}, mappedBy="shipment")
+     */
+    private $events;
 
     /**
      * @var integer
@@ -116,7 +125,14 @@ class Shipment
     * @ORM\Column(name="SHPMNT_updated", type="datetime")
     */
    private $updated;
-
+   
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -130,7 +146,7 @@ class Shipment
     /**
      * Set cargopass
      *
-     * @param string $cargopassEvent
+     * @param string $cargopass
      * @return Shipment
      */
     public function setCargopass($cargopass)
@@ -413,7 +429,13 @@ class Shipment
     {
         return $this->deliveryAddress;
     }
-
+    /**
+     * 
+     * @return boolean
+     */
+    public function hasDeliveryAddress(){
+        return ($this->getDeliveryAddress() instanceof DeliveryAddress);
+    }
     /**
      * Set weight
      *
@@ -435,5 +457,41 @@ class Shipment
     public function getWeight()
     {
         return $this->weight;
+    }
+
+
+    /**
+     * Add events
+     *
+     * @param \Novactive\AdminBundle\Entity\Event $events
+     * @return Shipment
+     */
+    public function addEvent(Event $event)
+    {
+        $event->setShipment($this);
+        
+        $this->events->add($event);
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Novactive\AdminBundle\Entity\Event $events
+     */
+    public function removeEvent(Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }
