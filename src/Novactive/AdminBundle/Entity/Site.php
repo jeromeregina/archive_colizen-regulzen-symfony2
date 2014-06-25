@@ -61,14 +61,14 @@ class Site
      *
      * @ORM\Column(name="SITE_longitude", type="decimal", precision=9, scale=6, nullable=false, options={"default" = 0})
      */
-    private $longitude;
+    private $longitude = 0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="SITE_latitude", type="decimal", precision=8, scale=6, nullable=false, options={"default" = 0})
      */
-    private $latitude;
+    private $latitude = 0;
 
     /**
     * @var datetime $created

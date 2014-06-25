@@ -16,7 +16,8 @@ class SiteType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('code')
+            ->add('codeColizen')
+            ->add('codeImtech')
             ->add('number')
             ->add('isActive')
             ->add('longitude')

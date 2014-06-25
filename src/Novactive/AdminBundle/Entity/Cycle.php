@@ -33,7 +33,7 @@ class Cycle
     /**
      * @var string
      *
-     * @ORM\Column(name="CYCLE_tour_code_format", type="string", length=45, nullable=false)
+     * @ORM\Column(name="CYCLE_tour_code_format", type="string", length=45, nullable=true)
      */
     private $tourCodeFormat;
 

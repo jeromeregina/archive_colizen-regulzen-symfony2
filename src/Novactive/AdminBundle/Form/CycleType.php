@@ -18,6 +18,7 @@ class CycleType extends AbstractType
             ->add('name')
             ->add('start')
             ->add('end')
+            ->add('tourCodeFormat')
         ;
     }
     

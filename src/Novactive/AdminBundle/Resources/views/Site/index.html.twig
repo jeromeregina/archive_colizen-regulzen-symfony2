@@ -9,7 +9,8 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Code</th>
+                <th>Code Colizen</th>
+                <th>Code Imtech</th>
                 <th>Number</th>
                 <th>Isactive</th>
                 <th>Longitude</th>
@@ -24,7 +25,8 @@
             <tr>
                 <td><a href="{{ path('admin_site_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
-                <td>{{ entity.code }}</td>
+                <td>{{ entity.codeColizen }}</td>
+                <td>{{ entity.codeImtech }}</td>
                 <td>{{ entity.number }}</td>
                 <td>{{ entity.isActive }}</td>
                 <td>{{ entity.longitude }}</td>
