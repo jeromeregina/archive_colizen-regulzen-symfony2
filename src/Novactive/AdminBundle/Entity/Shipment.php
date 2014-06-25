@@ -37,11 +37,9 @@ class Shipment
      */
     private $shipperId;
 
-     /**
-     * @var string
+    /**
      *
-     * @ORM\OneToOne(targetEntity="DeliveryAddress", cascade={"persist"}, inversedBy="shipment")
-     * @ORM\JoinColumn(name="DLVRADDR_id", referencedColumnName="DLVRADDR_id", onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="DeliveryAddress", mappedBy="shipment")
      */
     private $deliveryAddress;
 

@@ -83,10 +83,10 @@ class DeliveryAddress {
      * @ORM\Column(name="DLVRADDR_additional_infos", type="string", length=255, nullable=true)
      */
     protected $additionalInformations;
-     /**
-     * @var string
+
+    /**
      *
-     * @ORM\OneToOne(targetEntity="Shipment", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Shipment", inversedBy="deliveryAddress")
      * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", onDelete="CASCADE")
      */
     protected $shipment;
