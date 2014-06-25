@@ -86,7 +86,7 @@ class DeliveryAddress {
      /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="Shipment", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Shipment", cascade={"persist"}, mappedBy="deliveryAddress")
      * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", onDelete="CASCADE")
      */
     protected $shipment;
