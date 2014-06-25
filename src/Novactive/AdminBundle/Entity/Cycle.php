@@ -5,7 +5,7 @@ namespace Novactive\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
-use Novactive\AdminBundle\Entity\TourCode;
+
 /**
  * TblCycle
  *
@@ -38,13 +38,13 @@ class Cycle
     private $tourCodeFormat;
 
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="CYCLE_created", type="datetime")
-    */
-   private $created;
-   
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="CYCLE_created", type="datetime")
+     */
+    private $created;
+
     /**
      * @var \DateTime
      *
@@ -59,36 +59,38 @@ class Cycle
      */
     private $end;
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="update")
-    * @ORM\Column(name="CYCLE_updated", type="datetime")
-    */
-   private $updated;
-   
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="CYCLE_updated", type="datetime")
+     */
+    private $updated;
+
     /**
      * @ORM\OneToMany(targetEntity="TourCode", mappedBy="cycle")
      */
     private $tourCodes;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->tourCodes = new ArrayCollection();
     }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
 
-   
     /**
      * Set name
      *
      * @param string $name
+     *
      * @return Cycle
      */
     public function setName($name)
@@ -101,18 +103,18 @@ class Cycle
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
 
-    
-      /**
+    /**
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Parcel
      */
     public function setCreated($created)
@@ -125,7 +127,7 @@ class Cycle
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -136,6 +138,7 @@ class Cycle
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Parcel
      */
     public function setUpdated($updated)
@@ -148,7 +151,7 @@ class Cycle
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -159,6 +162,7 @@ class Cycle
      * Set start
      *
      * @param \DateTime $start
+     *
      * @return Cycle
      */
     public function setStart($start)
@@ -171,7 +175,7 @@ class Cycle
     /**
      * Get start
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStart()
     {
@@ -182,6 +186,7 @@ class Cycle
      * Set end
      *
      * @param \DateTime $end
+     *
      * @return Cycle
      */
     public function setEnd($end)
@@ -194,7 +199,7 @@ class Cycle
     /**
      * Get end
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEnd()
     {
@@ -205,6 +210,7 @@ class Cycle
      * Set tourCodeFormat
      *
      * @param string $tourCodeFormat
+     *
      * @return Cycle
      */
     public function setTourCodeFormat($tourCodeFormat)
@@ -217,7 +223,7 @@ class Cycle
     /**
      * Get tourCodeFormat
      *
-     * @return string 
+     * @return string
      */
     public function getTourCodeFormat()
     {
@@ -228,6 +234,7 @@ class Cycle
      * Add tourCodes
      *
      * @param \Novactive\AdminBundle\Entity\TourCode $tourCodes
+     *
      * @return Cycle
      */
     public function addTourCode(TourCode $tourCodes)
@@ -250,7 +257,7 @@ class Cycle
     /**
      * Get tourCodes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTourCodes()
     {

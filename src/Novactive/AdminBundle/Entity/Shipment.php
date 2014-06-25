@@ -39,8 +39,7 @@ class Shipment
      */
     private $shipperId;
 
-     /**
-     * @var string
+    /**
      *
      * @ORM\OneToOne(targetEntity="DeliveryAddress", cascade={"persist"}, inversedBy="shipment")
      * @ORM\JoinColumn(name="DLVRADDR_id", referencedColumnName="DLVRADDR_id", onDelete="SET NULL")
@@ -101,7 +100,7 @@ class Shipment
      * @ORM\Column(name="SHPMNT_weight", type="decimal", precision=5, scale=1, nullable=false)
      */
     private $weight;
-    
+
     /**
      * @var Site
      *
@@ -111,13 +110,11 @@ class Shipment
     private $site;
 
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="SHPMNT_created", type="datetime")
-    */
-   private $created;
-   
+     *
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="shipment")
+     */
+    private $events;
+
     /**
     * @var datetime $created
     *
@@ -133,10 +130,11 @@ class Shipment
     {
         $this->events = new ArrayCollection();
     }
+    
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -147,6 +145,8 @@ class Shipment
      * Set cargopass
      *
      * @param string $cargopass
+     * @param string $cargopassEvent
+     *
      * @return Shipment
      */
     public function setCargopass($cargopass)
@@ -159,29 +159,31 @@ class Shipment
     /**
      * Get cargopass format 123-123-123456789 123
      *
-     * @return string 
+     * @return string
      */
     public function getCargopass()
     {
         return $this->cargopass;
     }
-    
+
     /**
      * Get cargopass format 12312323456789
      *
-     * @return string 
+     * @return string
      */
     public function getCargopassFormatted()
     {
         $pattern = '/(\d{3})-(\d{3})-(\d)(\d{8}) (\d{3})/';
         $replacement = '$1$3$4';
-        return preg_replace($pattern, $replacement,$this->cargopass);
+
+        return preg_replace($pattern, $replacement, $this->cargopass);
     }
 
     /**
      * Set shipperId
      *
      * @param string $shipperId
+     *
      * @return Shipment
      */
     public function setShipperId($shipperId)
@@ -194,7 +196,7 @@ class Shipment
     /**
      * Get shipperId
      *
-     * @return string 
+     * @return string
      */
     public function getShipperId()
     {
@@ -205,6 +207,7 @@ class Shipment
      * Set parcelQuantity
      *
      * @param integer $parcelQuantity
+     *
      * @return Shipment
      */
     public function setParcelQuantity($parcelQuantity)
@@ -217,7 +220,7 @@ class Shipment
     /**
      * Get parcelQuantity
      *
-     * @return integer 
+     * @return integer
      */
     public function getParcelQuantity()
     {
@@ -228,6 +231,7 @@ class Shipment
      * Set deliveryDate
      *
      * @param \DateTime $deliveryDate
+     *
      * @return Shipment
      */
     public function setDeliveryDate($deliveryDate)
@@ -240,7 +244,7 @@ class Shipment
     /**
      * Get deliveryDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeliveryDate()
     {
@@ -251,6 +255,7 @@ class Shipment
      * Set deliverySlotStart
      *
      * @param \DateTime $deliverySlotStart
+     *
      * @return Shipment
      */
     public function setDeliverySlotStart($deliverySlotStart)
@@ -263,7 +268,7 @@ class Shipment
     /**
      * Get deliverySlotStart
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeliverySlotStart()
     {
@@ -274,6 +279,7 @@ class Shipment
      * Set deliverySlotEnd
      *
      * @param \DateTime $deliverySlotEnd
+     *
      * @return Shipment
      */
     public function setDeliverySlotEnd($deliverySlotEnd)
@@ -286,7 +292,7 @@ class Shipment
     /**
      * Get deliverySlotEnd
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeliverySlotEnd()
     {
@@ -297,6 +303,7 @@ class Shipment
      * Set serviceId
      *
      * @param integer $serviceId
+     *
      * @return Shipment
      */
     public function setServiceId($serviceId)
@@ -309,7 +316,7 @@ class Shipment
     /**
      * Get serviceId
      *
-     * @return integer 
+     * @return integer
      */
     public function getServiceId()
     {
@@ -320,6 +327,7 @@ class Shipment
      * Set creationDate
      *
      * @param \DateTime $creationDate
+     *
      * @return Shipment
      */
     public function setCreationDate($creationDate)
@@ -332,7 +340,7 @@ class Shipment
     /**
      * Get creationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreationDate()
     {
@@ -343,6 +351,7 @@ class Shipment
      * Set site
      *
      * @param \Novactive\AdminBundle\Entity\Site $site
+     *
      * @return Shipment
      */
     public function setSite(Site $site)
@@ -355,16 +364,17 @@ class Shipment
     /**
      * Get site
      *
-     * @return \Novactive\AdminBundle\Entity\Site 
+     * @return \Novactive\AdminBundle\Entity\Site
      */
     public function getSite()
     {
         return $this->site;
     }
-      /**
+    /**
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Parcel
      */
     public function setCreated($created)
@@ -377,7 +387,7 @@ class Shipment
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -388,6 +398,7 @@ class Shipment
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Parcel
      */
     public function setUpdated($updated)
@@ -400,7 +411,7 @@ class Shipment
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -411,6 +422,7 @@ class Shipment
      * Set deliveryAddress
      *
      * @param \Novactive\AdminBundle\Entity\DeliveryAddress $deliveryAddress
+     *
      * @return Shipment
      */
     public function setDeliveryAddress(DeliveryAddress $deliveryAddress)
@@ -423,7 +435,7 @@ class Shipment
     /**
      * Get deliveryAddress
      *
-     * @return \Novactive\AdminBundle\Entity\DeliveryAddress 
+     * @return \Novactive\AdminBundle\Entity\DeliveryAddress
      */
     public function getDeliveryAddress()
     {
@@ -440,6 +452,7 @@ class Shipment
      * Set weight
      *
      * @param string $weight
+     *
      * @return Shipment
      */
     public function setWeight($weight)
@@ -452,7 +465,7 @@ class Shipment
     /**
      * Get weight
      *
-     * @return string 
+     * @return string
      */
     public function getWeight()
     {

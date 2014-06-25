@@ -59,7 +59,7 @@ class Event
      */
     private $date;
 
-     /**
+    /**
      * @var Tour
      *
      * @ORM\ManyToOne(targetEntity="Tour", inversedBy="events")
@@ -135,7 +135,7 @@ class Event
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -158,7 +158,7 @@ class Event
     /**
      * Get cargopassEvent
      *
-     * @return string 
+     * @return string
      */
     public function getCargopassEvent()
     {
@@ -169,6 +169,7 @@ class Event
      * Set cargopassParcel
      *
      * @param string $cargopassParcel
+     *
      * @return Event
      */
     public function setCargopassParcel($cargopassParcel)
@@ -181,7 +182,7 @@ class Event
     /**
      * Get cargopassParcel
      *
-     * @return string 
+     * @return string
      */
     public function getCargopassParcel()
     {
@@ -192,6 +193,7 @@ class Event
      * Set date
      *
      * @param \DateTime $date
+     *
      * @return Event
      */
     public function setDate($date)
@@ -204,7 +206,7 @@ class Event
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -227,7 +229,7 @@ class Event
     /**
      * Get scanHour
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getScanHour()
     {
@@ -250,7 +252,7 @@ class Event
     /**
      * Get scanStatus
      *
-     * @return integer 
+     * @return integer
      */
     public function getScanStatus()
     {
@@ -261,6 +263,7 @@ class Event
      * Set theoricalHour
      *
      * @param \DateTime $theoricalHour
+     *
      * @return Event
      */
     public function setTheoricalHour($theoricalHour)
@@ -273,7 +276,7 @@ class Event
     /**
      * Get theoricalHour
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTheoricalHour()
     {
@@ -284,6 +287,7 @@ class Event
      * Set meetingHourStart
      *
      * @param \DateTime $meetingHourStart
+     *
      * @return Event
      */
     public function setMeetingHourStart($meetingHourStart)
@@ -296,7 +300,7 @@ class Event
     /**
      * Get meetingHourStart
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getMeetingHourStart()
     {
@@ -307,6 +311,7 @@ class Event
      * Set meetingHourEnd
      *
      * @param \DateTime $meetingHourEnd
+     *
      * @return Event
      */
     public function setMeetingHourEnd($meetingHourEnd)
@@ -319,7 +324,7 @@ class Event
     /**
      * Get meetingHourEnd
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getMeetingHourEnd()
     {
@@ -330,6 +335,7 @@ class Event
      * Set tourOrder
      *
      * @param integer $tourOrder
+     *
      * @return Event
      */
     public function setTourOrder($tourOrder)
@@ -342,16 +348,18 @@ class Event
     /**
      * Get tourOrder
      *
-     * @return integer 
+     * @return integer
      */
     public function getTourOrder()
     {
         return $this->tourOrder;
     }
-      /**
+
+    /**
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Parcel
      */
     public function setCreated($created)
@@ -364,7 +372,7 @@ class Event
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -375,6 +383,7 @@ class Event
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Parcel
      */
     public function setUpdated($updated)
@@ -387,7 +396,7 @@ class Event
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -398,6 +407,7 @@ class Event
      * Set shipment
      *
      * @param \Novactive\AdminBundle\Entity\Shipment $shipment
+     *
      * @return Event
      */
     public function setShipment(Shipment $shipment = null)
@@ -410,7 +420,7 @@ class Event
     /**
      * Get shipment
      *
-     * @return \Novactive\AdminBundle\Entity\Shipment 
+     * @return \Novactive\AdminBundle\Entity\Shipment
      */
     public function getShipment()
     {
@@ -433,7 +443,7 @@ class Event
     /**
      * Get tour
      *
-     * @return \Novactive\AdminBundle\Entity\Tour 
+     * @return \Novactive\AdminBundle\Entity\Tour
      */
     public function getTour()
     {

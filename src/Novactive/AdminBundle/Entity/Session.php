@@ -11,8 +11,9 @@ use Novactive\UserBundle\Entity\User;
  * @ORM\Table(name="TBL_session")
  * @ORM\Entity
  */
-class Session {
-     /**
+class Session
+{
+    /**
      * @var integer
      *
      * @ORM\Column(name="SESSION_id", type="string", length=255, nullable=false)
@@ -22,18 +23,18 @@ class Session {
     /**
      *
      * @var string
-     * @ORM\Column(name="SESSION_value", type="text",nullable=false) 
+     * @ORM\Column(name="SESSION_value", type="text",nullable=false)
      */
     private $value;
     /**
      *
      * @var integer
-     * @ORM\Column(name="SESSION_time", type="integer",nullable=false) 
+     * @ORM\Column(name="SESSION_time", type="integer",nullable=false)
      */
     private $time;
     /**
      * @var  \Novactive\UserBundle\Entity\User
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="\Novactive\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="USR_id", referencedColumnName="USR_id", nullable=true)
@@ -46,6 +47,7 @@ class Session {
      * Set id
      *
      * @param string $id
+     *
      * @return Session
      */
     public function setId($id)
@@ -58,7 +60,7 @@ class Session {
     /**
      * Get id
      *
-     * @return string 
+     * @return string
      */
     public function getId()
     {
@@ -69,6 +71,7 @@ class Session {
      * Set value
      *
      * @param string $value
+     *
      * @return Session
      */
     public function setValue($value)
@@ -81,7 +84,7 @@ class Session {
     /**
      * Get value
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {
@@ -92,6 +95,7 @@ class Session {
      * Set time
      *
      * @param integer $time
+     *
      * @return Session
      */
     public function setTime($time)
@@ -104,7 +108,7 @@ class Session {
     /**
      * Get time
      *
-     * @return integer 
+     * @return integer
      */
     public function getTime()
     {
@@ -115,6 +119,7 @@ class Session {
      * Set user
      *
      * @param \Novactive\UserBundle\Entity\User $user
+     *
      * @return Session
      */
     public function setUser(User $user = null)
@@ -127,7 +132,7 @@ class Session {
     /**
      * Get user
      *
-     * @return \Novactive\UserBundle\Entity\User 
+     * @return \Novactive\UserBundle\Entity\User
      */
     public function getUser()
     {

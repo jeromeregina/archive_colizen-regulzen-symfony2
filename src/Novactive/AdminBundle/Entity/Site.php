@@ -2,6 +2,7 @@
 
 namespace Novactive\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -41,7 +42,7 @@ class Site
      * @ORM\Column(name="SITE_code_imtech", type="string", length=5, nullable=false)
      */
     private $codeImtech;
-    
+
     /**
      * @var string
      *
@@ -71,26 +72,36 @@ class Site
     private $latitude = 0;
 
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="SITE_created", type="datetime")
-    */
-   private $created;
-   
-    /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="update")
-    * @ORM\Column(name="SITE_updated", type="datetime")
-    */
-   private $updated;
+     *
+     * @ORM\OneToMany(targetEntity="Tour", mappedBy="site")
+     */
+    private $tours;
 
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="SITE_created", type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="SITE_updated", type="datetime")
+     */
+    private $updated;
+
+    public function __construct()
+    {
+        $this->tours = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -101,6 +112,7 @@ class Site
      * Set name
      *
      * @param string $name
+     *
      * @return Site
      */
     public function setName($name)
@@ -113,7 +125,7 @@ class Site
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -124,6 +136,7 @@ class Site
      * Set isActive
      *
      * @param boolean $isActive
+     *
      * @return Site
      */
     public function setIsActive($isActive)
@@ -136,7 +149,7 @@ class Site
     /**
      * Get isActive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {
@@ -147,6 +160,7 @@ class Site
      * Set longitude
      *
      * @param string $longitude
+     *
      * @return Site
      */
     public function setLongitude($longitude)
@@ -159,7 +173,7 @@ class Site
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude()
     {
@@ -170,6 +184,7 @@ class Site
      * Set latitude
      *
      * @param string $latitude
+     *
      * @return Site
      */
     public function setLatitude($latitude)
@@ -182,16 +197,18 @@ class Site
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude()
     {
         return $this->latitude;
     }
-      /**
+
+    /**
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Parcel
      */
     public function setCreated($created)
@@ -204,7 +221,7 @@ class Site
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -215,6 +232,7 @@ class Site
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Parcel
      */
     public function setUpdated($updated)
@@ -227,7 +245,7 @@ class Site
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -238,6 +256,7 @@ class Site
      * Set number
      *
      * @param string $number
+     *
      * @return Site
      */
     public function setNumber($number)
@@ -250,7 +269,7 @@ class Site
     /**
      * Get number
      *
-     * @return string 
+     * @return string
      */
     public function getNumber()
     {
@@ -261,6 +280,7 @@ class Site
      * Set codeColizen
      *
      * @param string $codeColizen
+     *
      * @return Site
      */
     public function setCodeColizen($codeColizen)
@@ -273,7 +293,7 @@ class Site
     /**
      * Get codeColizen
      *
-     * @return string 
+     * @return string
      */
     public function getCodeColizen()
     {
@@ -284,6 +304,7 @@ class Site
      * Set codeImtech
      *
      * @param string $codeImtech
+     *
      * @return Site
      */
     public function setCodeImtech($codeImtech)
@@ -296,10 +317,44 @@ class Site
     /**
      * Get codeImtech
      *
-     * @return string 
+     * @return string
      */
     public function getCodeImtech()
     {
         return $this->codeImtech;
+    }
+
+    /**
+     * Add tours
+     *
+     * @param \Novactive\AdminBundle\Entity\Tour $tours
+     *
+     * @return Site
+     */
+    public function addTour(\Novactive\AdminBundle\Entity\Tour $tours)
+    {
+        $this->tours[] = $tours;
+
+        return $this;
+    }
+
+    /**
+     * Remove tours
+     *
+     * @param \Novactive\AdminBundle\Entity\Tour $tours
+     */
+    public function removeTour(\Novactive\AdminBundle\Entity\Tour $tours)
+    {
+        $this->tours->removeElement($tours);
+    }
+
+    /**
+     * Get tours
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTours()
+    {
+        return $this->tours;
     }
 }

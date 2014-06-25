@@ -11,8 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="TBL_import_log")
  * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\ImportLog")
  */
-class ImportLog {
-
+class ImportLog
+{
     const MESSAGE_LEVEL_ACTION = 1;
     const MESSAGE_LEVEL_FILE = 2;
     const MESSAGE_LEVEL_LINE = 3;
@@ -48,44 +48,44 @@ class ImportLog {
      */
     private $date;
 
-    public function getId() {
-
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getMessage() {
-
+    public function getMessage()
+    {
         return $this->message;
     }
 
-    public function setMessage($message) {
-
+    public function setMessage($message)
+    {
         $this->message = $message;
 
         return $this;
     }
 
-    public function getLevel() {
-
+    public function getLevel()
+    {
         return $this->level;
     }
 
-    public function setLevel($level) {
-        
+    public function setLevel($level)
+    {
         $this->level = $level;
-        
+
         return $this;
     }
 
-    public function getDate() {
-        
+    public function getDate()
+    {
         return $this->date;
     }
 
-    public function setDate(datetime $date) {
-        
+    public function setDate(datetime $date)
+    {
         $this->date = $date;
-        
+
         return $this;
     }
 

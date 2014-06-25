@@ -2,9 +2,10 @@
 
 namespace Novactive\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Novactive\AdminBundle\Entity\Shipment;
 use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * TblParcel
  *
@@ -102,26 +103,35 @@ class Parcel
     private $shipment;
 
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="PRCL_created", type="datetime")
-    */
-   private $created;
-   
-    /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="update")
-    * @ORM\Column(name="PRCL_updated", type="datetime")
-    */
-   private $updated;
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="parcel")
+     */
+    private $events;
 
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="PRCL_created", type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="PRCL_updated", type="datetime")
+     */
+    private $updated;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -132,6 +142,7 @@ class Parcel
      * Set cargopassParcel
      *
      * @param string $cargopassParcel
+     *
      * @return Parcel
      */
     public function setCargopassParcel($cargopassParcel)
@@ -144,7 +155,7 @@ class Parcel
     /**
      * Get cargopassParcel
      *
-     * @return string 
+     * @return string
      */
     public function getCargopassParcel()
     {
@@ -155,6 +166,7 @@ class Parcel
      * Set premium
      *
      * @param boolean $premium
+     *
      * @return Parcel
      */
     public function setPremium($premium)
@@ -167,7 +179,7 @@ class Parcel
     /**
      * Get premium
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPremium()
     {
@@ -178,6 +190,7 @@ class Parcel
      * Set shipperId
      *
      * @param string $shipperId
+     *
      * @return Parcel
      */
     public function setShipperId($shipperId)
@@ -190,7 +203,7 @@ class Parcel
     /**
      * Get shipperId
      *
-     * @return string 
+     * @return string
      */
     public function getShipperId()
     {
@@ -201,6 +214,7 @@ class Parcel
      * Set customerName
      *
      * @param string $customerName
+     *
      * @return Parcel
      */
     public function setCustomerName($customerName)
@@ -213,7 +227,7 @@ class Parcel
     /**
      * Get customerName
      *
-     * @return string 
+     * @return string
      */
     public function getCustomerName()
     {
@@ -224,6 +238,7 @@ class Parcel
      * Set customerPhone
      *
      * @param string $customerPhone
+     *
      * @return Parcel
      */
     public function setCustomerPhone($customerPhone)
@@ -236,7 +251,7 @@ class Parcel
     /**
      * Get customerPhone
      *
-     * @return string 
+     * @return string
      */
     public function getCustomerPhone()
     {
@@ -247,6 +262,7 @@ class Parcel
      * Set customerEmail
      *
      * @param string $customerEmail
+     *
      * @return Parcel
      */
     public function setCustomerEmail($customerEmail)
@@ -259,7 +275,7 @@ class Parcel
     /**
      * Get customerEmail
      *
-     * @return string 
+     * @return string
      */
     public function getCustomerEmail()
     {
@@ -270,6 +286,7 @@ class Parcel
      * Set shipperStatus
      *
      * @param integer $shipperStatus
+     *
      * @return Parcel
      */
     public function setShipperStatus($shipperStatus)
@@ -282,7 +299,7 @@ class Parcel
     /**
      * Get shipperStatus
      *
-     * @return integer 
+     * @return integer
      */
     public function getShipperStatus()
     {
@@ -293,6 +310,7 @@ class Parcel
      * Set nbPresentations
      *
      * @param integer $nbPresentations
+     *
      * @return Parcel
      */
     public function setNbPresentations($nbPresentations)
@@ -305,7 +323,7 @@ class Parcel
     /**
      * Get nbPresentations
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbPresentations()
     {
@@ -316,6 +334,7 @@ class Parcel
      * Set parcelStatus
      *
      * @param integer $parcelStatus
+     *
      * @return Parcel
      */
     public function setParcelStatus($parcelStatus)
@@ -328,7 +347,7 @@ class Parcel
     /**
      * Get parcelStatus
      *
-     * @return integer 
+     * @return integer
      */
     public function getParcelStatus()
     {
@@ -339,6 +358,7 @@ class Parcel
      * Set shpmnt
      *
      * @param \Novactive\AdminBundle\Entity\Shipment $shpmnt
+     *
      * @return Parcel
      */
     public function setShipment(Shipment $shpmnt)
@@ -351,7 +371,7 @@ class Parcel
     /**
      * Get shpmnt
      *
-     * @return \Novactive\AdminBundle\Entity\Shipment 
+     * @return \Novactive\AdminBundle\Entity\Shipment
      */
     public function getShipment()
     {
@@ -362,6 +382,7 @@ class Parcel
      * Set customerAddress
      *
      * @param string $customerAddress
+     *
      * @return Parcel
      */
     public function setCustomerAddress($customerAddress)
@@ -374,7 +395,7 @@ class Parcel
     /**
      * Get customerAddress
      *
-     * @return string 
+     * @return string
      */
     public function getCustomerAddress()
     {
@@ -385,6 +406,7 @@ class Parcel
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Parcel
      */
     public function setCreated($created)
@@ -397,7 +419,7 @@ class Parcel
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -408,6 +430,7 @@ class Parcel
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Parcel
      */
     public function setUpdated($updated)
@@ -420,10 +443,44 @@ class Parcel
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add events
+     *
+     * @param \Novactive\AdminBundle\Entity\Event $events
+     *
+     * @return Parcel
+     */
+    public function addEvent(\Novactive\AdminBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Novactive\AdminBundle\Entity\Event $events
+     */
+    public function removeEvent(\Novactive\AdminBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

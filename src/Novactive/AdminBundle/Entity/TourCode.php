@@ -4,7 +4,6 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Novactive\AdminBundle\Entity\Cycle;
 
 /**
  * TblCycle
@@ -12,7 +11,8 @@ use Novactive\AdminBundle\Entity\Cycle;
  * @ORM\Table(name="TBL_tour_code")
  * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\TourCode")
  */
-class TourCode {
+class TourCode
+{
     /**
      * @var integer
      *
@@ -21,14 +21,14 @@ class TourCode {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-     /**
+    /**
      * @var integer
      *
      * @ORM\Column(name="TOURCODE_code", type="integer", nullable=false)
      */
     protected $code;
-    
-     /**
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="TOURCODE_is_excluded", type="boolean", nullable=false, options={"default"=true})
@@ -38,37 +38,39 @@ class TourCode {
      * @ORM\OneToMany(targetEntity="Tour", mappedBy="tourCode")
      */
     private $tours;
-    
-   /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="TOURCODE_created", type="datetime")
-    */
-   protected $created;
-   
+
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="update")
-    * @ORM\Column(name="TOURCODE_updated", type="datetime")
-    */
-   protected $updated;
-     /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="TOURCODE_created", type="datetime")
+     */
+    protected $created;
+
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="TOURCODE_updated", type="datetime")
+     */
+    protected $updated;
+    /**
      * @var Cycle
      *
      * @ORM\ManyToOne(targetEntity="Cycle", inversedBy="tourCodes")
      * @ORM\JoinColumn(name="CYCLE_id", referencedColumnName="CYCLE_id", nullable=true)
      */
     protected $cycle;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->tours = new ArrayCollection();
     }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -79,6 +81,7 @@ class TourCode {
      * Set isExcluded
      *
      * @param boolean $isExcluded
+     *
      * @return Tour
      */
     public function setIsExcluded($isExcluded)
@@ -91,7 +94,7 @@ class TourCode {
     /**
      * Get isExcluded
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsExcluded()
     {
@@ -102,6 +105,7 @@ class TourCode {
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Tour
      */
     public function setCreated($created)
@@ -114,7 +118,7 @@ class TourCode {
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -125,6 +129,7 @@ class TourCode {
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Tour
      */
     public function setUpdated($updated)
@@ -137,7 +142,7 @@ class TourCode {
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -148,6 +153,7 @@ class TourCode {
      * Set cycle
      *
      * @param \Novactive\AdminBundle\Entity\Cycle $cycle
+     *
      * @return Tour
      */
     public function setCycle(Cycle $cycle)
@@ -160,7 +166,7 @@ class TourCode {
     /**
      * Get cycle
      *
-     * @return \Novactive\AdminBundle\Entity\Cycle 
+     * @return \Novactive\AdminBundle\Entity\Cycle
      */
     public function getCycle()
     {
@@ -171,6 +177,7 @@ class TourCode {
      * Set code
      *
      * @param integer $code
+     *
      * @return TourCode
      */
     public function setCode($code)
@@ -183,7 +190,7 @@ class TourCode {
     /**
      * Get code
      *
-     * @return integer 
+     * @return integer
      */
     public function getCode()
     {
@@ -194,6 +201,7 @@ class TourCode {
      * Add tours
      *
      * @param \Novactive\AdminBundle\Entity\Tour $tours
+     *
      * @return TourCode
      */
     public function addTour(\Novactive\AdminBundle\Entity\Tour $tours)
@@ -216,7 +224,7 @@ class TourCode {
     /**
      * Get tours
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTours()
     {
