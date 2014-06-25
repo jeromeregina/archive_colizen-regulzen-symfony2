@@ -32,9 +32,15 @@ class Site
     /**
      * @var string
      *
-     * @ORM\Column(name="SITE_code", type="string", length=3, nullable=false)
+     * @ORM\Column(name="SITE_code_czn", type="string", length=3, nullable=false)
      */
-    private $code;
+    private $codeColizen;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="SITE_code_imtech", type="string", length=3, nullable=false)
+     */
+    private $codeImtech;
     
     /**
      * @var string
@@ -53,14 +59,14 @@ class Site
     /**
      * @var string
      *
-     * @ORM\Column(name="SITE_longitude", type="decimal", precision=9, scale=6, nullable=true)
+     * @ORM\Column(name="SITE_longitude", type="decimal", precision=9, scale=6, nullable=false, options={"default" = 0})
      */
     private $longitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="SITE_latitude", type="decimal", precision=8, scale=6, nullable=true)
+     * @ORM\Column(name="SITE_latitude", type="decimal", precision=8, scale=6, nullable=false, options={"default" = 0})
      */
     private $latitude;
 
@@ -112,29 +118,6 @@ class Site
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set code
-     *
-     * @param string $code
-     * @return Site
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * Get code
-     *
-     * @return string 
-     */
-    public function getCode()
-    {
-        return $this->code;
     }
 
     /**
@@ -272,5 +255,51 @@ class Site
     public function getNumber()
     {
         return $this->number;
+    }
+
+    /**
+     * Set codeColizen
+     *
+     * @param string $codeColizen
+     * @return Site
+     */
+    public function setCodeColizen($codeColizen)
+    {
+        $this->codeColizen = $codeColizen;
+
+        return $this;
+    }
+
+    /**
+     * Get codeColizen
+     *
+     * @return string 
+     */
+    public function getCodeColizen()
+    {
+        return $this->codeColizen;
+    }
+
+    /**
+     * Set codeImtech
+     *
+     * @param string $codeImtech
+     * @return Site
+     */
+    public function setCodeImtech($codeImtech)
+    {
+        $this->codeImtech = $codeImtech;
+
+        return $this;
+    }
+
+    /**
+     * Get codeImtech
+     *
+     * @return string 
+     */
+    public function getCodeImtech()
+    {
+        return $this->codeImtech;
     }
 }

@@ -97,9 +97,7 @@ class Shipment
      * @var Site
      *
      * @ORM\ManyToOne(targetEntity="Site")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
-     * })
+     * @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
      */
     private $site;
 

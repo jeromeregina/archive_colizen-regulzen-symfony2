@@ -5,6 +5,9 @@ namespace Novactive\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Novactive\AdminBundle\Entity\Cycle;
+use Novactive\AdminBundle\Entity\TourCode;
+use Novactive\AdminBundle\Entity\Shipment;
+use Novactive\AdminBundle\Entity\Site;
 
 /**
  * TblCycle
@@ -20,27 +23,37 @@ class Tour {
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
      /**
-     * @var integer
+     * @var TourCode
      *
-     * @ORM\Column(name="TOUR_number", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="TourCode", inversedBy="tours")
+     * @ORM\JoinColumn(name="TOURCODE_id", referencedColumnName="TOURCODE_id", nullable=false)
      */
-    private $number;
+    protected $tourCode;
     
      /**
-     * @var boolean
+     * @var Site
      *
-     * @ORM\Column(name="TOUR_is_excluded", type="boolean", nullable=false, options={"default"=true})
+     * @ORM\ManyToOne(targetEntity="Site", inversedBy="tours")
+     * @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
      */
-    private $isExcluded = true;
+    protected $site;
+    
+   /**
+    * @var datetime $date
+    *
+    * @ORM\Column(name="TOUR_date", type="datetime")
+    */
+   protected $date;
+    
    /**
     * @var datetime $created
     *
     * @Gedmo\Timestampable(on="create")
     * @ORM\Column(name="TOUR_created", type="datetime")
     */
-   private $created;
+   protected $created;
    
     /**
     * @var datetime $created
@@ -48,14 +61,7 @@ class Tour {
     * @Gedmo\Timestampable(on="update")
     * @ORM\Column(name="TOUR_updated", type="datetime")
     */
-   private $updated;
-     /**
-     * @var Cycle
-     *
-     * @ORM\ManyToOne(targetEntity="Cycle", inversedBy="tours")
-     * @ORM\JoinColumn(name="CYCLE_id", referencedColumnName="CYCLE_id", nullable=false)
-     */
-    private $cycle;
+   protected $updated;
 
     /**
      * Get id
@@ -68,49 +74,26 @@ class Tour {
     }
 
     /**
-     * Set number
+     * Set date
      *
-     * @param integer $number
+     * @param \DateTime $date
      * @return Tour
      */
-    public function setNumber($number)
+    public function setDate($date)
     {
-        $this->number = $number;
+        $this->date = $date;
 
         return $this;
     }
 
     /**
-     * Get number
+     * Get date
      *
-     * @return integer 
+     * @return \DateTime 
      */
-    public function getNumber()
+    public function getDate()
     {
-        return $this->number;
-    }
-
-    /**
-     * Set isExcluded
-     *
-     * @param boolean $isExcluded
-     * @return Tour
-     */
-    public function setIsExcluded($isExcluded)
-    {
-        $this->isExcluded = $isExcluded;
-
-        return $this;
-    }
-
-    /**
-     * Get isExcluded
-     *
-     * @return boolean 
-     */
-    public function getIsExcluded()
-    {
-        return $this->isExcluded;
+        return $this->date;
     }
 
     /**
@@ -160,25 +143,48 @@ class Tour {
     }
 
     /**
-     * Set cycle
+     * Set tourCode
      *
-     * @param \Novactive\AdminBundle\Entity\Cycle $cycle
+     * @param \Novactive\AdminBundle\Entity\TourCode $tourCode
      * @return Tour
      */
-    public function setCycle(Cycle $cycle)
+    public function setTourCode(TourCode $tourCode)
     {
-        $this->cycle = $cycle;
+        $this->tourCode = $tourCode;
 
         return $this;
     }
 
     /**
-     * Get cycle
+     * Get tourCode
      *
-     * @return \Novactive\AdminBundle\Entity\Cycle 
+     * @return \Novactive\AdminBundle\Entity\TourCode 
      */
-    public function getCycle()
+    public function getTourCode()
     {
-        return $this->cycle;
+        return $this->tourCode;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \Novactive\AdminBundle\Entity\Site $site
+     * @return Tour
+     */
+    public function setSite(Site $site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \Novactive\AdminBundle\Entity\Site 
+     */
+    public function getSite()
+    {
+        return $this->site;
     }
 }

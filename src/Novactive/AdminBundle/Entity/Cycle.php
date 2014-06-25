@@ -5,7 +5,7 @@ namespace Novactive\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
-use Novactive\AdminBundle\Entity\Tour;
+use Novactive\AdminBundle\Entity\TourCode;
 /**
  * TblCycle
  *
@@ -29,6 +29,13 @@ class Cycle
      * @ORM\Column(name="CYCLE_name", type="string", length=45, nullable=false)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CYCLE_tour_code_format", type="string", length=45, nullable=false)
+     */
+    private $tourCodeFormat;
 
     /**
     * @var datetime $created
@@ -60,12 +67,12 @@ class Cycle
    private $updated;
    
     /**
-     * @ORM\OneToMany(targetEntity="Tour", mappedBy="cycle")
+     * @ORM\OneToMany(targetEntity="TourCode", mappedBy="cycle")
      */
-    private $tours;
+    private $tourCodes;
     
     public function __construct() {
-        $this->tours = new ArrayCollection();
+        $this->tourCodes = new ArrayCollection();
     }
     /**
      * Get id
@@ -149,51 +156,6 @@ class Cycle
     }
 
     /**
-     * Add tours
-     *
-     * @param \Novactive\AdminBundle\Entity\Tour $tours
-     * @return Cycle
-     */
-    public function addTour(Tour $tours)
-    {
-        $this->tours[] = $tours;
-
-        return $this;
-    }
-
-    /**
-     * Remove tours
-     *
-     * @param \Novactive\AdminBundle\Entity\Tour $tours
-     */
-    public function removeTour(Tour $tours)
-    {
-        $this->tours->removeElement($tours);
-    }
-
-    /**
-     * Get tours
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTours()
-    {
-        return $this->tours;
-    }
-    /**
-     * set tours
-     *
-     *  @param \Doctrine\Common\Collections\Collection  $tours
-     * @return Cycle 
-     */
-    public function setTours($tours)
-    {
-        $this->tours = $tours;
-        
-        return $this;
-    }
-
-    /**
      * Set start
      *
      * @param \DateTime $start
@@ -237,5 +199,61 @@ class Cycle
     public function getEnd()
     {
         return $this->end;
+    }
+
+    /**
+     * Set tourCodeFormat
+     *
+     * @param string $tourCodeFormat
+     * @return Cycle
+     */
+    public function setTourCodeFormat($tourCodeFormat)
+    {
+        $this->tourCodeFormat = $tourCodeFormat;
+
+        return $this;
+    }
+
+    /**
+     * Get tourCodeFormat
+     *
+     * @return string 
+     */
+    public function getTourCodeFormat()
+    {
+        return $this->tourCodeFormat;
+    }
+
+    /**
+     * Add tourCodes
+     *
+     * @param \Novactive\AdminBundle\Entity\TourCode $tourCodes
+     * @return Cycle
+     */
+    public function addTourCode(TourCode $tourCodes)
+    {
+        $this->tourCodes[] = $tourCodes;
+
+        return $this;
+    }
+
+    /**
+     * Remove tourCodes
+     *
+     * @param \Novactive\AdminBundle\Entity\TourCode $tourCodes
+     */
+    public function removeTourCode(TourCode $tourCodes)
+    {
+        $this->tourCodes->removeElement($tourCodes);
+    }
+
+    /**
+     * Get tourCodes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTourCodes()
+    {
+        return $this->tourCodes;
     }
 }

@@ -4,6 +4,9 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Novactive\AdminBundle\Entity\Tour;
+use Novactive\AdminBundle\Entity\Parcel;
+use Novactive\AdminBundle\Entity\Shipment;
 
 /**
  * TblEvent
@@ -25,16 +28,25 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="EVENT_cargopass_event", type="string", length=9, nullable=false)
+     * @ORM\Column(name="EVENT_cargopass_event", type="string", length=9, nullable=true)
      */
     private $cargopassEvent;
 
     /**
-     * @var string
+     * @var Parcel
      *
-     * @ORM\Column(name="EVENT_cargopass_parcel", type="string", length=8, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Parcel", inversedBy="events")
+     * @ORM\JoinColumn(name="PRCL_id", referencedColumnName="PRCL_id", nullable=true)
      */
-    private $cargopassParcel;
+    protected $parcel;
+
+    /**
+     * @var Shipment
+     *
+     * @ORM\ManyToOne(targetEntity="Shipment", inversedBy="events")
+     * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", nullable=true)
+     */
+    protected $shipment;
 
     /**
      * @var \DateTime
@@ -43,12 +55,13 @@ class Event
      */
     private $date;
 
-    /**
-     * @var string
+     /**
+     * @var Tour
      *
-     * @ORM\Column(name="EVENT_tour_code", type="string", length=3, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Tour", inversedBy="events")
+     * @ORM\JoinColumn(name="TOUR_id", referencedColumnName="TOUR_id", nullable=false)
      */
-    private $tourCode;
+    protected $tour;
 
     /**
      * @var \DateTime
@@ -392,5 +405,74 @@ class Event
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set parcel
+     *
+     * @param \Novactive\AdminBundle\Entity\Parcel $parcel
+     * @return Event
+     */
+    public function setParcel(Parcel $parcel = null)
+    {
+        $this->parcel = $parcel;
+
+        return $this;
+    }
+
+    /**
+     * Get parcel
+     *
+     * @return \Novactive\AdminBundle\Entity\Parcel 
+     */
+    public function getParcel()
+    {
+        return $this->parcel;
+    }
+
+    /**
+     * Set shipment
+     *
+     * @param \Novactive\AdminBundle\Entity\Shipment $shipment
+     * @return Event
+     */
+    public function setShipment(Shipment $shipment = null)
+    {
+        $this->shipment = $shipment;
+
+        return $this;
+    }
+
+    /**
+     * Get shipment
+     *
+     * @return \Novactive\AdminBundle\Entity\Shipment 
+     */
+    public function getShipment()
+    {
+        return $this->shipment;
+    }
+
+    /**
+     * Set tour
+     *
+     * @param \Novactive\AdminBundle\Entity\Tour $tour
+     * @return Event
+     */
+    public function setTour(Tour $tour)
+    {
+        $this->tour = $tour;
+
+        return $this;
+    }
+
+    /**
+     * Get tour
+     *
+     * @return \Novactive\AdminBundle\Entity\Tour 
+     */
+    public function getTour()
+    {
+        return $this->tour;
     }
 }
