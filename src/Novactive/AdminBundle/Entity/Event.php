@@ -4,9 +4,6 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Novactive\AdminBundle\Entity\Tour;
-use Novactive\AdminBundle\Entity\Parcel;
-use Novactive\AdminBundle\Entity\Shipment;
 
 /**
  * TblEvent
@@ -55,7 +52,7 @@ class Event
      */
     private $date;
 
-     /**
+    /**
      * @var Tour
      *
      * @ORM\ManyToOne(targetEntity="Tour", inversedBy="events")
@@ -106,26 +103,25 @@ class Event
     private $tourOrder;
 
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="EVENT_created", type="datetime")
-    */
-   private $created;
-   
-    /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="update")
-    * @ORM\Column(name="EVENT_updated", type="datetime")
-    */
-   private $updated;
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="EVENT_created", type="datetime")
+     */
+    private $created;
 
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="EVENT_updated", type="datetime")
+     */
+    private $updated;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -136,6 +132,7 @@ class Event
      * Set cargopassEvent
      *
      * @param string $cargopassEvent
+     *
      * @return Event
      */
     public function setCargopassEvent($cargopassEvent)
@@ -148,7 +145,7 @@ class Event
     /**
      * Get cargopassEvent
      *
-     * @return string 
+     * @return string
      */
     public function getCargopassEvent()
     {
@@ -159,6 +156,7 @@ class Event
      * Set cargopassParcel
      *
      * @param string $cargopassParcel
+     *
      * @return Event
      */
     public function setCargopassParcel($cargopassParcel)
@@ -171,7 +169,7 @@ class Event
     /**
      * Get cargopassParcel
      *
-     * @return string 
+     * @return string
      */
     public function getCargopassParcel()
     {
@@ -182,6 +180,7 @@ class Event
      * Set date
      *
      * @param \DateTime $date
+     *
      * @return Event
      */
     public function setDate($date)
@@ -194,7 +193,7 @@ class Event
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -205,6 +204,7 @@ class Event
      * Set tourCode
      *
      * @param string $tourCode
+     *
      * @return Event
      */
     public function setTourCode($tourCode)
@@ -217,7 +217,7 @@ class Event
     /**
      * Get tourCode
      *
-     * @return string 
+     * @return string
      */
     public function getTourCode()
     {
@@ -228,6 +228,7 @@ class Event
      * Set scanHour
      *
      * @param \DateTime $scanHour
+     *
      * @return Event
      */
     public function setScanHour($scanHour)
@@ -240,7 +241,7 @@ class Event
     /**
      * Get scanHour
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getScanHour()
     {
@@ -251,6 +252,7 @@ class Event
      * Set scanStatus
      *
      * @param integer $scanStatus
+     *
      * @return Event
      */
     public function setScanStatus($scanStatus)
@@ -263,7 +265,7 @@ class Event
     /**
      * Get scanStatus
      *
-     * @return integer 
+     * @return integer
      */
     public function getScanStatus()
     {
@@ -274,6 +276,7 @@ class Event
      * Set theoricalHour
      *
      * @param \DateTime $theoricalHour
+     *
      * @return Event
      */
     public function setTheoricalHour($theoricalHour)
@@ -286,7 +289,7 @@ class Event
     /**
      * Get theoricalHour
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTheoricalHour()
     {
@@ -297,6 +300,7 @@ class Event
      * Set meetingHourStart
      *
      * @param \DateTime $meetingHourStart
+     *
      * @return Event
      */
     public function setMeetingHourStart($meetingHourStart)
@@ -309,7 +313,7 @@ class Event
     /**
      * Get meetingHourStart
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getMeetingHourStart()
     {
@@ -320,6 +324,7 @@ class Event
      * Set meetingHourEnd
      *
      * @param \DateTime $meetingHourEnd
+     *
      * @return Event
      */
     public function setMeetingHourEnd($meetingHourEnd)
@@ -332,7 +337,7 @@ class Event
     /**
      * Get meetingHourEnd
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getMeetingHourEnd()
     {
@@ -343,6 +348,7 @@ class Event
      * Set tourOrder
      *
      * @param integer $tourOrder
+     *
      * @return Event
      */
     public function setTourOrder($tourOrder)
@@ -355,16 +361,18 @@ class Event
     /**
      * Get tourOrder
      *
-     * @return integer 
+     * @return integer
      */
     public function getTourOrder()
     {
         return $this->tourOrder;
     }
-      /**
+
+    /**
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Parcel
      */
     public function setCreated($created)
@@ -377,7 +385,7 @@ class Event
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -388,6 +396,7 @@ class Event
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Parcel
      */
     public function setUpdated($updated)
@@ -400,7 +409,7 @@ class Event
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -411,6 +420,7 @@ class Event
      * Set parcel
      *
      * @param \Novactive\AdminBundle\Entity\Parcel $parcel
+     *
      * @return Event
      */
     public function setParcel(Parcel $parcel = null)
@@ -423,7 +433,7 @@ class Event
     /**
      * Get parcel
      *
-     * @return \Novactive\AdminBundle\Entity\Parcel 
+     * @return \Novactive\AdminBundle\Entity\Parcel
      */
     public function getParcel()
     {
@@ -434,6 +444,7 @@ class Event
      * Set shipment
      *
      * @param \Novactive\AdminBundle\Entity\Shipment $shipment
+     *
      * @return Event
      */
     public function setShipment(Shipment $shipment = null)
@@ -446,7 +457,7 @@ class Event
     /**
      * Get shipment
      *
-     * @return \Novactive\AdminBundle\Entity\Shipment 
+     * @return \Novactive\AdminBundle\Entity\Shipment
      */
     public function getShipment()
     {
@@ -457,6 +468,7 @@ class Event
      * Set tour
      *
      * @param \Novactive\AdminBundle\Entity\Tour $tour
+     *
      * @return Event
      */
     public function setTour(Tour $tour)
@@ -469,7 +481,7 @@ class Event
     /**
      * Get tour
      *
-     * @return \Novactive\AdminBundle\Entity\Tour 
+     * @return \Novactive\AdminBundle\Entity\Tour
      */
     public function getTour()
     {

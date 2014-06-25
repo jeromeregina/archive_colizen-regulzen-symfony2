@@ -5,10 +5,6 @@ namespace Novactive\AdminBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Novactive\AdminBundle\Entity\Cycle;
-use Novactive\AdminBundle\Entity\TourCode;
-use Novactive\AdminBundle\Entity\Shipment;
-use Novactive\AdminBundle\Entity\Site;
 
 /**
  * TblCycle
@@ -16,7 +12,8 @@ use Novactive\AdminBundle\Entity\Site;
  * @ORM\Table(name="TBL_tour")
  * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\Tour")
  */
-class Tour {
+class Tour
+{
     /**
      * @var integer
      *
@@ -25,28 +22,28 @@ class Tour {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-     /**
+    /**
      * @var TourCode
      *
      * @ORM\ManyToOne(targetEntity="TourCode", inversedBy="tours")
      * @ORM\JoinColumn(name="TOURCODE_id", referencedColumnName="TOURCODE_id", nullable=false)
      */
     protected $tourCode;
-    
-     /**
+
+    /**
      * @var Site
      *
      * @ORM\ManyToOne(targetEntity="Site", inversedBy="tours")
      * @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
      */
     protected $site;
-    
-   /**
-    * @var datetime $date
-    *
-    * @ORM\Column(name="TOUR_date", type="datetime")
-    */
-   protected $date;
+
+    /**
+     * @var datetime $date
+     *
+     * @ORM\Column(name="TOUR_date", type="datetime")
+     */
+    protected $date;
 
     /**
      *
@@ -54,22 +51,21 @@ class Tour {
      */
     protected $events;
 
-
-   /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="TOUR_created", type="datetime")
-    */
-   protected $created;
-   
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="update")
-    * @ORM\Column(name="TOUR_updated", type="datetime")
-    */
-   protected $updated;
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="TOUR_created", type="datetime")
+     */
+    protected $created;
+
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="TOUR_updated", type="datetime")
+     */
+    protected $updated;
 
     public function __construct()
     {
@@ -79,7 +75,7 @@ class Tour {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -90,6 +86,7 @@ class Tour {
      * Set date
      *
      * @param \DateTime $date
+     *
      * @return Tour
      */
     public function setDate($date)
@@ -102,7 +99,7 @@ class Tour {
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -113,6 +110,7 @@ class Tour {
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Tour
      */
     public function setCreated($created)
@@ -125,7 +123,7 @@ class Tour {
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -136,6 +134,7 @@ class Tour {
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Tour
      */
     public function setUpdated($updated)
@@ -148,7 +147,7 @@ class Tour {
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -159,6 +158,7 @@ class Tour {
      * Set tourCode
      *
      * @param \Novactive\AdminBundle\Entity\TourCode $tourCode
+     *
      * @return Tour
      */
     public function setTourCode(TourCode $tourCode)
@@ -171,7 +171,7 @@ class Tour {
     /**
      * Get tourCode
      *
-     * @return \Novactive\AdminBundle\Entity\TourCode 
+     * @return \Novactive\AdminBundle\Entity\TourCode
      */
     public function getTourCode()
     {
@@ -182,6 +182,7 @@ class Tour {
      * Set site
      *
      * @param \Novactive\AdminBundle\Entity\Site $site
+     *
      * @return Tour
      */
     public function setSite(Site $site)
@@ -194,10 +195,44 @@ class Tour {
     /**
      * Get site
      *
-     * @return \Novactive\AdminBundle\Entity\Site 
+     * @return \Novactive\AdminBundle\Entity\Site
      */
     public function getSite()
     {
         return $this->site;
+    }
+
+    /**
+     * Add events
+     *
+     * @param \Novactive\AdminBundle\Entity\Event $events
+     *
+     * @return Tour
+     */
+    public function addEvent(\Novactive\AdminBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Novactive\AdminBundle\Entity\Event $events
+     */
+    public function removeEvent(\Novactive\AdminBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

@@ -3,9 +3,6 @@
 namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
-use Novactive\AdminBundle\Entity\Shipment;
 
 /**
  * TblCycle
@@ -13,7 +10,8 @@ use Novactive\AdminBundle\Entity\Shipment;
  * @ORM\Table(name="TBL_delivery_address")
  * @ORM\Entity(repositoryClass="Novactive\AdminBundle\Repository\DeliveryAddress")
  */
-class DeliveryAddress {
+class DeliveryAddress
+{
     /**
      * @var integer
      *
@@ -28,43 +26,43 @@ class DeliveryAddress {
      * @ORM\Column(name="DLVRADDR_country", type="string", length=1, nullable=false)
      */
     protected $country;
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="DLVRADDR_zipcode", type="string", length=10, nullable=false)
      */
     protected $zipcode;
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="DLVRADDR_city", type="string", length=58, nullable=false)
      */
     protected $city;
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="DLVRADDR_address", type="text", nullable=false)
      */
     protected $address;
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="DLVRADDR_name", type="string", length=255, nullable=false)
      */
     protected $name;
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="DLVRADDR_telephone", type="string", length=12, nullable=true)
      */
     protected $telephone;
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="DLVRADDR_email", type="string", length=255, nullable=true)
      */
     protected $email;
-  /**
+    /**
      * @var string
      *
      * @ORM\Column(name="DLVRADDR_longitude", type="decimal", precision=9, scale=6, nullable=true)
@@ -77,7 +75,7 @@ class DeliveryAddress {
      * @ORM\Column(name="DLVRADDR_latitude", type="decimal", precision=8, scale=6, nullable=true)
      */
     private $latitude;
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="DLVRADDR_additional_infos", type="string", length=255, nullable=true)
@@ -90,12 +88,11 @@ class DeliveryAddress {
      * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", onDelete="CASCADE")
      */
     protected $shipment;
-    
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -106,6 +103,7 @@ class DeliveryAddress {
      * Set country
      *
      * @param string $country
+     *
      * @return DeliveryAddress
      */
     public function setCountry($country)
@@ -118,7 +116,7 @@ class DeliveryAddress {
     /**
      * Get country
      *
-     * @return string 
+     * @return string
      */
     public function getCountry()
     {
@@ -129,6 +127,7 @@ class DeliveryAddress {
      * Set zipcode
      *
      * @param string $zipcode
+     *
      * @return DeliveryAddress
      */
     public function setZipcode($zipcode)
@@ -141,7 +140,7 @@ class DeliveryAddress {
     /**
      * Get zipcode
      *
-     * @return string 
+     * @return string
      */
     public function getZipcode()
     {
@@ -152,6 +151,7 @@ class DeliveryAddress {
      * Set city
      *
      * @param string $city
+     *
      * @return DeliveryAddress
      */
     public function setCity($city)
@@ -164,7 +164,7 @@ class DeliveryAddress {
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -175,6 +175,7 @@ class DeliveryAddress {
      * Set address
      *
      * @param string $address
+     *
      * @return DeliveryAddress
      */
     public function setAddress($address)
@@ -187,7 +188,7 @@ class DeliveryAddress {
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -198,6 +199,7 @@ class DeliveryAddress {
      * Set name
      *
      * @param string $name
+     *
      * @return DeliveryAddress
      */
     public function setName($name)
@@ -210,7 +212,7 @@ class DeliveryAddress {
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -221,6 +223,7 @@ class DeliveryAddress {
      * Set telephone
      *
      * @param string $telephone
+     *
      * @return DeliveryAddress
      */
     public function setTelephone($telephone)
@@ -233,7 +236,7 @@ class DeliveryAddress {
     /**
      * Get telephone
      *
-     * @return string 
+     * @return string
      */
     public function getTelephone()
     {
@@ -244,6 +247,7 @@ class DeliveryAddress {
      * Set email
      *
      * @param string $email
+     *
      * @return DeliveryAddress
      */
     public function setEmail($email)
@@ -256,7 +260,7 @@ class DeliveryAddress {
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -267,6 +271,7 @@ class DeliveryAddress {
      * Set longitude
      *
      * @param string $longitude
+     *
      * @return DeliveryAddress
      */
     public function setLongitude($longitude)
@@ -279,7 +284,7 @@ class DeliveryAddress {
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude()
     {
@@ -290,6 +295,7 @@ class DeliveryAddress {
      * Set latitude
      *
      * @param string $latitude
+     *
      * @return DeliveryAddress
      */
     public function setLatitude($latitude)
@@ -302,7 +308,7 @@ class DeliveryAddress {
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude()
     {
@@ -313,6 +319,7 @@ class DeliveryAddress {
      * Set additionalInformations
      *
      * @param string $additionalInformations
+     *
      * @return DeliveryAddress
      */
     public function setAdditionalInformations($additionalInformations)
@@ -325,7 +332,7 @@ class DeliveryAddress {
     /**
      * Get additionalInformations
      *
-     * @return string 
+     * @return string
      */
     public function getAdditionalInformations()
     {
@@ -336,21 +343,22 @@ class DeliveryAddress {
      * Set shipment
      *
      * @param \Novactive\AdminBundle\Entity\Shipment $shipment
+     *
      * @return DeliveryAddress
      */
     public function setShipment(Shipment $shipment)
     {
         $shipment->setDeliveryAddress($this);
-        
+
         $this->shipment = $shipment;
-        
+
         return $this;
     }
 
     /**
      * Get shipment
      *
-     * @return \Novactive\AdminBundle\Entity\Shipment 
+     * @return \Novactive\AdminBundle\Entity\Shipment
      */
     public function getShipment()
     {

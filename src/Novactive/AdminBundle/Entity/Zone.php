@@ -3,7 +3,6 @@
 namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Novactive\AdminBundle\Entity\Site;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -48,26 +47,25 @@ class Zone
     private $site;
 
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="ZONE_created", type="datetime")
-    */
-   private $created;
-   
-    /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="update")
-    * @ORM\Column(name="ZONE_updated", type="datetime")
-    */
-   private $updated;
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="ZONE_created", type="datetime")
+     */
+    private $created;
 
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="ZONE_updated", type="datetime")
+     */
+    private $updated;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,6 +76,7 @@ class Zone
      * Set name
      *
      * @param string $name
+     *
      * @return Zone
      */
     public function setName($name)
@@ -90,7 +89,7 @@ class Zone
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -101,6 +100,7 @@ class Zone
      * Set travelTime
      *
      * @param integer $travelTime
+     *
      * @return Zone
      */
     public function setTravelTime($travelTime)
@@ -113,7 +113,7 @@ class Zone
     /**
      * Get travelTime
      *
-     * @return integer 
+     * @return integer
      */
     public function getTravelTime()
     {
@@ -124,6 +124,7 @@ class Zone
      * Set site
      *
      * @param \Novactive\AdminBundle\Entity\Site $site
+     *
      * @return Zone
      */
     public function setSite(Site $site)
@@ -136,16 +137,18 @@ class Zone
     /**
      * Get site
      *
-     * @return \Novactive\AdminBundle\Entity\Site 
+     * @return \Novactive\AdminBundle\Entity\Site
      */
     public function getSite()
     {
         return $this->site;
     }
-      /**
+
+    /**
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Parcel
      */
     public function setCreated($created)
@@ -158,7 +161,7 @@ class Zone
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -169,6 +172,7 @@ class Zone
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Parcel
      */
     public function setUpdated($updated)
@@ -181,7 +185,7 @@ class Zone
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {

@@ -35,7 +35,7 @@ class Sender
      * @ORM\Column(name="SNDR_short_name", type="string", length=3, nullable=false)
      */
     private $shortName;
-    
+
     /**
      * @var string
      *
@@ -57,26 +57,25 @@ class Sender
     private $sensitivity = 2;
 
     /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="create")
-    * @ORM\Column(name="SNDR_created", type="datetime")
-    */
-   private $created;
-   
-    /**
-    * @var datetime $created
-    *
-    * @Gedmo\Timestampable(on="update")
-    * @ORM\Column(name="SNDR_updated", type="datetime")
-    */
-   private $updated;
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="SNDR_created", type="datetime")
+     */
+    private $created;
 
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="SNDR_updated", type="datetime")
+     */
+    private $updated;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -87,6 +86,7 @@ class Sender
      * Set name
      *
      * @param string $name
+     *
      * @return Sender
      */
     public function setName($name)
@@ -99,7 +99,7 @@ class Sender
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -110,6 +110,7 @@ class Sender
      * Set shortName
      *
      * @param string $shortName
+     *
      * @return Sender
      */
     public function setShortName($shortName)
@@ -122,7 +123,7 @@ class Sender
     /**
      * Get shortName
      *
-     * @return string 
+     * @return string
      */
     public function getShortName()
     {
@@ -133,6 +134,7 @@ class Sender
      * Set satus
      *
      * @param integer $tatus
+     *
      * @return Sender
      */
     public function setStatus($status)
@@ -145,16 +147,18 @@ class Sender
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
         return $this->status;
     }
-      /**
+
+    /**
      * Set created
      *
      * @param \DateTime $created
+     *
      * @return Parcel
      */
     public function setCreated($created)
@@ -167,7 +171,7 @@ class Sender
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -178,6 +182,7 @@ class Sender
      * Set updated
      *
      * @param \DateTime $updated
+     *
      * @return Parcel
      */
     public function setUpdated($updated)
@@ -190,45 +195,55 @@ class Sender
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
         return $this->updated;
     }
+
     /**
-     * 
+     *
      * @return string
      */
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
+
     /**
-     * 
+     *
      * @param string $code
+     *
      * @return \Novactive\AdminBundle\Entity\Sender
      */
-    public function setCode($code) {
+    public function setCode($code)
+    {
         $this->code = $code;
-        return $this;
-    }
-    /**
-     * 
-     * @return int
-     */
-    public function getSensitivity() {
-        return $this->sensitivity;
-    }
-    
-    /**
-     * 
-     * @param int $sensitivity
-     * @return \Novactive\AdminBundle\Entity\Sender
-     */
-    public function setSensitivity($sensitivity) {
-        $this->sensitivity = $sensitivity;
+
         return $this;
     }
 
+    /**
+     *
+     * @return int
+     */
+    public function getSensitivity()
+    {
+        return $this->sensitivity;
+    }
+
+    /**
+     *
+     * @param int $sensitivity
+     *
+     * @return \Novactive\AdminBundle\Entity\Sender
+     */
+    public function setSensitivity($sensitivity)
+    {
+        $this->sensitivity = $sensitivity;
+
+        return $this;
+    }
 
 }
