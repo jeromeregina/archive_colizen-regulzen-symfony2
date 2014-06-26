@@ -13,12 +13,19 @@
 
 
     <!-- page specific plugin styles -->
+    {% block third_party_css %}{% endblock %}
 
     <!-- text fonts -->
     <link rel="stylesheet" href="{{ asset('bundles/novactiveinterface/ace/css/ace-fonts.css') }}" />
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="{{ asset('bundles/novactiveinterface/ace/css/ace.min.css') }}" />
+    {% stylesheets '@NovactiveInterfaceBundle/Resources/public/ace/css/less/ace.less'
+        filter='less'
+        output='css/ace.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" />
+    {% endstylesheets %}
+
 
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="{{ asset('bundles/novactiveinterface/ace/css/ace-part2.min.css') }}" />
@@ -46,19 +53,14 @@
 
 {% block body %}
 <body class="no-skin">
-    <div class="navbar" id="navbar">
-        <!-- navbar goes here -->
-    </div>
+
+    {% include '::_header.html.twig' %}
 
     <div class="main-container" id="main-container">
         <div class="main-content">
 
             <div class="page-content">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {% block content %}{% endblock %}
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
+                {% block content %}{% endblock %}
             </div><!-- /.page-content -->
         </div><!-- /.main-content -->
 

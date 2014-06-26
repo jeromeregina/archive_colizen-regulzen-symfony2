@@ -17,6 +17,8 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+    node_bin: /usr/bin/nodejs
+    node_paths: [/usr/local/lib/node_modules]
 #paramètre déterminant le temps pour la libération du lock sur la session en minutes
     session_login_lock_time: 10 
 #info webservice

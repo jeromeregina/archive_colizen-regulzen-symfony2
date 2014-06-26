@@ -36,9 +36,13 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ NovactiveAdminBundle ]
+    bundles:        [ NovactiveAdminBundle, NovactiveInterfaceBundle ]
     #java: /usr/bin/java
     filters:
+        less:
+            node: %node_bin%
+            node_paths: %node_paths%
+            apply_to: "\.less$"
         lessphp:
              file: %kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php
              apply_to: "\.less$"
