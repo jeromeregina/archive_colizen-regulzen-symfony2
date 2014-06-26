@@ -31,7 +31,7 @@ class UserChecker extends BaseChecker{
         foreach ($existingSessions as $es){
             /* @var $es ESession */
             if (time()-$es->getTime()<$this->sessionLockTime)
-            { throw new AuthenticationException('another user is already connected with these credentials');}
+            { throw new AuthenticationException('security.already_connected.flash.error');}
             else {
                 $this->em->remove($es);
                 $this->em->flush();

@@ -1,53 +1,53 @@
-{% extends "NovactiveAdminBundle::base_layout.html.twig" %}
+{% extends "::base.html.twig" %}
 
-{% block body %}
-    <div class="row">
-        {{ form_start(dateCycleForm) }}
-        <div class="col-md-3 col-md-offset-3">
-            {{ form_widget(dateCycleForm.date) }}
+{#{% block body %}#}
+    {#<div class="row">#}
+        {#{{ form_start(dateCycleForm) }}#}
+        {#<div class="col-md-3 col-md-offset-3">#}
+            {#{{ form_widget(dateCycleForm.date) }}#}
 
-            </div>
-        <div class="col-md-2">
-            {{ form_widget(dateCycleForm.cycle) }}
-        </div>
-        <div class="col-md-2">
-            {{ form_widget(dateCycleForm.valider) }}
-        </div>
-        {{ form_rest(dateCycleForm) }}
-        {{ form_end(dateCycleForm) }}
-    </div>
-        <br />
+            {#</div>#}
+        {#<div class="col-md-2">#}
+            {#{{ form_widget(dateCycleForm.cycle) }}#}
+        {#</div>#}
+        {#<div class="col-md-2">#}
+            {#{{ form_widget(dateCycleForm.valider) }}#}
+        {#</div>#}
+        {#{{ form_rest(dateCycleForm) }}#}
+        {#{{ form_end(dateCycleForm) }}#}
+    {#</div>#}
+        {#<br />#}
 
-        <div class="row">
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th>Site</th>
-                        <th>Nb Expéditions</th>
-                        <th>Nb Colis</th>
-                        <th>% Dispatch</th>
-                        <th>% Départ</th>
-                        <th>% Avancement</th>
-                        <th>Tx d'echec</th>
-                        <th>Tx HC</th>
-                        <th>Prev Tx HC</th>
-                        <th>Prev minutes HC</th>
-                        <th>Prev livreur sensible</th>
-                        <th>Manquant</th>
-                        <th>Surplus</th>
-                        <th>CNML</th>
-                        <th>Inv Tou</th>
-                        <th>% Cloture</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
+        {#<div class="row">#}
+            {#<table class="table table-condensed">#}
+                {#<thead>#}
+                    {#<tr>#}
+                        {#<th>Site</th>#}
+                        {#<th>Nb Expéditions</th>#}
+                        {#<th>Nb Colis</th>#}
+                        {#<th>% Dispatch</th>#}
+                        {#<th>% Départ</th>#}
+                        {#<th>% Avancement</th>#}
+                        {#<th>Tx d'echec</th>#}
+                        {#<th>Tx HC</th>#}
+                        {#<th>Prev Tx HC</th>#}
+                        {#<th>Prev minutes HC</th>#}
+                        {#<th>Prev livreur sensible</th>#}
+                        {#<th>Manquant</th>#}
+                        {#<th>Surplus</th>#}
+                        {#<th>CNML</th>#}
+                        {#<th>Inv Tou</th>#}
+                        {#<th>% Cloture</th>#}
+                    {#</tr>#}
+                {#</thead>#}
+                {#<tbody>#}
+                    {#<tr>#}
 
-                    </tr>
-                </tbody>
-            </table>
+                    {#</tr>#}
+                {#</tbody>#}
+            {#</table>#}
 
 
-        </div>
+        {#</div>#}
 
-{% endblock %}
+{#{% endblock %}#}
