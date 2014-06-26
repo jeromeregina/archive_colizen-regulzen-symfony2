@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Novactive\AdminBundle\Entity\DeliveryAddress;
 use Novactive\AdminBundle\Entity\Event;
+use Novactive\AdminBundle\Entity\Sender;
+use Novactive\AdminBundle\Entity\Slot;
 /**
  * TblShipment
  *
@@ -33,11 +35,12 @@ class Shipment
     private $cargopass;
 
     /**
-     * @var string
+     * @var Site
      *
-     * @ORM\Column(name="SHPMNT_shipper_id", type="string", length=8, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Sender")
+     * @ORM\JoinColumn(name="SNDR_id", referencedColumnName="SNDR_id", nullable=false)
      */
-    private $shipperId;
+    private $sender;
 
     /**
      *
@@ -61,39 +64,24 @@ class Shipment
     private $parcelQuantity;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="SHPMNT_delivery_date", type="date", nullable=true)
-     */
-    private $deliveryDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="SHPMNT_delivery_slot_start", type="time", nullable=true)
-     */
-    private $deliverySlotStart;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="SHPMNT_delivery_slot_end", type="time", nullable=true)
-     */
-    private $deliverySlotEnd;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="SHPMNT_service_id", type="integer", nullable=true)
      */
     private $serviceId;
-
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="SHPMNT_creation_date", type="datetime", nullable=false)
+     * @ORM\Column(name="SHPMNT_priority", type="integer", nullable=true)
      */
-    private $creationDate;
+    private $priority;
+
+//    /**
+//     * @var \DateTime
+//     *
+//     * @ORM\Column(name="SHPMNT_creation_date", type="datetime", nullable=false)
+//     */
+//    private $creationDate;
     /**
      * @var string
      *
@@ -108,7 +96,12 @@ class Shipment
      * @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
      */
     private $site;
-
+    /**
+     * @var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="Slot", cascade={"persist"}, mappedBy="shipment")
+     */
+    protected $slots;
     /**
     * @var datetime $created
     *
@@ -131,6 +124,7 @@ class Shipment
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->slots = new ArrayCollection();
     }
     
     /**
@@ -169,40 +163,16 @@ class Shipment
     }
 
     /**
-     * Get cargopass format 12312323456789
+     * Get cargopass format 1231233456789
      *
      * @return string
      */
     public function getCargopassFormatted()
     {
-        $pattern = '/(\d{3})-(\d{3})-(\d)(\d{8}) (\d{3})/';
+        $pattern = '/(\d{3})-(\d{3})-(\d{2})(\d{7}) (\d{3})/';
         $replacement = '$1$3$4';
 
         return preg_replace($pattern, $replacement, $this->cargopass);
-    }
-
-    /**
-     * Set shipperId
-     *
-     * @param string $shipperId
-     *
-     * @return Shipment
-     */
-    public function setShipperId($shipperId)
-    {
-        $this->shipperId = $shipperId;
-
-        return $this;
-    }
-
-    /**
-     * Get shipperId
-     *
-     * @return string
-     */
-    public function getShipperId()
-    {
-        return $this->shipperId;
     }
 
     /**
@@ -325,29 +295,29 @@ class Shipment
         return $this->serviceId;
     }
 
-    /**
-     * Set creationDate
-     *
-     * @param \DateTime $creationDate
-     *
-     * @return Shipment
-     */
-    public function setCreationDate($creationDate)
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    /**
-     * Get creationDate
-     *
-     * @return \DateTime
-     */
-    public function getCreationDate()
-    {
-        return $this->creationDate;
-    }
+//    /**
+//     * Set creationDate
+//     *
+//     * @param \DateTime $creationDate
+//     *
+//     * @return Shipment
+//     */
+//    public function setCreationDate($creationDate)
+//    {
+//        $this->creationDate = $creationDate;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get creationDate
+//     *
+//     * @return \DateTime
+//     */
+//    public function getCreationDate()
+//    {
+//        return $this->creationDate;
+//    }
 
     /**
      * Set site
@@ -508,5 +478,86 @@ class Shipment
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Add slots
+     *
+     * @param \Novactive\AdminBundle\Entity\Slot $slots
+     * @return Shipment
+     */
+    public function addSlot(Slot $slot)
+    {
+        $slot->setShipment($this);
+        
+        $this->slots->add($slot);
+
+        return $this;
+    }
+
+    /**
+     * Remove slots
+     *
+     * @param \Novactive\AdminBundle\Entity\Slot $slots
+     */
+    public function removeSlot(Slot $slot)
+    {
+        $this->slots->removeElement($slots);
+    }
+
+    /**
+     * Get slots
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSlots()
+    {
+        return $this->slots;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     * @return Shipment
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * Set sender
+     *
+     * @param \Novactive\AdminBundle\Entity\Sender $sender
+     * @return Shipment
+     */
+    public function setSender(Sender $sender)
+    {
+        $this->sender = $sender;
+
+        return $this;
+    }
+
+    /**
+     * Get sender
+     *
+     * @return \Novactive\AdminBundle\Entity\Sender 
+     */
+    public function getSender()
+    {
+        return $this->sender;
     }
 }

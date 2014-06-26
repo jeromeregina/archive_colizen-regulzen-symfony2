@@ -33,28 +33,28 @@ class TourPlanning extends AbstractImporter  {
         return $sheetData;
     }
 /**
-    * C -> cargopass
-    * D -> code client -> shipper id
-    * E -> code agence expediteur
-    * F -> date d'expedition
-    * G -> poids
-    * H -> nombre de colis
- * K -> priorité de la livraison (?)
+    * C -> cargopass -> Shipment.cargopass
+    * D -> code client -> Shipment.shipper_id (Sender?)
+    * E -> code agence expediteur -> Shipment.Site.CodeImtech ou Shipment.Site.Number
+    * F -> date d'expedition -> Shipment.creationDate
+    * G -> poids -> Shipment.weight
+    * H -> nombre de colis -> Shipment.parcelQuantity
+    * K -> priorité de la livraison (?)
  * L -> code agence ? = 750 ? à importer ?
- * M -> code tournée
- * N -> position du bordereau
- * O -> date tournée
- * P -> créneau horaire
-    * R -> détails de l'adresse de livraison
-    * S -> adresse de livraison : pays
-    * T -> adresse de livraison : cp
-    * U -> adresse de livraison : ville
-    * V -> adresse de livraison : adress
-    * W -> adresse de livraison : nom destinataire
-    * X -> telephone destinataire
-    * Y -> email destinataire
-    * Z -> latitude
-    * AA -> longitude
+    * M -> code tournée
+    * N -> position du bordereau
+    * O -> date tournée
+    * P -> créneau horaire
+    * R -> détails de l'adresse de livraison -> Shipment.DeliveryAddress.additionalInformations
+    * S -> adresse de livraison : pays -> Shipment.DeliveryAddress.country
+    * T -> adresse de livraison : cp -> Shipment.DeliveryAddress.zipcode
+    * U -> adresse de livraison : ville -> Shipment.DeliveryAddress.city
+    * V -> adresse de livraison : adress -> Shipment.DeliveryAddress.address
+    * W -> adresse de livraison : nom destinataire -> Shipment.DeliveryAddress.name
+    * X -> telephone destinataire -> Shipment.DeliveryAddress.telephone
+    * Y -> email destinataire -> Shipment.DeliveryAddress.email
+    * Z -> latitude -> Shipment.DeliveryAddress.latitude
+    * AA -> longitude -> Shipment.DeliveryAddress.longitude
     * AC -> heure planifiée
  * 
  * @param array $line
@@ -66,15 +66,18 @@ class TourPlanning extends AbstractImporter  {
             }
                $shipment= $this->getShipmentRepository()->resolveByCargopass($line['C']);
                
-               $site= $this->getSiteRepository()->findOneByAnyCode($line['E']);
+               $site= $this->getSiteRepository()->findOneByAnyCode($line['L']);
+               
                
                $shipment->setCargopass($line['C'])
                        ->setShipperId($line['D'])
-                       ->setCreationDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
-                       ->setDeliveryDate(\DateTime::createFromFormat('H:i',$line['AC']))
+//                       ->setCreationDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
+//                       ->setDeliveryDate(\DateTime::createFromFormat('H:i',$line['AC']))
+                       ->setDeliveryDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
                        ->setParcelQuantity($line['H'])
                        ->setSite($site)
                        ->setWeight($line['G'])
+                       ->setPriority($line['K'])
                        ;
                
                $deliveryAddress=($shipment->hasDeliveryAddress())?$shipment->getDeliveryAddress():new DeliveryAddress();
@@ -96,25 +99,32 @@ class TourPlanning extends AbstractImporter  {
                
                $shipment->setDeliveryAddress($deliveryAddress);
                // à afiner
-               $tourCode =  new \Novactive\AdminBundle\Entity\TourCode();
+               
+               
+               $tourCode =  $this->em->getRepository('NovactiveAdminBundle:TourCode')->resolveByCode($line['M']);
+               
+               $tour = new \Novactive\AdminBundle\Entity\Tour();
+               $tour->setSite($site)
+                    ->setTourCode($tourCode)
+                    ->setDate(\DateTime::createFromFormat('[d.m.Y]',$line['O']));
+               
+               $slot = new \Novactive\AdminBundle\Entity\Slot();
+               
+               list($slotStart,$slotEnd)=explode('-',trim($line['P'],'[]'));
+               
+               $slot->setTourOrder($line['N'])
+                     ->setTour($tour)
+                     ->setDeliverySlotStart(\DateTime::createFromFormat('H:i',$slotStart))
+                     ->setDeliverySlotEnd(\DateTime::createFromFormat('H:i',$slotEnd))
+                     ->setPlanifiedHour(\DateTime::createFromFormat('H:i',$line['AC']))
+                     ;  
+               $shipment->addSlot($slot);
+                       
                
                //
                $this->em->persist($shipment);
                $this->em->flush();
                
-               
-                       
-//           * K -> priorité de la livraison (?)
-// * L -> code agence ? = 750 ? à importer ?
-// * M -> code tournée
-// * N -> position du bordereau
-// * O -> date tournée
-// * P -> créneau horaire     
-//               var_dump($shipment);die;
-//               $this->em->persist($shipment);
-               
-//               $sender = $this->getSenderRepository()->findOneBy(array(''))
-                              
             }
         
             protected function getActionName() {

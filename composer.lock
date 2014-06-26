@@ -4,8 +4,34 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7c7852bfb4f336370f5de3d5963ed203",
+    "hash": "24949f699e96f71d1ec18d9dc11e122c",
     "packages": [
+        {
+            "name": "beberlei/DoctrineExtensions",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beberlei/DoctrineExtensions.git",
+                "reference": "5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc",
+                "reference": "5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "DoctrineExtensions": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2013-12-20 22:02:19"
+        },
         {
             "name": "braincrafted/bootstrap-bundle",
             "version": "v2.0.1",
@@ -2603,18 +2629,15 @@
             "time": "2013-08-21 18:09:35"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "knplabs/knp-menu": 15,
-        "knplabs/knp-menu-bundle": 15
+        "knplabs/knp-menu-bundle": 15,
+        "beberlei/doctrineextensions": 20
     },
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

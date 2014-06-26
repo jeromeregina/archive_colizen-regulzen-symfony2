@@ -4,7 +4,7 @@ namespace Novactive\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * TblCycle
  *
