@@ -33,16 +33,16 @@ class Event
      */
     private $cargopassEvent;
 
-    /**
-     * @var Parcel
-     *
-     * @ORM\ManyToMany(targetEntity="Parcel", inversedBy="events")
-     * @ORM\JoinTable(name="JNT_event_has_parcel",
-     *      joinColumns={@ORM\JoinColumn(name="EVENT_id", referencedColumnName="EVENT_id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="PRCL_id", referencedColumnName="PRCL_id")}
-     *      )
-     */
-    protected $parcels;
+//    /**
+//     * @var Parcel
+//     *
+//     * @ORM\ManyToMany(targetEntity="Parcel", inversedBy="events")
+//     * @ORM\JoinTable(name="JNT_event_has_parcel",
+//     *      joinColumns={@ORM\JoinColumn(name="EVENT_id", referencedColumnName="EVENT_id")},
+//     *      inverseJoinColumns={@ORM\JoinColumn(name="PRCL_id", referencedColumnName="PRCL_id")}
+//     *      )
+//     */
+//    protected $parcels;
 
     /**
      * @var Shipment
@@ -58,14 +58,14 @@ class Event
      * @ORM\Column(name="EVENT_date", type="date", nullable=false)
      */
     private $date;
-
-    /**
-     * @var Tour
-     *
-     * @ORM\ManyToOne(targetEntity="Tour", inversedBy="events")
-     * @ORM\JoinColumn(name="TOUR_id", referencedColumnName="TOUR_id", nullable=false)
-     */
-    protected $tour;
+//
+//    /**
+//     * @var Tour
+//     *
+//     * @ORM\ManyToOne(targetEntity="Tour", inversedBy="events")
+//     * @ORM\JoinColumn(name="TOUR_id", referencedColumnName="TOUR_id", nullable=false)
+//     */
+//    protected $tour;
 
     /**
      * @var \DateTime
@@ -102,12 +102,12 @@ class Event
      */
     private $meetingHourEnd;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="EVENT_tour_order", type="integer", nullable=false)
-     */
-    private $tourOrder;
+//    /**
+//     * @var integer
+//     *
+//     * @ORM\Column(name="EVENT_tour_order", type="integer", nullable=false)
+//     */
+//    private $tourOrder;
 
     /**
     * @var datetime $created
@@ -331,29 +331,29 @@ class Event
         return $this->meetingHourEnd;
     }
 
-    /**
-     * Set tourOrder
-     *
-     * @param integer $tourOrder
-     *
-     * @return Event
-     */
-    public function setTourOrder($tourOrder)
-    {
-        $this->tourOrder = $tourOrder;
-
-        return $this;
-    }
-
-    /**
-     * Get tourOrder
-     *
-     * @return integer
-     */
-    public function getTourOrder()
-    {
-        return $this->tourOrder;
-    }
+//    /**
+//     * Set tourOrder
+//     *
+//     * @param integer $tourOrder
+//     *
+//     * @return Event
+//     */
+//    public function setTourOrder($tourOrder)
+//    {
+//        $this->tourOrder = $tourOrder;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get tourOrder
+//     *
+//     * @return integer
+//     */
+//    public function getTourOrder()
+//    {
+//        return $this->tourOrder;
+//    }
 
     /**
      * Set created
@@ -427,60 +427,60 @@ class Event
         return $this->shipment;
     }
 
-    /**
-     * Set tour
-     *
-     * @param \Novactive\AdminBundle\Entity\Tour $tour
-     * @return Event
-     */
-    public function setTour(Tour $tour)
-    {
-        $this->tour = $tour;
+//    /**
+//     * Set tour
+//     *
+//     * @param \Novactive\AdminBundle\Entity\Tour $tour
+//     * @return Event
+//     */
+//    public function setTour(Tour $tour)
+//    {
+//        $this->tour = $tour;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get tour
+//     *
+//     * @return \Novactive\AdminBundle\Entity\Tour
+//     */
+//    public function getTour()
+//    {
+//        return $this->tour;
+//    }
 
-        return $this;
-    }
 
-    /**
-     * Get tour
-     *
-     * @return \Novactive\AdminBundle\Entity\Tour
-     */
-    public function getTour()
-    {
-        return $this->tour;
-    }
-
-
-    /**
-     * Add parcels
-     *
-     * @param \Novactive\AdminBundle\Entity\Parcel $parcels
-     * @return Event
-     */
-    public function addParcel(Parcel $parcels)
-    {
-        $this->parcels[] = $parcels;
-
-        return $this;
-    }
-
-    /**
-     * Remove parcels
-     *
-     * @param \Novactive\AdminBundle\Entity\Parcel $parcels
-     */
-    public function removeParcel(Parcel $parcels)
-    {
-        $this->parcels->removeElement($parcels);
-    }
-
-    /**
-     * Get parcels
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getParcels()
-    {
-        return $this->parcels;
-    }
+//    /**
+//     * Add parcels
+//     *
+//     * @param \Novactive\AdminBundle\Entity\Parcel $parcels
+//     * @return Event
+//     */
+//    public function addParcel(Parcel $parcels)
+//    {
+//        $this->parcels[] = $parcels;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove parcels
+//     *
+//     * @param \Novactive\AdminBundle\Entity\Parcel $parcels
+//     */
+//    public function removeParcel(Parcel $parcels)
+//    {
+//        $this->parcels->removeElement($parcels);
+//    }
+//
+//    /**
+//     * Get parcels
+//     *
+//     * @return \Doctrine\Common\Collections\Collection 
+//     */
+//    public function getParcels()
+//    {
+//        return $this->parcels;
+//    }
 }

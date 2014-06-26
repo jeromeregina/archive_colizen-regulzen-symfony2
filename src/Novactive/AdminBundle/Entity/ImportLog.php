@@ -41,7 +41,7 @@ class ImportLog
     private $level;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="IMPRT_date", type="datetime")
@@ -82,7 +82,7 @@ class ImportLog
         return $this->date;
     }
 
-    public function setDate(datetime $date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
 

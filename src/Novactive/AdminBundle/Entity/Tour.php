@@ -25,7 +25,7 @@ class Tour
     /**
      * @var TourCode
      *
-     * @ORM\ManyToOne(targetEntity="TourCode", inversedBy="tours")
+     * @ORM\ManyToOne(targetEntity="TourCode", cascade={"persist"}, inversedBy="tours")
      * @ORM\JoinColumn(name="TOURCODE_id", referencedColumnName="TOURCODE_id", nullable=false)
      */
     protected $tourCode;
@@ -47,9 +47,15 @@ class Tour
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="tour")
+     * @ORM\OneToMany(targetEntity="Slot", mappedBy="tour")
      */
-    protected $events;
+    protected $slots;
+//
+//    /**
+//     *
+//     * @ORM\OneToMany(targetEntity="Event", mappedBy="tour")
+//     */
+//    protected $events;
 
     /**
      * @var datetime $created
@@ -69,7 +75,7 @@ class Tour
 
     public function __construct()
     {
-        $this->events = new ArrayCollection();
+        $this->slots = new ArrayCollection();
     }
 
     /**
@@ -202,37 +208,70 @@ class Tour
         return $this->site;
     }
 
+//    /**
+//     * Add events
+//     *
+//     * @param \Novactive\AdminBundle\Entity\Event $events
+//     *
+//     * @return Tour
+//     */
+//    public function addEvent(\Novactive\AdminBundle\Entity\Event $events)
+//    {
+//        $this->events[] = $events;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove events
+//     *
+//     * @param \Novactive\AdminBundle\Entity\Event $events
+//     */
+//    public function removeEvent(\Novactive\AdminBundle\Entity\Event $events)
+//    {
+//        $this->events->removeElement($events);
+//    }
+//
+//    /**
+//     * Get events
+//     *
+//     * @return \Doctrine\Common\Collections\Collection
+//     */
+//    public function getEvents()
+//    {
+//        return $this->events;
+//    }
+
     /**
-     * Add events
+     * Add slots
      *
-     * @param \Novactive\AdminBundle\Entity\Event $events
-     *
+     * @param \Novactive\AdminBundle\Entity\Slot $slots
      * @return Tour
      */
-    public function addEvent(\Novactive\AdminBundle\Entity\Event $events)
+    public function addSlot(\Novactive\AdminBundle\Entity\Slot $slots)
     {
-        $this->events[] = $events;
+        $this->slots[] = $slots;
 
         return $this;
     }
 
     /**
-     * Remove events
+     * Remove slots
      *
-     * @param \Novactive\AdminBundle\Entity\Event $events
+     * @param \Novactive\AdminBundle\Entity\Slot $slots
      */
-    public function removeEvent(\Novactive\AdminBundle\Entity\Event $events)
+    public function removeSlot(\Novactive\AdminBundle\Entity\Slot $slots)
     {
-        $this->events->removeElement($events);
+        $this->slots->removeElement($slots);
     }
 
     /**
-     * Get events
+     * Get slots
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getEvents()
+    public function getSlots()
     {
-        return $this->events;
+        return $this->slots;
     }
 }

@@ -29,12 +29,13 @@ class Sender
      */
     private $name;
 
-    /**
-     * @var string
+  /**
+     * @var Site
      *
-     * @ORM\Column(name="SNDR_short_name", type="string", length=3, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Site")
+     * @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
      */
-    private $shortName;
+    protected $site;
 
     /**
      * @var string
@@ -246,4 +247,27 @@ class Sender
         return $this;
     }
 
+
+    /**
+     * Set site
+     *
+     * @param \Novactive\AdminBundle\Entity\Site $site
+     * @return Sender
+     */
+    public function setSite(\Novactive\AdminBundle\Entity\Site $site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \Novactive\AdminBundle\Entity\Site 
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
 }
