@@ -97,7 +97,22 @@ class DeliveryAddress {
      */
     protected $shipment;
     
-
+   /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="create")
+    * @ORM\Column(name="DLVRADDR_created", type="datetime")
+    */
+   private $created;
+   
+    /**
+    * @var datetime $created
+    *
+    * @Gedmo\Timestampable(on="update")
+    * @ORM\Column(name="DLVRADDR_updated", type="datetime")
+    */
+   private $updated;
+   
     /**
      * Get id
      *
@@ -384,5 +399,51 @@ class DeliveryAddress {
     public function getZipcodeExtended()
     {
         return $this->zipcodeExtended;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return DeliveryAddress
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return DeliveryAddress
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

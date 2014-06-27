@@ -26,9 +26,9 @@ class Parcel
     /**
      * @var string
      *
-     * @ORM\Column(name="PRCL_cargopass_parcel", type="string", length=8, nullable=false)
+     * @ORM\Column(name="PRCL_cargopass", type="string", length=8, nullable=false)
      */
-    private $cargopassParcel;
+    private $cargopass;
 
     /**
      * @var integer
@@ -36,6 +36,13 @@ class Parcel
      * @ORM\Column(name="PRCL_nb_presentations", type="integer", nullable=false, options={"default" = 1})
      */
     private $nbPresentations = 1;
+    
+    /**
+     * @var status
+     *
+     * @ORM\Column(name="PRCL_status", type="integer", nullable=false, options={"default" = 1})
+     */
+    private $status = 1;
 
     /**
      * @var Shipment
@@ -81,27 +88,27 @@ class Parcel
     }
 
     /**
-     * Set cargopassParcel
+     * Set cargopass
      *
-     * @param string $cargopassParcel
+     * @param string $cargopass
      *
      * @return Parcel
      */
-    public function setCargopassParcel($cargopassParcel)
+    public function setCargopass($cargopassParcel)
     {
-        $this->cargopassParcel = $cargopassParcel;
+        $this->cargopass = $cargopassParcel;
 
         return $this;
     }
 
     /**
-     * Get cargopassParcel
+     * Get cargopass
      *
      * @return string
      */
-    public function getCargopassParcel()
+    public function getCargopass()
     {
-        return $this->cargopassParcel;
+        return $this->cargopass;
     }
 
 
@@ -257,5 +264,28 @@ class Parcel
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Parcel
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

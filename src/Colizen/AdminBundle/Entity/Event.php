@@ -263,4 +263,27 @@ class Event
     {
         return $this->parcel;
     }
+
+    /**
+     * Set slot
+     *
+     * @param \Colizen\AdminBundle\Entity\Slot $slot
+     * @return Event
+     */
+    public function setSlot(\Colizen\AdminBundle\Entity\Slot $slot = null)
+    {
+        $this->slot = $slot;
+
+        return $this;
+    }
+
+    /**
+     * Get slot
+     *
+     * @return \Colizen\AdminBundle\Entity\Slot 
+     */
+    public function getSlot()
+    {
+        return $this->slot;
+    }
 }

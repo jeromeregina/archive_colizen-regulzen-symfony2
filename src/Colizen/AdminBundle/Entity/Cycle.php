@@ -67,7 +67,7 @@ class Cycle
     private $updated;
 
     /**
-     * @ORM\OneToMany(targetEntity="TourCode", mappedBy="cycle")
+     * @ORM\ManyToMany(targetEntity="TourCode", mappedBy="cycles")
      */
     private $tourCodes;
 

@@ -28,9 +28,9 @@ class Slot {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="SLOT_planified_hour", type="time", nullable=true)
+     * @ORM\Column(name="SLOT_theorical_hour", type="time", nullable=true)
      */
-    protected $planifiedHour;
+    protected $theoricalHour;
     /**
      * @var \DateTime
      *
@@ -207,26 +207,26 @@ class Slot {
     }
 
     /**
-     * Set planifiedHour
+     * Set theoricalHour
      *
-     * @param \DateTime $planifiedHour
+     * @param \DateTime $theoricalHour
      * @return Slot
      */
-    public function setPlanifiedHour($planifiedHour)
+    public function setTheoricalHour($theoricalHour)
     {
-        $this->planifiedHour = $planifiedHour;
+        $this->theoricalHour = $theoricalHour;
 
         return $this;
     }
 
     /**
-     * Get planifiedHour
+     * Get theoricalHour
      *
      * @return \DateTime 
      */
-    public function getPlanifiedHour()
+    public function getTheoricalHour()
     {
-        return $this->planifiedHour;
+        return $this->theoricalHour;
     }
 
     /**
@@ -457,5 +457,45 @@ class Slot {
     public function getRealHour()
     {
         return $this->realHour;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add events
+     *
+     * @param \Colizen\AdminBundle\Entity\Event $events
+     * @return Slot
+     */
+    public function addEvent(\Colizen\AdminBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Colizen\AdminBundle\Entity\Event $events
+     */
+    public function removeEvent(\Colizen\AdminBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }
