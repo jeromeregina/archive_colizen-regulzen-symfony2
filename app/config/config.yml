@@ -30,13 +30,13 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - NovactiveAdminBundle:Form:form_div_layout.html.twig
+            - ColizenAdminBundle:Form:form_div_layout.html.twig
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ NovactiveAdminBundle, NovactiveInterfaceBundle ]
+    bundles:        [ ColizenAdminBundle, ColizenInterfaceBundle ]
     #java: /usr/bin/java
     filters:
         less:
@@ -76,7 +76,7 @@ doctrine:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Novactive\UserBundle\Entity\User
+    user_class: Colizen\UserBundle\Entity\User
     
 # Swiftmailer Configuration
 swiftmailer:

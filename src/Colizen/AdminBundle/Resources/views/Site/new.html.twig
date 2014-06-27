@@ -1,0 +1,14 @@
+{% extends "ColizenAdminBundle::admin_layout.html.twig" %}
+{% from "ColizenAdminBundle:Form:_macros.html.twig" import btn %}
+
+{% block body -%}
+    <h1>Site creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+       {{ btn('site','list') }}
+    </li>
+</ul>
+{% endblock %}

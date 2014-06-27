@@ -1,10 +1,10 @@
-novactive_admin:
-    resource: "@NovactiveAdminBundle/Controller/"
+colizen_admin:
+    resource: "@ColizenAdminBundle/Controller/"
     type:     annotation
     prefix:   /admin
 
-novactive_interface:
-    resource: "@NovactiveInterfaceBundle/Controller/"
+colizen_interface:
+    resource: "@ColizenInterfaceBundle/Controller/"
     type:     annotation
     prefix:   /
     
