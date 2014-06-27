@@ -23,7 +23,7 @@
 
     <div class="space-6"></div><!-- optional space -->
     <div class="pos-rel"><!-- a position relative container -->
-        <div class="login-box visible widget-box no-border col-md-4 col-md-offset-4" id="login-box">
+        <div class="login-box visible widget-box no-border" id="login-box">
             <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
