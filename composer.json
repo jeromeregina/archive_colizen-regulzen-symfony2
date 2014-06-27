@@ -21,7 +21,6 @@
         "stof/doctrine-extensions-bundle": "v1.1.0",
         "braincrafted/bootstrap-bundle": "v2.0.1",
         "twbs/bootstrap": "v3.1.1",
-        "oyejorge/less.php": "~1.5",
         "jquery/jquery":  "2.0.*",
         "egeloen/google-map-bundle": "~2.1",
         "widop/http-adapter-bundle": "1.1.*",
