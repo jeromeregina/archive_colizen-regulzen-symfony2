@@ -34,7 +34,7 @@ class TourPlanning extends AbstractImporter  {
     }
 /**
     * C -> cargopass -> Shipment.cargopass
-    * D -> code client -> Shipment.shipper_id (Sender?)
+    * D -> code client -> Shipment.shipper_id (SenderAccount?)
     * E -> code agence expediteur -> Shipment.Site.CodeImtech ou Shipment.Site.Number
     * F -> date d'expedition -> Shipment.creationDate
     * G -> poids -> Shipment.weight

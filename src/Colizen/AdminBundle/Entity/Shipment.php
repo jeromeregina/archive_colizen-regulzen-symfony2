@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Event;
-use Colizen\AdminBundle\Entity\Sender;
+use Colizen\AdminBundle\Entity\SenderAccount;
 use Colizen\AdminBundle\Entity\Slot;
 /**
  * TblShipment
@@ -37,10 +37,10 @@ class Shipment
     /**
      * @var Site
      *
-     * @ORM\ManyToOne(targetEntity="Sender")
+     * @ORM\ManyToOne(targetEntity="SenderAccount")
      * @ORM\JoinColumn(name="SNDR_id", referencedColumnName="SNDR_id", nullable=false)
      */
-    private $sender;
+    private $senderAccount;
 
     /**
      *
@@ -509,25 +509,25 @@ class Shipment
     }
 
     /**
-     * Set sender
+     * Set senderAccount
      *
-     * @param \Colizen\AdminBundle\Entity\Sender $sender
+     * @param \Colizen\AdminBundle\Entity\SenderAccount $senderAccount
      * @return Shipment
      */
-    public function setSender(Sender $sender)
+    public function setSenderAccount(SenderAccount $senderAccount)
     {
-        $this->sender = $sender;
+        $this->senderAccount = $senderAccount;
 
         return $this;
     }
 
     /**
-     * Get sender
+     * Get senderAccount
      *
-     * @return \Colizen\AdminBundle\Entity\Sender 
+     * @return \Colizen\AdminBundle\Entity\SenderAccount 
      */
-    public function getSender()
+    public function getSenderAccount()
     {
-        return $this->sender;
+        return $this->senderAccount;
     }
 }

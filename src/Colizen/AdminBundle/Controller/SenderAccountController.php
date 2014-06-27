@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Colizen\AdminBundle\Entity\Sender;
-use Colizen\AdminBundle\Form\SenderType;
+use Colizen\AdminBundle\Entity\SenderAccount;
+use Colizen\AdminBundle\Form\SenderAccountType;
 
 /**
- * Sender controller.
+ * SenderAccount controller.
  *
- * @Route("/sender")
+ * @Route("/sender_account")
  */
-class SenderController extends Controller
+class SenderAccountController extends Controller
 {
 
     /**
-     * Lists all Sender entities.
+     * Lists all SenderAccount entities.
      *
-     * @Route("/", name="admin_sender_list")
+     * @Route("/", name="admin_sender_account_list")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class SenderController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ColizenAdminBundle:Sender')->findAll();
+        $entities = $em->getRepository('ColizenAdminBundle:SenderAccount')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Sender entity.
+     * Creates a new SenderAccount entity.
      *
-     * @Route("/", name="admin_sender_create")
+     * @Route("/", name="admin_sender_account_create")
      * @Method("POST")
-     * @Template("ColizenAdminBundle:Sender:new.html.twig")
+     * @Template("ColizenAdminBundle:SenderAccount:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Sender();
+        $entity = new SenderAccount();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class SenderController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_sender_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_sender_account_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class SenderController extends Controller
     }
 
     /**
-    * Creates a form to create a Sender entity.
+    * Creates a form to create a SenderAccount entity.
     *
-    * @param Sender $entity The entity
+    * @param SenderAccount $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Sender $entity)
+    private function createCreateForm(SenderAccount $entity)
     {
-        $form = $this->createForm(new SenderType(), $entity, array(
-            'action' => $this->generateUrl('admin_sender_create'),
+        $form = $this->createForm(new SenderAccountType(), $entity, array(
+            'action' => $this->generateUrl('admin_sender_account_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class SenderController extends Controller
     }
 
     /**
-     * Displays a form to create a new Sender entity.
+     * Displays a form to create a new SenderAccount entity.
      *
-     * @Route("/new", name="admin_sender_new")
+     * @Route("/new", name="admin_sender_account_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Sender();
+        $entity = new SenderAccount();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class SenderController extends Controller
     }
 
     /**
-     * Finds and displays a Sender entity.
+     * Finds and displays a SenderAccount entity.
      *
-     * @Route("/{id}", name="admin_sender_show")
+     * @Route("/{id}", name="admin_sender_account_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class SenderController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ColizenAdminBundle:Sender')->find($id);
+        $entity = $em->getRepository('ColizenAdminBundle:SenderAccount')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Sender entity.');
+            throw $this->createNotFoundException('Unable to find SenderAccount entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class SenderController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Sender entity.
+     * Displays a form to edit an existing SenderAccount entity.
      *
-     * @Route("/{id}/edit", name="admin_sender_edit")
+     * @Route("/{id}/edit", name="admin_sender_account_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class SenderController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ColizenAdminBundle:Sender')->find($id);
+        $entity = $em->getRepository('ColizenAdminBundle:SenderAccount')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Sender entity.');
+            throw $this->createNotFoundException('Unable to find SenderAccount entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class SenderController extends Controller
     }
 
     /**
-    * Creates a form to edit a Sender entity.
+    * Creates a form to edit a SenderAccount entity.
     *
-    * @param Sender $entity The entity
+    * @param SenderAccount $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Sender $entity)
+    private function createEditForm(SenderAccount $entity)
     {
-        $form = $this->createForm(new SenderType(), $entity, array(
-            'action' => $this->generateUrl('admin_sender_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new SenderAccountType(), $entity, array(
+            'action' => $this->generateUrl('admin_sender_account_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class SenderController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Sender entity.
+     * Edits an existing SenderAccount entity.
      *
-     * @Route("/{id}", name="admin_sender_update")
+     * @Route("/{id}", name="admin_sender_account_update")
      * @Method("PUT")
-     * @Template("ColizenAdminBundle:Sender:edit.html.twig")
+     * @Template("ColizenAdminBundle:SenderAccount:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ColizenAdminBundle:Sender')->find($id);
+        $entity = $em->getRepository('ColizenAdminBundle:SenderAccount')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Sender entity.');
+            throw $this->createNotFoundException('Unable to find SenderAccount entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class SenderController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_sender_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_sender_account_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class SenderController extends Controller
         );
     }
     /**
-     * Deletes a Sender entity.
+     * Deletes a SenderAccount entity.
      *
-     * @Route("/{id}", name="admin_sender_delete")
+     * @Route("/{id}", name="admin_sender_account_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class SenderController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ColizenAdminBundle:Sender')->find($id);
+            $entity = $em->getRepository('ColizenAdminBundle:SenderAccount')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Sender entity.');
+                throw $this->createNotFoundException('Unable to find SenderAccount entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_sender_list'));
+        return $this->redirect($this->generateUrl('admin_sender_account_list'));
     }
 
     /**
-     * Creates a form to delete a Sender entity by id.
+     * Creates a form to delete a SenderAccount entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class SenderController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_sender_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_sender_account_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'regulzen.admin.delete','attr'=>array('type'=>'danger','icon'=>'trash')))
             ->getForm()

@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * TblSender
+ * TblSenderAccount
  *
- * @ORM\Table(name="TBL_sender")
- * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\Sender")
+ * @ORM\Table(name="TBL_sender_account")
+ * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\SenderAccount")
  */
-class Sender
+class SenderAccount
 {
     /**
      * @var integer
@@ -88,7 +88,7 @@ class Sender
      *
      * @param string $name
      *
-     * @return Sender
+     * @return SenderAccount
      */
     public function setName($name)
     {
@@ -112,7 +112,7 @@ class Sender
      *
      * @param string $shortName
      *
-     * @return Sender
+     * @return SenderAccount
      */
     public function setShortName($shortName)
     {
@@ -136,7 +136,7 @@ class Sender
      *
      * @param integer $tatus
      *
-     * @return Sender
+     * @return SenderAccount
      */
     public function setStatus($status)
     {
@@ -216,7 +216,7 @@ class Sender
      *
      * @param string $code
      *
-     * @return \Colizen\AdminBundle\Entity\Sender
+     * @return \Colizen\AdminBundle\Entity\SenderAccount
      */
     public function setCode($code)
     {
@@ -238,7 +238,7 @@ class Sender
      *
      * @param int $sensitivity
      *
-     * @return \Colizen\AdminBundle\Entity\Sender
+     * @return \Colizen\AdminBundle\Entity\SenderAccount
      */
     public function setSensitivity($sensitivity)
     {
@@ -252,7 +252,7 @@ class Sender
      * Set site
      *
      * @param \Colizen\AdminBundle\Entity\Site $site
-     * @return Sender
+     * @return SenderAccount
      */
     public function setSite(\Colizen\AdminBundle\Entity\Site $site)
     {
