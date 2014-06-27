@@ -8,6 +8,7 @@ use Colizen\AdminBundle\Entity\Tour;
 use Colizen\AdminBundle\Entity\Parcel;
 use Colizen\AdminBundle\Entity\Shipment;
 use Doctrine\Common\Collections\ArrayCollection;
+use Colizen\AdminBundle\Entity\Slot;
 
 /**
  * TblEvent
@@ -62,7 +63,15 @@ class Event
      * @ORM\Column(name="EVENT_scan_status", type="integer", nullable=true)
      */
     private $scanStatus;
-
+    
+    /**
+    * @var Slot
+    *
+    * @ORM\ManyToOne(targetEntity="Slot", inversedBy="events")
+    * @ORM\JoinColumn(name="SLOT_id", referencedColumnName="SLOT_id", nullable=true)
+    */
+   private $slot;
+   
     /**
     * @var datetime $created
     *

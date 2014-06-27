@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Tour;
 use Colizen\AdminBundle\Entity\Shipment;
+use Colizen\AdminBundle\Entity\Event;
 /**
  * TblShipment
  *
@@ -96,6 +97,12 @@ class Slot {
      * @ORM\JoinColumn(name="SLOT_theorical_TOUR_id", referencedColumnName="TOUR_id", nullable=false)
      */
     protected $theoricalTour;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="slot")
+     */
+    private  $events;
+    
     /**
      * @var Shipment
      *
