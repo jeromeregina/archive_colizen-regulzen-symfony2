@@ -3,9 +3,9 @@
 namespace Colizen\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Colizen\AdminBundle\Entity\Site;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Tour;
 use Colizen\AdminBundle\Entity\Shipment;
@@ -30,6 +30,12 @@ class Slot {
      * @ORM\Column(name="SLOT_planified_hour", type="time", nullable=true)
      */
     protected $planifiedHour;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="SLOT_real_hour", type="time", nullable=true)
+     */
+    protected $realHour;
     
     /**
      * @var \DateTime
@@ -47,13 +53,13 @@ class Slot {
     /**
      * @var integer
      *
-     * @ORM\Column(name="SLOT_tour_order", type="integer", nullable=false)
+     * @ORM\Column(name="SLOT_real_tour_order", type="integer", nullable=true)
      */
     private $realTourOrder;
     /**
      * @var integer
      *
-     * @ORM\Column(name="SLOT_update_counter", type="integer", nullable=false)
+     * @ORM\Column(name="SLOT_real_update_counter", type="integer", nullable=true)
      */
     private $realUpdateCounter;
     /**
@@ -421,5 +427,28 @@ class Slot {
     public function getTheoricalTour()
     {
         return $this->theoricalTour;
+    }
+
+    /**
+     * Set realHour
+     *
+     * @param \DateTime $realHour
+     * @return Slot
+     */
+    public function setRealHour($realHour)
+    {
+        $this->realHour = $realHour;
+
+        return $this;
+    }
+
+    /**
+     * Get realHour
+     *
+     * @return \DateTime 
+     */
+    public function getRealHour()
+    {
+        return $this->realHour;
     }
 }

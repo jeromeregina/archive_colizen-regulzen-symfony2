@@ -27,22 +27,12 @@ class Event
     private $id;
 
     /**
-     * @var string
+     * @var Parcel
      *
-     * @ORM\Column(name="EVENT_cargopass_event", type="string", length=9, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Parcel", inversedBy="events")
+     * @ORM\JoinColumn(name="PRCL_id", referencedColumnName="PRCL_id", nullable=true)
      */
-    private $cargopassEvent;
-
-//    /**
-//     * @var Parcel
-//     *
-//     * @ORM\ManyToMany(targetEntity="Parcel", inversedBy="events")
-//     * @ORM\JoinTable(name="JNT_event_has_parcel",
-//     *      joinColumns={@ORM\JoinColumn(name="EVENT_id", referencedColumnName="EVENT_id")},
-//     *      inverseJoinColumns={@ORM\JoinColumn(name="PRCL_id", referencedColumnName="PRCL_id")}
-//     *      )
-//     */
-//    protected $parcels;
+    protected $parcel;
 
     /**
      * @var Shipment
@@ -58,14 +48,6 @@ class Event
      * @ORM\Column(name="EVENT_date", type="date", nullable=false)
      */
     private $date;
-//
-//    /**
-//     * @var Tour
-//     *
-//     * @ORM\ManyToOne(targetEntity="Tour", inversedBy="events")
-//     * @ORM\JoinColumn(name="TOUR_id", referencedColumnName="TOUR_id", nullable=false)
-//     */
-//    protected $tour;
 
     /**
      * @var \DateTime
@@ -82,34 +64,6 @@ class Event
     private $scanStatus;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="EVENT_theorical_hour", type="time", nullable=false)
-     */
-    private $theoricalHour;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="EVENT_meeting_hour_start", type="time", nullable=false)
-     */
-    private $meetingHourStart;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="EVENT_meeting_hour_end", type="time", nullable=false)
-     */
-    private $meetingHourEnd;
-
-//    /**
-//     * @var integer
-//     *
-//     * @ORM\Column(name="EVENT_tour_order", type="integer", nullable=false)
-//     */
-//    private $tourOrder;
-
-    /**
     * @var datetime $created
     *
     * @Gedmo\Timestampable(on="create")
@@ -124,13 +78,6 @@ class Event
     * @ORM\Column(name="EVENT_updated", type="datetime")
     */
    private $updated;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->parcels = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -140,53 +87,6 @@ class Event
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set cargopassEvent
-     *
-     * @param string $cargopassEvent
-     * @return Event
-     */
-    public function setCargopassEvent($cargopassEvent)
-    {
-        $this->cargopassEvent = $cargopassEvent;
-
-        return $this;
-    }
-
-    /**
-     * Get cargopassEvent
-     *
-     * @return string
-     */
-    public function getCargopassEvent()
-    {
-        return $this->cargopassEvent;
-    }
-
-    /**
-     * Set cargopassParcel
-     *
-     * @param string $cargopassParcel
-     *
-     * @return Event
-     */
-    public function setCargopassParcel($cargopassParcel)
-    {
-        $this->cargopassParcel = $cargopassParcel;
-
-        return $this;
-    }
-
-    /**
-     * Get cargopassParcel
-     *
-     * @return string
-     */
-    public function getCargopassParcel()
-    {
-        return $this->cargopassParcel;
     }
 
     /**
@@ -260,102 +160,6 @@ class Event
     }
 
     /**
-     * Set theoricalHour
-     *
-     * @param \DateTime $theoricalHour
-     *
-     * @return Event
-     */
-    public function setTheoricalHour($theoricalHour)
-    {
-        $this->theoricalHour = $theoricalHour;
-
-        return $this;
-    }
-
-    /**
-     * Get theoricalHour
-     *
-     * @return \DateTime
-     */
-    public function getTheoricalHour()
-    {
-        return $this->theoricalHour;
-    }
-
-    /**
-     * Set meetingHourStart
-     *
-     * @param \DateTime $meetingHourStart
-     *
-     * @return Event
-     */
-    public function setMeetingHourStart($meetingHourStart)
-    {
-        $this->meetingHourStart = $meetingHourStart;
-
-        return $this;
-    }
-
-    /**
-     * Get meetingHourStart
-     *
-     * @return \DateTime
-     */
-    public function getMeetingHourStart()
-    {
-        return $this->meetingHourStart;
-    }
-
-    /**
-     * Set meetingHourEnd
-     *
-     * @param \DateTime $meetingHourEnd
-     *
-     * @return Event
-     */
-    public function setMeetingHourEnd($meetingHourEnd)
-    {
-        $this->meetingHourEnd = $meetingHourEnd;
-
-        return $this;
-    }
-
-    /**
-     * Get meetingHourEnd
-     *
-     * @return \DateTime
-     */
-    public function getMeetingHourEnd()
-    {
-        return $this->meetingHourEnd;
-    }
-
-//    /**
-//     * Set tourOrder
-//     *
-//     * @param integer $tourOrder
-//     *
-//     * @return Event
-//     */
-//    public function setTourOrder($tourOrder)
-//    {
-//        $this->tourOrder = $tourOrder;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get tourOrder
-//     *
-//     * @return integer
-//     */
-//    public function getTourOrder()
-//    {
-//        return $this->tourOrder;
-//    }
-
-    /**
      * Set created
      *
      * @param \DateTime $created
@@ -427,60 +231,27 @@ class Event
         return $this->shipment;
     }
 
-//    /**
-//     * Set tour
-//     *
-//     * @param \Colizen\AdminBundle\Entity\Tour $tour
-//     * @return Event
-//     */
-//    public function setTour(Tour $tour)
-//    {
-//        $this->tour = $tour;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get tour
-//     *
-//     * @return \Colizen\AdminBundle\Entity\Tour
-//     */
-//    public function getTour()
-//    {
-//        return $this->tour;
-//    }
 
+    /**
+     * Set parcel
+     *
+     * @param \Colizen\AdminBundle\Entity\Parcel $parcel
+     * @return Event
+     */
+    public function setParcel(\Colizen\AdminBundle\Entity\Parcel $parcel = null)
+    {
+        $this->parcel = $parcel;
 
-//    /**
-//     * Add parcels
-//     *
-//     * @param \Colizen\AdminBundle\Entity\Parcel $parcels
-//     * @return Event
-//     */
-//    public function addParcel(Parcel $parcels)
-//    {
-//        $this->parcels[] = $parcels;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Remove parcels
-//     *
-//     * @param \Colizen\AdminBundle\Entity\Parcel $parcels
-//     */
-//    public function removeParcel(Parcel $parcels)
-//    {
-//        $this->parcels->removeElement($parcels);
-//    }
-//
-//    /**
-//     * Get parcels
-//     *
-//     * @return \Doctrine\Common\Collections\Collection 
-//     */
-//    public function getParcels()
-//    {
-//        return $this->parcels;
-//    }
+        return $this;
+    }
+
+    /**
+     * Get parcel
+     *
+     * @return \Colizen\AdminBundle\Entity\Parcel 
+     */
+    public function getParcel()
+    {
+        return $this->parcel;
+    }
 }

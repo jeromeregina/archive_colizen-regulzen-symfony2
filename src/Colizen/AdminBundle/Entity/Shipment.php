@@ -76,12 +76,6 @@ class Shipment
      */
     private $priority;
 
-//    /**
-//     * @var \DateTime
-//     *
-//     * @ORM\Column(name="SHPMNT_creation_date", type="datetime", nullable=false)
-//     */
-//    private $creationDate;
     /**
      * @var string
      *
@@ -294,30 +288,6 @@ class Shipment
     {
         return $this->serviceId;
     }
-
-//    /**
-//     * Set creationDate
-//     *
-//     * @param \DateTime $creationDate
-//     *
-//     * @return Shipment
-//     */
-//    public function setCreationDate($creationDate)
-//    {
-//        $this->creationDate = $creationDate;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get creationDate
-//     *
-//     * @return \DateTime
-//     */
-//    public function getCreationDate()
-//    {
-//        return $this->creationDate;
-//    }
 
     /**
      * Set site

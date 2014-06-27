@@ -37,6 +37,12 @@ class DeliveryAddress {
      /**
      * @var string
      *
+     * @ORM\Column(name="DLVRADDR_zipcode_extended", type="string", length=30, nullable=true)
+     */
+    protected $zipcodeExtended;
+     /**
+     * @var string
+     *
      * @ORM\Column(name="DLVRADDR_city", type="string", length=58, nullable=false)
      */
     protected $city;
@@ -355,5 +361,28 @@ class DeliveryAddress {
     public function getShipment()
     {
         return $this->shipment;
+    }
+
+    /**
+     * Set zipcodeExtended
+     *
+     * @param string $zipcodeExtended
+     * @return DeliveryAddress
+     */
+    public function setZipcodeExtended($zipcodeExtended)
+    {
+        $this->zipcodeExtended = $zipcodeExtended;
+
+        return $this;
+    }
+
+    /**
+     * Get zipcodeExtended
+     *
+     * @return string 
+     */
+    public function getZipcodeExtended()
+    {
+        return $this->zipcodeExtended;
     }
 }

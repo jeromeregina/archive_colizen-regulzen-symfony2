@@ -96,15 +96,13 @@ class Parcel
      * @var Shipment
      *
      * @ORM\ManyToOne(targetEntity="Shipment")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", nullable=false)
-     * })
+     * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", nullable=false)
      */
     private $shipment;
-//    /**
-//     * @ORM\ManyToMany(targetEntity="Event", mappedBy="parcels")
-//     */
-//    private  $events;
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="parcel")
+     */
+    private  $events;
 
     /**
      * @var datetime $created
@@ -449,37 +447,37 @@ class Parcel
         return $this->updated;
     }
 
-//    /**
-//     * Add events
-//     *
-//     * @param \Colizen\AdminBundle\Entity\Event $events
-//     *
-//     * @return Parcel
-//     */
-//    public function addEvent(\Colizen\AdminBundle\Entity\Event $events)
-//    {
-//        $this->events[] = $events;
-//
-//        return $this;
-//}
-//
-//    /**
-//     * Remove events
-//     *
-//     * @param \Colizen\AdminBundle\Entity\Event $events
-//     */
-//    public function removeEvent(\Colizen\AdminBundle\Entity\Event $events)
-//    {
-//        $this->events->removeElement($events);
-//    }
-//
-//    /**
-//     * Get events
-//     *
-//     * @return \Doctrine\Common\Collections\Collection
-//     */
-//    public function getEvents()
-//    {
-//        return $this->events;
-//    }
+
+    /**
+     * Add events
+     *
+     * @param \Colizen\AdminBundle\Entity\Event $events
+     * @return Parcel
+     */
+    public function addEvent(\Colizen\AdminBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Colizen\AdminBundle\Entity\Event $events
+     */
+    public function removeEvent(\Colizen\AdminBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
 }
