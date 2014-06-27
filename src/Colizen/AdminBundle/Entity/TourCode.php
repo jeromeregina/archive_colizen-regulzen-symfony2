@@ -40,6 +40,14 @@ class TourCode
     private $tours;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Cycle", inversedBy="tourCodes")
+     * @ORM\JoinTable(name="JNT_tour_code_has_cycle",
+     *      joinColumns={@ORM\JoinColumn(name="TOURCODE_id", referencedColumnName="TOURCODE_id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="CYCLE_id", referencedColumnName="CYCLE_id")}
+     *      )
+     */
+    protected $cycles;
+    /**
      * @var datetime $created
      *
      * @Gedmo\Timestampable(on="create")
@@ -54,17 +62,11 @@ class TourCode
      * @ORM\Column(name="TOURCODE_updated", type="datetime")
      */
     protected $updated;
-    /**
-     * @var Cycle
-     *
-     * @ORM\ManyToOne(targetEntity="Cycle", inversedBy="tourCodes")
-     * @ORM\JoinColumn(name="CYCLE_id", referencedColumnName="CYCLE_id", nullable=true)
-     */
-    protected $cycle;
 
     public function __construct()
     {
         $this->tours = new ArrayCollection();
+        $this->cycles = new ArrayCollection();
     }
 
     /**
@@ -150,30 +152,6 @@ class TourCode
     }
 
     /**
-     * Set cycle
-     *
-     * @param \Colizen\AdminBundle\Entity\Cycle $cycle
-     *
-     * @return Tour
-     */
-    public function setCycle(Cycle $cycle)
-    {
-        $this->cycle = $cycle;
-
-        return $this;
-    }
-
-    /**
-     * Get cycle
-     *
-     * @return \Colizen\AdminBundle\Entity\Cycle
-     */
-    public function getCycle()
-    {
-        return $this->cycle;
-    }
-
-    /**
      * Set code
      *
      * @param integer $code
@@ -229,5 +207,38 @@ class TourCode
     public function getTours()
     {
         return $this->tours;
+    }
+
+    /**
+     * Add cycles
+     *
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycles
+     * @return TourCode
+     */
+    public function addCycle(\Colizen\AdminBundle\Entity\Cycle $cycles)
+    {
+        $this->cycles[] = $cycles;
+
+        return $this;
+    }
+
+    /**
+     * Remove cycles
+     *
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycles
+     */
+    public function removeCycle(\Colizen\AdminBundle\Entity\Cycle $cycles)
+    {
+        $this->cycles->removeElement($cycles);
+    }
+
+    /**
+     * Get cycles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCycles()
+    {
+        return $this->cycles;
     }
 }

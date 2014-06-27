@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="colizen_admin.importer.tour_planning.class">Colizen\AdminBundle\Importer\TourPlanning</parameter>
-        <parameter key="colizen_admin.importer.tour_planning.filepattern">*.xlsx</parameter>
+        <parameter key="colizen_admin.importer.tour_planning.filepattern">/\.xls(x){0,1}$/</parameter>
         <parameter key="colizen_admin.importer.parcel_details.class">Colizen\AdminBundle\Importer\ParcelDetails</parameter>
         <parameter key="colizen_admin.importer.parcel_details.filepattern">*.txt</parameter>
         <parameter key="colizen_admin.importer.output_handler.class">Colizen\AdminBundle\Command\OutputHandler\OutputHandler</parameter>

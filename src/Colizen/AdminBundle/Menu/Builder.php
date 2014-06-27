@@ -15,7 +15,7 @@ class Builder extends ContainerAware{
         $menu['Logs imports']->addChild('Logs imports de fichiers', array('route' => 'admin_logs_imports_list'));
         $menu['Logs imports']->addChild('Logs imports webservices', array('route' => 'regulzen_interface_index'));
         $menu->addChild('Créneaux', array('route' => 'regulzen_interface_index'));
-        $menu->addChild('Comptes chargeurs', array('route' => 'admin_sender_list'));
+        $menu->addChild('Comptes chargeurs', array('route' => 'admin_sender_account_list'));
         $menu->addChild('Sites', array('route' => 'admin_site_list'));
         $menu->addChild('Cycles', array('route' => 'admin_cycle_list'));
 

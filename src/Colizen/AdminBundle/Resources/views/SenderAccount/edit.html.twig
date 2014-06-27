@@ -2,13 +2,14 @@
 {% from "ColizenAdminBundle:Form:_macros.html.twig" import btn %}
 
 {% block body -%}
-    <h1>Sender creation</h1>
+    <h1>SenderAccount edit</h1>
 
-    {{ form(form) }}
+    {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
-        {{ btn('sender','list') }}
+        {{ btn('sender_account','list') }}
     </li>
+    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

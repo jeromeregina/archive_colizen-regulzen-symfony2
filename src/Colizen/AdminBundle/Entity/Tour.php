@@ -208,12 +208,79 @@ class Tour
     }
 
     /**
-     * Get slots
-     * !Todo
+     * Get all slots (result from merge, non persistent collection)
      * @return \Doctrine\Common\Collections\Collection 
      */
     public function getSlots()
     {
-        return ;
+        return new ArrayCollection(
+                array_merge($this->realSlots->toArray(), $this->theoricalSlots->toArray())
+                );
+    }
+
+    /**
+     * Add realSlots
+     *
+     * @param \Colizen\AdminBundle\Entity\Slot $realSlots
+     * @return Tour
+     */
+    public function addRealSlot(\Colizen\AdminBundle\Entity\Slot $realSlots)
+    {
+        $this->realSlots[] = $realSlots;
+
+        return $this;
+    }
+
+    /**
+     * Remove realSlots
+     *
+     * @param \Colizen\AdminBundle\Entity\Slot $realSlots
+     */
+    public function removeRealSlot(\Colizen\AdminBundle\Entity\Slot $realSlots)
+    {
+        $this->realSlots->removeElement($realSlots);
+    }
+
+    /**
+     * Get realSlots
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRealSlots()
+    {
+        return $this->realSlots;
+    }
+
+    /**
+     * Add theoricalSlots
+     *
+     * @param \Colizen\AdminBundle\Entity\Slot $theoricalSlots
+     * @return Tour
+     */
+    public function addTheoricalSlot(\Colizen\AdminBundle\Entity\Slot $theoricalSlots)
+    {
+        $this->theoricalSlots[] = $theoricalSlots;
+
+        return $this;
+    }
+
+    /**
+     * Remove theoricalSlots
+     *
+     * @param \Colizen\AdminBundle\Entity\Slot $theoricalSlots
+     */
+    public function removeTheoricalSlot(\Colizen\AdminBundle\Entity\Slot $theoricalSlots)
+    {
+        $this->theoricalSlots->removeElement($theoricalSlots);
+    }
+
+    /**
+     * Get theoricalSlots
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTheoricalSlots()
+    {
+        return $this->theoricalSlots;
     }
 }

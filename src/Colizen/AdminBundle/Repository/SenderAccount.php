@@ -4,6 +4,6 @@ namespace Colizen\AdminBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class Sender extends EntityRepository
+class SenderAccount extends EntityRepository
 {
 }

@@ -3,12 +3,13 @@
 namespace Colizen\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Colizen\AdminBundle\Entity\Site;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Tour;
 use Colizen\AdminBundle\Entity\Shipment;
+use Colizen\AdminBundle\Entity\Event;
 /**
  * TblShipment
  *
@@ -27,9 +28,15 @@ class Slot {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="SLOT_planified_hour", type="time", nullable=true)
+     * @ORM\Column(name="SLOT_theorical_hour", type="time", nullable=true)
      */
-    protected $planifiedHour;
+    protected $theoricalHour;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="SLOT_real_hour", type="time", nullable=true)
+     */
+    protected $realHour;
     
     /**
      * @var \DateTime
@@ -47,13 +54,13 @@ class Slot {
     /**
      * @var integer
      *
-     * @ORM\Column(name="SLOT_tour_order", type="integer", nullable=false)
+     * @ORM\Column(name="SLOT_real_tour_order", type="integer", nullable=true)
      */
     private $realTourOrder;
     /**
      * @var integer
      *
-     * @ORM\Column(name="SLOT_update_counter", type="integer", nullable=false)
+     * @ORM\Column(name="SLOT_real_update_counter", type="integer", nullable=true)
      */
     private $realUpdateCounter;
     /**
@@ -90,6 +97,12 @@ class Slot {
      * @ORM\JoinColumn(name="SLOT_theorical_TOUR_id", referencedColumnName="TOUR_id", nullable=false)
      */
     protected $theoricalTour;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="slot")
+     */
+    private  $events;
+    
     /**
      * @var Shipment
      *
@@ -194,26 +207,26 @@ class Slot {
     }
 
     /**
-     * Set planifiedHour
+     * Set theoricalHour
      *
-     * @param \DateTime $planifiedHour
+     * @param \DateTime $theoricalHour
      * @return Slot
      */
-    public function setPlanifiedHour($planifiedHour)
+    public function setTheoricalHour($theoricalHour)
     {
-        $this->planifiedHour = $planifiedHour;
+        $this->theoricalHour = $theoricalHour;
 
         return $this;
     }
 
     /**
-     * Get planifiedHour
+     * Get theoricalHour
      *
      * @return \DateTime 
      */
-    public function getPlanifiedHour()
+    public function getTheoricalHour()
     {
-        return $this->planifiedHour;
+        return $this->theoricalHour;
     }
 
     /**
@@ -421,5 +434,68 @@ class Slot {
     public function getTheoricalTour()
     {
         return $this->theoricalTour;
+    }
+
+    /**
+     * Set realHour
+     *
+     * @param \DateTime $realHour
+     * @return Slot
+     */
+    public function setRealHour($realHour)
+    {
+        $this->realHour = $realHour;
+
+        return $this;
+    }
+
+    /**
+     * Get realHour
+     *
+     * @return \DateTime 
+     */
+    public function getRealHour()
+    {
+        return $this->realHour;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add events
+     *
+     * @param \Colizen\AdminBundle\Entity\Event $events
+     * @return Slot
+     */
+    public function addEvent(\Colizen\AdminBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Colizen\AdminBundle\Entity\Event $events
+     */
+    public function removeEvent(\Colizen\AdminBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }
