@@ -37,7 +37,7 @@ class Shipment
     /**
      * @var Site
      *
-     * @ORM\ManyToOne(targetEntity="SenderAccount")
+     * @ORM\ManyToOne(targetEntity="SenderAccount", cascade={"persist"})
      * @ORM\JoinColumn(name="SNDR_id", referencedColumnName="SNDR_id", nullable=false)
      */
     private $senderAccount;
@@ -94,6 +94,7 @@ class Shipment
      * @var ArrayCollection
      * 
      * @ORM\OneToMany(targetEntity="Slot", cascade={"persist"}, mappedBy="shipment")
+     * @ORM\OrderBy({"created" = "ASC"})
      */
     protected $slots;
     /**
@@ -483,6 +484,23 @@ class Shipment
     public function getSlots()
     {
         return $this->slots;
+    }
+    /**
+     * Get slot
+     *
+     * @return \Colizen\AdminBundle\Entity\Slot
+     */
+    public function getLastSlot()
+    {
+        return $this->slots->last();
+    }
+    /**
+     * 
+     * @return boolean
+     */
+    public function hasSlots()
+    {
+        return !$this->slots->isEmpty();
     }
 
     /**

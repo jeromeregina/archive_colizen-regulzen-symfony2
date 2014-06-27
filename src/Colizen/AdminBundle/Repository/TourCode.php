@@ -23,10 +23,11 @@ class TourCode extends EntityRepository
            
            $new= new Entity();
            $new->setCode($code);
-           $cycle=$this->_em->getRepository('ColizenAdminBundle:Cycle')->findByTourCode($code);
-           $new->setCode($code)
-                ->setCycle($cycle);
+           $cycles=$this->_em->getRepository('ColizenAdminBundle:Cycle')->findByTourCode($code);
            
+           foreach ($cycles as $cycle){
+                $new->addCycle($cycle);
+           }
            return $new;
 
         }

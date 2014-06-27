@@ -67,7 +67,7 @@ class Slot {
      * @var Tour
      *
      * @ORM\ManyToOne(targetEntity="Tour", cascade={"persist"}, inversedBy="realSlots")
-     * @ORM\JoinColumn(name="SLOT_real_TOUR_id", referencedColumnName="TOUR_id", nullable=false)
+     * @ORM\JoinColumn(name="SLOT_real_TOUR_id", referencedColumnName="TOUR_id", nullable=true)
      */
     protected $realTour;
     
@@ -94,7 +94,7 @@ class Slot {
      * @var Tour
      *
      * @ORM\ManyToOne(targetEntity="Tour", cascade={"persist"}, inversedBy="theoricalSlots")
-     * @ORM\JoinColumn(name="SLOT_theorical_TOUR_id", referencedColumnName="TOUR_id", nullable=false)
+     * @ORM\JoinColumn(name="SLOT_theorical_TOUR_id", referencedColumnName="TOUR_id", nullable=true)
      */
     protected $theoricalTour;
     

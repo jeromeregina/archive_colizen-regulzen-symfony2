@@ -53,6 +53,7 @@ abstract class AbstractImporter {
                 $lc++;
             }
         }
+        return $output;
     }
     
     protected function findFiles(){
@@ -71,13 +72,6 @@ abstract class AbstractImporter {
     }
     /**
      * 
-     * @return \Colizen\AdminBundle\Repository\Parcel
-     */
-    protected function getParcelRepository(){
-       return $this->em->getRepository('ColizenAdminBundle:Parcel');
-    }
-    /**
-     * 
      * @return \Colizen\AdminBundle\Repository\SenderAccount
      */
     protected function getSenderAccountRepository(){
@@ -92,23 +86,9 @@ abstract class AbstractImporter {
     }
     /**
      * 
-     * @return \Colizen\AdminBundle\Repository\TourCode
-     */
-    protected function getTourCodeRepository(){
-       return $this->em->getRepository('ColizenAdminBundle:TourCode');
-    }
-    /**
-     * 
      * @return \Colizen\AdminBundle\Repository\Tour
      */
     protected function getTourRepository(){
        return $this->em->getRepository('ColizenAdminBundle:Tour');
-    }
-    /**
-     * 
-     * @return \Colizen\AdminBundle\Repository\Event
-     */
-    protected function getEventRepository(){
-       return $this->em->getRepository('ColizenAdminBundle:Event');
     }
 }

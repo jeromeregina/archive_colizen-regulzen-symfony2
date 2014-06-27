@@ -29,14 +29,6 @@ class SenderAccount
      */
     private $name;
 
-  /**
-     * @var Site
-     *
-     * @ORM\ManyToOne(targetEntity="Site")
-     * @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
-     */
-    protected $site;
-
     /**
      * @var string
      *
@@ -248,26 +240,4 @@ class SenderAccount
     }
 
 
-    /**
-     * Set site
-     *
-     * @param \Colizen\AdminBundle\Entity\Site $site
-     * @return SenderAccount
-     */
-    public function setSite(\Colizen\AdminBundle\Entity\Site $site)
-    {
-        $this->site = $site;
-
-        return $this;
-    }
-
-    /**
-     * Get site
-     *
-     * @return \Colizen\AdminBundle\Entity\Site 
-     */
-    public function getSite()
-    {
-        return $this->site;
-    }
 }

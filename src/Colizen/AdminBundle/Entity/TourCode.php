@@ -40,7 +40,9 @@ class TourCode
     private $tours;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cycle", inversedBy="tourCodes")
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * 
+     * @ORM\ManyToMany(targetEntity="Cycle", inversedBy="tourCodes", cascade={"persist"})
      * @ORM\JoinTable(name="JNT_tour_code_has_cycle",
      *      joinColumns={@ORM\JoinColumn(name="TOURCODE_id", referencedColumnName="TOURCODE_id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="CYCLE_id", referencedColumnName="CYCLE_id")}
@@ -48,7 +50,7 @@ class TourCode
      */
     protected $cycles;
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="TOURCODE_created", type="datetime")
@@ -56,7 +58,7 @@ class TourCode
     protected $created;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="TOURCODE_updated", type="datetime")
@@ -215,9 +217,11 @@ class TourCode
      * @param \Colizen\AdminBundle\Entity\Cycle $cycles
      * @return TourCode
      */
-    public function addCycle(\Colizen\AdminBundle\Entity\Cycle $cycles)
+    public function addCycle(\Colizen\AdminBundle\Entity\Cycle $cycle)
     {
-        $this->cycles[] = $cycles;
+        $cycle->addTourCode($this);
+        
+        $this->cycles->add($cycle);
 
         return $this;
     }

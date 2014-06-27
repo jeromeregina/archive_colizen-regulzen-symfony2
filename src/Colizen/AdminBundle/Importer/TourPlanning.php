@@ -7,6 +7,7 @@ use Symfony\Component\Finder\SplFileInfo;
 use Colizen\AdminBundle\Command\OutputHandler\OutputHandler;
 use Colizen\AdminBundle\Entity\Shipment;
 use Colizen\AdminBundle\Entity\DeliveryAddress;
+use Colizen\AdminBundle\Entity\Slot;
 
 class TourPlanning extends AbstractImporter  {
     /**
@@ -68,11 +69,7 @@ class TourPlanning extends AbstractImporter  {
                
                $site= $this->getSiteRepository()->findOneByAnyCode($line['L']);
                
-               
                $shipment->setCargopass($line['C'])
-                       ->setShipperId($line['D'])
-//                       ->setCreationDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
-//                       ->setDeliveryDate(\DateTime::createFromFormat('H:i',$line['AC']))
                        ->setDeliveryDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
                        ->setParcelQuantity(($line['H']==0)?1:$line['H'])
                        ->setSite($site)
@@ -98,33 +95,32 @@ class TourPlanning extends AbstractImporter  {
                        ;
                
                $shipment->setDeliveryAddress($deliveryAddress);
-               // à afiner
                
-               
-               $tourCode =  $this->em->getRepository('ColizenAdminBundle:TourCode')->resolveByCode($line['M']);
-               
-               $tour = new \Colizen\AdminBundle\Entity\Tour();
-               $tour->setSite($site)
-                    ->setTourCode($tourCode)
-                    ->setDate(\DateTime::createFromFormat('[d.m.Y]',$line['O']));
-               
-               $slot = new \Colizen\AdminBundle\Entity\Slot();
+               $tour = $this->getTourRepository()->resolveByTourCodeDateAndSite($line['M'],\DateTime::createFromFormat('[d.m.Y]',$line['O']),$site);
+                
+               $slot = ($shipment->getLastSlot() instanceof Slot)?$shipment->getLastSlot():new Slot();
                
                list($slotStart,$slotEnd)=explode('-',trim($line['P'],'[]'));
                
-               $slot->setTourOrder($line['N'])
-                     ->setTour($tour)
-                     ->setDeliverySlotStart(\DateTime::createFromFormat('H:i',$slotStart))
-                     ->setDeliverySlotEnd(\DateTime::createFromFormat('H:i',$slotEnd))
-                     ->setPlanifiedHour(\DateTime::createFromFormat('H:i',$line['AC']))
-                     ;  
-               $shipment->addSlot($slot);
-                       
+               $slot->setTheoricalTourOrder($line['N'])
+                     ->setTheoricalTour($tour)
+                     ->setTheoricalSlotStart(\DateTime::createFromFormat('H:i',$slotStart))
+                     ->setTheoricalSlotEnd(\DateTime::createFromFormat('H:i',$slotEnd))
+                     ->setTheoricalHour(\DateTime::createFromFormat('H:i',$line['AC']))
+                     ;
                
-               //
+               if (!$shipment->hasSlots())
+                   $shipment->addSlot($slot);
+               
+               list($useless,$senderCode,$senderName)=explode('-',$line['D']);
+               
+               $senderAccount=$this->getSenderAccountRepository()->resolveByCode($senderCode,$senderName);
+               $shipment->setSenderAccount($senderAccount);
+                       
                $this->em->persist($shipment);
                $this->em->flush();
                
+               return $output;
             }
         
             protected function getActionName() {

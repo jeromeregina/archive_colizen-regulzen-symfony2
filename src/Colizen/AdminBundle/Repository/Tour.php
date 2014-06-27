@@ -4,28 +4,29 @@ namespace Colizen\AdminBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Colizen\AdminBundle\Entity\Tour as Entity;
+use Colizen\AdminBundle\Entity\Site as SiteEntity;
 
 class Tour extends EntityRepository
 {
     /**
      * returns existing Tour or new one by if missing
-     * !Todo
      * @param string $code
+     * @param \DateTime $date
+     * @param \Colizen\AdminBundle\Entity\Site
      * @return \Colizen\AdminBundle\Entity\Tour
      */
-    public function resolve($code,$date){
-//
-//           $existing=$this->findOneBy(array('code'=>$code));
-//           
-//           if ($existing instanceof Entity)
-//               return $existing;
-//           
-//           $new= new Entity();
-//           $new->setCode($code);
-//           $cycle=$this->_em->getRepository('ColizenAdminBundle:Cycle')->findByTourCode($code);
-//           $new->setCode($code)
-//                ->setCycle($cycle);
+    public function resolveByTourCodeDateAndSite($code,\DateTime $date,SiteEntity $site){
+           $tourCode =  $this->_em->getRepository('ColizenAdminBundle:TourCode')->resolveByCode($code);
+             
+           $existing=$this->findOneBy(array('tourCode'=>$tourCode,'date'=>$date,'site'=>$site));
            
+           if ($existing instanceof Entity)
+               return $existing;
+            
+            $new = new Entity();
+            $new->setSite($site)
+                 ->setTourCode($tourCode)
+                 ->setDate($date);
            return $new;
 
         }

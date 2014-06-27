@@ -237,9 +237,9 @@ class Cycle
      *
      * @return Cycle
      */
-    public function addTourCode(TourCode $tourCodes)
+    public function addTourCode(TourCode $tourCode)
     {
-        $this->tourCodes[] = $tourCodes;
+        $this->tourCodes->add($tourCode);
 
         return $this;
     }
