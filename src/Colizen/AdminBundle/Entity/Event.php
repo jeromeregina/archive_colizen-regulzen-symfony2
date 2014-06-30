@@ -56,13 +56,14 @@ class Event
      * @ORM\Column(name="EVENT_scan_hour", type="time", nullable=true)
      */
     private $scanHour;
-
+    
     /**
-     * @var integer
+     * @var Parcel
      *
-     * @ORM\Column(name="EVENT_scan_status", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Status")
+     * @ORM\JoinColumn(name="STATUS_code", referencedColumnName="STATUS_code", nullable=true)
      */
-    private $scanStatus;
+    protected $scanStatus;
     
     /**
     * @var Slot
@@ -143,29 +144,6 @@ class Event
     public function getScanHour()
     {
         return $this->scanHour;
-    }
-
-    /**
-     * Set scanStatus
-     *
-     * @param integer $scanStatus
-     * @return Event
-     */
-    public function setScanStatus($scanStatus)
-    {
-        $this->scanStatus = $scanStatus;
-
-        return $this;
-    }
-
-    /**
-     * Get scanStatus
-     *
-     * @return integer
-     */
-    public function getScanStatus()
-    {
-        return $this->scanStatus;
     }
 
     /**
@@ -285,5 +263,28 @@ class Event
     public function getSlot()
     {
         return $this->slot;
+    }
+
+    /**
+     * Set scanStatus
+     *
+     * @param \Colizen\AdminBundle\Entity\Status $scanStatus
+     * @return Event
+     */
+    public function setScanStatus(\Colizen\AdminBundle\Entity\Status $scanStatus = null)
+    {
+        $this->scanStatus = $scanStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get scanStatus
+     *
+     * @return \Colizen\AdminBundle\Entity\Status 
+     */
+    public function getScanStatus()
+    {
+        return $this->scanStatus;
     }
 }

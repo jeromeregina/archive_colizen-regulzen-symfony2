@@ -3,9 +3,9 @@
 namespace Colizen\AdminBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Colizen\AdminBundle\Entity\SenderAccount as Entity;
+use Colizen\AdminBundle\Entity\ShipperAccount as Entity;
 
-class SenderAccount extends EntityRepository
+class ShipperAccount extends EntityRepository
 {
     /**
      * returns existing Tour or new one by if missing
@@ -13,7 +13,7 @@ class SenderAccount extends EntityRepository
      * @param string $code
      * @param string $name better add a name if your want to create an account
      * 
-     * @return \Colizen\AdminBundle\Entity\SenderAccount
+     * @return \Colizen\AdminBundle\Entity\ShipperAccount
      */
     public function resolveByCode($code,$name=null){
            $existing=$this->findOneBy(array('code'=>$code));

@@ -72,10 +72,10 @@ abstract class AbstractImporter {
     }
     /**
      * 
-     * @return \Colizen\AdminBundle\Repository\SenderAccount
+     * @return \Colizen\AdminBundle\Repository\ShipperAccount
      */
-    protected function getSenderAccountRepository(){
-       return $this->em->getRepository('ColizenAdminBundle:SenderAccount');
+    protected function getShipperAccountRepository(){
+       return $this->em->getRepository('ColizenAdminBundle:ShipperAccount');
     }
     /**
      * 

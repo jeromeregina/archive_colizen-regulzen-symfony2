@@ -2,7 +2,7 @@
 {% from "ColizenAdminBundle:Form:_macros.html.twig" import btn %}
 
 {% block content -%}
-    <h1>SenderAccount</h1>
+    <h1>ShipperAccount</h1>
 
     <table class="record_properties table-hover table-striped">
         <tbody>
@@ -43,10 +43,10 @@
 
         <ul class="record_actions">
     <li>
-        {{ btn('sender_account','list') }}
+        {{ btn('shipper_account','list') }}
     </li>
     <li>
-        {{ btn('sender_account','edit',entity.id) }}
+        {{ btn('shipper_account','edit',entity.id) }}
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>

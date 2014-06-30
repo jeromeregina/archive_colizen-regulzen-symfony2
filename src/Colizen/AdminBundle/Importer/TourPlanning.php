@@ -35,7 +35,7 @@ class TourPlanning extends AbstractImporter  {
     }
 /**
     * C -> cargopass -> Shipment.cargopass
-    * D -> code client -> Shipment.shipper_id (SenderAccount?)
+    * D -> code client -> Shipment.shipper_id (ShipperAccount?)
     * E -> code agence expediteur -> Shipment.Site.CodeImtech ou Shipment.Site.Number
     * F -> date d'expedition -> Shipment.creationDate
     * G -> poids -> Shipment.weight
@@ -114,8 +114,8 @@ class TourPlanning extends AbstractImporter  {
                
                list($useless,$senderCode,$senderName)=explode('-',$line['D']);
                
-               $senderAccount=$this->getSenderAccountRepository()->resolveByCode($senderCode,$senderName);
-               $shipment->setSenderAccount($senderAccount);
+               $shipperAccount=$this->getShipperAccountRepository()->resolveByCode($senderCode,$senderName);
+               $shipment->setShipperAccount($shipperAccount);
                        
                $this->em->persist($shipment);
                $this->em->flush();
