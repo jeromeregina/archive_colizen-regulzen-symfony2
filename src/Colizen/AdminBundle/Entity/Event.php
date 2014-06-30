@@ -73,7 +73,7 @@ class Event
    private $slot;
    
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="create")
     * @ORM\Column(name="EVENT_created", type="datetime")
@@ -81,7 +81,7 @@ class Event
    private $created;
    
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="update")
     * @ORM\Column(name="EVENT_updated", type="datetime")

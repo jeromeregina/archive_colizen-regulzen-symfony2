@@ -39,9 +39,9 @@ class Tour
     protected $site;
 
     /**
-     * @var datetime $date
+     * @var \DateTime $date
      *
-     * @ORM\Column(name="TOUR_date", type="datetime")
+     * @ORM\Column(name="TOUR_date", type="date")
      */
     protected $date;
 
@@ -57,7 +57,7 @@ class Tour
     protected $theoricalSlots;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="TOUR_created", type="datetime")
@@ -65,7 +65,7 @@ class Tour
     protected $created;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="TOUR_updated", type="datetime")

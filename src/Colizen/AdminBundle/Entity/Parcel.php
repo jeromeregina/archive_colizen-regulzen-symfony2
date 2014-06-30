@@ -57,7 +57,7 @@ class Parcel
     private  $events;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="PRCL_created", type="datetime")
@@ -65,7 +65,7 @@ class Parcel
     private $created;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="PRCL_updated", type="datetime")

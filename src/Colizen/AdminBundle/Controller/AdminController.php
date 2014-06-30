@@ -26,6 +26,10 @@ class AdminController extends Controller
      */
     public function soapAction(Request $request)
     {
-
+//        /* @var $ws \Colizen\AdminBundle\SoapClient\ColizenWebService */
+//        $ws=$this->get('colizen_admin.soapclient.czn_webservice');
+//        $ret=$ws->getShipmentTrace('750','2507502583094');
+//        echo'<pre>';
+//        var_dump($ret);die;
     }
 }

@@ -50,7 +50,7 @@ class SenderAccount
     private $sensitivity = 2;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="SNDR_created", type="datetime")
@@ -58,7 +58,7 @@ class SenderAccount
     private $created;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="SNDR_updated", type="datetime")

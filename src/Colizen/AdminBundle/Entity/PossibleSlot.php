@@ -35,7 +35,7 @@ class PossibleSlot {
     private $end;
     
    /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="create")
     * @ORM\Column(name="PSLOT_created", type="datetime")
@@ -43,7 +43,7 @@ class PossibleSlot {
     private $created;
 
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="update")
     * @ORM\Column(name="PSLOT_updated", type="datetime")

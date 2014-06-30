@@ -38,7 +38,7 @@ class Cycle
     private $tourCodeFormat;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="CYCLE_created", type="datetime")
@@ -59,7 +59,7 @@ class Cycle
      */
     private $end;
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="CYCLE_updated", type="datetime")

@@ -30,7 +30,7 @@ class Shipment
     /**
      * @var string
      *
-     * @ORM\Column(name="SHPMNT_cargopass", type="string", length=16, nullable=false)
+     * @ORM\Column(name="SHPMNT_cargopass", type="string", length=21, nullable=false)
      */
     private $cargopass;
 
@@ -98,7 +98,7 @@ class Shipment
      */
     protected $slots;
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="create")
     * @ORM\Column(name="SHPMNT_created", type="datetime")
@@ -106,7 +106,7 @@ class Shipment
    private $created;
 
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="update")
     * @ORM\Column(name="SHPMNT_updated", type="datetime")
