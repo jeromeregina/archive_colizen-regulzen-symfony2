@@ -1,3 +1,19 @@
-{% extends "ColizenAdminBundle::base_layout.html.twig" %}
+{% extends "::base.html.twig" %}
 
 {% set menu = knp_menu_render("ColizenAdminBundle:Builder:adminMenu", { 'style': 'navbar' }) %}
+{% set _content = block('content') %}
+
+{% block main_contenainer %}
+   {# <div class="sidebar responsive" id="sidebar">
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        </div>
+        {{ knp_menu_render("ColizenAdminBundle:Builder:adminMenu", { 'style': 'navbar' }) }}
+        <div class="sidebar-toggle sidebar-collapse">
+        </div>
+   </div>#}
+        <div class="main-content">
+            <div class="page-content">
+                {{ _content|raw }}
+            </div>
+        </div>
+{% endblock %}
