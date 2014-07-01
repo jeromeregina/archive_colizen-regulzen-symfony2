@@ -4,6 +4,10 @@
     </a>
 {% endmacro %}
 
+{% macro bool(val) %}
+    {{ (val? 'yes':'no')|trans }}
+{% endmacro %}
+
 {% macro get_icon(action) %}
     {% if action=='list' %}
         {{ icon('circle-arrow-left')}}

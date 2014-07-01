@@ -1,6 +1,6 @@
 {% extends "ColizenAdminBundle::layout.html.twig" %}
 
-{% from "ColizenAdminBundle:Form:_macros.html.twig" import btn %}
+{% from "ColizenAdminBundle:Form:_macros.html.twig" import btn,bool %}
 
 {% block content %}
     <h1>Status list</h1>
@@ -22,7 +22,7 @@
             <tr>
                 <td><a href="{{ path('admin_status_show', { 'id': entity.code }) }}">{{ entity.code }}</a></td>
                 <td>{{ entity.shortname }}</td>
-                <td>{{ (entity.isExcluded? 'yes':'no')|trans }}</td>
+                <td>{{ bool(entity.isExcluded) }}</td>
                 <td>{{ entity.description }}</td>
                 <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>

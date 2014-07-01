@@ -1,5 +1,5 @@
 {% extends "ColizenAdminBundle::layout.html.twig" %}
-{% from "ColizenAdminBundle:Form:_macros.html.twig" import btn %}
+{% from "ColizenAdminBundle:Form:_macros.html.twig" import btn,bool %}
 
 {% block content -%}
     <h1>TourCode</h1>
@@ -15,8 +15,8 @@
                 <td>{{ entity.code }}</td>
             </tr>
             <tr>
-                <th>Isexcluded</th>
-                <td>{{ entity.isExcluded }}</td>
+                <th>Is excluded?</th>
+                <td>{{ bool(entity.isExcluded) }}</td>
             </tr>
             <tr>
                 <th>Created</th>

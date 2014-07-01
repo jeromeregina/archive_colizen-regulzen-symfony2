@@ -1,6 +1,6 @@
 {% extends "ColizenAdminBundle::layout.html.twig" %}
 
-{% from "ColizenAdminBundle:Form:_macros.html.twig" import btn %}
+{% from "ColizenAdminBundle:Form:_macros.html.twig" import btn,bool %}
 
 {% block content %}
     <h1>Status</h1>
@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <th>Is Excluded?</th>
-                <td>{{ (entity.isExcluded? 'yes':'no')|trans }}</td>
+                <td>{{ bool(entity.isExcluded) }}</td>
             </tr>
             <tr>
                 <th>Description</th>
@@ -31,7 +31,7 @@
         {{ btn('status','list') }}
     </li>
     <li>
-        {{ btn('status','edit',entity.id) }}
+        {{ btn('status','edit',entity.code) }}
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>

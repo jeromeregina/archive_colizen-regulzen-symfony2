@@ -240,7 +240,7 @@ class TourCodeController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_tour_code_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'regulzen.admin.delete','attr'=>array('type'=>'danger','icon'=>'trash')))
             ->getForm()
         ;
     }
