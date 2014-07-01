@@ -7,8 +7,10 @@
     <parameters>
         <parameter key="colizen_admin.importer.tour_planning.class">Colizen\AdminBundle\Importer\TourPlanning</parameter>
         <parameter key="colizen_admin.importer.tour_planning.filepattern">/\.xls(x){0,1}$/</parameter>
+        <parameter key="colizen_admin.importer.tour_planning.mail_template">ColizenAdminBundle:Mails:import.html.twig</parameter>
         <parameter key="colizen_admin.importer.parcel_details.class">Colizen\AdminBundle\Importer\ParcelDetails</parameter>
         <parameter key="colizen_admin.importer.parcel_details.filepattern">*.txt</parameter>
+        <parameter key="colizen_admin.importer.parcel_details.mail_template">ColizenAdminBundle:Mails:import.html.twig</parameter>
         <parameter key="colizen_admin.importer.output_handler.class">Colizen\AdminBundle\Command\OutputHandler\OutputHandler</parameter>
     </parameters>
 
@@ -17,12 +19,18 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument>%file_import.after_routeur.location%</argument>
             <argument>%colizen_admin.importer.tour_planning.filepattern%</argument>
+            <argument type="service" id="swiftmailer.mailer.default" />
+            <argument type="service" id="templating" />
+            <argument>%colizen_admin.importer.tour_planning.mail_template%</argument>
             <argument type="service" id="phpexcel" />
         </service>
         <service id="colizen_admin.importer.parcel_details" class="%colizen_admin.importer.parcel_details.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument>%file_import.parcels_planned.location%</argument>
             <argument>%colizen_admin.importer.parcel_details.filepattern%</argument>
+            <argument type="service" id="swiftmailer.mailer.default" />
+            <argument type="service" id="templating" />
+            <argument>%colizen_admin.importer.parcel_details.mail_template%</argument>
         </service>
         <service id="colizen_admin.importer.output_handler" class="%colizen_admin.importer.output_handler.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />

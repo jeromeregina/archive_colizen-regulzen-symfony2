@@ -10,6 +10,7 @@ parameters:
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
+    mailer_encryption:  ssl
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
@@ -30,3 +31,7 @@ parameters:
     file_import.after_routeur.location: %kernel.root_dir%/../imports/apres_routeur 
 #répertoire pour les fichiers txt listant les colis plannifiés
     file_import.parcels_planned.location: %kernel.root_dir%/../imports/planif
+#paramètres pour la requête (permet de générer des urls absolus depuis la ligne de commande, eg pour l'envoi de mail depuis l'import de fichier)
+    router.request_context.host: example.org
+    router.request_context.scheme: https
+    router.request_context.base_url: my/path
