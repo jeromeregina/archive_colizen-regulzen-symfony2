@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Colizen\AdminBundle\Entity;
