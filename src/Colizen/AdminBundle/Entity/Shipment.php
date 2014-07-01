@@ -1,3 +1,4 @@
+
 <?php
 
 namespace Colizen\AdminBundle\Entity;
@@ -473,7 +474,7 @@ class Shipment
      */
     public function removeSlot(Slot $slot)
     {
-        $this->slots->removeElement($slots);
+        $this->slots->removeElement($slot);
     }
 
     /**
