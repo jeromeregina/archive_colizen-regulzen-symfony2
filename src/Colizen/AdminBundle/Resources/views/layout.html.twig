@@ -1,0 +1,8 @@
+{% extends "::base.html.twig" %}
+
+{% set menu = knp_menu_render("ColizenAdminBundle:Builder:adminMenu", { 'style': 'navbar' }) %}
+
+{% block header %}
+    {% include 'ColizenAdminBundle::_header.html.twig' %}
+{% endblock %}
+

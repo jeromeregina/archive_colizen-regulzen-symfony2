@@ -3,7 +3,7 @@
  height: 100%;
  margin: 0 !important;
  
- > li {
+ > li, .navbar-nav li {
 	line-height: @navbar-min-height;
 	height: @navbar-min-height;
 
@@ -16,8 +16,8 @@
 	&:first-child {
 	  border-left-width: 0;
 	}
-	
-	> a {
+
+   > a, .navbar-nav li a {
 		background-color: @ace-nav-default;
 		color: #FFF;
 
