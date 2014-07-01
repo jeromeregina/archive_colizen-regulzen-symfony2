@@ -28,14 +28,14 @@ class StatusController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $res=$em->getRepository('ColizenAdminBundle:Status')->findAll();
+        $query=$em->getRepository('ColizenAdminBundle:Status')->findAllQuery();
 
         $paginator  = $this->get('knp_paginator');
         
         $page=$request->get('page',1);
         
         $pagination = $paginator->paginate(
-            $res,
+            $query,
             $page,
             20
         );
