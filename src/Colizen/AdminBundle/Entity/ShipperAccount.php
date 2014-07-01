@@ -6,17 +6,22 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * TblSenderAccount
+ * TblShipperAccount
  *
- * @ORM\Table(name="TBL_sender_account")
- * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\SenderAccount")
+ * @ORM\Table(name="TBL_shipper_account")
+ * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\ShipperAccount")
  */
-class SenderAccount
+class ShipperAccount
 {
+    const FLOW_TYPE_BTOB=0;
+    const FLOW_TYPE_BTOC=1;
+    const SERVICE_LEVEL_STANDARD=0;
+    const SERVICE_LEVEL_PREMIUM=1;
+    
     /**
      * @var integer
      *
-     * @ORM\Column(name="SNDR_id", type="integer", nullable=false)
+     * @ORM\Column(name="SHPR_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -25,43 +30,64 @@ class SenderAccount
     /**
      * @var string
      *
-     * @ORM\Column(name="SNDR_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="SHPR_name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="SNDR_code", type="string", length=6, nullable=false)
+     * @ORM\Column(name="SHPR_code", type="string", length=6, nullable=false)
      */
     private $code;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="SNDR_status", type="integer", nullable=false, options={"default" = 0})
+     * @ORM\Column(name="SHPR_status", type="integer", nullable=false, options={"default" = 0})
      */
     private $status = 0;
+    
+    /**
+     * @var integer
+     * 
+     * 0 = standard
+     * 1 = premium
+     * 
+     * @ORM\Column(name="SHPR_service_level", type="integer", nullable=false, options={"default" = 0})
+     */
+    private $serviceLevel = 0;
+    
+    /**
+     * @var integer
+     * 
+     * 0 = BtoB
+     * 1 = BtoC
+     * 
+     * @ORM\Column(name="SHPR_flow_type", type="integer", nullable=false, options={"default" = 0})
+     */
+    private $flow_type = 0;
+    
     /**
      * @var integer
      *
-     * @ORM\Column(name="SNDR_sensitivity", type="integer", nullable=false, options={"default" = 2})
+     * @ORM\Column(name="SHPR_sensitivity", type="integer", nullable=false, options={"default" = 2})
      */
     private $sensitivity = 2;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="SNDR_created", type="datetime")
+     * @ORM\Column(name="SHPR_created", type="datetime")
      */
     private $created;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="SNDR_updated", type="datetime")
+     * @ORM\Column(name="SHPR_updated", type="datetime")
      */
     private $updated;
 
@@ -80,7 +106,7 @@ class SenderAccount
      *
      * @param string $name
      *
-     * @return SenderAccount
+     * @return ShipperAccount
      */
     public function setName($name)
     {
@@ -104,7 +130,7 @@ class SenderAccount
      *
      * @param string $shortName
      *
-     * @return SenderAccount
+     * @return ShipperAccount
      */
     public function setShortName($shortName)
     {
@@ -128,7 +154,7 @@ class SenderAccount
      *
      * @param integer $tatus
      *
-     * @return SenderAccount
+     * @return ShipperAccount
      */
     public function setStatus($status)
     {
@@ -208,7 +234,7 @@ class SenderAccount
      *
      * @param string $code
      *
-     * @return \Colizen\AdminBundle\Entity\SenderAccount
+     * @return \Colizen\AdminBundle\Entity\ShipperAccount
      */
     public function setCode($code)
     {
@@ -230,7 +256,7 @@ class SenderAccount
      *
      * @param int $sensitivity
      *
-     * @return \Colizen\AdminBundle\Entity\SenderAccount
+     * @return \Colizen\AdminBundle\Entity\ShipperAccount
      */
     public function setSensitivity($sensitivity)
     {
@@ -240,4 +266,50 @@ class SenderAccount
     }
 
 
+
+    /**
+     * Set serviceLevel
+     *
+     * @param integer $serviceLevel
+     * @return ShipperAccount
+     */
+    public function setServiceLevel($serviceLevel)
+    {
+        $this->serviceLevel = $serviceLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get serviceLevel
+     *
+     * @return integer 
+     */
+    public function getServiceLevel()
+    {
+        return $this->serviceLevel;
+    }
+
+    /**
+     * Set flow_type
+     *
+     * @param integer $flowType
+     * @return ShipperAccount
+     */
+    public function setFlowType($flowType)
+    {
+        $this->flow_type = $flowType;
+
+        return $this;
+    }
+
+    /**
+     * Get flow_type
+     *
+     * @return integer 
+     */
+    public function getFlowType()
+    {
+        return $this->flow_type;
+    }
 }

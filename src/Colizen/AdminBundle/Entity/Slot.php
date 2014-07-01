@@ -111,7 +111,7 @@ class Slot {
      */
     protected $shipment;
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="create")
     * @ORM\Column(name="SLOT_created", type="datetime")
@@ -119,7 +119,7 @@ class Slot {
     private $created;
 
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="update")
     * @ORM\Column(name="SLOT_updated", type="datetime")

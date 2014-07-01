@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SenderAccountType extends AbstractType
+class ShipperAccountType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -28,7 +28,7 @@ class SenderAccountType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Colizen\AdminBundle\Entity\SenderAccount'
+            'data_class' => 'Colizen\AdminBundle\Entity\ShipperAccount'
         ));
     }
 
@@ -37,6 +37,6 @@ class SenderAccountType extends AbstractType
      */
     public function getName()
     {
-        return 'colizen_adminbundle_sender_account';
+        return 'colizen_adminbundle_shipper_account';
     }
 }

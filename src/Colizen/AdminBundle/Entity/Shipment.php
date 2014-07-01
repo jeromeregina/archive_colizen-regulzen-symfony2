@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Event;
-use Colizen\AdminBundle\Entity\SenderAccount;
+use Colizen\AdminBundle\Entity\ShipperAccount;
 use Colizen\AdminBundle\Entity\Slot;
 /**
  * TblShipment
@@ -30,17 +30,17 @@ class Shipment
     /**
      * @var string
      *
-     * @ORM\Column(name="SHPMNT_cargopass", type="string", length=16, nullable=false)
+     * @ORM\Column(name="SHPMNT_cargopass", type="string", length=21, nullable=false)
      */
     private $cargopass;
 
     /**
      * @var Site
      *
-     * @ORM\ManyToOne(targetEntity="SenderAccount", cascade={"persist"})
-     * @ORM\JoinColumn(name="SNDR_id", referencedColumnName="SNDR_id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="ShipperAccount", cascade={"persist"})
+     * @ORM\JoinColumn(name="SHPR_id", referencedColumnName="SHPR_id", nullable=false)
      */
-    private $senderAccount;
+    private $shipperAccount;
 
     /**
      *
@@ -98,7 +98,7 @@ class Shipment
      */
     protected $slots;
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="create")
     * @ORM\Column(name="SHPMNT_created", type="datetime")
@@ -106,7 +106,7 @@ class Shipment
    private $created;
 
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="update")
     * @ORM\Column(name="SHPMNT_updated", type="datetime")
@@ -527,25 +527,25 @@ class Shipment
     }
 
     /**
-     * Set senderAccount
+     * Set shipperAccount
      *
-     * @param \Colizen\AdminBundle\Entity\SenderAccount $senderAccount
+     * @param \Colizen\AdminBundle\Entity\ShipperAccount $shipperAccount
      * @return Shipment
      */
-    public function setSenderAccount(SenderAccount $senderAccount)
+    public function setShipperAccount(ShipperAccount $shipperAccount)
     {
-        $this->senderAccount = $senderAccount;
+        $this->shipperAccount = $shipperAccount;
 
         return $this;
     }
 
     /**
-     * Get senderAccount
+     * Get shipperAccount
      *
-     * @return \Colizen\AdminBundle\Entity\SenderAccount 
+     * @return \Colizen\AdminBundle\Entity\ShipperAccount 
      */
-    public function getSenderAccount()
+    public function getShipperAccount()
     {
-        return $this->senderAccount;
+        return $this->shipperAccount;
     }
 }

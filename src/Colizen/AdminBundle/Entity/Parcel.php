@@ -45,6 +45,39 @@ class Parcel
     private $status = 1;
 
     /**
+     * @var integer
+     * 
+     * Parcel's weight in grams
+     * 
+     * @ORM\Column(name="PRCL_weight", type="integer", nullable=false, options={"default" = 0})
+     */
+    private $weight = 0;
+    /**
+     * @var integer
+     * 
+     * Parcel's width in centimeters
+     * 
+     * @ORM\Column(name="PRCL_width", type="integer", nullable=false, options={"default" = 0})
+     */
+    private $width = 0;
+    /**
+     * @var integer
+     * 
+     * Parcel's depth in centimeters
+     * 
+     * @ORM\Column(name="PRCL_depth", type="integer", nullable=false, options={"default" = 0})
+     */
+    private $depth = 0;
+    /**
+     * @var integer
+     * 
+     * Parcel's height in centimeters
+     * 
+     * @ORM\Column(name="PRCL_height", type="integer", nullable=false, options={"default" = 0})
+     */
+    private $height = 0;
+    
+    /**
      * @var Shipment
      *
      * @ORM\ManyToOne(targetEntity="Shipment")
@@ -57,7 +90,7 @@ class Parcel
     private  $events;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="PRCL_created", type="datetime")
@@ -65,7 +98,7 @@ class Parcel
     private $created;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="PRCL_updated", type="datetime")
@@ -287,5 +320,97 @@ class Parcel
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set weight
+     *
+     * @param integer $weight
+     * @return Parcel
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get weight
+     *
+     * @return integer 
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Set width
+     *
+     * @param integer $width
+     * @return Parcel
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer 
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set depth
+     *
+     * @param integer $depth
+     * @return Parcel
+     */
+    public function setDepth($depth)
+    {
+        $this->depth = $depth;
+
+        return $this;
+    }
+
+    /**
+     * Get depth
+     *
+     * @return integer 
+     */
+    public function getDepth()
+    {
+        return $this->depth;
+    }
+
+    /**
+     * Set height
+     *
+     * @param integer $height
+     * @return Parcel
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return integer 
+     */
+    public function getHeight()
+    {
+        return $this->height;
     }
 }

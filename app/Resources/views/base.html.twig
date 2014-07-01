@@ -21,9 +21,9 @@
     <!-- ace styles -->
     {% stylesheets '@ColizenInterfaceBundle/Resources/public/ace/css/less/ace.less'
         filter='less'
-        output='css/ace.css'
+        output='/css/ace.css'
     %}
-    <link href="{{ asset_url }}" rel="stylesheet" />
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all" />
     {% endstylesheets %}
 
 
@@ -59,13 +59,14 @@
     {% endblock %}
 
     <div class="main-container" id="main-container">
+      {% block main_contenainer %}
         <div class="main-content">
-
+            
             <div class="page-content">
                 {% block content %}{% endblock %}
             </div><!-- /.page-content -->
         </div><!-- /.main-content -->
-
+      {% endblock %}
     </div><!-- /.main-container -->
 
 

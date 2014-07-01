@@ -40,14 +40,12 @@ class Zone
      * @var Site
      *
      * @ORM\ManyToOne(targetEntity="Site")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
-     * })
+     * @ORM\JoinColumn(name="SITE_id", referencedColumnName="SITE_id", nullable=false)
      */
     private $site;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="ZONE_created", type="datetime")
@@ -55,7 +53,7 @@ class Zone
     private $created;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="ZONE_updated", type="datetime")

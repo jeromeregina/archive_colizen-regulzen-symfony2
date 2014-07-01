@@ -1,8 +1,49 @@
 {% extends 'BraincraftedBootstrapBundle:Form:bootstrap.html.twig' %}
 
-{#{% block url_widget %}
+{% block timepicker_widget %}
 {% spaceless %}
-    {% set type = type|default('url') %}
-    {{ block('form_widget_simple') }}
+    <div class="input-group bootstrap-timepicker">
+     {% spaceless %}
+            {% set style = style|default(bootstrap_get_style()) %}
+            {% set col_size = col_size|default(bootstrap_get_col_size()) %}
+
+            {% if simple_col is not defined and bootstrap_get_simple_col() %}
+                {% set simple_col = bootstrap_get_simple_col() %}
+            {% endif %}
+            {% if attr.simple_col is defined and attr.simple_col is not empty %}
+                {% set simple_col = attr.simple_col %}
+            {% endif  %}
+            {% if attr.col_size is defined and attr.col_size is not empty %}
+                {% set col_size = attr.col_size %}
+            {% endif %}
+            {% if attr.style is defined and attr.style is not empty %}
+                {% set style = attr.style %}
+            {% endif %}
+
+            {% if simple_col is defined and simple_col %}
+                <div class="col-{{ col_size }}-{{ simple_col }}">
+            {% endif %}
+
+            {% set type = type|default('text') %}
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control timepicker')|trim }) %}
+
+            {% if style == 'inline' and (attr.placeholder is not defined or attr.placeholder is empty) %}
+                {% if label is empty %}
+                    {% set attr = attr|merge({ 'placeholder': name|humanize }) %}
+                {% else %}
+                    {% set attr = attr|merge({ 'placeholder': label}) %}
+                {% endif %}
+            {% endif %}
+
+            <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}>
+
+            {% if simple_col is defined %}
+                </div>
+            {% endif %}
+            <span class="input-group-addon">
+                {{ icon('time') }}
+            </span>
+    {% endspaceless %}   
+    </div>
 {% endspaceless %}
-{% endblock url_widget %}#}
+{% endblock timepicker_widget %}

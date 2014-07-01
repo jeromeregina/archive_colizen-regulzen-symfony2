@@ -98,7 +98,7 @@ class DeliveryAddress {
     protected $shipment;
     
    /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="create")
     * @ORM\Column(name="DLVRADDR_created", type="datetime")
@@ -106,7 +106,7 @@ class DeliveryAddress {
    private $created;
    
     /**
-    * @var datetime $created
+    * @var \DateTime $created
     *
     * @Gedmo\Timestampable(on="update")
     * @ORM\Column(name="DLVRADDR_updated", type="datetime")
