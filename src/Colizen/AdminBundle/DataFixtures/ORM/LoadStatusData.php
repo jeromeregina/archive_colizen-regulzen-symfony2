@@ -24,26 +24,29 @@ class LoadStatusData implements FixtureInterface, ContainerAwareInterface
     {
         $this->container = $container;
     }
+
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $file=__DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'Status.xlsx';
-        $phpexcel=$this->container->get('phpexcel');
+        $statusFilePath = $this->container->getParameter('kernel.root_dir').'/../data/fixtures/Status.xlsx';
+        $phpexcel = $this->container->get('phpexcel');
         /* @var $peo \PHPExcel */
-        $peo=$phpexcel->createPHPExcelObject($file);
+        $peo = $phpexcel->createPHPExcelObject($statusFilePath);
         $peo->setActiveSheetIndexByName('Statuts_CLZ');
-        $sheetData=$peo->getActiveSheet()->toArray(null,true,true,true);
+        $sheetData = $peo->getActiveSheet()->toArray(null, true, true, true);
         // suppression de la ligne d'entête (meilleure solution?)
         array_shift($sheetData);
-        foreach ($sheetData as $line){
-            if ($line['B']!=""){
-                $status=new Status();
+        foreach ($sheetData as $line)
+        {
+            if ($line['B'] != "")
+            {
+                $status = new Status();
                 $status->setCode($line['A']);
                 $status->setShortname($line['B']);
                 $status->setDescription($line['C']);
-                $status->setIsExcluded($line['E']=='non'?true:false);
+                $status->setIsExcluded($line['E'] == 'non' ? true : false);
                 $manager->persist($status);
             }
         }
