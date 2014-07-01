@@ -1,0 +1,27 @@
+<html>
+   <head>
+   </head>
+    <body>
+        {{ 'regulzen.mails.import.introduction'|trans }}
+        {% for filename,fileLines in files %}
+            <br/>
+            <b>{{'regulzen.mails.import.file'|trans({'%filename%':filename})}}</b>
+            <br/>
+            <ul>
+                {% for lineId,emailLines in fileLines %}
+                    <li>
+                        {{ lineId }}
+                        <ul>
+                            {% for a in emailLines %}
+                                <li>
+                                    {{ a.message|trans({'%id%':a.objectId,'%url%':url(a.route,{'id':a.objectId})}) }}
+                                </li>
+                             {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>        
+
+        {% endfor %}
+    </body>
+</html>

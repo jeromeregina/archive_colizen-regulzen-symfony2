@@ -8,6 +8,8 @@ use Colizen\AdminBundle\Command\OutputHandler\OutputHandler;
 use Colizen\AdminBundle\Entity\Shipment;
 use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Slot;
+use \Swift_Mailer;
+use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
 
 class TourPlanning extends AbstractImporter  {
     /**
@@ -16,9 +18,9 @@ class TourPlanning extends AbstractImporter  {
      */
     protected $phpExcel;
     
-    public function __construct(EntityManagerInterface $em, $sourceDirectory, $filenamePattern, Factory $phpExcel) {
+    public function __construct(EntityManagerInterface $em, $sourceDirectory, $filenamePattern, Swift_Mailer $mailer, TimedTwigEngine $templating, $mailTemplate, Factory $phpExcel) {
         $this->phpExcel=$phpExcel;
-        parent::__construct($em, $sourceDirectory, $filenamePattern);
+        parent::__construct($em, $sourceDirectory, $filenamePattern, $mailer, $templating,$mailTemplate);
     }
 
     /**
@@ -97,7 +99,15 @@ class TourPlanning extends AbstractImporter  {
                $shipment->setDeliveryAddress($deliveryAddress);
                
                $tour = $this->getTourRepository()->resolveByTourCodeDateAndSite($line['M'],\DateTime::createFromFormat('[d.m.Y]',$line['O']),$site);
-                
+               
+               $tourcode=$tour->getTourCode();
+               /** ajout à l'email en cour: "un tour_code à été créé" **/ 
+               if ($tourcode->getId()==null){
+                    $this->em->persist($tourcode);
+                    $this->em->flush();
+                    $this->addEmailLine($file->getFilename(), $line['C'], 'tour_code', $tour->getTourCode()->getId());
+               }
+               
                $slot = ($shipment->getLastSlot() instanceof Slot)?$shipment->getLastSlot():new Slot();
                
                list($slotStart,$slotEnd)=explode('-',trim($line['P'],'[]'));
@@ -115,6 +125,13 @@ class TourPlanning extends AbstractImporter  {
                list($useless,$senderCode,$senderName)=explode('-',$line['D']);
                
                $shipperAccount=$this->getShipperAccountRepository()->resolveByCode($senderCode,$senderName);
+               
+                /** ajout à l'email en cour: "un shipper_account à été créé" **/ 
+                if ($shipperAccount->getId()==null){
+                    $this->em->persist($shipperAccount);
+                    $this->em->flush();
+                    $this->addEmailLine($file->getFilename(), $line['C'], 'shipper_account', $shipperAccount->getId());
+               }
                $shipment->setShipperAccount($shipperAccount);
                        
                $this->em->persist($shipment);

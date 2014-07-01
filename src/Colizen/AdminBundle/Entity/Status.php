@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Status
  *
  * @ORM\Table(name="TBL_status")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\Status")
  */
 class Status {
     /**
@@ -31,7 +31,7 @@ class Status {
     /**
      * @var string
      *
-     * @ORM\Column(name="STATUS_description", type="string", length=255, nullable=false)
+     * @ORM\Column(name="STATUS_description", type="string", length=255, nullable=true)
      */
     protected $description;
     /**
