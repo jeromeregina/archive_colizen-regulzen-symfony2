@@ -1,0 +1,51 @@
+{% extends "ColizenAdminBundle::layout.html.twig" %}
+
+{% from "ColizenAdminBundle:Form:_macros.html.twig" import btn %}
+
+{% block content %}
+    <h1>Status list</h1>
+
+    <table class="records_list table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Short name</th>
+                <th>Is Excluded ?</th>
+                <th>Description</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in pagination %}
+            <tr>
+                <td><a href="{{ path('admin_status_show', { 'id': entity.code }) }}">{{ entity.code }}</a></td>
+                <td>{{ entity.shortname }}</td>
+                <td>{{ (entity.isExcluded? 'yes':'no')|trans }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    {{ btn('status','show',entity.code,true) }}
+                    {{ btn('status','edit',entity.code,true) }}
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Results: {{ pagination.getTotalItemCount }}</th>
+                <th colspan="6">{{ knp_pagination_render(pagination, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}</th>
+            </tr>
+        </tfoot>
+    </table>
+
+        <ul>
+        <li>
+            {{ btn('status','new') }}
+        </li>
+    </ul>
+{% endblock %}

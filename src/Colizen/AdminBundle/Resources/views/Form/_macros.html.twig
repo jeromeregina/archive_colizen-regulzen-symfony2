@@ -1,5 +1,5 @@
-{% macro btn(admin,action,id=0,is_small=false) %}
-    <a href="{{ (id>0)?path('admin_'~admin~'_'~action,{'id':id}):path('admin_'~admin~'_'~action) }}" class="btn {{ _self.get_btn_type(action) }} {{ is_small?'btn-sm':''}}">
+{% macro btn(admin,action,id= '-1',is_small=false) %}
+    <a href="{{ (id>-1)?path('admin_'~admin~'_'~action,{'id':id}):path('admin_'~admin~'_'~action) }}" class="btn {{ _self.get_btn_type(action) }} {{ is_small?'btn-sm':''}}">
             {{ _self.get_icon(action) }} {{ ('regulzen.admin.'~action)|trans }}
     </a>
 {% endmacro %}

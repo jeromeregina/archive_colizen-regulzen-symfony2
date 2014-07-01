@@ -1,3 +1,5 @@
+yes: oui
+no: non
 regulzen:
     info:
         import_last_started_at: Dernier import lancé le %date% à %time%
