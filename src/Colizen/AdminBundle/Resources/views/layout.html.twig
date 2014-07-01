@@ -2,7 +2,32 @@
 
 {% set menu = knp_menu_render("ColizenAdminBundle:Builder:adminMenu", { 'style': 'navbar' }) %}
 
+
 {% block header %}
     {% include 'ColizenAdminBundle::_header.html.twig' %}
 {% endblock %}
 
+
+{% block stylesheets %}
+    {% stylesheets '@ColizenInterfaceBundle/Resources/public/ace/css/bootstrap-timepicker.css'
+    filter='cssrewrite'
+    output='/css/backoffice.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all" />
+    {% endstylesheets %}
+    {% stylesheets '@ColizenAdminBundle/Resources/assets/css/*.less'
+    filter='less'
+    output='/css/widgets.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all" />
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@ColizenAdminBundle/Resources/assets/js/*'
+                   '@ColizenInterfaceBundle/Resources/public/ace/js/date-time/bootstrap-timepicker.min.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
