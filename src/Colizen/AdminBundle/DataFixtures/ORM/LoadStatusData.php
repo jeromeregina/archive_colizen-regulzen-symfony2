@@ -30,23 +30,21 @@ class LoadStatusData implements FixtureInterface, ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
-        $statusFilePath = $this->container->getParameter('kernel.root_dir').'/../data/fixtures/Status.xlsx';
+        $statusFilePath = dirname($this->container->getParameter('kernel.root_dir')).'/data/fixtures/Status-2014_07_01.xlsx';
         $phpexcel = $this->container->get('phpexcel');
         /* @var $peo \PHPExcel */
         $peo = $phpexcel->createPHPExcelObject($statusFilePath);
-        $peo->setActiveSheetIndexByName('Statuts_CLZ');
+        $peo->setActiveSheetIndexByName('Statuts CargoNET');
         $sheetData = $peo->getActiveSheet()->toArray(null, true, true, true);
-        // suppression de la ligne d'entête (meilleure solution?)
-        array_shift($sheetData);
-        foreach ($sheetData as $line)
+        foreach ($sheetData as $i=>$line)
         {
-            if ($line['B'] != "")
+            if (strlen($line['B'])== 4)
             {
                 $status = new Status();
                 $status->setCode($line['A']);
                 $status->setShortname($line['B']);
-                $status->setDescription($line['C']);
-                $status->setIsExcluded($line['E'] == 'non' ? true : false);
+                $status->setDescription($line['D']);
+                $status->setIsExcluded($line['H'] == '1' ? false : true);
                 $manager->persist($status);
             }
         }
