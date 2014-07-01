@@ -14,6 +14,12 @@ regulzen:
         create: Créer
         update: Enregistrer
         delete: Supprimer
+        entity:
+            updated: L'objet de type '%entity%' avec l'id '%id%' à été mis à jour
+            created: L'objet de type '%entity%' à été créé avec l'id '%id%'
+            deleted: L'objet de type '%entity%' avec l'id '%id%' à été supprimé
+            error:
+                 deletion: "L'objet de type '%entity%' avec l'id '%id%' n'as pû être supprimé : %message%"
     mails:
         import:
             introduction: "Nouvelles entrées administrables trouvés lors de l'import des fichiers suivants:"

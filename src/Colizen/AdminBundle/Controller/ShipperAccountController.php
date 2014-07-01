@@ -47,12 +47,14 @@ class ShipperAccountController extends Controller
         $entity = new ShipperAccount();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        $flash = $this->get('braincrafted_bootstrap.flash');
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
+            $flash->info($this->get('translator')->trans('regulzen.admin.entity.created',array('%entity%'=>'site','%id%'=>$entity->getId())));
+            
             return $this->redirect($this->generateUrl('admin_shipper_account_show', array('id' => $entity->getId())));
         }
 
@@ -192,8 +194,12 @@ class ShipperAccountController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_shipper_account_edit', array('id' => $id)));
+       
+            $flash = $this->get('braincrafted_bootstrap.flash');
+            
+            $flash->info($this->get('translator')->trans('regulzen.admin.entity.updated',array('%entity%'=>'site','%id%'=>$entity->getId())));
+            
+            return $this->redirect($this->generateUrl('admin_shipper_account_list'));
         }
 
         return array(
@@ -212,17 +218,22 @@ class ShipperAccountController extends Controller
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
-
+        $flash = $this->get('braincrafted_bootstrap.flash');
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('ColizenAdminBundle:ShipperAccount')->find($id);
+            try {
+                if (!$entity) {
+                    throw $this->createNotFoundException('Unable to find ShipperAccount entity.');
+                }
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find ShipperAccount entity.');
+                $em->remove($entity);
+                $em->flush();
+               $flash->error($this->get('translator')->trans('regulzen.admin.entity.deleted',array('%entity%'=>'site','%id%'=>$entity->getId())));
+            } catch (\Exception $e){
+                $flash->error($this->get('translator')->trans('regulzen.admin.entity.error.deletion',array('%entity%'=>'site','%id%'=>$entity->getId(),'%message%'=>$e->getMessage())));
             }
-
-            $em->remove($entity);
-            $em->flush();
         }
 
         return $this->redirect($this->generateUrl('admin_shipper_account_list'));

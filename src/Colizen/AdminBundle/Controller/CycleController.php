@@ -47,12 +47,15 @@ class CycleController extends Controller
         $entity = new Cycle();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        $flash = $this->get('braincrafted_bootstrap.flash');
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
+            
+            $flash->info($this->get('translator')->trans('regulzen.admin.entity.created',array('%entity%'=>'site','%id%'=>$entity->getId())));
+            
             return $this->redirect($this->generateUrl('admin_cycle_show', array('id' => $entity->getId())));
         }
 
@@ -192,8 +195,12 @@ class CycleController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_cycle_edit', array('id' => $id)));
+            
+            $flash = $this->get('braincrafted_bootstrap.flash');
+            
+            $flash->info($this->get('translator')->trans('regulzen.admin.entity.updated',array('%entity%'=>'site','%id%'=>$entity->getId())));
+            
+            return $this->redirect($this->generateUrl('admin_cycle_list'));
         }
 
         return array(
@@ -212,10 +219,11 @@ class CycleController extends Controller
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
-
+        $flash = $this->get('braincrafted_bootstrap.flash');
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('ColizenAdminBundle:Cycle')->find($id);
+        try {
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Cycle entity.');
@@ -223,6 +231,10 @@ class CycleController extends Controller
 
             $em->remove($entity);
             $em->flush();
+              $flash->error($this->get('translator')->trans('regulzen.admin.entity.deleted',array('%entity%'=>'site','%id%'=>$entity->getId())));
+            } catch (\Exception $e){
+                $flash->error($this->get('translator')->trans('regulzen.admin.entity.error.deletion',array('%entity%'=>'site','%id%'=>$entity->getId(),'%message%'=>$e->getMessage())));
+            }
         }
 
         return $this->redirect($this->generateUrl('admin_cycle_list'));

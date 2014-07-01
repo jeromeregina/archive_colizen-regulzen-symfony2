@@ -16,8 +16,8 @@ class TourCodeType extends AbstractType
     {
         $builder
             ->add('code')
-            ->add('isExcluded')
-            ->add('cycles')
+            ->add('isExcluded','checkbox',array('required'=>false))
+            ->add('cycles',null,array('required'=>false))
         ;
     }
     
