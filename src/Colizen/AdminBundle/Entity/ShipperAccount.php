@@ -15,8 +15,16 @@ class ShipperAccount
 {
     const FLOW_TYPE_BTOB=0;
     const FLOW_TYPE_BTOC=1;
+    public static $flowTypeLabels=array(
+                                        self::FLOW_TYPE_BTOB=>'regulzen.shipper_account.flow_type.btob',
+                                        self::FLOW_TYPE_BTOC=>'regulzen.shipper_account.flow_type.btoc',
+                                    );
     const SERVICE_LEVEL_STANDARD=0;
     const SERVICE_LEVEL_PREMIUM=1;
+    public static $serviceLevelLabels=array(
+                                        self::SERVICE_LEVEL_STANDARD=>'regulzen.shipper_account.service_level.standard',
+                                        self::SERVICE_LEVEL_PREMIUM=>'regulzen.shipper_account.service_level.premium',
+                                    );
     
     /**
      * @var integer
@@ -289,7 +297,13 @@ class ShipperAccount
     {
         return $this->serviceLevel;
     }
-
+    /**
+     * 
+     * @return string translatable service level label
+     */
+    public function getServiceLevelLabel(){
+        return self::$serviceLevelLabels[$this->getServiceLevel()];
+    }
     /**
      * Set flow_type
      *
@@ -311,5 +325,12 @@ class ShipperAccount
     public function getFlowType()
     {
         return $this->flow_type;
+    }
+    /**
+     * 
+     * @return string translatable flow type label
+     */
+    public function getFlowTypeLabel(){
+        return self::$flowTypeLabels[$this->getFlowType()];
     }
 }

@@ -14,6 +14,7 @@ class ImportLog extends EntityRepository
     public function findLatestImportLogDates(){
         return array('latest_import_action_date'=>$this->findLatestImportActionDate(),'latest_content_update_date'=>$this->findLatestContentUpdateDate());
     }
+    
     public function findLatestImportActionDate(){
         $qb=$this->createQueryBuilder('il');
         $qb->select('MAX(il.date)')
@@ -22,6 +23,7 @@ class ImportLog extends EntityRepository
         $lastest=$qb->getQuery()->getSingleScalarResult();
         return (is_string($lastest))?new \DateTime($lastest):false;
     }
+    
     public function findLatestContentUpdateDate(){
         $qb=$this->createQueryBuilder('il');
         $qb->select('MAX(il.date)')
@@ -29,5 +31,13 @@ class ImportLog extends EntityRepository
             ->setParameter('level', Entity::MESSAGE_LEVEL_LINE);
         $lastest=$qb->getQuery()->getSingleScalarResult();
         return (is_string($lastest))?new \DateTime($lastest):false;
+    }
+    public function findAllSortedByDateDesc($getQuery=false){
+        $qb=$this->createQueryBuilder('il');
+        $qb->select('il')
+            ->orderBy('il.date','DESC');
+        $query=$qb->getQuery();
+        
+        return ($getQuery)?$query:$query->execute();
     }
 }

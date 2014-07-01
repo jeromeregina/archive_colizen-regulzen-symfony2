@@ -16,10 +16,6 @@
                 <td>{{ entity.name }}</td>
             </tr>
             <tr>
-                <th>Shortname</th>
-                <td>{{ entity.shortName }}</td>
-            </tr>
-            <tr>
                 <th>Code</th>
                 <td>{{ entity.code }}</td>
             </tr>
@@ -30,6 +26,14 @@
             <tr>
                 <th>Sensitivity</th>
                 <td>{{ entity.sensitivity }}</td>
+            </tr>
+            <tr>
+                <th>Flow Type</th>
+                <td>{{ entity.flowTypeLabel|trans }}</td>
+            </tr>
+            <tr>
+                <th>Service Label</th>
+                <td>{{ entity.ServiceLevelLabel|trans }}</td>
             </tr>
             <tr>
                 <th>Created</th>

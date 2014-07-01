@@ -5,6 +5,7 @@ namespace Colizen\AdminBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Colizen\AdminBundle\Entity\ShipperAccount as Entity;
 
 class ShipperAccountType extends AbstractType
 {
@@ -19,6 +20,8 @@ class ShipperAccountType extends AbstractType
             ->add('code')
             ->add('status')
             ->add('sensitivity')
+            ->add('flowType','choice',array('choices'=> Entity::$flowTypeLabels))
+            ->add('serviceLevel','choice',array('choices'=> Entity::$serviceLevelLabels))
         ;
     }
     

@@ -24,14 +24,23 @@ class LogsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function importsListAction()
+    public function importsListAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $query=$em->getRepository('ColizenAdminBundle:ImportLog')->findAllSortedByDateDesc(true);
 
-        $entities = $em->getRepository('ColizenAdminBundle:ImportLog')->findBy(array(),array('date'=>'DESC'));
+        $paginator  = $this->get('knp_paginator');
+        
+        $page=$request->get('page',1);
+        
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
 
         return array(
-            'entities' => $entities,
+            'pagination' => $pagination,
         );
     }
 }
