@@ -1,6 +1,6 @@
 <?php
 
-namespace Colizen\AdminBundle\Form;
+namespace Colizen\AdminBundle\Form\Widgets;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

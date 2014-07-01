@@ -16,8 +16,8 @@ class CycleType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('start')
-            ->add('end')
+            ->add('start','timepicker')
+            ->add('end','timepicker')
             ->add('tourCodeFormat')
         ;
     }
