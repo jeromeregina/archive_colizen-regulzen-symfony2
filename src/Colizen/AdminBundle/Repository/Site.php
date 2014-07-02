@@ -33,9 +33,9 @@ class Site extends EntityRepository
                                      LEFT JOIN s.tours t
                                      LEFT JOIN t.theoricalSlots sl
                                      LEFT JOIN sl.shipment sh
-                                   WHERE (t.date = :date OR t.date IS NULL)
-                                     AND (sl.theoricalHour > :cycleStartHour OR sl.theoricalHour IS NULL)
-                                     AND (sl.theoricalHour < :cycleEndHour   OR sl.theoricalHour IS NULL)
+                                   WHERE t.date = :date
+                                     AND sl.theoricalHour > :cycleStartHour
+                                     AND sl.theoricalHour < :cycleEndHour
                                    GROUP BY s.id')
                     ->setParameter('date', $date)
                     ->setParameter('cycleStartHour', $cycle->getStart())
