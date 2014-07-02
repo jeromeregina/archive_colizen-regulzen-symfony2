@@ -4,7 +4,7 @@ security:
     role_hierarchy:
         ROLE_CUSTOMER_SERVICE: ROLE_USER
         ROLE_REGUL:       ROLE_USER
-        ROLE_ADMIN:       ROLE_REGUL
+        ROLE_ADMIN:       ROLE_REGUL, ROLE_CUSTOMER_SERVICE
         ROLE_SUPER_ADMIN: ROLE_ADMIN
     session_fixation_strategy: none
     providers:
@@ -30,4 +30,5 @@ security:
         - { path: ^/_, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/css, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_ADMIN }
-        - { path: ^/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/customer_service, role: ROLE_CUSTOMER_SERVICE }
+        - { path: ^/, role: ROLE_REGUL }
