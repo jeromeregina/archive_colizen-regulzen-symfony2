@@ -18,8 +18,11 @@ class LogsController extends Controller
 {
 
     /**
-     * Lists all Cycle entities.
-     *
+     * Lists all Logs entities sorted by Id Desc.
+     * !Todo: il faudrait éventuellement rétablir le tri par date lors de la migration vers PostgreSql
+     * ! (dans le cas ou Doctrine2 gère correctement les milliseconds sur les dates Postgre)
+     * ! aujourd'hui le tri se fait par id car plus précis
+     * 
      * @Route("/imports", name="admin_logs_imports_list")
      * @Method("GET")
      * @Template()
@@ -27,7 +30,7 @@ class LogsController extends Controller
     public function importsListAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $query=$em->getRepository('ColizenAdminBundle:ImportLog')->findAllSortedByDateDesc(true);
+        $query=$em->getRepository('ColizenAdminBundle:ImportLog')->findAllSortedByIdDesc(true);
 
         $paginator  = $this->get('knp_paginator');
         

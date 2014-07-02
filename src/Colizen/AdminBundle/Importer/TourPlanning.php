@@ -68,9 +68,15 @@ class TourPlanning extends AbstractImporter  {
             $output->write('importing "'.$line['C'].'" from file "'.$file->getFilename().'"');
             }
                $shipment= $this->getShipmentRepository()->resolveByCargopass($line['C']);
-               
-               $site= $this->getSiteRepository()->findOneByAnyCode($line['L']);
-               
+               try {
+                    $site= $this->getSiteRepository()->findOneByAnyCode($line['L']);
+               } catch (\Doctrine\ORM\NoResultException $e){
+                   if ($output instanceof OutputHandler)
+                    { 
+                        $output->write('aborting import of "'.$line['C'].'" from "'.$file->getFilename().'": site with code "'.$line['L']."' has not been found");
+                    }
+                   return;
+               }
                $shipment->setCargopass($line['C'])
                        ->setDeliveryDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
                        ->setParcelQuantity(($line['H']==0)?1:$line['H'])
@@ -137,7 +143,6 @@ class TourPlanning extends AbstractImporter  {
                $this->em->persist($shipment);
                $this->em->flush();
                
-               return $output;
             }
         
             protected function getActionName() {

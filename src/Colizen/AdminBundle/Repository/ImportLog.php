@@ -40,4 +40,12 @@ class ImportLog extends EntityRepository
         
         return ($getQuery)?$query:$query->execute();
     }
+    public function findAllSortedByIdDesc($getQuery=false){
+        $qb=$this->createQueryBuilder('il');
+        $qb->select('il')
+            ->orderBy('il.id','DESC');
+        $query=$qb->getQuery();
+        
+        return ($getQuery)?$query:$query->execute();
+    }
 }

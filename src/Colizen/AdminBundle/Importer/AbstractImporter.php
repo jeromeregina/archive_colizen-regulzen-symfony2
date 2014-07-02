@@ -90,7 +90,6 @@ abstract class AbstractImporter {
         }
         if ($this->hasEmailLines())
             $this->sendMail();
-        return $output;
     }
     
     protected function findFiles(){
