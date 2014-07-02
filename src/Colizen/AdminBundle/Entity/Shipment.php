@@ -97,6 +97,15 @@ class Shipment
      * @ORM\OrderBy({"created" = "ASC"})
      */
     protected $slots;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Parcel", cascade={"persist"}, mappedBy="shipment")
+     *
+     */
+    protected $parcels;
+
     /**
     * @var \DateTime $created
     *
@@ -120,6 +129,7 @@ class Shipment
     {
         $this->events = new ArrayCollection();
         $this->slots = new ArrayCollection();
+        $this->parcels = new ArrayCollection();
     }
     
     /**
@@ -547,5 +557,38 @@ class Shipment
     public function getShipperAccount()
     {
         return $this->shipperAccount;
+    }
+
+    /**
+     * Add parcels
+     *
+     * @param \Colizen\AdminBundle\Entity\Parcel $parcels
+     * @return Shipment
+     */
+    public function addParcel(\Colizen\AdminBundle\Entity\Parcel $parcels)
+    {
+        $this->parcels[] = $parcels;
+
+        return $this;
+    }
+
+    /**
+     * Remove parcels
+     *
+     * @param \Colizen\AdminBundle\Entity\Parcel $parcels
+     */
+    public function removeParcel(\Colizen\AdminBundle\Entity\Parcel $parcels)
+    {
+        $this->parcels->removeElement($parcels);
+    }
+
+    /**
+     * Get parcels
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParcels()
+    {
+        return $this->parcels;
     }
 }

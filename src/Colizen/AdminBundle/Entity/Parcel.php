@@ -80,10 +80,11 @@ class Parcel
     /**
      * @var Shipment
      *
-     * @ORM\ManyToOne(targetEntity="Shipment")
+     * @ORM\ManyToOne(targetEntity="Shipment", inversedBy="parcels")
      * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", nullable=false)
      */
     private $shipment;
+
     /**
      * @ORM\OneToMany(targetEntity="Event", mappedBy="parcel")
      */
