@@ -5,6 +5,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\SplFileInfo;
 use Colizen\AdminBundle\Command\OutputHandler\OutputHandler;
 use Colizen\AdminBundle\Entity\Parcel;
+use Colizen\AdminBundle\Importer\Exception\NotFoundException;
 
 class ParcelDetails extends AbstractImporter {
     /**
