@@ -45,15 +45,37 @@ class InterfaceController extends Controller
             $dateCycle = $dateCycleForm->getData();
         }
 
+        // Les sites
         $sites = $this->getDoctrine()
             ->getRepository('ColizenAdminBundle:Site')
+            ->findAll();
+        $sitesData = array();
+        foreach ($sites as $site)
+        {
+            $sitesData[$site->getId()]['site'] = $site;
+            $sitesData[$site->getId()]['nombreExpeditions'] = '';
+        }
+
+        // nombre d'expeditions
+        $nombreExpeditions = $this->getDoctrine()
+            ->getRepository('ColizenAdminBundle:Site')
             ->getNombreExpeditionsBySite($dateCycle->getDate(), $dateCycle->getCycle());
+
+        foreach ($nombreExpeditions as $nombreExpeditionsLine)
+        {
+            $sitesData[$nombreExpeditionsLine['site']->getId()]['nombreExpeditions'] = $nombreExpeditionsLine['nombreExpeditions'];
+        }
+
+
+
+
+
 
 
         return array(
             'dateCycleForm' => $dateCycleForm->createView(),
             'shipments'     => $shipments,
-            'sites'         => $sites
+            'sitesData'     => $sitesData
         );
     }
 }

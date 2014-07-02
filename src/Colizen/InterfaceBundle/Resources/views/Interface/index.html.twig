@@ -60,10 +60,10 @@
                 </tr>
             </thead>
             <tbody>
-                {% for site in sites %}
+                {% for siteId, siteRow in sitesData %}
                 <tr>
-                    <td>{{ site.site.name }}</td>
-                    <td>{{ site.nombreExpeditions }}</td>
+                    <td>{{ siteRow['site'].name }}</td>
+                    <td>{{ siteRow['nombreExpeditions'] }}</td>
                     <td></td>
                     <td></td>
                     <td></td>
