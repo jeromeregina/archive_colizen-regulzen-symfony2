@@ -13,6 +13,8 @@ class InterfaceExtension extends \Twig_Extension{
     {
         $this->em = $em;
     }
+
+
     /**
      * Returns a list of global variables to add to the existing list.
      *
@@ -28,6 +30,25 @@ class InterfaceExtension extends \Twig_Extension{
         
         return $globals;
     }
+
+    public function getFilters()
+    {
+        return array(
+            new \Twig_SimpleFilter('make_na_small', array($this, 'makeNaSmall')),
+        );
+    }
+
+    public function makeNaSmall($value)
+    {
+        if  ($value === 'N/A')
+        {
+            $value = '<small class="red">'.$value.'</small>';
+        }
+
+        return $value;
+    }
+
+
     public function getName() {
         return 'regulzen_interface';
     }

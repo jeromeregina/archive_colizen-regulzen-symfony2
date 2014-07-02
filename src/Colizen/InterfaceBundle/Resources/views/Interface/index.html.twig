@@ -38,32 +38,35 @@
     </div>
     <br />
     <div class="row">
-        <table class="table table-condensed">
-            <thead>
+        <table class="table table-bordered table-striped">
+            <thead class="thin-border-bottom">
                 <tr>
+
                     <th>Site</th>
-                    <th>Nb Expéditions</th>
-                    <th>Nb Colis</th>
-                    <th>% Dispatch</th>
-                    <th>% Départ</th>
-                    <th>% Avancement</th>
-                    <th>Tx d'echec</th>
-                    <th>Tx HC</th>
-                    <th>Prev Tx HC</th>
-                    <th>Prev minutes HC</th>
-                    <th>Prev livreur sensible</th>
-                    <th>Manquant</th>
-                    <th>Surplus</th>
-                    <th>CNML</th>
-                    <th>Inv Tou</th>
-                    <th>% Cloture</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i><span title="Nombre d'expéditions">Nbr Expéditions</span></th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i><span title="Nombre de colis (COEC et EDIR)">Nbr Colis</span></th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>% Dispatch</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>% Départ</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>% Avancement</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>Tx d'echec</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>Tx HC</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>Prev Tx HC</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>Prev minutes HC</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>Prev livreur sensible</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>Manquant</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>Surplus</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>CNML</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>Inv Tou</th>
+                    <th><i class="ace-icon fa fa-caret-right blue"></i>% Cloture</th>
                 </tr>
             </thead>
             <tbody>
                 {% for siteId, siteRow in sitesData %}
                 <tr>
                     <td>{{ siteRow['site'].name }}</td>
-                    <td>{{ siteRow['nombreExpeditions'] }}</td>
+                    <td>{{ siteRow['nombreExpeditions'] |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['nombreColis'] |make_na_small |raw }}</td>
+
                     <td></td>
                     <td></td>
                     <td></td>

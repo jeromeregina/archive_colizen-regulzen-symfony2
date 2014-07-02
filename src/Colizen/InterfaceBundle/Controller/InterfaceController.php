@@ -45,28 +45,32 @@ class InterfaceController extends Controller
             $dateCycle = $dateCycleForm->getData();
         }
 
+        $siteRepository = $this->getDoctrine()->getRepository('ColizenAdminBundle:Site');
+
         // Les sites
-        $sites = $this->getDoctrine()
-            ->getRepository('ColizenAdminBundle:Site')
-            ->findAll();
+        $sites = $siteRepository->findAll();
         $sitesData = array();
         foreach ($sites as $site)
         {
             $sitesData[$site->getId()]['site'] = $site;
-            $sitesData[$site->getId()]['nombreExpeditions'] = '';
+            $sitesData[$site->getId()]['nombreExpeditions'] = 'N/A';
+            $sitesData[$site->getId()]['nombreColis'] = 'N/A';
         }
 
         // nombre d'expeditions
-        $nombreExpeditions = $this->getDoctrine()
-            ->getRepository('ColizenAdminBundle:Site')
-            ->getNombreExpeditionsBySite($dateCycle->getDate(), $dateCycle->getCycle());
+        $nombreExpeditions = $siteRepository->getNombreExpeditionsBySite($dateCycle->getDate(), $dateCycle->getCycle());
 
         foreach ($nombreExpeditions as $nombreExpeditionsLine)
         {
             $sitesData[$nombreExpeditionsLine['site']->getId()]['nombreExpeditions'] = $nombreExpeditionsLine['nombreExpeditions'];
         }
 
-
+        // nombre de colis
+        $nombreColis = $siteRepository->getNombreColisBySite($dateCycle->getDate(), $dateCycle->getCycle());
+        foreach ($nombreColis as $nombreColisLine)
+        {
+            $sitesData[$nombreColisLine['site']->getId()]['nombreColis'] = $nombreColisLine['nombreColis'];
+        }
 
 
 
