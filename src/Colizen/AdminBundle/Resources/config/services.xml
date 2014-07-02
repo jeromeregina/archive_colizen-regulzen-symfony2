@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="colizen_admin.soapclient.czn_webservice.class">Colizen\AdminBundle\SoapClient\ColizenWebService</parameter>
+        <parameter key="colizen_admin.event_listener.kernel_request.class">Colizen\AdminBundle\Listener\Request</parameter>
     </parameters>
 
     <services>
@@ -13,5 +14,12 @@
             <argument>%czn_webservice%</argument>
         </service>
         <service id="webservice" alias="colizen_admin.soapclient.czn_webservice" />
+        <service id="kernel.listener.request" class="%colizen_admin.event_listener.kernel_request.class%">
+            <argument>%session_login_lock_time%</argument>
+            <argument type="service" id="security.context" />
+            <argument type="service" id="braincrafted_bootstrap.flash" />
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_listener" event="kernel.request" method="sessionIdleTimeCheck" />
+        </service>
     </services>
 </container>
