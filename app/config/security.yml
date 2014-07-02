@@ -2,6 +2,7 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
     role_hierarchy:
+        ROLE_CUSTOMER_SERVICE: ROLE_USER
         ROLE_REGUL:       ROLE_USER
         ROLE_ADMIN:       ROLE_REGUL
         ROLE_SUPER_ADMIN: ROLE_ADMIN

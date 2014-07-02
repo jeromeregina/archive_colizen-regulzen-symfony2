@@ -33,6 +33,15 @@ class LoadUserData implements FixtureInterface
             ->setRoles(array('ROLE_REGUL'));
 
         $manager->persist($user);
+        
+        $user = new User();
+        $user->setEmail('service_client@novactive.com')
+            ->setUsername('service_client')
+            ->setPlainPassword('service_client')
+            ->setEnabled(true)
+            ->setRoles(array('ROLE_CUSTOMER_SERVICE'));
+
+        $manager->persist($user);
 
         $manager->flush();
     }
