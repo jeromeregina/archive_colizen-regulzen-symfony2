@@ -60,9 +60,25 @@
                 </tr>
             </thead>
             <tbody>
+                {% for site in sites %}
                 <tr>
-
+                    <td>{{ site.site.name }}</td>
+                    <td>{{ site.nombreExpeditions }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
 

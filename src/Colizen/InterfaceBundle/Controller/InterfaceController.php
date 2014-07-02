@@ -20,7 +20,7 @@ class InterfaceController extends Controller
     public function indexAction(Request $request)
     {
         $shipments = array();
-        $dateCycleForm = $this->createForm('date_cycle', new DateCycleFormModel());
+
 
         $cycles = $this->getDoctrine()
             ->getRepository('ColizenAdminBundle:Cycle')
@@ -35,19 +35,25 @@ class InterfaceController extends Controller
             }
         }
 
-        $dateCycleForm->get('cycle')->setData($currentCycle);
+        $dateCycle = new DateCycleFormModel();
+        $dateCycle->setCycle($currentCycle);
 
-
+        $dateCycleForm = $this->createForm('date_cycle', $dateCycle);
         $dateCycleForm->handleRequest($request);
         if ($dateCycleForm->isValid())
         {
             $dateCycle = $dateCycleForm->getData();
-
         }
+
+        $sites = $this->getDoctrine()
+            ->getRepository('ColizenAdminBundle:Site')
+            ->getNombreExpeditionsBySite($dateCycle->getDate(), $dateCycle->getCycle());
+
 
         return array(
             'dateCycleForm' => $dateCycleForm->createView(),
-            'shipments'     => $shipments
+            'shipments'     => $shipments,
+            'sites'         => $sites
         );
     }
 }
