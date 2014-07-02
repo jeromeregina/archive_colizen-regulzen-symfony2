@@ -77,7 +77,7 @@ abstract class AbstractImporter {
                 $lc=0;
             foreach ($this->getLinesFromFile($file) as $line){
                 try {
-                    $this->persistLine($line,$file,$output);
+                    $this->persistLine($line,$lc,$file,$output);
                 } catch(\Exception $e){
                     if ($output instanceof OutputHandler){
                         $output->write('Error on '.$file->getFilename().', line '.$lc.' : '.$e->getMessage(), ImportLog::MESSAGE_LEVEL_LINE);
@@ -96,7 +96,7 @@ abstract class AbstractImporter {
         return $this->finder->files()->in($this->sourceDirectory)->name($this->filenamePattern);
     }
     
-    abstract protected function persistLine($line,SplFileInfo $file,  OutputHandler $output = null);
+    abstract protected function persistLine($line,$lineid,SplFileInfo $file,  OutputHandler $output = null);
     abstract protected function getLinesFromFile(SplFileInfo $file);
     abstract protected function getActionName();
     /**

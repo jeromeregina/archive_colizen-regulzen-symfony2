@@ -16,7 +16,8 @@ class ImportCommand extends ContainerAwareCommand
             ->setDescription('Imports data from colizen');
     }
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $this->firstStep($output);
+//        $this->firstStep($output);
+        $this->secondStep($output);
         
        
     }

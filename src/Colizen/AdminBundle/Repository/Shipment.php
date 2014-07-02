@@ -20,4 +20,16 @@ class Shipment extends EntityRepository
            return ($shipment instanceof Entity)?$shipment:new Entity();
 
         }
+    public function findOneByFifteenIntegersFormatCargopass($cargopass){
+        $qb=$this->createQueryBuilder('s');
+        
+        $pattern = '/(\d{3})(\d{3})(\d{9})/';
+        $replacement = '$1-$2-$3____';
+        $searchPattern= preg_replace($pattern, $replacement, $cargopass);
+        
+        $qb->where($qb->expr()->like('s.cargopass', ':searchPattern'));
+        
+        $qb->setParameter('searchPattern', $searchPattern);
+        return $qb->getQuery()->getSingleResult();
+    }
 }

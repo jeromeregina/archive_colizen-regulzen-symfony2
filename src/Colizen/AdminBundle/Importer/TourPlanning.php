@@ -10,6 +10,7 @@ use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Slot;
 use \Swift_Mailer;
 use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
+use Colizen\AdminBundle\Importer\Exception\NotFoundException;
 
 class TourPlanning extends AbstractImporter  {
     /**
@@ -62,7 +63,7 @@ class TourPlanning extends AbstractImporter  {
  * 
  * @param array $line
  */
-    protected function persistLine($line,SplFileInfo $file,OutputHandler $output = null) {
+    protected function persistLine($line,$lineid,SplFileInfo $file,OutputHandler $output = null) {
         if ($output instanceof OutputHandler)
             { 
             $output->write('importing "'.$line['C'].'" from file "'.$file->getFilename().'"');
@@ -71,11 +72,7 @@ class TourPlanning extends AbstractImporter  {
                try {
                     $site= $this->getSiteRepository()->findOneByAnyCode($line['L']);
                } catch (\Doctrine\ORM\NoResultException $e){
-                   if ($output instanceof OutputHandler)
-                    { 
-                        $output->write('aborting import of "'.$line['C'].'" from "'.$file->getFilename().'": site with code "'.$line['L']."' has not been found");
-                    }
-                   return;
+                   throw new NotFoundException('aborting import of "'.$line['C'].'" from "'.$file->getFilename().'": site with code "'.$line['L']."' has not been found");
                }
                $shipment->setCargopass($line['C'])
                        ->setDeliveryDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
