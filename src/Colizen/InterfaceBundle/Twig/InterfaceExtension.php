@@ -1,8 +1,12 @@
 <?php
+
 namespace Colizen\InterfaceBundle\Twig;
 
+use Colizen\InterfaceBundle\Service\TableauNational;
 use Doctrine\ORM\EntityManager;
-class InterfaceExtension extends \Twig_Extension{
+
+class InterfaceExtension extends \Twig_Extension
+{
     /**
      *
      * @var EntityManager 
@@ -22,9 +26,9 @@ class InterfaceExtension extends \Twig_Extension{
      */
     public function getGlobals()
     {
-        $globals=array();
+        $globals = array();
         
-        $repo=$this->em->getRepository('ColizenAdminBundle:ImportLog');
+        $repo = $this->em->getRepository('ColizenAdminBundle:ImportLog');
         
         $globals += $repo->findLatestImportLogDates();
         
@@ -40,7 +44,7 @@ class InterfaceExtension extends \Twig_Extension{
 
     public function makeNaSmall($value)
     {
-        if  ($value === 'N/A')
+        if  ($value === TableauNational::NOT_AVAILABLE_LABEL)
         {
             $value = '<small class="red">'.$value.'</small>';
         }
@@ -52,5 +56,4 @@ class InterfaceExtension extends \Twig_Extension{
     public function getName() {
         return 'regulzen_interface';
     }
-
 }

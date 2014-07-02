@@ -20,6 +20,8 @@ class Site extends EntityRepository
     }
 
     /**
+     * Nombre d'expéditions par site
+     *
      * @param \DatTime $date
      * @param Cycle    $cycle
      *
@@ -45,15 +47,17 @@ class Site extends EntityRepository
 
 
     /**
+     * Nombre de colis avec les statuts COEC (arrivé au centre) ou EDIR (étiqueté)
+     *
      * @param \DatTime $date
      * @param Cycle    $cycle
      *
      * @return array
      */
-    public function getNombreColisBySite(\DateTime $date, Cycle $cycle)
+    public function countColisCoecEdirBySite(\DateTime $date, Cycle $cycle)
     {
         return $this->getEntityManager()
-                    ->createQuery('SELECT s AS site, COUNT(p.id) AS nombreColis
+                    ->createQuery('SELECT s AS site, COUNT(p.id) AS countColisCoecEdir
                                    FROM ColizenAdminBundle:Site s
                                      LEFT JOIN s.tours t
                                      LEFT JOIN t.theoricalSlots sl
@@ -71,5 +75,32 @@ class Site extends EntityRepository
                     ->setParameter('coecStatus', 'COEC')
                     ->setParameter('edirStatus', 'EDIR')
                     ->getResult();
+    }
+
+    /**
+     * Nombre de tous les colis
+     *
+     * @param \DateTime $date
+     * @param Cycle     $cycle
+     *
+     * @return array
+     */
+    public function countColisBySite(\DateTime $date, Cycle $cycle)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT s AS site, COUNT(p.id) AS countColis
+                                   FROM ColizenAdminBundle:Site s
+                                     LEFT JOIN s.tours t
+                                     LEFT JOIN t.theoricalSlots sl
+                                     LEFT JOIN sl.shipment sh
+                                     LEFT JOIN sh.parcels p
+                                   WHERE t.date = :date
+                                     AND sl.theoricalHour > :cycleStartHour
+                                     AND sl.theoricalHour < :cycleEndHour
+                                   GROUP BY s.id')
+            ->setParameter('date', $date)
+            ->setParameter('cycleStartHour', $cycle->getStart())
+            ->setParameter('cycleEndHour',   $cycle->getEnd())
+            ->getResult();
     }
 }

@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="colizen_interface.twig.extension.class">Colizen\InterfaceBundle\Twig\InterfaceExtension</parameter>
+        <parameter key="colizen_interface.service.tableau_national.class">Colizen\InterfaceBundle\Service\TableauNational</parameter>
     </parameters>
 
     <services>
@@ -13,5 +14,11 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />
            <tag name="twig.extension" />
        </service>
+        <service id="colizen_interface.service.tableau_national" class="%colizen_interface.service.tableau_national.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+       </service>
+
+
+
     </services>
 </container>
