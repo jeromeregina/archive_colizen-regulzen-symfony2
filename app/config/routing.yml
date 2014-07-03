@@ -7,6 +7,11 @@ colizen_interface:
     resource: "@ColizenInterfaceBundle/Controller/"
     type:     annotation
     prefix:   /
+
+colizen_customer_service:
+    resource: "@ColizenCustomerServiceBundle/Controller/"
+    type:     annotation
+    prefix:   /customer_service
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

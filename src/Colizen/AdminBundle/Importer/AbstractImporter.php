@@ -9,6 +9,8 @@ use Colizen\AdminBundle\Command\OutputHandler\OutputHandler;
 use Colizen\AdminBundle\Entity\ImportLog;
 use \Swift_Mailer;
 use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
+use Colizen\AdminBundle\Entity\Site;
+use Colizen\AdminBundle\Entity\Tour;
 
 abstract class AbstractImporter {
     /**
@@ -77,7 +79,7 @@ abstract class AbstractImporter {
                 $lc=0;
             foreach ($this->getLinesFromFile($file) as $line){
                 try {
-                    $this->persistLine($line,$file,$output);
+                    $this->persistLine($line,$lc,$file,$output);
                 } catch(\Exception $e){
                     if ($output instanceof OutputHandler){
                         $output->write('Error on '.$file->getFilename().', line '.$lc.' : '.$e->getMessage(), ImportLog::MESSAGE_LEVEL_LINE);
@@ -96,7 +98,7 @@ abstract class AbstractImporter {
         return $this->finder->files()->in($this->sourceDirectory)->name($this->filenamePattern);
     }
     
-    abstract protected function persistLine($line,SplFileInfo $file,  OutputHandler $output = null);
+    abstract protected function persistLine($line,$lineid,SplFileInfo $file,  OutputHandler $output = null);
     abstract protected function getLinesFromFile(SplFileInfo $file);
     abstract protected function getActionName();
     /**
@@ -134,8 +136,30 @@ abstract class AbstractImporter {
     protected function getUserRepository(){
        return $this->em->getRepository('ColizenUserBundle:User');
     }
-    
-    
+    /**
+     *  resolves tour & adds line to import email if tour_code is created
+     * 
+     * @param string $code
+     * @param \DateTime $date
+     * @param \Colizen\AdminBundle\Entity\Site $site
+     * @param string $filename
+     * @param string $lineId "identifiant" de la ligne
+     * @return \Colizen\AdminBundle\Entity\Tour
+     */
+    protected function resolveTour($code, \DateTime $date, Site $site,$filename,$lineId){
+        $tour = $this->getTourRepository()->resolveByTourCodeDateAndSite($code,$date,$site);
+               
+               $tourcode=$tour->getTourCode();
+               /** ajout à l'email en cour: "un tour_code à été créé" **/ 
+               if ($tourcode->getId()==null){
+                    $this->em->persist($tourcode);
+                    $this->em->flush();
+                    $this->addEmailLine($filename, $linecargopass, 'tour_code', $tour->getTourCode()->getId());
+               }
+        return $tour;
+    }
+
+
     protected function sendMail(){
         
         $to=$this->getUserRepository()->getAllAdminEmails();

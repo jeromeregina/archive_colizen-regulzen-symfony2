@@ -10,6 +10,7 @@ use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Slot;
 use \Swift_Mailer;
 use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
+use Colizen\AdminBundle\Importer\Exception\NotFoundException;
 
 class TourPlanning extends AbstractImporter  {
     /**
@@ -35,15 +36,37 @@ class TourPlanning extends AbstractImporter  {
         array_shift( $sheetData);
         return $sheetData;
     }
+    const CARGOPASS='C';
+    const CUSTOMER_CODE='D';
+    const SITE_CODE='L';
+    const SHIPPING_DATE='F';
+    const SHIPMENT_WEIGHT='G';
+    const PARCEL_QUANTITY='H';
+    const SHIPMENT_PRIORITY='K';
+    const TOUR_CODE='M';
+    const TOUR_POSITION='N';
+    const TOUR_DATE='O';
+    const SLOT='P';
+    const ADDRESS_REMARK='R';
+    const ADDRESS_COUNTRY='S';
+    const ADDRESS_ZIPCODE='T';
+    const ADDRESS_CITY='U';
+    const ADDRESS='V';
+    const ADDRESS_NAME='W';
+    const TELEPHONE='X';
+    const EMAIL='Y';
+    const LATITUDE='Z';
+    const LONGITUDE='AA';
+    const THEORICAL_HOUR='AC';
 /**
     * C -> cargopass -> Shipment.cargopass
     * D -> code client -> Shipment.shipper_id (ShipperAccount?)
-    * E -> code agence expediteur -> Shipment.Site.CodeImtech ou Shipment.Site.Number
-    * F -> date d'expedition -> Shipment.creationDate
+    * xxx E -> code agence expediteur -> Shipment.Site.CodeImtech ou Shipment.Site.Number
+    * F -> date d'expedition -> Shipment.creationDate (?)
     * G -> poids -> Shipment.weight
     * H -> nombre de colis -> Shipment.parcelQuantity
     * K -> priorité de la livraison (?)
- * L -> code agence ? = 750 ? à importer ?
+    * L -> code agence -> Shipment.Site.Number
     * M -> code tournée
     * N -> position du bordereau
     * O -> date tournée
@@ -62,73 +85,61 @@ class TourPlanning extends AbstractImporter  {
  * 
  * @param array $line
  */
-    protected function persistLine($line,SplFileInfo $file,OutputHandler $output = null) {
+    protected function persistLine($line,$lineid,SplFileInfo $file,OutputHandler $output = null) {
         if ($output instanceof OutputHandler)
             { 
-            $output->write('importing "'.$line['C'].'" from file "'.$file->getFilename().'"');
+            $output->write('importing "'.$line[self::CARGOPASS].'" from file "'.$file->getFilename().'"');
             }
-               $shipment= $this->getShipmentRepository()->resolveByCargopass($line['C']);
+               $shipment= $this->getShipmentRepository()->resolveByCargopass($line[self::CARGOPASS]);
                try {
-                    $site= $this->getSiteRepository()->findOneByAnyCode($line['L']);
+                    $site= $this->getSiteRepository()->findOneByAnyCode($line[self::SITE_CODE]);
                } catch (\Doctrine\ORM\NoResultException $e){
-                   if ($output instanceof OutputHandler)
-                    { 
-                        $output->write('aborting import of "'.$line['C'].'" from "'.$file->getFilename().'": site with code "'.$line['L']."' has not been found");
-                    }
-                   return;
+                   throw new NotFoundException('aborting import of "'.$line[self::CARGOPASS].'" from "'.$file->getFilename().'": site with code "'.$line[self::SITE_CODE]."' has not been found");
                }
-               $shipment->setCargopass($line['C'])
-                       ->setDeliveryDate(\DateTime::createFromFormat('d.m.Y',$line['F']))
-                       ->setParcelQuantity(($line['H']==0)?1:$line['H'])
+               $shipment->setCargopass($line[self::CARGOPASS])
+                       ->setDeliveryDate(\DateTime::createFromFormat('d.m.Y',$line[self::SHIPPING_DATE]))
+                       ->setParcelQuantity(($line[self::PARCEL_QUANTITY]==0)?1:$line[self::PARCEL_QUANTITY])
                        ->setSite($site)
-                       ->setWeight($line['G'])
-                       ->setPriority($line['K'])
+                       ->setWeight($line[self::SHIPMENT_WEIGHT])
+                       ->setPriority($line[self::SHIPMENT_PRIORITY])
                        ;
                
                $deliveryAddress=($shipment->hasDeliveryAddress())?$shipment->getDeliveryAddress():new DeliveryAddress();
                
                
                $deliveryAddress
-                       ->setAddress($line['V'])
-                       ->setAdditionalInformations(($line['R']=='<?>')?null:$line['R'])
-                       ->setCountry($line['S'])
-                       ->setZipcode($line['T'])
-                       ->setCity($line['U'])
-                       ->setName($line['W'])
-                       ->setTelephone(($line['X']=='<?>')?null:$line['X'])
-                       ->setEmail(($line['Y']=='<?>')?null:$line['Y'])
-                       ->setLatitude($line['Z'])
-                       ->setLongitude($line['AA'])
+                       ->setAddress($line[self::ADDRESS])
+                       ->setAdditionalInformations(($line[self::ADDRESS_REMARK]=='<?>')?null:$line[self::ADDRESS_REMARK])
+                       ->setCountry($line[self::ADDRESS_COUNTRY])
+                       ->setZipcode($line[self::ADDRESS_ZIPCODE])
+                       ->setCity($line[self::ADDRESS_CITY])
+                       ->setName($line[self::ADDRESS_NAME])
+                       ->setTelephone(($line[self::TELEPHONE]=='<?>')?null:$line[self::TELEPHONE])
+                       ->setEmail(($line[self::EMAIL]=='<?>')?null:$line[self::EMAIL])
+                       ->setLatitude($line[self::LATITUDE])
+                       ->setLongitude($line[self::LONGITUDE])
                        ->setShipment($shipment)
                        ;
                
                $shipment->setDeliveryAddress($deliveryAddress);
                
-               $tour = $this->getTourRepository()->resolveByTourCodeDateAndSite($line['M'],\DateTime::createFromFormat('[d.m.Y]',$line['O']),$site);
-               
-               $tourcode=$tour->getTourCode();
-               /** ajout à l'email en cour: "un tour_code à été créé" **/ 
-               if ($tourcode->getId()==null){
-                    $this->em->persist($tourcode);
-                    $this->em->flush();
-                    $this->addEmailLine($file->getFilename(), $line['C'], 'tour_code', $tour->getTourCode()->getId());
-               }
-               
+               $tour = $this->resolveTour($line[self::TOUR_CODE], \DateTime::createFromFormat('[d.m.Y]',$line[self::TOUR_DATE]), $site, $file->getFilename(), $line[self::CARGOPASS]);
+                       
                $slot = ($shipment->getLastSlot() instanceof Slot)?$shipment->getLastSlot():new Slot();
                
-               list($slotStart,$slotEnd)=explode('-',trim($line['P'],'[]'));
+               list($slotStart,$slotEnd)=explode('-',trim($line[self::SLOT],'[]'));
                
-               $slot->setTheoricalTourOrder($line['N'])
+               $slot->setTheoricalTourOrder($line[self::TOUR_POSITION])
                      ->setTheoricalTour($tour)
                      ->setTheoricalSlotStart(\DateTime::createFromFormat('H:i',$slotStart))
                      ->setTheoricalSlotEnd(\DateTime::createFromFormat('H:i',$slotEnd))
-                     ->setTheoricalHour(\DateTime::createFromFormat('H:i',$line['AC']))
+                     ->setTheoricalHour(\DateTime::createFromFormat('H:i',$line[self::THEORICAL_HOUR]))
                      ;
                
                if (!$shipment->hasSlots())
                    $shipment->addSlot($slot);
                
-               list($useless,$senderCode,$senderName)=explode('-',$line['D']);
+               list($useless,$senderCode,$senderName)=explode('-',$line[self::CUSTOMER_CODE]);
                
                $shipperAccount=$this->getShipperAccountRepository()->resolveByCode($senderCode,$senderName);
                
@@ -136,7 +147,7 @@ class TourPlanning extends AbstractImporter  {
                 if ($shipperAccount->getId()==null){
                     $this->em->persist($shipperAccount);
                     $this->em->flush();
-                    $this->addEmailLine($file->getFilename(), $line['C'], 'shipper_account', $shipperAccount->getId());
+                    $this->addEmailLine($file->getFilename(), $line[self::CARGOPASS], 'shipper_account', $shipperAccount->getId());
                }
                $shipment->setShipperAccount($shipperAccount);
                        
