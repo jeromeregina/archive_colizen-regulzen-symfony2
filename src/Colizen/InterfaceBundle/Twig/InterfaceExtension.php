@@ -28,9 +28,20 @@ class InterfaceExtension extends \Twig_Extension
     {
         $globals = array();
         
-        $repo = $this->em->getRepository('ColizenAdminBundle:ImportLog');
+        /* pas très beau, à revoir autrement */
+        $temp=array();
         
-        $globals += $repo->findLatestImportLogDates();
+        foreach (array('ImportLog','ImportWebServiceLog') as $e){
+        $repo = $this->em->getRepository("ColizenAdminBundle:$e");
+            foreach($repo->findLatestImportLogDates() as $k=>$val){
+                if (!isset($temp[$k])||$temp[$k]<$val) {
+                    $temp[$k]=$val;
+                } 
+            }
+                
+        }
+        
+        $globals += $temp;
         
         return $globals;
     }

@@ -13,6 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class ImportWebServiceLog
 {
+    const MESSAGE_LEVEL_GLOBAL = 1;
+    const MESSAGE_LEVEL_CALL = 2;
 
     /**
      * @var integer
@@ -30,6 +32,13 @@ class ImportWebServiceLog
      */
     private $message;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="IMPRTWS_level", type="integer", nullable=false)
+     */
+    private $level;
+    
     /**
      * @var string
      *
@@ -188,5 +197,28 @@ class ImportWebServiceLog
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set level
+     *
+     * @param integer $level
+     * @return ImportWebServiceLog
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return integer 
+     */
+    public function getLevel()
+    {
+        return $this->level;
     }
 }
