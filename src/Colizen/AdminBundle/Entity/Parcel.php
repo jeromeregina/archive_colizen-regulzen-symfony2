@@ -5,6 +5,7 @@ namespace Colizen\AdminBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Colizen\AdminBundle\Entity\Status;
 
 /**
  * TblParcel
@@ -36,13 +37,21 @@ class Parcel
      * @ORM\Column(name="PRCL_nb_presentations", type="integer", nullable=false, options={"default" = 1})
      */
     private $nbPresentations = 1;
-    
+ 
     /**
-     * @var status
+     * @var Status
      *
-     * @ORM\Column(name="PRCL_status", type="integer", nullable=false, options={"default" = 1})
+     * @ORM\ManyToOne(targetEntity="Status")
+     * @ORM\JoinColumn(name="STATUS_code", referencedColumnName="STATUS_code", nullable=true)
      */
-    private $status = 1;
+    protected $status;
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="STATUS_code", type="integer", nullable=true)
+     */
+    protected $statusCode;
 
     /**
      * @var integer
@@ -301,29 +310,6 @@ class Parcel
     }
 
     /**
-     * Set status
-     *
-     * @param integer $status
-     * @return Parcel
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set weight
      *
      * @param integer $weight
@@ -413,5 +399,51 @@ class Parcel
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * Set statusCode
+     *
+     * @param integer $statusCode
+     * @return Parcel
+     */
+    public function setStatusCode($statusCode)
+    {
+        $this->statusCode = $statusCode;
+
+        return $this;
+    }
+
+    /**
+     * Get statusCode
+     *
+     * @return integer 
+     */
+    public function getStatusCode()
+    {
+        return $this->statusCode;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \Colizen\AdminBundle\Entity\Status $status
+     * @return Parcel
+     */
+    public function setStatus(Status $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \Colizen\AdminBundle\Entity\Status 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
