@@ -80,7 +80,7 @@ class Parcel
     /**
      * @var Shipment
      *
-     * @ORM\ManyToOne(targetEntity="Shipment", inversedBy="parcels")
+     * @ORM\ManyToOne(targetEntity="Shipment", inversedBy="parcels", cascade={"persist"})
      * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", nullable=false)
      */
     private $shipment;

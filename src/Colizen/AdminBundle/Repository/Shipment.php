@@ -11,7 +11,7 @@ class Shipment extends EntityRepository
     /**
      * returns existing Shipment or new one by if missing
      * 
-     * @param string $cargopass of format <i>123-123-123456789 123</i>
+     * @param string $cargopass of format <i>xxx-yyy-123456789 zzz</i>
      * @return \Colizen\AdminBundle\Entity\Shipment
      */
     public function resolveByCargopass($cargopass){
@@ -20,6 +20,12 @@ class Shipment extends EntityRepository
            return ($shipment instanceof Entity)?$shipment:new Entity();
 
         }
+    /**
+     * returns existing Shipment by "15 numbers format cargopass"
+     * 
+     * @param string $cargopass of format <i>xxxyyy123456789</i>
+     * @return \Colizen\AdminBundle\Entity\Shipment
+     */
     public function findOneByFifteenIntegersFormatCargopass($cargopass){
         $qb=$this->createQueryBuilder('s');
         
