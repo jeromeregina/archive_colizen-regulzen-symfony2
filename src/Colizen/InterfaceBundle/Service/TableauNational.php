@@ -40,6 +40,7 @@ class TableauNational implements TableauNationalInterface
             $sitesData[$site->getId()]['countColisCoecEdir'] = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['dispatchRate']       = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['departRate']         = self::NOT_AVAILABLE_LABEL;
+            $sitesData[$site->getId()]['controleRate']       = self::NOT_AVAILABLE_LABEL;
         }
 
         // nombre d'expeditions
@@ -69,6 +70,23 @@ class TableauNational implements TableauNationalInterface
                 $sitesData[$siteId]['dispatchRate'] = round($value, 2) . '%';
             }
         }
+
+        // Pourcentage de controle
+        $colisCtrl = $this->getSiteRepository()->countColisCtrlBySite($date, $cycle);
+        foreach ($colisCoecEdir as $colisCoecEdirLine)
+        {
+            $siteId = $colisCoecEdirLine['site']->getId();
+
+            foreach ($colisCtrl as $colisCtrlLine)
+            {
+                if ($colisCtrlLine['site']->getId() == $siteId)
+                {
+                    $value = $colisCtrlLine['countColisCtrl'] / $colisCoecEdirLine['countColisCoecEdir'];
+                    $sitesData[$siteId]['controleRate'] = round($value, 2) . '%';
+                }
+            }
+        }
+
 
 
         // Pourcentage de départ
