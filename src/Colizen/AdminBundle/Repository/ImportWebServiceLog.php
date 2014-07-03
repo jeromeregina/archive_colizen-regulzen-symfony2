@@ -22,8 +22,8 @@ class ImportWebServiceLog extends EntityRepository
         $qb->select('MAX(il.date)')
             ->where('il.level = :level')
             ->setParameter('level', Entity::MESSAGE_LEVEL_GLOBAL);
-        $lastest=$qb->getQuery()->getSingleScalarResult();
-        return (is_string($lastest))?new \DateTime($lastest):false;
+        $latest=$qb->getQuery()->getSingleScalarResult();
+        return (is_string($latest))?new \DateTime($latest):false;
     }
     /**
      * 
@@ -34,8 +34,8 @@ class ImportWebServiceLog extends EntityRepository
         $qb->select('MAX(il.date)')
             ->where('il.level = :level')
             ->setParameter('level', Entity::MESSAGE_LEVEL_CALL);
-        $lastest=$qb->getQuery()->getSingleScalarResult();
-        return (is_string($lastest))?new \DateTime($lastest):false;
+        $latest=$qb->getQuery()->getSingleScalarResult();
+        return (is_string($latest))?new \DateTime($latest):false;
     }
     
     public function findAllSortedByIdDesc($getQuery=false){

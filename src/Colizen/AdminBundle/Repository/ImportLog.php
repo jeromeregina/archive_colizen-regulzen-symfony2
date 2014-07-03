@@ -22,8 +22,8 @@ class ImportLog extends EntityRepository
         $qb->select('MAX(il.date)')
             ->where('il.level = :level')
             ->setParameter('level', Entity::MESSAGE_LEVEL_ACTION);
-        $lastest=$qb->getQuery()->getSingleScalarResult();
-        return (is_string($lastest))?new \DateTime($lastest):false;
+        $latest=$qb->getQuery()->getSingleScalarResult();
+        return (is_string($latest))?new \DateTime($latest):false;
     }
     /**
      * 
@@ -34,8 +34,8 @@ class ImportLog extends EntityRepository
         $qb->select('MAX(il.date)')
             ->where('il.level = :level')
             ->setParameter('level', Entity::MESSAGE_LEVEL_LINE);
-        $lastest=$qb->getQuery()->getSingleScalarResult();
-        return (is_string($lastest))?new \DateTime($lastest):false;
+        $latest=$qb->getQuery()->getSingleScalarResult();
+        return (is_string($latest))?new \DateTime($latest):false;
     }
     public function findAllSortedByDateDesc($getQuery=false){
         $qb=$this->createQueryBuilder('il');
