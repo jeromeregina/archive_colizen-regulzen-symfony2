@@ -41,6 +41,7 @@ class TableauNational implements TableauNationalInterface
             $sitesData[$site->getId()]['dispatchRate']       = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['departRate']         = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['controleRate']       = self::NOT_AVAILABLE_LABEL;
+            $sitesData[$site->getId()]['avancementRate']     = self::NOT_AVAILABLE_LABEL;
         }
 
         // nombre d'expeditions
@@ -104,6 +105,24 @@ class TableauNational implements TableauNationalInterface
                 }
             }
         }
+
+        // Pourcentage d'avancement
+        $colisRemiNliv = $this->getSiteRepository()->countColisRemiNlivBySite($date, $cycle);
+        foreach ($allColis as $countColis)
+        {
+            $siteId = $countColis['site']->getId();
+
+            foreach ($colisRemiNliv as $colisRemiNlivLine)
+            {
+                if ($siteId == $colisRemiNlivLine['site']->getId())
+                {
+                    $value = $colisRemiNlivLine['countColisRemiNliv'] / $countColis['countColis'];
+                    $sitesData[$siteId]['avancementRate'] = round($value, 2) . '%';
+                }
+            }
+        }
+
+
 
         return $sitesData;
     }

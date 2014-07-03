@@ -68,7 +68,7 @@
                     </th>
                     <th>
                         <i class="ace-icon fa fa-caret-right blue"></i>
-                        <span title="">% Avancement</span>
+                        <span title="Pourcentage d'avancement">% Avancement</span>
                     </th>
                     <th>
                         <i class="ace-icon fa fa-caret-right blue"></i>
@@ -116,12 +116,12 @@
                 {% for siteId, siteRow in sitesData %}
                 <tr>
                     <td>{{ siteRow['site'].name }}</td>
-                    <td>{{ siteRow['nombreExpeditions'] |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['nombreExpeditions']  |make_na_small |raw  }}</td>
                     <td>{{ siteRow['countColisCoecEdir'] |make_na_small |raw }}</td>
-                    <td>{{ siteRow['dispatchRate'] |make_na_small |raw  }}</td>
-                    <td>{{ siteRow['controleRate'] |make_na_small |raw  }}</td>
-                    <td>{{ siteRow['departRate'] |make_na_small |raw  }}</td>
-                    <td></td>
+                    <td>{{ siteRow['dispatchRate']       |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['controleRate']       |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['departRate']         |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['avancementRate']     |make_na_small |raw  }}</td>
                     <td></td>
                     <td></td>
                     <td></td>
