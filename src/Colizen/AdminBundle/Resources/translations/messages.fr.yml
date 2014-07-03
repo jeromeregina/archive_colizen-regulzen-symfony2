@@ -3,7 +3,7 @@ no: non
 regulzen:
     flash:
         error:
-            logout_on_session_expired: Déconnexion automatique dû à une inactivité supérieure à %minutes%minutes.
+            logout_on_session_expired: Déconnexion automatique dû à une inactivité supérieure à %minutes% minutes.
     info:
         import_last_started_at: Dernier import lancé le %date% à %time%
         no_existing_import_logs: Aucun log d'import
