@@ -58,13 +58,20 @@ class Event
     private $scanHour;
     
     /**
-     * @var Parcel
+     * @var Status
      *
      * @ORM\ManyToOne(targetEntity="Status")
      * @ORM\JoinColumn(name="STATUS_code", referencedColumnName="STATUS_code", nullable=true)
      */
     protected $scanStatus;
     
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="STATUS_code", type="integer", nullable=true)
+     */
+    protected $scanStatusCode;
+
     /**
     * @var Slot
     *
@@ -286,5 +293,28 @@ class Event
     public function getScanStatus()
     {
         return $this->scanStatus;
+    }
+
+    /**
+     * Set scanStatusCode
+     *
+     * @param integer $scanStatusCode
+     * @return Event
+     */
+    public function setScanStatusCode($scanStatusCode)
+    {
+        $this->scanStatusCode = $scanStatusCode;
+
+        return $this;
+    }
+
+    /**
+     * Get scanStatusCode
+     *
+     * @return integer 
+     */
+    public function getScanStatusCode()
+    {
+        return $this->scanStatusCode;
     }
 }

@@ -16,7 +16,7 @@ class ImportCommand extends ContainerAwareCommand
             ->setDescription('Imports data from colizen');
     }
     protected function execute(InputInterface $input, OutputInterface $output) {
-//        $this->firstStep($output);
+        $this->firstStep($output);
         $this->secondStep($output);
         
        
@@ -29,10 +29,8 @@ class ImportCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
     protected function firstStep(OutputInterface $output){
-        /* @var $logger \Symfony\Bridge\Monolog\Logger */
         $importer=$this->getContainer()->get('colizen_admin.importer.tour_planning');
-        $oh=$this->getContainer()->get('colizen_admin.importer.output_handler')->setCommandOutput($output);
-        $importer->execute($oh);
+        $importer->execute($this->getOutputHandler($output));
     }
     /**
      *  Import des fichiers txt de type "fichier planification"
@@ -40,8 +38,15 @@ class ImportCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
     protected function secondStep(OutputInterface $output){
-         $importer=$this->getContainer()->get('colizen_admin.importer.parcel_details');
-         $oh=$this->getContainer()->get('colizen_admin.importer.output_handler')->setCommandOutput($output);
-         $importer->execute($oh);
+        $importer=$this->getContainer()->get('colizen_admin.importer.parcel_details');
+        $importer->execute($this->getOutputHandler($output));
+    }
+    protected function webserviceImport(OutputInterface $output){
+        $importer=$this->getContainer()->get('colizen_admin.importer.webservice');
+        $importer->execute($this->getOutputHandler($output));
+    }
+    
+    protected function getOutputHandler(OutputInterface $output){
+        return $this->getContainer()->get('colizen_admin.importer.output_handler')->setCommandOutput($output);
     }
 }

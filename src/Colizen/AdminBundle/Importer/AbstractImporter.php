@@ -92,6 +92,10 @@ abstract class AbstractImporter {
         }
         if ($this->hasEmailLines())
             $this->sendMail();
+        
+        if ($output instanceof OutputHandler){
+            $output->write('Import done : '.$this->getActionName(), ImportLog::MESSAGE_LEVEL_ACTION);
+        }
     }
     
     protected function findFiles(){
