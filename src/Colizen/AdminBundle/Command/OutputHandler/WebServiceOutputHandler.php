@@ -5,21 +5,21 @@ namespace Colizen\AdminBundle\Command\OutputHandler;
 use Colizen\AdminBundle\Command\OutputHandler\AbstractOutputHandler;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
-use Colizen\AdminBundle\Entity\ImportLog;
+use Colizen\AdminBundle\Entity\ImportWebServiceLog;
 
 /**
- *  permet l'écriture simultané vers la ligne de commande & la table ImportLog
+ *  permet l'écriture simultané vers la ligne de commande & la table ImportWebserviceLog
  */
-class OutputHandler extends AbstractOutputHandler
+class WebServiceOutputHandler extends AbstractOutputHandler
 {
 
-    public function write($message, $level=ImportLog::MESSAGE_LEVEL_LINE, $isError=false)
+    public function write($message, $isError=false)
     {
         if ($this->hasCommandOutput())
             $this->output->writeln($message);
         
-        $log = new ImportLog();
-        $log->setLevel($level)
+        $log = new ImportWebServiceLog();
+        $log
             ->setMessage($message)
             ->setIsError($isError);
         

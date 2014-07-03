@@ -76,13 +76,13 @@ abstract class AbstractImporter {
         
         foreach ($this->findFiles() as $file){
             /* @var $file SplFileInfo */
-                $lc=0;
+                $lc=1;
             foreach ($this->getLinesFromFile($file) as $line){
                 try {
                     $this->persistLine($line,$lc,$file,$output);
                 } catch(\Exception $e){
                     if ($output instanceof OutputHandler){
-                        $output->write('Error on '.$file->getFilename().', line '.$lc.' : '.$e->getMessage(), ImportLog::MESSAGE_LEVEL_LINE);
+                        $output->write('Error on '.$file->getFilename().', line '.$lc.' : '.$e->getMessage(), ImportLog::MESSAGE_LEVEL_LINE, true);
                     } else {
                         throw $e;
                     }

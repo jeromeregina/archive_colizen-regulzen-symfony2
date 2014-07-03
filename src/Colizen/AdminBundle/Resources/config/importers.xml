@@ -12,6 +12,7 @@
         <parameter key="colizen_admin.importer.parcel_details.filepattern">*.txt</parameter>
         <parameter key="colizen_admin.importer.parcel_details.mail_template">ColizenAdminBundle:Mails:import.html.twig</parameter>
         <parameter key="colizen_admin.importer.output_handler.class">Colizen\AdminBundle\Command\OutputHandler\OutputHandler</parameter>
+        <parameter key="colizen_admin.importer.webservice.output_handler.class">Colizen\AdminBundle\Command\OutputHandler\WebServiceOutputHandler</parameter>
         <parameter key="colizen_admin.importer.webservice.class">Colizen\AdminBundle\Importer\WebService</parameter>
         <parameter key="colizen_admin.importer.webservice.mail_template">ColizenAdminBundle:Mails:import.html.twig</parameter>
     </parameters>
@@ -42,6 +43,9 @@
             <argument>%colizen_admin.importer.webservice.mail_template%</argument>
         </service>
         <service id="colizen_admin.importer.output_handler" class="%colizen_admin.importer.output_handler.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
+        <service id="colizen_admin.importer.webservice.output_handler" class="%colizen_admin.importer.webservice.output_handler.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
         </service>
     </services>

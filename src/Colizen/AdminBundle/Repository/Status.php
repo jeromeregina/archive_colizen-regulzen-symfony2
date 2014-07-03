@@ -14,12 +14,4 @@ class Status extends EntityRepository{
         
         return $qb->select('s')->getQuery();
     }
-    /**
-     * récupère le status de type "PLANIF"
-     * 
-     * @return \Colizen\AdminBundle\Entity\Status
-     */
-    public function getPlanif(){
-        return $this->find(-1);
-    }
 }

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * TblCycle
+ * ImportLog
  *
  * @ORM\Table(name="TBL_import_log")
  * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\ImportLog")
@@ -41,47 +41,79 @@ class ImportLog
     private $level;
 
     /**
+     *
+     * @var boolean
+     * 
+     * @ORM\Column(name="IMPRT_is_error", type="boolean", length=20, nullable=false, options={"default" = false})
+     */
+    private $isError = false;
+    /**
      * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="IMPRT_date", type="datetime")
      */
     private $date;
-
+    /**
+     * 
+     * @return integer
+     */
     public function getId()
     {
         return $this->id;
     }
-
+    /**
+     * 
+     * @return string
+     */
     public function getMessage()
     {
         return $this->message;
     }
-
+    /**
+     * 
+     * @param string $message
+     * @return \Colizen\AdminBundle\Entity\ImportLog
+     */
     public function setMessage($message)
     {
         $this->message = $message;
 
         return $this;
     }
-
+    /**
+     * 
+     * @return integer
+     */
     public function getLevel()
     {
         return $this->level;
     }
-
+    /**
+     * 
+     * @param integer $level
+     * @return \Colizen\AdminBundle\Entity\ImportLog
+     */
     public function setLevel($level)
     {
         $this->level = $level;
 
         return $this;
     }
-
+    /**
+     * 
+     * @return  \DateTime
+     */
     public function getDate()
     {
         return $this->date;
     }
-
+    /**
+     * 
+     * @param \DateTime $date
+     * @return \Colizen\AdminBundle\Entity\ImportLog
+     * 
+     */
     public function setDate(\DateTime $date)
     {
         $this->date = $date;
@@ -89,4 +121,27 @@ class ImportLog
         return $this;
     }
 
+
+    /**
+     * Set isError
+     *
+     * @param boolean $isError
+     * @return ImportLog
+     */
+    public function setIsError($isError)
+    {
+        $this->isError = (bool) $isError;
+
+        return $this;
+    }
+
+    /**
+     * Get isError
+     *
+     * @return boolean 
+     */
+    public function getIsError()
+    {
+        return (bool) $this->isError;
+    }
 }

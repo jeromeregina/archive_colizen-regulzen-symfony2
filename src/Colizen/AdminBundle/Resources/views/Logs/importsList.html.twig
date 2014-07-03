@@ -16,7 +16,7 @@
         </thead>
         <tbody>
         {% for entity in pagination %}
-            <tr>
+            <tr {% if entity.isError %}class="red danger"{% endif %}>
                 <td>{{ entity.id }}</td>
                 <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
                 <td>{{ entity.message }}</td>

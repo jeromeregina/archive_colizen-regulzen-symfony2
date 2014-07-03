@@ -16,7 +16,7 @@ class ImportCommand extends ContainerAwareCommand
             ->setDescription('Imports data from colizen');
     }
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $this->firstStep($output);
+//        $this->firstStep($output);
         $this->secondStep($output);
         
        
@@ -43,7 +43,7 @@ class ImportCommand extends ContainerAwareCommand
     }
     protected function webserviceImport(OutputInterface $output){
         $importer=$this->getContainer()->get('colizen_admin.importer.webservice');
-        $importer->execute($this->getOutputHandler($output));
+        $importer->execute($this->getContainer()->get('colizen_admin.importer.webservice.output_handler')->setCommandOutput($output));
     }
     
     protected function getOutputHandler(OutputInterface $output){
