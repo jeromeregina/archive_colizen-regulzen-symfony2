@@ -7,7 +7,7 @@ use \Swift_Mailer;
 use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
 use Colizen\AdminBundle\SoapClient\ColizenWebService;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
+
 class WebService {
     /**
      *
