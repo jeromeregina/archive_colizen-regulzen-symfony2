@@ -72,7 +72,7 @@
                     </th>
                     <th>
                         <i class="ace-icon fa fa-caret-right blue"></i>
-                        <span title="">Tx d'echec</span>
+                        <span title="Pourcentage d'échec">% Echec</span>
                     </th>
                     <th>
                         <i class="ace-icon fa fa-caret-right blue"></i>
@@ -122,6 +122,7 @@
                     <td>{{ siteRow['controleRate']       |make_na_small |raw  }}</td>
                     <td>{{ siteRow['departRate']         |make_na_small |raw  }}</td>
                     <td>{{ siteRow['avancementRate']     |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['echecRate']          |make_na_small |raw  }}</td>
                     <td></td>
                     <td></td>
                     <td></td>

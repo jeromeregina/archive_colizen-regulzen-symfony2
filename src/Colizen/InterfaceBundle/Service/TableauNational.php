@@ -39,9 +39,10 @@ class TableauNational implements TableauNationalInterface
             $sitesData[$site->getId()]['nombreExpeditions']  = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['countColisCoecEdir'] = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['dispatchRate']       = self::NOT_AVAILABLE_LABEL;
-            $sitesData[$site->getId()]['departRate']         = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['controleRate']       = self::NOT_AVAILABLE_LABEL;
+            $sitesData[$site->getId()]['departRate']         = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['avancementRate']     = self::NOT_AVAILABLE_LABEL;
+            $sitesData[$site->getId()]['echecRate']          = self::NOT_AVAILABLE_LABEL;
         }
 
         // nombre d'expeditions
@@ -118,6 +119,23 @@ class TableauNational implements TableauNationalInterface
                 {
                     $value = $colisRemiNlivLine['countColisRemiNliv'] / $countColis['countColis'];
                     $sitesData[$siteId]['avancementRate'] = round($value, 2) . '%';
+                }
+            }
+        }
+
+
+        // Pourcentage d'échec
+        $colisNlivCnml = $this->getSiteRepository()->countColisNlivCnmlBySite($date, $cycle);
+        foreach ($allColis as $countColis)
+        {
+            $siteId = $countColis['site']->getId();
+
+            foreach ($colisNlivCnml as $colisNlivCnmlLine)
+            {
+                if ($siteId == $colisNlivCnmlLine['site']->getId())
+                {
+                    $value = $colisNlivCnmlLine['countColisNlivCnml'] / $countColis['countColis'];
+                    $sitesData[$siteId]['echecRate'] = round($value, 2) . '%';
                 }
             }
         }
