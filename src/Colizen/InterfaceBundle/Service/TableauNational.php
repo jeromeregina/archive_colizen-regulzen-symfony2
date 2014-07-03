@@ -39,6 +39,7 @@ class TableauNational implements TableauNationalInterface
             $sitesData[$site->getId()]['nombreExpeditions']  = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['countColisCoecEdir'] = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['dispatchRate']       = self::NOT_AVAILABLE_LABEL;
+            $sitesData[$site->getId()]['departRate']         = self::NOT_AVAILABLE_LABEL;
         }
 
         // nombre d'expeditions
@@ -64,7 +65,25 @@ class TableauNational implements TableauNationalInterface
 
             if ($sitesData[$siteId]['countColisCoecEdir'] !== self::NOT_AVAILABLE_LABEL)
             {
-                $sitesData[$siteId]['dispatchRate'] = $sitesData[$siteId]['countColisCoecEdir'] / $countColis['countColis'];
+                $value = $sitesData[$siteId]['countColisCoecEdir'] / $countColis['countColis'];
+                $sitesData[$siteId]['dispatchRate'] = round($value, 2) . '%';
+            }
+        }
+
+
+        // Pourcentage de départ
+        $colisTour = $this->getSiteRepository()->countColisTourBySite($date, $cycle);
+        foreach ($colisCoecEdir as $colisCoecEdirLine)
+        {
+            $siteId = $colisCoecEdirLine['site']->getId();
+
+            foreach ($colisTour as $colisTourLine)
+            {
+                if ($colisTourLine['site']->getId() == $siteId)
+                {
+                    $value = $colisTourLine['countColisTour'] / $colisCoecEdirLine['countColisCoecEdir'];
+                    $sitesData[$siteId]['departRate'] = round($value, 2) . '%';
+                }
             }
         }
 

@@ -78,6 +78,36 @@ class Site extends EntityRepository
     }
 
     /**
+     * Nombre de colis avec les statuts TOUR
+     *
+     * @param \DatTime $date
+     * @param Cycle    $cycle
+     *
+     * @return array
+     */
+    public function countColisTourBySite(\DateTime $date, Cycle $cycle)
+    {
+        return $this->getEntityManager()
+                    ->createQuery('SELECT s AS site, IFNULL(COUNT(p.id), 0) AS countColisTour
+                                   FROM ColizenAdminBundle:Site s
+                                     LEFT JOIN s.tours t
+                                     LEFT JOIN t.theoricalSlots sl
+                                     LEFT JOIN sl.shipment sh
+                                     LEFT JOIN sh.parcels p
+                                     LEFT JOIN ColizenAdminBundle:Status st WITH p.status = st.shortname
+                                   WHERE t.date = :date
+                                     AND sl.theoricalHour > :cycleStartHour
+                                     AND sl.theoricalHour < :cycleEndHour
+                                     AND st.shortname = :tourStatus
+                                   GROUP BY s.id')
+                    ->setParameter('date', $date)
+                    ->setParameter('cycleStartHour', $cycle->getStart())
+                    ->setParameter('cycleEndHour',   $cycle->getEnd())
+                    ->setParameter('tourStatus', 'TOUR')
+                    ->getResult();
+    }
+
+    /**
      * Nombre de tous les colis
      *
      * @param \DateTime $date
