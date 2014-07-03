@@ -61,6 +61,14 @@ class ImportWebServiceLog
      * @ORM\JoinColumn(name="STATUS_code", referencedColumnName="STATUS_code", nullable=true)
      */
     protected $status;
+        
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="STATUS_code", type="integer", nullable=true)
+     */
+    protected $statusCode;
+    
     /**
      *
      * @var boolean
@@ -220,5 +228,27 @@ class ImportWebServiceLog
     public function getLevel()
     {
         return $this->level;
+    }
+     /**
+     * Set statusCode
+     *
+     * @param integer $statusCode
+     * @return Parcel
+     */
+    public function setStatusCode($statusCode)
+    {
+        $this->statusCode = $statusCode;
+
+        return $this;
+    }
+
+    /**
+     * Get statusCode
+     *
+     * @return integer 
+     */
+    public function getStatusCode()
+    {
+        return $this->statusCode;
     }
 }

@@ -8,6 +8,7 @@ use Colizen\AdminBundle\Command\OutputHandler\OutputHandler;
 use Colizen\AdminBundle\Entity\Shipment;
 use Colizen\AdminBundle\Entity\DeliveryAddress;
 use Colizen\AdminBundle\Entity\Slot;
+use Colizen\AdminBundle\Entity\ImportLog;
 use \Swift_Mailer;
 use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
 use Colizen\AdminBundle\Importer\Exception\NotFoundException;
@@ -88,7 +89,7 @@ class TourPlanning extends AbstractImporter  {
     protected function persistLine($line,$lineid,SplFileInfo $file,OutputHandler $output = null) {
         if ($output instanceof OutputHandler)
             { 
-            $output->write('importing "'.$line[self::CARGOPASS].'" from file "'.$file->getFilename().'"');
+            $output->write('importing "'.$line[self::CARGOPASS].'" from file "'.$file->getFilename().'"',$this->getLineLevel(), false, $line[self::CARGOPASS]);
             }
                $shipment= $this->getShipmentRepository()->resolveByCargopass($line[self::CARGOPASS]);
                try {
@@ -158,5 +159,8 @@ class TourPlanning extends AbstractImporter  {
         
             protected function getActionName() {
                 return 'Excels liste camionage après routeur';
+            }
+            protected function getLineLevel(){
+                return ImportLog::MESSAGE_LEVEL_SHIPMENT;
             }
 }

@@ -13,7 +13,7 @@ use Colizen\AdminBundle\Entity\ImportLog;
 class OutputHandler extends AbstractOutputHandler
 {
 
-    public function write($message, $level=ImportLog::MESSAGE_LEVEL_LINE, $isError=false)
+    public function write($message, $level=ImportLog::MESSAGE_LEVEL_FILE, $isError=false, $cargopass=null)
     {
         if ($this->hasCommandOutput())
             $this->output->writeln($message);
@@ -21,7 +21,8 @@ class OutputHandler extends AbstractOutputHandler
         $log = new ImportLog();
         $log->setLevel($level)
             ->setMessage($message)
-            ->setIsError($isError);
+            ->setIsError($isError)
+            ->setCargopass($cargopass);
         
         $this->em->persist($log);
         $this->em->flush();

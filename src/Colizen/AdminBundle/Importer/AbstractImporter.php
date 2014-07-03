@@ -82,7 +82,7 @@ abstract class AbstractImporter {
                     $this->persistLine($line,$lc,$file,$output);
                 } catch(\Exception $e){
                     if ($output instanceof OutputHandler){
-                        $output->write('Error on '.$file->getFilename().', line '.$lc.' : '.$e->getMessage(), ImportLog::MESSAGE_LEVEL_LINE, true);
+                        $output->write('Error on '.$file->getFilename().', line '.$lc.' : '.$e->getMessage(), $this->getLineLevel(), true);
                     } else {
                         throw $e;
                     }
@@ -105,6 +105,7 @@ abstract class AbstractImporter {
     abstract protected function persistLine($line,$lineid,SplFileInfo $file,  OutputHandler $output = null);
     abstract protected function getLinesFromFile(SplFileInfo $file);
     abstract protected function getActionName();
+    abstract protected function getLineLevel();
     /**
      * 
      * @return \Colizen\AdminBundle\Repository\Shipment
@@ -158,7 +159,7 @@ abstract class AbstractImporter {
                if ($tourcode->getId()==null){
                     $this->em->persist($tourcode);
                     $this->em->flush();
-                    $this->addEmailLine($filename, $linecargopass, 'tour_code', $tour->getTourCode()->getId());
+                    $this->addEmailLine($filename, $lineId, 'tour_code', $tour->getTourCode()->getId());
                }
         return $tour;
     }
@@ -203,4 +204,5 @@ abstract class AbstractImporter {
                                                         'objectId'=>$objectId
                                                         );
     }
+    
 }

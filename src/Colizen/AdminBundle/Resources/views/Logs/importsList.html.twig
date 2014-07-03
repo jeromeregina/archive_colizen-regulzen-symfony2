@@ -11,6 +11,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'Id', 'il.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Date', 'il.date') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Message', 'il.message') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Cargopass', 'il.cargopass') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Level', 'il.level') }}</th>
             </tr>
         </thead>
@@ -20,7 +21,8 @@
                 <td>{{ entity.id }}</td>
                 <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
                 <td>{{ entity.message }}</td>
-                <td>{{ entity.level }}</td>
+                <td>{{ entity.cargopass }}</td>
+                <td>{{ entity.levelLabel|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

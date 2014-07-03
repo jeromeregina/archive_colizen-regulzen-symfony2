@@ -8,6 +8,7 @@ use Colizen\AdminBundle\Command\OutputHandler\OutputHandler;
 use Colizen\AdminBundle\Entity\Parcel;
 use Colizen\AdminBundle\Importer\Exception\NotFoundException;
 use Colizen\AdminBundle\Entity\Slot;
+use Colizen\AdminBundle\Entity\ImportLog;
 
 class ParcelDetails extends AbstractImporter {
 
@@ -37,7 +38,7 @@ class ParcelDetails extends AbstractImporter {
      */
     protected function persistLine($line, $lineid, SplFileInfo $file, OutputHandler $output = null) {
         if ($output instanceof OutputHandler) {
-            $output->write('importing line "' . $lineid . '" from file "' . $file->getFilename() . '"');
+            $output->write('importing line "' . $lineid . '" from file "' . $file->getFilename() . '"',  $this->getLineLevel(), false, $line[self::CARGOPASS_PARCEL]);
         }
         $array = explode('|', $line);
 
@@ -92,5 +93,7 @@ class ParcelDetails extends AbstractImporter {
     protected function getParcelRepository() {
         return $this->em->getRepository('ColizenAdminBundle:Parcel');
     }
-
+    protected function getLineLevel(){
+                return ImportLog::MESSAGE_LEVEL_PARCEL;
+            }
 }

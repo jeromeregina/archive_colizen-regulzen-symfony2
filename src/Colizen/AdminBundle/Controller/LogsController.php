@@ -31,7 +31,7 @@ class LogsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query=$em->getRepository('ColizenAdminBundle:ImportLog')->findAllSortedByIdDesc(true);
-
+        
         $paginator  = $this->get('knp_paginator');
         
         $page=$request->get('page',1);

@@ -36,3 +36,9 @@ regulzen:
         service_level:
             standard: Standard
             premium: Premium
+    import_log:
+        level:
+            action: Action
+            file: Fichier
+            shipment: Expédition
+            parcel: Colis

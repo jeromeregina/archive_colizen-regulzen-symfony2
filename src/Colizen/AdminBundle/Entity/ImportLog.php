@@ -15,8 +15,15 @@ class ImportLog
 {
     const MESSAGE_LEVEL_ACTION = 1;
     const MESSAGE_LEVEL_FILE = 2;
-    const MESSAGE_LEVEL_LINE = 3;
-
+    const MESSAGE_LEVEL_SHIPMENT = 3;
+    const MESSAGE_LEVEL_PARCEL = 4;
+    
+    public static $levelLabels=array(
+        self::MESSAGE_LEVEL_ACTION => 'regulzen.import_log.level.action',
+        self::MESSAGE_LEVEL_FILE => 'regulzen.import_log.level.file',
+        self::MESSAGE_LEVEL_SHIPMENT => 'regulzen.import_log.level.shipment',
+        self::MESSAGE_LEVEL_PARCEL => 'regulzen.import_log.level.parcel'
+    );
     /**
      * @var integer
      *
@@ -32,6 +39,13 @@ class ImportLog
      * @ORM\Column(name="IMPRT_message", type="string", length=255, nullable=false)
      */
     private $message;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="IMPRT_cargopass", type="string", length=20, nullable=true)
+     */
+    private $cargopass;
 
     /**
      * @var string
@@ -89,6 +103,9 @@ class ImportLog
     {
         return $this->level;
     }
+    public function getLevelLabel(){
+        return self::$levelLabels[$this->level];
+    }
     /**
      * 
      * @param integer $level
@@ -143,5 +160,28 @@ class ImportLog
     public function getIsError()
     {
         return (bool) $this->isError;
+    }
+
+    /**
+     * Set cargopass
+     *
+     * @param string $cargopass
+     * @return ImportLog
+     */
+    public function setCargopass($cargopass = null)
+    {
+        $this->cargopass = $cargopass;
+
+        return $this;
+    }
+
+    /**
+     * Get cargopass
+     *
+     * @return string 
+     */
+    public function getCargopass()
+    {
+        return $this->cargopass;
     }
 }
