@@ -53,7 +53,7 @@ class ImportLog extends EntityRepository
         
         return ($getQuery)?$query:$query->execute();
     }
-    public function findTodaysCargopassesInThirteenNumberFormat(){
+    public function findTodaysCargopasses(){
         $qb=$this->createQueryBuilder('il');
         $qb->select('il.cargopass')
            ->where('il.level = :level')
@@ -65,7 +65,7 @@ class ImportLog extends EntityRepository
         $query=$qb->getQuery();
         $ret=array();
         foreach ($query->getResult() as $entry)
-            $ret[]=preg_replace('/(\d{6})(\d{2})(\d{7})/','$1$3',$entry['cargopass']);
+            $ret[]=$entry['cargopass'];
         return $ret;
     }
 }
