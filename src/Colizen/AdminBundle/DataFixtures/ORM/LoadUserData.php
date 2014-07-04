@@ -16,9 +16,9 @@ class LoadUserData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $user = new User();
-        $user->setEmail('qmdeveloppement@gmail.com')
+        $user->setEmail('admin@novactive.com')
             ->setUsername('admin')
-            ->setPlainPassword('start123')
+            ->setPlainPassword('admin')
             ->setEnabled(true)
             ->setSuperAdmin(true);
 
@@ -26,18 +26,18 @@ class LoadUserData implements FixtureInterface
 
 
         $user = new User();
-        $user->setEmail('q.morlais@novactive.com')
+        $user->setEmail('regul@novactive.com')
             ->setUsername('regul')
-            ->setPlainPassword('start123')
+            ->setPlainPassword('regul')
             ->setEnabled(true)
             ->setRoles(array('ROLE_REGUL'));
 
         $manager->persist($user);
         
         $user = new User();
-        $user->setEmail('sylvodsds@gmail.com')
-            ->setUsername('sc')
-            ->setPlainPassword('start123')
+        $user->setEmail('service_client@novactive.com')
+            ->setUsername('service_client')
+            ->setPlainPassword('service_client')
             ->setEnabled(true)
             ->setRoles(array('ROLE_CUSTOMER_SERVICE'));
 
