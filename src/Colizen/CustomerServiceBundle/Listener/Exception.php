@@ -28,9 +28,11 @@ class Exception
     }
     public function onForbiddenException(GetResponseForExceptionEvent $event)
     {
-       $user=$this->sc->getToken()->getUser();
-       if ($event->getException() instanceof AccessDeniedHttpException && $user!=null && $user->hasRole('ROLE_CUSTOMER_SERVICE')){
-           $event->setResponse(new RedirectResponse($this->router->generate('customer_service_index')));
+       if ($this->sc->getToken()!=null){
+            $user=$this->sc->getToken()->getUser();
+            if ($event->getException() instanceof AccessDeniedHttpException && $user!=null && $user->hasRole('ROLE_CUSTOMER_SERVICE')){
+                $event->setResponse(new RedirectResponse($this->router->generate('customer_service_index')));
+            }
        }
     }
 }
