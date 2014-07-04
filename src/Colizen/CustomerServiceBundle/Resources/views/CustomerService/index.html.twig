@@ -1,1 +1,43 @@
 {% extends "ColizenCustomerServiceBundle::layout.html.twig" %}
+
+{% block content %}
+{{ parent() }}
+
+	<div class="row">
+
+	</div>
+
+	<div class="row">
+		<table class="table table-bordered table-striped">
+			<thead class="thin-border-bottom">
+			<tr>
+				<td>Heure de la demande</td>
+				<td>Expéditeur</td>
+				<td>Type de demande</td>
+				<td>Récapitulatif de la demande</td>
+				<td>Statut</td>
+			</tr>
+			</thead>
+
+			<tbody>
+			{% for entity in pagination %}
+				<tr>
+					<td>{{ entity.created | date('H:i') }}</td>
+					<td>{{ entity.user }}</td>
+					<td>{{ entity.typeLabel | trans }}</td>
+					<td>{{ entity.desc }}</td>
+					<td>{{ entity.statusLabel | trans }}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+
+			<tfoot>
+			<tr>
+				<th colspan="5">{{ knp_pagination_render(pagination, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}</th>
+			</tr>
+			</tfoot>
+		</table>
+	</div>
+
+
+{% endblock %}

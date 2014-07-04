@@ -42,3 +42,11 @@ regulzen:
             file: Fichier
             shipment: Expédition
             parcel: Colis
+    customer_service_request:
+        status:
+            waiting: En attente
+            accepted: Validé
+            refused: Refusé
+        type:
+            update: Modification
+            cancel: Annulation

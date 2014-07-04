@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Colizen\AdminBundle\Entity\CustomerServiceRequest;
 
 /**
  * @Route("/")
@@ -32,4 +33,28 @@ class AdminController extends Controller
         echo'<pre>';
         var_dump($ret);die;
     }
+
+	/**
+	 * TEST
+	 * @param Request $request
+	 * @Route("/ajouterdemande")
+	 * @Template()
+	 */
+	public function addCustomerRequestAction(Request $request)
+	{
+		$em=$this->getDoctrine()->getManager();
+		$csreq = new CustomerServiceRequest();
+		$csreq->setType(CustomerServiceRequest::REQUEST_TYPE_UPDATE)
+			->setDesc('Tournée: 102 / Créneau: 08h-12h / M. Dauly')
+			->setStatus(CustomerServiceRequest::REQUEST_STATUS_WAITING)
+			->setCargopass('12345678')
+			->setTourcode(15)
+			->setStartTime(new \DateTime('now'))
+			->setEndTime(new \DateTime('now'));
+
+		$em->persist($csreq);
+
+		$em->flush();
+		die;
+	}
 }
