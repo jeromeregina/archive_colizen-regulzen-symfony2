@@ -31,10 +31,22 @@ class TourPlanning extends AbstractImporter  {
      * @return array
      */
     protected function getLinesFromFile(SplFileInfo $file){
-        $peo=$this->phpExcel->createPHPExcelObject($file);
+        $isftp=(substr($file->getPath(),0,3)=='ftp');
+        /** si le fichier est sur un ftp, stocker dans un fichier temporaire pour phpexcel **/
+        if ($isftp){
+            $filename = tempnam("/tmp", "apres_routeur");
+            $handle = fopen($filename, "w");
+            fwrite($handle, $file->getContents());
+            fclose($handle);
+        }  else {
+            $filename = $file->getFilename();
+        }
+        $peo=$this->phpExcel->createPHPExcelObject($filename);
         $sheetData=$peo->getActiveSheet()->toArray(null,true,true,true);
         // suppression de la ligne d'entête (meilleure solution?)
         array_shift( $sheetData);
+        if ($isftp)
+            unlink($filename);
         return $sheetData;
     }
     const CARGOPASS='C';
@@ -115,7 +127,7 @@ class TourPlanning extends AbstractImporter  {
                        ->setZipcode($line[self::ADDRESS_ZIPCODE])
                        ->setCity($line[self::ADDRESS_CITY])
                        ->setName($line[self::ADDRESS_NAME])
-                       ->setTelephone(($line[self::TELEPHONE]=='<?>')?null:$line[self::TELEPHONE])
+                       ->setTelephone(($line[self::TELEPHONE]=='<?>')?null:preg_replace('/[^0-9+]/', '', $line[self::TELEPHONE]))
                        ->setEmail(($line[self::EMAIL]=='<?>')?null:$line[self::EMAIL])
                        ->setLatitude($line[self::LATITUDE])
                        ->setLongitude($line[self::LONGITUDE])
