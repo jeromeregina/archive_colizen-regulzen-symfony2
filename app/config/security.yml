@@ -30,5 +30,5 @@ security:
         - { path: ^/_, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/css, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_ADMIN }
-        - { path: ^/customer_service, role: ROLE_CUSTOMER_SERVICE }
+        - { path: ^/customer_service, roles: [ROLE_CUSTOMER_SERVICE,ROLE_REGUL] }
         - { path: ^/, role: ROLE_REGUL }
