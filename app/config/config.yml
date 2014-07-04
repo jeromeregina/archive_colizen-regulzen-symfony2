@@ -72,7 +72,6 @@ doctrine:
         dql:
             numeric_functions:
                 regexp: Colizen\AdminBundle\Query\Regexp
-                ifnull: DoctrineExtensions\Query\Mysql\IfNull
 
 fos_user:
     db_driver: orm
