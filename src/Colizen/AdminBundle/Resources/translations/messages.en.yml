@@ -1,0 +1,52 @@
+yes: oui
+no: non
+regulzen:
+    flash:
+        error:
+            logout_on_session_expired: Déconnexion automatique dû à une inactivité supérieure à %minutes% minutes.
+    info:
+        import_last_started_at: Dernier import lancé le %date% à %time%
+        no_existing_import_logs: Aucun log d'import
+        content_last_updated_at: Dernier contenu mis à jour le %date% à %time%
+        no_content_updated: Aucun log de mise à jour de contenu
+    admin:
+        list: Retourner à la liste
+        edit: Editer
+        show: Aperçu
+        new: Créer une nouvelle entrée
+        create: Créer
+        update: Enregistrer
+        delete: Supprimer
+        entity:
+            updated: L'objet de type '%entity%' avec l'id '%id%' à été mis à jour
+            created: L'objet de type '%entity%' à été créé avec l'id '%id%'
+            deleted: L'objet de type '%entity%' avec l'id '%id%' à été supprimé
+            error:
+                 deletion: "L'objet de type '%entity%' avec l'id '%id%' n'as pû être supprimé : %message%"
+    mails:
+        import:
+            introduction: "Nouvelles entrées administrables trouvés lors de l'import des fichiers suivants:"
+            file: "import du fichier '%filename%':"
+            new_tour_code: un nouveau tour_code à été ajouté avec l'id %id% et est administrable à l'addresse %url%
+            new_shipper_account: un nouveau compte chargeur à été ajouté avec l'id %id% et est administrable à l'addresse %url%
+    shipper_account:
+        flow_type:
+            btob: BtoB
+            btoc: BtoC
+        service_level:
+            standard: Standard
+            premium: Premium
+    import_log:
+        level:
+            action: Action
+            file: Fichier
+            shipment: Expédition
+            parcel: Colis
+    customer_service_request:
+        status:
+            waiting: En attente
+            accepted: Validé
+            refused: Refusé
+        type:
+            update: Modification
+            cancel: Annulation
