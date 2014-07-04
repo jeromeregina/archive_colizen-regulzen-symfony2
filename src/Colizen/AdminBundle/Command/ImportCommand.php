@@ -17,7 +17,8 @@ class ImportCommand extends ContainerAwareCommand
     }
     protected function execute(InputInterface $input, OutputInterface $output) {
         $this->firstStep($output);
-//        $this->secondStep($output);
+        $this->secondStep($output);
+        $this->webserviceImport($output);
         
        
     }
