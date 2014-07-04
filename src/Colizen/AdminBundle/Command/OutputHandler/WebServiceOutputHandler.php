@@ -13,7 +13,7 @@ use Colizen\AdminBundle\Entity\ImportWebServiceLog;
 class WebServiceOutputHandler extends AbstractOutputHandler
 {
 
-    public function write($message, $level = ImportWebServiceLog::MESSAGE_LEVEL_CALL, $isError=false, $cargopass=null)
+    public function write($message, $level = ImportWebServiceLog::MESSAGE_LEVEL_CALL, $isError=false, $cargopass=null,$status=null)
     {
         if ($this->hasCommandOutput())
             $this->output->writeln($message);
@@ -22,7 +22,8 @@ class WebServiceOutputHandler extends AbstractOutputHandler
         $log->setLevel($level)
             ->setMessage($message)
             ->setIsError($isError)
-            ->setCargopass($cargopass);
+            ->setCargopass($cargopass)
+            ->setStatusCode($status);
         
         $this->em->persist($log);
         $this->em->flush();

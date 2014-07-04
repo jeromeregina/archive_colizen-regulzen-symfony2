@@ -40,8 +40,10 @@ class ImportWebServiceLog extends EntityRepository
     
     public function findAllSortedByIdDesc($getQuery=false){
         $qb=$this->createQueryBuilder('il');
-        $qb->select('il')
-            ->orderBy('il.id','DESC');
+        $qb->select('il,t,tc')
+           ->leftJoin('il.tour', 't')
+           ->leftJoin('t.tourCode', 'tc')
+           ->orderBy('il.id','DESC');
         $query=$qb->getQuery();
         
         return ($getQuery)?$query:$query->execute();

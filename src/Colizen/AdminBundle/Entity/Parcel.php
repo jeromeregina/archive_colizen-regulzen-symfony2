@@ -95,7 +95,7 @@ class Parcel
     private $shipment;
 
     /**
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="parcel")
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="parcel", cascade={"persist"})
      */
     private  $events;
 

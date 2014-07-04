@@ -27,10 +27,14 @@ parameters:
         wsdl_location: ~
         customer: ~
         password: ~
+    file_import.ftp_host: dev.novactive.net
+    file_import.ftp_port: 21
+    file_import.ftp_user: ~
+    file_import.ftp_password: ~
 #répertoire pour les fichiers excels "après routeur"
-    file_import.after_routeur.location: %kernel.root_dir%/../imports/apres_routeur 
+    file_import.after_routeur.location: ftp://%file_import.ftp_user%:%file_import.ftp_password%@%file_import.ftp_host%:%file_import.ftp_port%/planif 
 #répertoire pour les fichiers txt listant les colis plannifiés
-    file_import.parcels_planned.location: %kernel.root_dir%/../imports/planif
+    file_import.parcels_planned.location: ftp://%file_import.ftp_user%:%file_import.ftp_password%@%file_import.ftp_host%:%file_import.ftp_port%/parcel
 #paramètres pour la requête (permet de générer des urls absolus depuis la ligne de commande, eg pour l'envoi de mail depuis l'import de fichier)
     router.request_context.host: example.org
     router.request_context.scheme: https
