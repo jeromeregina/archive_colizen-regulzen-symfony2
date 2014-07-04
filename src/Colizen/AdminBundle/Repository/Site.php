@@ -2,7 +2,7 @@
 
 namespace Colizen\AdminBundle\Repository;
 
-use Colizen\AdminBundle\Entity\Cycle;
+use Colizen\AdminBundle\Entity\Cycle as EntityCycle;
 use Doctrine\ORM\EntityRepository;
 
 class Site extends EntityRepository
@@ -23,11 +23,11 @@ class Site extends EntityRepository
      * Nombre d'expéditions par site
      *
      * @param \DatTime $date
-     * @param Cycle    $cycle
+     * @param \Colizen\AdminBundle\Entity\Cycle    $cycle
      *
      * @return array
      */
-    public function getNombreExpeditionsBySite (\DateTime $date, Cycle $cycle)
+    public function getNombreExpeditionsBySite (\DateTime $date, EntityCycle $cycle)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT s AS site, COUNT(sh.id) AS nombreExpeditions
@@ -50,11 +50,11 @@ class Site extends EntityRepository
      * Nombre de colis avec les statuts COEC (arrivé au centre) ou EDIR (étiqueté)
      *
      * @param \DatTime $date
-     * @param Cycle    $cycle
+     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
      *
      * @return array
      */
-    public function countColisCoecEdirBySite(\DateTime $date, Cycle $cycle)
+    public function countColisCoecEdirBySite(\DateTime $date, EntityCycle $cycle)
     {
         return $this->getEntityManager()
                     ->createQuery('SELECT s AS site, COUNT(p.id) AS countColisCoecEdir
@@ -81,11 +81,11 @@ class Site extends EntityRepository
      * Nombre de colis avec les statuts TOUR
      *
      * @param \DatTime $date
-     * @param Cycle    $cycle
+     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
      *
      * @return array
      */
-    public function countColisTourBySite(\DateTime $date, Cycle $cycle)
+    public function countColisTourBySite(\DateTime $date, EntityCycle $cycle)
     {
         return $this->getEntityManager()
                     ->createQuery('SELECT s AS site, IFNULL(COUNT(p.id), 0) AS countColisTour
@@ -111,11 +111,11 @@ class Site extends EntityRepository
      * Nombre de colis avec les statuts CTRL
      *
      * @param \DatTime $date
-     * @param Cycle    $cycle
+     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
      *
      * @return array
      */
-    public function countColisCtrlBySite(\DateTime $date, Cycle $cycle)
+    public function countColisCtrlBySite(\DateTime $date, EntityCycle $cycle)
     {
         return $this->getEntityManager()
                     ->createQuery('SELECT s AS site, IFNULL(COUNT(p.id), 0) AS countColisCtrl
@@ -141,11 +141,11 @@ class Site extends EntityRepository
      * Nombre de tous les colis
      *
      * @param \DateTime $date
-     * @param Cycle     $cycle
+     * @param \Colizen\AdminBundle\Entity\Cycle      $cycle
      *
      * @return array
      */
-    public function countColisBySite(\DateTime $date, Cycle $cycle)
+    public function countColisBySite(\DateTime $date, EntityCycle $cycle)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT s AS site, COUNT(p.id) AS countColis
@@ -169,11 +169,11 @@ class Site extends EntityRepository
      * Nombre de colis avec les statuts REMI ou NLIV (colis présentés au client)
      *
      * @param \DatTime $date
-     * @param Cycle    $cycle
+     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
      *
      * @return array
      */
-    public function countColisRemiNlivBySite(\DateTime $date, Cycle $cycle)
+    public function countColisRemiNlivBySite(\DateTime $date, EntityCycle $cycle)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT s AS site, IFNULL(COUNT(p.id), 0) AS countColisRemiNliv
@@ -201,11 +201,11 @@ class Site extends EntityRepository
      * Nombre de colis avec les statuts NLIV ou CNML (colis en échec)
      *
      * @param \DatTime $date
-     * @param Cycle    $cycle
+     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
      *
      * @return array
      */
-    public function countColisNlivCnmlBySite(\DateTime $date, Cycle $cycle)
+    public function countColisNlivCnmlBySite(\DateTime $date, EntityCycle $cycle)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT s AS site, IFNULL(COUNT(p.id), 0) AS countColisNlivCnml
