@@ -46,4 +46,30 @@ class LogsController extends Controller
             'pagination' => $pagination,
         );
     }
+    /**
+     * Lists all Logs entities sorted by Id Desc.
+     * 
+     * @Route("/imports_web_service", name="admin_logs_imports_web_service_list")
+     * @Method("GET")
+     * @Template()
+     */
+    public function importsWebServiceListAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query=$em->getRepository('ColizenAdminBundle:ImportWebServiceLog')->findAllSortedByIdDesc(true);
+        
+        $paginator  = $this->get('knp_paginator');
+        
+        $page=$request->get('page',1);
+        
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
+
+        return array(
+            'pagination' => $pagination,
+        );
+    }
 }

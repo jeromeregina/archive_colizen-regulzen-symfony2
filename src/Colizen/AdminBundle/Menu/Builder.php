@@ -14,7 +14,7 @@ class Builder extends ContainerAware
         //$menu->addChild('Retour à l\'interface', array('route' => 'regulzen_interface_index', 'attributes' => array('class' => 'purple')));
         $menu->addChild('Logs imports', array('attributes' => array('class' => 'purple')));
         $menu['Logs imports']->addChild('Logs imports de fichiers', array('route' => 'admin_logs_imports_list'));
-        $menu['Logs imports']->addChild('Logs imports webservices', array('route' => 'regulzen_interface_index'));
+        $menu['Logs imports']->addChild('Logs imports webservices', array('route' => 'admin_logs_imports_web_service_list'));
         $menu->addChild('Codes Tournées', array('route' => 'admin_tour_code_list', 'attributes' => array('class' => 'purple')));
         $menu->addChild('Status', array('route' => 'admin_status_list', 'attributes' => array('class' => 'purple')));
         $menu->addChild('Comptes chargeurs', array('route' => 'admin_shipper_account_list', 'attributes' => array('class' => 'purple')));
