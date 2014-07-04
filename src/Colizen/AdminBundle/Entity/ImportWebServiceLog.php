@@ -28,7 +28,7 @@ class ImportWebServiceLog
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPRTWS_message", type="string", length=255, nullable=false)
+     * @ORM\Column(name="IMPRTWS_message", type="text", nullable=false)
      */
     private $message;
 
@@ -42,7 +42,7 @@ class ImportWebServiceLog
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPRTWS_cargopass", type="string", length=20, nullable=false)
+     * @ORM\Column(name="IMPRTWS_cargopass", type="string", length=25, nullable=false)
      */
     private $cargopass;
     

@@ -36,14 +36,14 @@ class ImportLog
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPRT_message", type="string", length=255, nullable=false)
+     * @ORM\Column(name="IMPRT_message", type="text", nullable=false)
      */
     private $message;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPRT_cargopass", type="string", length=20, nullable=true)
+     * @ORM\Column(name="IMPRT_cargopass", type="string", length=25, nullable=true)
      */
     private $cargopass;
 

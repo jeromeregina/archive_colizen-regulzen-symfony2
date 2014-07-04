@@ -71,7 +71,7 @@ doctrine:
         auto_mapping: true
         dql:
             numeric_functions:
-                regexp: DoctrineExtensions\Query\Mysql\Regexp
+                regexp: Colizen\AdminBundle\Query\Regexp
                 ifnull: DoctrineExtensions\Query\Mysql\IfNull
 
 fos_user:

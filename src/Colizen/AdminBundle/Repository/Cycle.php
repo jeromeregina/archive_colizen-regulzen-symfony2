@@ -34,7 +34,7 @@ class Cycle extends EntityRepository
      * @return type
      */
     public function findByTourCode($code){
-        $query=$this->getEntityManager()->createQuery('SELECT c FROM '.$this->getEntityName().' c WHERE REGEXP(:code, c.tourCodeFormat) = 1');
+        $query=$this->getEntityManager()->createQuery('SELECT c FROM '.$this->getEntityName().' c WHERE REGEXP(:code, c.tourCodeFormat) = true');
         $query->setParameter('code', $code);
         return $query->getResult();
     }

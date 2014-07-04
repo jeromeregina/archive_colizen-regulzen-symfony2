@@ -102,7 +102,7 @@ class TourPlanning extends AbstractImporter  {
                        ->setParcelQuantity(($line[self::PARCEL_QUANTITY]==0)?1:$line[self::PARCEL_QUANTITY])
                        ->setSite($site)
                        ->setWeight($line[self::SHIPMENT_WEIGHT])
-                       ->setPriority($line[self::SHIPMENT_PRIORITY])
+                       ->setPriority(($line[self::SHIPMENT_PRIORITY]=='<?>')?null:$line[self::SHIPMENT_PRIORITY])
                        ;
                
                $deliveryAddress=($shipment->hasDeliveryAddress())?$shipment->getDeliveryAddress():new DeliveryAddress();
