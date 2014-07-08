@@ -17,7 +17,7 @@ class ImportLog
     const MESSAGE_LEVEL_FILE = 2;
     const MESSAGE_LEVEL_SHIPMENT = 3;
     const MESSAGE_LEVEL_PARCEL = 4;
-    
+
     public static $levelLabels=array(
         self::MESSAGE_LEVEL_ACTION => 'regulzen.import_log.level.action',
         self::MESSAGE_LEVEL_FILE => 'regulzen.import_log.level.file',
@@ -57,7 +57,7 @@ class ImportLog
     /**
      *
      * @var boolean
-     * 
+     *
      * @ORM\Column(name="IMPRT_is_error", type="boolean", length=20, nullable=false, options={"default" = false})
      */
     private $isError = false;
@@ -69,7 +69,7 @@ class ImportLog
      */
     private $date;
     /**
-     * 
+     *
      * @return integer
      */
     public function getId()
@@ -77,7 +77,7 @@ class ImportLog
         return $this->id;
     }
     /**
-     * 
+     *
      * @return string
      */
     public function getMessage()
@@ -85,8 +85,8 @@ class ImportLog
         return $this->message;
     }
     /**
-     * 
-     * @param string $message
+     *
+     * @param  string                                $message
      * @return \Colizen\AdminBundle\Entity\ImportLog
      */
     public function setMessage($message)
@@ -96,19 +96,20 @@ class ImportLog
         return $this;
     }
     /**
-     * 
+     *
      * @return integer
      */
     public function getLevel()
     {
         return $this->level;
     }
-    public function getLevelLabel(){
+    public function getLevelLabel()
+    {
         return self::$levelLabels[$this->level];
     }
     /**
-     * 
-     * @param integer $level
+     *
+     * @param  integer                               $level
      * @return \Colizen\AdminBundle\Entity\ImportLog
      */
     public function setLevel($level)
@@ -118,18 +119,18 @@ class ImportLog
         return $this;
     }
     /**
-     * 
-     * @return  \DateTime
+     *
+     * @return \DateTime
      */
     public function getDate()
     {
         return $this->date;
     }
     /**
-     * 
-     * @param \DateTime $date
+     *
+     * @param  \DateTime                             $date
      * @return \Colizen\AdminBundle\Entity\ImportLog
-     * 
+     *
      */
     public function setDate(\DateTime $date)
     {
@@ -138,11 +139,10 @@ class ImportLog
         return $this;
     }
 
-
     /**
      * Set isError
      *
-     * @param boolean $isError
+     * @param  boolean   $isError
      * @return ImportLog
      */
     public function setIsError($isError)
@@ -155,7 +155,7 @@ class ImportLog
     /**
      * Get isError
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsError()
     {
@@ -165,7 +165,7 @@ class ImportLog
     /**
      * Set cargopass
      *
-     * @param string $cargopass
+     * @param  string    $cargopass
      * @return ImportLog
      */
     public function setCargopass($cargopass = null)
@@ -178,7 +178,7 @@ class ImportLog
     /**
      * Get cargopass
      *
-     * @return string 
+     * @return string
      */
     public function getCargopass()
     {

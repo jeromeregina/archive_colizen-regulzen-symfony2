@@ -24,7 +24,6 @@ class LoadUserData implements FixtureInterface
 
         $manager->persist($user);
 
-
         $user = new User();
         $user->setEmail('regul@novactive.com')
             ->setUsername('regul')
@@ -33,7 +32,7 @@ class LoadUserData implements FixtureInterface
             ->setRoles(array('ROLE_REGUL'));
 
         $manager->persist($user);
-        
+
         $user = new User();
         $user->setEmail('service_client@novactive.com')
             ->setUsername('service_client')

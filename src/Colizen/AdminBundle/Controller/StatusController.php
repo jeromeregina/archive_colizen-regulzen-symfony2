@@ -31,9 +31,9 @@ class StatusController extends Controller
         $query=$em->getRepository('ColizenAdminBundle:Status')->findAllQuery();
 
         $paginator  = $this->get('knp_paginator');
-        
+
         $page=$request->get('page',1);
-        
+
         $pagination = $paginator->paginate(
             $query,
             $page,
@@ -57,13 +57,13 @@ class StatusController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $flash = $this->get('braincrafted_bootstrap.flash');
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
             $flash->info($this->get('translator')->trans('regulzen.admin.entity.created',array('%entity%'=>'site','%id%'=>$entity->getCode())));
-  
+
             return $this->redirect($this->generateUrl('admin_status_show', array('id' => $entity->getCode())));
         }
 
@@ -204,9 +204,9 @@ class StatusController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
             $flash = $this->get('braincrafted_bootstrap.flash');
-            
+
             $flash->info($this->get('translator')->trans('regulzen.admin.entity.updated',array('%entity%'=>'site','%id%'=>$entity->getCode())));
-            
+
             return $this->redirect($this->generateUrl('admin_status_list'));
         }
 
@@ -227,7 +227,7 @@ class StatusController extends Controller
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
         $flash = $this->get('braincrafted_bootstrap.flash');
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('ColizenAdminBundle:Status')->find($id);
@@ -239,7 +239,7 @@ class StatusController extends Controller
                 $em->remove($entity);
                 $em->flush();
              $flash->error($this->get('translator')->trans('regulzen.admin.entity.deleted',array('%entity%'=>'site','%id%'=>$entity->getCode())));
-            } catch (\Exception $e){
+            } catch (\Exception $e) {
                 $flash->error($this->get('translator')->trans('regulzen.admin.entity.error.deletion',array('%entity%'=>'site','%id%'=>$entity->getCode(),'%message%'=>$e->getMessage())));
             }
         }

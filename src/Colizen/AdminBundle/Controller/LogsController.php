@@ -22,7 +22,7 @@ class LogsController extends Controller
      * !Todo: il faudrait éventuellement rétablir le tri par date lors de la migration vers PostgreSql
      * ! (dans le cas ou Doctrine2 gère correctement les milliseconds sur les dates Postgre)
      * ! aujourd'hui le tri se fait par id car plus précis
-     * 
+     *
      * @Route("/imports", name="admin_logs_imports_list")
      * @Method("GET")
      * @Template()
@@ -31,11 +31,11 @@ class LogsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query=$em->getRepository('ColizenAdminBundle:ImportLog')->findAllSortedByIdDesc(true);
-        
+
         $paginator  = $this->get('knp_paginator');
-        
+
         $page=$request->get('page',1);
-        
+
         $pagination = $paginator->paginate(
             $query,
             $page,
@@ -48,7 +48,7 @@ class LogsController extends Controller
     }
     /**
      * Lists all Logs entities sorted by Id Desc.
-     * 
+     *
      * @Route("/imports_web_service", name="admin_logs_imports_web_service_list")
      * @Method("GET")
      * @Template()
@@ -57,11 +57,11 @@ class LogsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query=$em->getRepository('ColizenAdminBundle:ImportWebServiceLog')->findAllSortedByIdDesc(true);
-        
+
         $paginator  = $this->get('knp_paginator');
-        
+
         $page=$request->get('page',1);
-        
+
         $pagination = $paginator->paginate(
             $query,
             $page,

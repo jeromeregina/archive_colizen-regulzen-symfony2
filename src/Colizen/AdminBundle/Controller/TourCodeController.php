@@ -48,14 +48,14 @@ class TourCodeController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $flash = $this->get('braincrafted_bootstrap.flash');
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            
+
             $flash->info($this->get('translator')->trans('regulzen.admin.entity.created',array('%entity%'=>'site','%id%'=>$entity->getId())));
-            
+
             return $this->redirect($this->generateUrl('admin_tour_code_show', array('id' => $entity->getId())));
         }
 
@@ -195,11 +195,11 @@ class TourCodeController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-            
+
             $flash = $this->get('braincrafted_bootstrap.flash');
-            
+
             $flash->info($this->get('translator')->trans('regulzen.admin.entity.updated',array('%entity%'=>'site','%id%'=>$entity->getId())));
-            
+
             return $this->redirect($this->generateUrl('admin_tour_code_list'));
         }
 
@@ -220,12 +220,12 @@ class TourCodeController extends Controller
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
         $flash = $this->get('braincrafted_bootstrap.flash');
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('ColizenAdminBundle:TourCode')->find($id);
             try {
-                
+
                 if (!$entity) {
                     throw $this->createNotFoundException('Unable to find TourCode entity.');
                 }
@@ -233,7 +233,7 @@ class TourCodeController extends Controller
                 $em->remove($entity);
                 $em->flush();
              $flash->error($this->get('translator')->trans('regulzen.admin.entity.deleted',array('%entity%'=>'site','%id%'=>$entity->getId())));
-            } catch (\Exception $e){
+            } catch (\Exception $e) {
                 $flash->error($this->get('translator')->trans('regulzen.admin.entity.error.deletion',array('%entity%'=>'site','%id%'=>$entity->getId(),'%message%'=>$e->getMessage())));
             }
         }

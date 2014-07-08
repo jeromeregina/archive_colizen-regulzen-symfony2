@@ -4,19 +4,15 @@ namespace Colizen\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Colizen\AdminBundle\Entity\Site;
 use Doctrine\Common\Collections\ArrayCollection;
-use Colizen\AdminBundle\Entity\DeliveryAddress;
-use Colizen\AdminBundle\Entity\Tour;
-use Colizen\AdminBundle\Entity\Shipment;
-use Colizen\AdminBundle\Entity\Event;
 /**
  * TblShipment
  *
  * @ORM\Table(name="TBL_slot")})
  * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\Slot")
  */
-class Slot {
+class Slot
+{
    /**
      * @var integer
      *
@@ -37,14 +33,14 @@ class Slot {
      * @ORM\Column(name="SLOT_real_hour", type="time", nullable=true)
      */
     protected $realHour;
-    
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="SLOT_real_slot_start", type="time", nullable=true)
      */
     private $realSlotStart;
-    
+
     /**
      * @var \DateTime
      *
@@ -70,14 +66,14 @@ class Slot {
      * @ORM\JoinColumn(name="SLOT_real_TOUR_id", referencedColumnName="TOUR_id", nullable=true)
      */
     protected $realTour;
-    
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="SLOT_theorical_slot_start", type="time", nullable=true)
      */
     private $theoricalSlotStart;
-    
+
     /**
      * @var \DateTime
      *
@@ -97,12 +93,12 @@ class Slot {
      * @ORM\JoinColumn(name="SLOT_theorical_TOUR_id", referencedColumnName="TOUR_id", nullable=true)
      */
     protected $theoricalTour;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Event", mappedBy="slot")
      */
-    private  $events;
-    
+    private $events;
+
     /**
      * @var Shipment
      *
@@ -129,7 +125,7 @@ class Slot {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -139,7 +135,7 @@ class Slot {
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Slot
      */
     public function setCreated($created)
@@ -152,7 +148,7 @@ class Slot {
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -162,7 +158,7 @@ class Slot {
     /**
      * Set updated
      *
-     * @param \DateTime $updated
+     * @param  \DateTime $updated
      * @return Slot
      */
     public function setUpdated($updated)
@@ -175,18 +171,17 @@ class Slot {
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
         return $this->updated;
     }
 
-
     /**
      * Set shipment
      *
-     * @param \Colizen\AdminBundle\Entity\Shipment $shipment
+     * @param  \Colizen\AdminBundle\Entity\Shipment $shipment
      * @return Slot
      */
     public function setShipment(\Colizen\AdminBundle\Entity\Shipment $shipment)
@@ -199,7 +194,7 @@ class Slot {
     /**
      * Get shipment
      *
-     * @return \Colizen\AdminBundle\Entity\Shipment 
+     * @return \Colizen\AdminBundle\Entity\Shipment
      */
     public function getShipment()
     {
@@ -209,7 +204,7 @@ class Slot {
     /**
      * Set theoricalHour
      *
-     * @param \DateTime $theoricalHour
+     * @param  \DateTime $theoricalHour
      * @return Slot
      */
     public function setTheoricalHour($theoricalHour)
@@ -222,7 +217,7 @@ class Slot {
     /**
      * Get theoricalHour
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTheoricalHour()
     {
@@ -232,7 +227,7 @@ class Slot {
     /**
      * Set realSlotStart
      *
-     * @param \DateTime $realSlotStart
+     * @param  \DateTime $realSlotStart
      * @return Slot
      */
     public function setRealSlotStart($realSlotStart)
@@ -245,7 +240,7 @@ class Slot {
     /**
      * Get realSlotStart
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRealSlotStart()
     {
@@ -255,7 +250,7 @@ class Slot {
     /**
      * Set realSlotEnd
      *
-     * @param \DateTime $realSlotEnd
+     * @param  \DateTime $realSlotEnd
      * @return Slot
      */
     public function setRealSlotEnd($realSlotEnd)
@@ -268,7 +263,7 @@ class Slot {
     /**
      * Get realSlotEnd
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRealSlotEnd()
     {
@@ -278,7 +273,7 @@ class Slot {
     /**
      * Set realTourOrder
      *
-     * @param integer $realTourOrder
+     * @param  integer $realTourOrder
      * @return Slot
      */
     public function setRealTourOrder($realTourOrder)
@@ -291,7 +286,7 @@ class Slot {
     /**
      * Get realTourOrder
      *
-     * @return integer 
+     * @return integer
      */
     public function getRealTourOrder()
     {
@@ -301,7 +296,7 @@ class Slot {
     /**
      * Set realUpdateCounter
      *
-     * @param integer $realUpdateCounter
+     * @param  integer $realUpdateCounter
      * @return Slot
      */
     public function setRealUpdateCounter($realUpdateCounter)
@@ -314,7 +309,7 @@ class Slot {
     /**
      * Get realUpdateCounter
      *
-     * @return integer 
+     * @return integer
      */
     public function getRealUpdateCounter()
     {
@@ -324,7 +319,7 @@ class Slot {
     /**
      * Set theoricalSlotStart
      *
-     * @param \DateTime $theoricalSlotStart
+     * @param  \DateTime $theoricalSlotStart
      * @return Slot
      */
     public function setTheoricalSlotStart($theoricalSlotStart)
@@ -337,7 +332,7 @@ class Slot {
     /**
      * Get theoricalSlotStart
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTheoricalSlotStart()
     {
@@ -347,7 +342,7 @@ class Slot {
     /**
      * Set theoricalSlotEnd
      *
-     * @param \DateTime $theoricalSlotEnd
+     * @param  \DateTime $theoricalSlotEnd
      * @return Slot
      */
     public function setTheoricalSlotEnd($theoricalSlotEnd)
@@ -360,7 +355,7 @@ class Slot {
     /**
      * Get theoricalSlotEnd
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTheoricalSlotEnd()
     {
@@ -370,7 +365,7 @@ class Slot {
     /**
      * Set theoricalTourOrder
      *
-     * @param integer $theoricalTourOrder
+     * @param  integer $theoricalTourOrder
      * @return Slot
      */
     public function setTheoricalTourOrder($theoricalTourOrder)
@@ -383,7 +378,7 @@ class Slot {
     /**
      * Get theoricalTourOrder
      *
-     * @return integer 
+     * @return integer
      */
     public function getTheoricalTourOrder()
     {
@@ -393,7 +388,7 @@ class Slot {
     /**
      * Set realTour
      *
-     * @param \Colizen\AdminBundle\Entity\Tour $realTour
+     * @param  \Colizen\AdminBundle\Entity\Tour $realTour
      * @return Slot
      */
     public function setRealTour(Tour $realTour)
@@ -406,7 +401,7 @@ class Slot {
     /**
      * Get realTour
      *
-     * @return \Colizen\AdminBundle\Entity\Tour 
+     * @return \Colizen\AdminBundle\Entity\Tour
      */
     public function getRealTour()
     {
@@ -416,7 +411,7 @@ class Slot {
     /**
      * Set theoricalTour
      *
-     * @param \Colizen\AdminBundle\Entity\Tour $theoricalTour
+     * @param  \Colizen\AdminBundle\Entity\Tour $theoricalTour
      * @return Slot
      */
     public function setTheoricalTour(Tour $theoricalTour)
@@ -429,7 +424,7 @@ class Slot {
     /**
      * Get theoricalTour
      *
-     * @return \Colizen\AdminBundle\Entity\Tour 
+     * @return \Colizen\AdminBundle\Entity\Tour
      */
     public function getTheoricalTour()
     {
@@ -439,7 +434,7 @@ class Slot {
     /**
      * Set realHour
      *
-     * @param \DateTime $realHour
+     * @param  \DateTime $realHour
      * @return Slot
      */
     public function setRealHour($realHour)
@@ -452,7 +447,7 @@ class Slot {
     /**
      * Get realHour
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRealHour()
     {
@@ -469,7 +464,7 @@ class Slot {
     /**
      * Add events
      *
-     * @param \Colizen\AdminBundle\Entity\Event $events
+     * @param  \Colizen\AdminBundle\Entity\Event $events
      * @return Slot
      */
     public function addEvent(\Colizen\AdminBundle\Entity\Event $events)
@@ -492,7 +487,7 @@ class Slot {
     /**
      * Get events
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEvents()
     {

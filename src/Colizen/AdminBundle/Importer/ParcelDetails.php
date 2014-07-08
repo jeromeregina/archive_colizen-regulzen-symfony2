@@ -2,7 +2,6 @@
 
 namespace Colizen\AdminBundle\Importer;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\SplFileInfo;
 use Colizen\AdminBundle\Command\OutputHandler\OutputHandler;
 use Colizen\AdminBundle\Entity\Parcel;
@@ -10,8 +9,8 @@ use Colizen\AdminBundle\Importer\Exception\NotFoundException;
 use Colizen\AdminBundle\Entity\Slot;
 use Colizen\AdminBundle\Entity\ImportLog;
 
-class ParcelDetails extends AbstractImporter {
-
+class ParcelDetails extends AbstractImporter
+{
     const SITE_CODE = 0;
     const TOUR_CODE = 1;
     const PLANIFIED_DATE = 2;
@@ -33,10 +32,11 @@ class ParcelDetails extends AbstractImporter {
      *   9 -> Créneau de livraison prévue      -> HH:HH/HH:HH
      *  12 -> Position du colis dans la tournée
      *  13 -> Numéro d'expédition              -> xxxyyy123456789
-     * 
+     *
      * @param string $line
      */
-    protected function persistLine($line, $lineid, SplFileInfo $file, OutputHandler $output = null) {
+    protected function persistLine($line, $lineid, SplFileInfo $file, OutputHandler $output = null)
+    {
         if ($output instanceof OutputHandler) {
             $output->write('importing line "' . $lineid . '" from file "' . $file->getFilename() . '"',  $this->getLineLevel(), false, $line[self::CARGOPASS_PARCEL]);
         }
@@ -74,26 +74,31 @@ class ParcelDetails extends AbstractImporter {
     }
 
     /**
-     * 
+     *
      * @param SplFileInfo $file
      */
-    protected function getLinesFromFile(SplFileInfo $file) {
+    protected function getLinesFromFile(SplFileInfo $file)
+    {
         $ar = explode("\r\n", trim($file->getContents()));
+
         return $ar;
     }
 
-    protected function getActionName() {
+    protected function getActionName()
+    {
         return 'Text fichier planification imtech';
     }
 
     /**
-     * 
+     *
      * @return \Colizen\AdminBundle\Repository\Parcel
      */
-    protected function getParcelRepository() {
+    protected function getParcelRepository()
+    {
         return $this->em->getRepository('ColizenAdminBundle:Parcel');
     }
-    protected function getLineLevel(){
+    protected function getLineLevel()
+    {
                 return ImportLog::MESSAGE_LEVEL_PARCEL;
             }
 }

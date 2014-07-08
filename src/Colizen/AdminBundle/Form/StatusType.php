@@ -10,7 +10,7 @@ class StatusType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,7 +20,7 @@ class StatusType extends AbstractType
             ->add('isExcluded','checkbox',array('required'=>false))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

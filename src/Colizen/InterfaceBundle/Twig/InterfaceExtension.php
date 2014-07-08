@@ -9,15 +9,14 @@ class InterfaceExtension extends \Twig_Extension
 {
     /**
      *
-     * @var EntityManager 
+     * @var EntityManager
      */
     protected $em;
-    
+
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
-
 
     /**
      * Returns a list of global variables to add to the existing list.
@@ -27,22 +26,22 @@ class InterfaceExtension extends \Twig_Extension
     public function getGlobals()
     {
         $globals = array();
-        
+
         /* pas très beau, à revoir autrement */
         $temp=array();
-        
-        foreach (array('ImportLog','ImportWebServiceLog') as $e){
+
+        foreach (array('ImportLog','ImportWebServiceLog') as $e) {
         $repo = $this->em->getRepository("ColizenAdminBundle:$e");
-            foreach($repo->findLatestImportLogDates() as $k=>$val){
+            foreach ($repo->findLatestImportLogDates() as $k=>$val) {
                 if (!isset($temp[$k])||$temp[$k]<$val) {
                     $temp[$k]=$val;
-                } 
+                }
             }
-                
+
         }
-        
+
         $globals += $temp;
-        
+
         return $globals;
     }
 
@@ -55,16 +54,15 @@ class InterfaceExtension extends \Twig_Extension
 
     public function makeNaSmall($value)
     {
-        if  ($value === TableauNational::NOT_AVAILABLE_LABEL)
-        {
+        if ($value === TableauNational::NOT_AVAILABLE_LABEL) {
             $value = '<small class="red">'.$value.'</small>';
         }
 
         return $value;
     }
 
-
-    public function getName() {
+    public function getName()
+    {
         return 'regulzen_interface';
     }
 }

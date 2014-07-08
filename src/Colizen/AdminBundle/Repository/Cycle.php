@@ -29,13 +29,15 @@ class Cycle extends EntityRepository
                     ->getResult();
     }
     /**
-     * 
-     * @param type $code
+     *
+     * @param  type $code
      * @return type
      */
-    public function findByTourCode($code){
+    public function findByTourCode($code)
+    {
         $query=$this->getEntityManager()->createQuery('SELECT c FROM '.$this->getEntityName().' c WHERE REGEXP(:code, c.tourCodeFormat) = true');
         $query->setParameter('code', $code);
+
         return $query->getResult();
     }
 }

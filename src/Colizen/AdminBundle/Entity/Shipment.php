@@ -3,13 +3,8 @@
 namespace Colizen\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Colizen\AdminBundle\Entity\Site;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Colizen\AdminBundle\Entity\DeliveryAddress;
-use Colizen\AdminBundle\Entity\Event;
-use Colizen\AdminBundle\Entity\ShipperAccount;
-use Colizen\AdminBundle\Entity\Slot;
 /**
  * TblShipment
  *
@@ -48,7 +43,7 @@ class Shipment
      * @ORM\JoinColumn(name="DLVRADDR_id", referencedColumnName="DLVRADDR_id", onDelete="SET NULL")
      */
     private $deliveryAddress;
-    
+
      /**
      * @var ArrayCollection
      *
@@ -92,7 +87,7 @@ class Shipment
     private $site;
     /**
      * @var ArrayCollection
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Slot", cascade={"persist"}, mappedBy="shipment")
      * @ORM\OrderBy({"created" = "ASC"})
      */
@@ -121,7 +116,7 @@ class Shipment
     * @ORM\Column(name="SHPMNT_updated", type="datetime")
     */
    private $updated;
-   
+
     /**
      * Constructor
      */
@@ -131,7 +126,7 @@ class Shipment
         $this->slots = new ArrayCollection();
         $this->parcels = new ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -395,10 +390,11 @@ class Shipment
         return $this->deliveryAddress;
     }
     /**
-     * 
+     *
      * @return boolean
      */
-    public function hasDeliveryAddress(){
+    public function hasDeliveryAddress()
+    {
         return ($this->getDeliveryAddress() instanceof DeliveryAddress);
     }
     /**
@@ -425,17 +421,16 @@ class Shipment
         return $this->weight;
     }
 
-
     /**
      * Add events
      *
-     * @param \Colizen\AdminBundle\Entity\Event $events
+     * @param  \Colizen\AdminBundle\Entity\Event $events
      * @return Shipment
      */
     public function addEvent(Event $event)
     {
         $event->setShipment($this);
-        
+
         $this->events->add($event);
 
         return $this;
@@ -454,7 +449,7 @@ class Shipment
     /**
      * Get events
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEvents()
     {
@@ -464,13 +459,13 @@ class Shipment
     /**
      * Add slots
      *
-     * @param \Colizen\AdminBundle\Entity\Slot $slots
+     * @param  \Colizen\AdminBundle\Entity\Slot $slots
      * @return Shipment
      */
     public function addSlot(Slot $slot)
     {
         $slot->setShipment($this);
-        
+
         $this->slots->add($slot);
 
         return $this;
@@ -489,7 +484,7 @@ class Shipment
     /**
      * Get slots
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSlots()
     {
@@ -505,7 +500,7 @@ class Shipment
         return $this->slots->last();
     }
     /**
-     * 
+     *
      * @return boolean
      */
     public function hasSlots()
@@ -516,7 +511,7 @@ class Shipment
     /**
      * Set priority
      *
-     * @param integer $priority
+     * @param  integer  $priority
      * @return Shipment
      */
     public function setPriority($priority)
@@ -529,7 +524,7 @@ class Shipment
     /**
      * Get priority
      *
-     * @return integer 
+     * @return integer
      */
     public function getPriority()
     {
@@ -539,7 +534,7 @@ class Shipment
     /**
      * Set shipperAccount
      *
-     * @param \Colizen\AdminBundle\Entity\ShipperAccount $shipperAccount
+     * @param  \Colizen\AdminBundle\Entity\ShipperAccount $shipperAccount
      * @return Shipment
      */
     public function setShipperAccount(ShipperAccount $shipperAccount)
@@ -552,7 +547,7 @@ class Shipment
     /**
      * Get shipperAccount
      *
-     * @return \Colizen\AdminBundle\Entity\ShipperAccount 
+     * @return \Colizen\AdminBundle\Entity\ShipperAccount
      */
     public function getShipperAccount()
     {
@@ -562,7 +557,7 @@ class Shipment
     /**
      * Add parcels
      *
-     * @param \Colizen\AdminBundle\Entity\Parcel $parcels
+     * @param  \Colizen\AdminBundle\Entity\Parcel $parcels
      * @return Shipment
      */
     public function addParcel(\Colizen\AdminBundle\Entity\Parcel $parcels)
@@ -585,7 +580,7 @@ class Shipment
     /**
      * Get parcels
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getParcels()
     {

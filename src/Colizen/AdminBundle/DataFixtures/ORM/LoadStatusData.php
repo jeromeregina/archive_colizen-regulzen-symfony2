@@ -36,10 +36,8 @@ class LoadStatusData implements FixtureInterface, ContainerAwareInterface
         $peo = $phpexcel->createPHPExcelObject($statusFilePath);
         $peo->setActiveSheetIndexByName('Statuts CargoNET');
         $sheetData = $peo->getActiveSheet()->toArray(null, true, true, true);
-        foreach ($sheetData as $i=>$line)
-        {
-            if (strlen($line['B'])== 4)
-            {
+        foreach ($sheetData as $i=>$line) {
+            if (strlen($line['B'])== 4) {
                 $status = new Status();
                 $status->setCode($line['A']);
                 $status->setShortname($line['B']);

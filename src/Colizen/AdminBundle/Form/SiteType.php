@@ -10,7 +10,7 @@ class SiteType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,7 +24,7 @@ class SiteType extends AbstractType
             ->add('latitude')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -3,7 +3,8 @@ namespace Colizen\AdminBundle\Query;
 
 use DoctrineExtensions\Query\Mysql\Regexp as Base;
 use Doctrine\ORM\Query\SqlWalker;
-class Regexp extends Base{
+class Regexp extends Base
+{
     public function getSql(SqlWalker $sqlWalker)
     {
         if ($sqlWalker->getConnection()->getDriver()->getName()=='pdo_mysql')

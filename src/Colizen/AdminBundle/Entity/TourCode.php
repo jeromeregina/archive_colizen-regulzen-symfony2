@@ -41,7 +41,7 @@ class TourCode
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * 
+     *
      * @ORM\ManyToMany(targetEntity="Cycle", inversedBy="tourCodes", cascade={"persist"})
      * @ORM\JoinTable(name="JNT_tour_code_has_cycle",
      *      joinColumns={@ORM\JoinColumn(name="TOURCODE_id", referencedColumnName="TOURCODE_id")},
@@ -214,13 +214,13 @@ class TourCode
     /**
      * Add cycles
      *
-     * @param \Colizen\AdminBundle\Entity\Cycle $cycles
+     * @param  \Colizen\AdminBundle\Entity\Cycle $cycles
      * @return TourCode
      */
     public function addCycle(\Colizen\AdminBundle\Entity\Cycle $cycle)
     {
         $cycle->addTourCode($this);
-        
+
         $this->cycles->add($cycle);
 
         return $this;
@@ -239,7 +239,7 @@ class TourCode
     /**
      * Get cycles
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCycles()
     {

@@ -22,7 +22,7 @@ class LoadSiteData implements FixtureInterface
              ->setIsActive(true)
              ->setNumber(750);
         $manager->persist($site);
-        
+
         $site = new Site();
         $site->setName('Lyon')
              ->setCodeColizen('LYS')
@@ -30,7 +30,7 @@ class LoadSiteData implements FixtureInterface
              ->setIsActive(true)
              ->setNumber(690);
         $manager->persist($site);
-        
+
         $site = new Site();
         $site->setName('Lille')
              ->setCodeColizen('LIL')
@@ -38,7 +38,7 @@ class LoadSiteData implements FixtureInterface
              ->setIsActive(true)
              ->setNumber(590);
         $manager->persist($site);
-        
+
         $site = new Site();
         $site->setName('Marseille')
              ->setCodeColizen('OMV')
@@ -46,7 +46,7 @@ class LoadSiteData implements FixtureInterface
              ->setIsActive(true)
              ->setNumber(130);
         $manager->persist($site);
-        
+
         $manager->flush();
     }
 }

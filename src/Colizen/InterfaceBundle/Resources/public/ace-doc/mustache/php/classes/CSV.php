@@ -2,20 +2,19 @@
 /**
  * @link http://gist.github.com/385876
  */
-class CSV 
+class CSV
 {
 
 public static function to_array($filename='', $delimiter=',')
 {
     if(!file_exists($filename) || !is_readable($filename))
+
         return FALSE;
 
-    $header = NULL;
+    $header = null;
     $data = array();
-    if (($handle = fopen($filename, 'r')) !== FALSE)
-    {
-        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
-        {
+    if (($handle = fopen($filename, 'r')) !== FALSE) {
+        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE) {
             if(!$header)
                 $header = $row;
             else
@@ -23,6 +22,7 @@ public static function to_array($filename='', $delimiter=',')
         }
         fclose($handle);
     }
+
     return $data;
 }
 

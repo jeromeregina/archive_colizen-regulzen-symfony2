@@ -8,7 +8,6 @@
 
 namespace Colizen\InterfaceBundle\Form\Model;
 
-
 class DateCycleFormModel
 {
     /**

@@ -39,8 +39,6 @@ class LoadCycleData implements FixtureInterface
                 ;
         $manager->persist($cycle);
 
-
-
         $manager->flush();
     }
 }

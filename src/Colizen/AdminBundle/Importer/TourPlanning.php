@@ -13,32 +13,35 @@ use \Swift_Mailer;
 use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
 use Colizen\AdminBundle\Importer\Exception\NotFoundException;
 
-class TourPlanning extends AbstractImporter  {
+class TourPlanning extends AbstractImporter
+{
     /**
      *
      * @var Factory
      */
     protected $phpExcel;
-    
-    public function __construct(EntityManagerInterface $em, $sourceDirectory, $filenamePattern, Swift_Mailer $mailer, TimedTwigEngine $templating, $mailTemplate, Factory $phpExcel) {
+
+    public function __construct(EntityManagerInterface $em, $sourceDirectory, $filenamePattern, Swift_Mailer $mailer, TimedTwigEngine $templating, $mailTemplate, Factory $phpExcel)
+    {
         $this->phpExcel=$phpExcel;
         parent::__construct($em, $sourceDirectory, $filenamePattern, $mailer, $templating,$mailTemplate);
     }
 
     /**
-     * 
-     * @param SplFileInfo $file (or string for filename)
+     *
+     * @param  SplFileInfo $file (or string for filename)
      * @return array
      */
-    protected function getLinesFromFile(SplFileInfo $file){
+    protected function getLinesFromFile(SplFileInfo $file)
+    {
         $isftp=(substr($file->getPath(),0,3)=='ftp');
         /** si le fichier est sur un ftp, stocker dans un fichier temporaire pour phpexcel **/
-        if ($isftp){
+        if ($isftp) {
             $filename = tempnam("/tmp", "apres_routeur");
             $handle = fopen($filename, "w");
             fwrite($handle, $file->getContents());
             fclose($handle);
-        }  else {
+        } else {
             $filename = $file->getFilename();
         }
         $peo=$this->phpExcel->createPHPExcelObject($filename);
@@ -47,6 +50,7 @@ class TourPlanning extends AbstractImporter  {
         array_shift( $sheetData);
         if ($isftp)
             unlink($filename);
+
         return $sheetData;
     }
     const CARGOPASS='C';
@@ -95,18 +99,18 @@ class TourPlanning extends AbstractImporter  {
     * Z -> latitude -> Shipment.DeliveryAddress.latitude
     * AA -> longitude -> Shipment.DeliveryAddress.longitude
     * AC -> heure planifiée
- * 
+ *
  * @param array $line
  */
-    protected function persistLine($line,$lineid,SplFileInfo $file,OutputHandler $output = null) {
-        if ($output instanceof OutputHandler)
-            { 
+    protected function persistLine($line,$lineid,SplFileInfo $file,OutputHandler $output = null)
+    {
+        if ($output instanceof OutputHandler) {
             $output->write('importing "'.$line[self::CARGOPASS].'" from file "'.$file->getFilename().'"',$this->getLineLevel(), false, $line[self::CARGOPASS]);
             }
                $shipment= $this->getShipmentRepository()->resolveByCargopass($line[self::CARGOPASS]);
                try {
                     $site= $this->getSiteRepository()->findOneByAnyCode($line[self::SITE_CODE]);
-               } catch (\Doctrine\ORM\NoResultException $e){
+               } catch (\Doctrine\ORM\NoResultException $e) {
                    throw new NotFoundException('aborting import of "'.$line[self::CARGOPASS].'" from "'.$file->getFilename().'": site with code "'.$line[self::SITE_CODE]."' has not been found");
                }
                $shipment->setCargopass($line[self::CARGOPASS])
@@ -116,10 +120,10 @@ class TourPlanning extends AbstractImporter  {
                        ->setWeight($line[self::SHIPMENT_WEIGHT])
                        ->setPriority(($line[self::SHIPMENT_PRIORITY]=='<?>')?null:$line[self::SHIPMENT_PRIORITY])
                        ;
-               
+
                $deliveryAddress=($shipment->hasDeliveryAddress())?$shipment->getDeliveryAddress():new DeliveryAddress();
-               
-               
+
+
                $deliveryAddress
                        ->setAddress($line[self::ADDRESS])
                        ->setAdditionalInformations(($line[self::ADDRESS_REMARK]=='<?>')?null:$line[self::ADDRESS_REMARK])
@@ -133,46 +137,48 @@ class TourPlanning extends AbstractImporter  {
                        ->setLongitude($line[self::LONGITUDE])
                        ->setShipment($shipment)
                        ;
-               
+
                $shipment->setDeliveryAddress($deliveryAddress);
-               
+
                $tour = $this->resolveTour($line[self::TOUR_CODE], \DateTime::createFromFormat('[d.m.Y]',$line[self::TOUR_DATE]), $site, $file->getFilename(), $line[self::CARGOPASS]);
-                       
+
                $slot = ($shipment->getLastSlot() instanceof Slot)?$shipment->getLastSlot():new Slot();
-               
+
                list($slotStart,$slotEnd)=explode('-',trim($line[self::SLOT],'[]'));
-               
+
                $slot->setTheoricalTourOrder($line[self::TOUR_POSITION])
                      ->setTheoricalTour($tour)
                      ->setTheoricalSlotStart(\DateTime::createFromFormat('H:i',$slotStart))
                      ->setTheoricalSlotEnd(\DateTime::createFromFormat('H:i',$slotEnd))
                      ->setTheoricalHour(\DateTime::createFromFormat('H:i',$line[self::THEORICAL_HOUR]))
                      ;
-               
+
                if (!$shipment->hasSlots())
                    $shipment->addSlot($slot);
-               
+
                list($useless,$senderCode,$senderName)=explode('-',$line[self::CUSTOMER_CODE]);
-               
+
                $shipperAccount=$this->getShipperAccountRepository()->resolveByCode($senderCode,$senderName);
-               
-                /** ajout à l'email en cour: "un shipper_account à été créé" **/ 
-                if ($shipperAccount->getId()==null){
+
+                /** ajout à l'email en cour: "un shipper_account à été créé" **/
+                if ($shipperAccount->getId()==null) {
                     $this->em->persist($shipperAccount);
                     $this->em->flush();
                     $this->addEmailLine($file->getFilename(), $line[self::CARGOPASS], 'shipper_account', $shipperAccount->getId());
                }
                $shipment->setShipperAccount($shipperAccount);
-                       
+
                $this->em->persist($shipment);
                $this->em->flush();
-               
+
             }
-        
-            protected function getActionName() {
+
+            protected function getActionName()
+            {
                 return 'Excels liste camionage après routeur';
             }
-            protected function getLineLevel(){
+            protected function getLineLevel()
+            {
                 return ImportLog::MESSAGE_LEVEL_SHIPMENT;
             }
 }

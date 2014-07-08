@@ -7,27 +7,28 @@ use Doctrine\ORM\EntityRepository;
 
 class Site extends EntityRepository
 {
-    public function findOneByAnyCode($code){
+    public function findOneByAnyCode($code)
+    {
         $qb=$this->createQueryBuilder('s');
-        
+
         $qb->where('s.codeColizen = :code')
            ->orWhere('s.codeImtech = :code')
            ->orWhere('s.number = :code')
            ->setParameter('code', $code);
-        
+
         return $qb->getQuery()->getSingleResult();
-           
+
     }
 
     /**
      * Nombre d'expéditions par site
      *
-     * @param \DatTime $date
-     * @param \Colizen\AdminBundle\Entity\Cycle    $cycle
+     * @param \DatTime                          $date
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycle
      *
      * @return array
      */
-    public function getNombreExpeditionsBySite (\DateTime $date, EntityCycle $cycle)
+    public function getNombreExpeditionsBySite(\DateTime $date, EntityCycle $cycle)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT s AS site, COUNT(sh.id) AS nombreExpeditions
@@ -49,8 +50,8 @@ class Site extends EntityRepository
     /**
      * Nombre de colis avec les statuts COEC (arrivé au centre) ou EDIR (étiqueté)
      *
-     * @param \DatTime $date
-     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
+     * @param \DatTime                          $date
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycle
      *
      * @return array
      */
@@ -80,8 +81,8 @@ class Site extends EntityRepository
     /**
      * Nombre de colis avec les statuts TOUR
      *
-     * @param \DatTime $date
-     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
+     * @param \DatTime                          $date
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycle
      *
      * @return array
      */
@@ -110,8 +111,8 @@ class Site extends EntityRepository
     /**
      * Nombre de colis avec les statuts CTRL
      *
-     * @param \DatTime $date
-     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
+     * @param \DatTime                          $date
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycle
      *
      * @return array
      */
@@ -140,8 +141,8 @@ class Site extends EntityRepository
     /**
      * Nombre de tous les colis
      *
-     * @param \DateTime $date
-     * @param \Colizen\AdminBundle\Entity\Cycle      $cycle
+     * @param \DateTime                         $date
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycle
      *
      * @return array
      */
@@ -168,8 +169,8 @@ class Site extends EntityRepository
     /**
      * Nombre de colis avec les statuts REMI ou NLIV (colis présentés au client)
      *
-     * @param \DatTime $date
-     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
+     * @param \DatTime                          $date
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycle
      *
      * @return array
      */
@@ -200,8 +201,8 @@ class Site extends EntityRepository
     /**
      * Nombre de colis avec les statuts NLIV ou CNML (colis en échec)
      *
-     * @param \DatTime $date
-     * @param \Colizen\AdminBundle\Entity\Cycle     $cycle
+     * @param \DatTime                          $date
+     * @param \Colizen\AdminBundle\Entity\Cycle $cycle
      *
      * @return array
      */

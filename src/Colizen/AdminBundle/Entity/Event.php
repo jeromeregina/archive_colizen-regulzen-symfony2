@@ -4,11 +4,6 @@ namespace Colizen\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Colizen\AdminBundle\Entity\Tour;
-use Colizen\AdminBundle\Entity\Parcel;
-use Colizen\AdminBundle\Entity\Shipment;
-use Doctrine\Common\Collections\ArrayCollection;
-use Colizen\AdminBundle\Entity\Slot;
 
 /**
  * TblEvent
@@ -56,7 +51,7 @@ class Event
      * @ORM\Column(name="EVENT_scan_hour", type="time", nullable=true)
      */
     private $scanHour;
-    
+
     /**
      * @var Status
      *
@@ -64,7 +59,7 @@ class Event
      * @ORM\JoinColumn(name="STATUS_code", referencedColumnName="STATUS_code", nullable=true)
      */
     protected $scanStatus;
-    
+
     /**
      * @var integer
      *
@@ -79,7 +74,7 @@ class Event
     * @ORM\JoinColumn(name="SLOT_id", referencedColumnName="SLOT_id", nullable=true)
     */
    private $slot;
-   
+
     /**
     * @var \DateTime $created
     *
@@ -87,7 +82,7 @@ class Event
     * @ORM\Column(name="EVENT_created", type="datetime")
     */
    private $created;
-   
+
     /**
     * @var \DateTime $created
     *
@@ -133,7 +128,7 @@ class Event
     /**
      * Set scanHour
      *
-     * @param \DateTime $scanHour
+     * @param  \DateTime $scanHour
      * @return Event
      */
     public function setScanHour($scanHour)
@@ -225,11 +220,10 @@ class Event
         return $this->shipment;
     }
 
-
     /**
      * Set parcel
      *
-     * @param \Colizen\AdminBundle\Entity\Parcel $parcel
+     * @param  \Colizen\AdminBundle\Entity\Parcel $parcel
      * @return Event
      */
     public function setParcel(\Colizen\AdminBundle\Entity\Parcel $parcel = null)
@@ -242,7 +236,7 @@ class Event
     /**
      * Get parcel
      *
-     * @return \Colizen\AdminBundle\Entity\Parcel 
+     * @return \Colizen\AdminBundle\Entity\Parcel
      */
     public function getParcel()
     {
@@ -252,7 +246,7 @@ class Event
     /**
      * Set slot
      *
-     * @param \Colizen\AdminBundle\Entity\Slot $slot
+     * @param  \Colizen\AdminBundle\Entity\Slot $slot
      * @return Event
      */
     public function setSlot(\Colizen\AdminBundle\Entity\Slot $slot = null)
@@ -265,7 +259,7 @@ class Event
     /**
      * Get slot
      *
-     * @return \Colizen\AdminBundle\Entity\Slot 
+     * @return \Colizen\AdminBundle\Entity\Slot
      */
     public function getSlot()
     {
@@ -275,7 +269,7 @@ class Event
     /**
      * Set scanStatus
      *
-     * @param \Colizen\AdminBundle\Entity\Status $scanStatus
+     * @param  \Colizen\AdminBundle\Entity\Status $scanStatus
      * @return Event
      */
     public function setScanStatus(\Colizen\AdminBundle\Entity\Status $scanStatus = null)
@@ -288,7 +282,7 @@ class Event
     /**
      * Get scanStatus
      *
-     * @return \Colizen\AdminBundle\Entity\Status 
+     * @return \Colizen\AdminBundle\Entity\Status
      */
     public function getScanStatus()
     {
@@ -298,7 +292,7 @@ class Event
     /**
      * Set scanStatusCode
      *
-     * @param integer $scanStatusCode
+     * @param  integer $scanStatusCode
      * @return Event
      */
     public function setScanStatusCode($scanStatusCode)
@@ -311,7 +305,7 @@ class Event
     /**
      * Get scanStatusCode
      *
-     * @return integer 
+     * @return integer
      */
     public function getScanStatusCode()
     {

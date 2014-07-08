@@ -38,14 +38,14 @@ class ImportWebServiceLog
      * @ORM\Column(name="IMPRTWS_level", type="integer", nullable=false)
      */
     private $level;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="IMPRTWS_cargopass", type="string", length=25, nullable=false)
      */
     private $cargopass;
-    
+
      /**
      * @var Tour
      *
@@ -53,7 +53,7 @@ class ImportWebServiceLog
      * @ORM\JoinColumn(name="TOUR_id", referencedColumnName="TOUR_id", nullable=true)
      */
     private $tour;
-  
+
     /**
      * @var Status
      *
@@ -61,22 +61,22 @@ class ImportWebServiceLog
      * @ORM\JoinColumn(name="STATUS_code", referencedColumnName="STATUS_code", nullable=true)
      */
     protected $status;
-        
+
      /**
      * @var integer
      *
      * @ORM\Column(name="STATUS_code", type="integer", nullable=true)
      */
     protected $statusCode;
-    
+
     /**
      *
      * @var boolean
-     * 
+     *
      * @ORM\Column(name="IMPRTWS_is_error", type="boolean", length=20, nullable=false, options={"default" = false})
      */
     private $isError = false;
-    
+
     /**
      * @var \DateTime $created
      *
@@ -114,11 +114,10 @@ class ImportWebServiceLog
         return $this;
     }
 
-
     /**
      * Set cargopass
      *
-     * @param string $cargopass
+     * @param  string              $cargopass
      * @return ImportWebServiceLog
      */
     public function setCargopass($cargopass)
@@ -131,7 +130,7 @@ class ImportWebServiceLog
     /**
      * Get cargopass
      *
-     * @return string 
+     * @return string
      */
     public function getCargopass()
     {
@@ -141,7 +140,7 @@ class ImportWebServiceLog
     /**
      * Set isError
      *
-     * @param boolean $isError
+     * @param  boolean             $isError
      * @return ImportWebServiceLog
      */
     public function setIsError($isError)
@@ -154,7 +153,7 @@ class ImportWebServiceLog
     /**
      * Get isError
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsError()
     {
@@ -164,7 +163,7 @@ class ImportWebServiceLog
     /**
      * Set tour
      *
-     * @param \Colizen\AdminBundle\Entity\Tour $tour
+     * @param  \Colizen\AdminBundle\Entity\Tour $tour
      * @return ImportWebServiceLog
      */
     public function setTour(\Colizen\AdminBundle\Entity\Tour $tour = null)
@@ -177,7 +176,7 @@ class ImportWebServiceLog
     /**
      * Get tour
      *
-     * @return \Colizen\AdminBundle\Entity\Tour 
+     * @return \Colizen\AdminBundle\Entity\Tour
      */
     public function getTour()
     {
@@ -187,7 +186,7 @@ class ImportWebServiceLog
     /**
      * Set status
      *
-     * @param \Colizen\AdminBundle\Entity\Status $status
+     * @param  \Colizen\AdminBundle\Entity\Status $status
      * @return ImportWebServiceLog
      */
     public function setStatus(\Colizen\AdminBundle\Entity\Status $status = null)
@@ -200,7 +199,7 @@ class ImportWebServiceLog
     /**
      * Get status
      *
-     * @return \Colizen\AdminBundle\Entity\Status 
+     * @return \Colizen\AdminBundle\Entity\Status
      */
     public function getStatus()
     {
@@ -210,7 +209,7 @@ class ImportWebServiceLog
     /**
      * Set level
      *
-     * @param integer $level
+     * @param  integer             $level
      * @return ImportWebServiceLog
      */
     public function setLevel($level)
@@ -223,7 +222,7 @@ class ImportWebServiceLog
     /**
      * Get level
      *
-     * @return integer 
+     * @return integer
      */
     public function getLevel()
     {
@@ -232,7 +231,7 @@ class ImportWebServiceLog
      /**
      * Set statusCode
      *
-     * @param integer $statusCode
+     * @param  integer $statusCode
      * @return Parcel
      */
     public function setStatusCode($statusCode)
@@ -245,7 +244,7 @@ class ImportWebServiceLog
     /**
      * Get statusCode
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatusCode()
     {

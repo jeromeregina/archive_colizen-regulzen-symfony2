@@ -5,7 +5,8 @@ namespace Colizen\AdminBundle\Listener;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\Security\Core\SecurityContext;
-class Request {
+class Request
+{
     /**
      *
      * @var int session_lock_time converted in seconds
@@ -13,23 +14,25 @@ class Request {
     protected $sessionLockTime;
     /**
      *
-     * @var SecurityContext 
+     * @var SecurityContext
      */
     protected $sc;
     protected $flashbag;
     protected $translator;
     /**
-     * 
+     *
      * @param int $sessionLockTime session_lock_time in minutes
      */
-    public function __construct($sessionLockTime,SecurityContext $sc,$flashbag,$translator) {
+    public function __construct($sessionLockTime,SecurityContext $sc,$flashbag,$translator)
+    {
         $this->sessionLockTime=(int) $sessionLockTime * 60;
         $this->sc=$sc;
         $this->flashbag = $flashbag;
         $this->translator = $translator;
     }
 
-    public function sessionIdleTimeCheck(GetResponseEvent $event) {
+    public function sessionIdleTimeCheck(GetResponseEvent $event)
+    {
         if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
             return;
         }

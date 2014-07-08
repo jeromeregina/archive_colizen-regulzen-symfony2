@@ -209,7 +209,7 @@ class Tour
 
     /**
      * Get all slots (result from merge, non persistent collection)
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSlots()
     {
@@ -221,7 +221,7 @@ class Tour
     /**
      * Add realSlots
      *
-     * @param \Colizen\AdminBundle\Entity\Slot $realSlots
+     * @param  \Colizen\AdminBundle\Entity\Slot $realSlots
      * @return Tour
      */
     public function addRealSlot(\Colizen\AdminBundle\Entity\Slot $realSlots)
@@ -244,7 +244,7 @@ class Tour
     /**
      * Get realSlots
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRealSlots()
     {
@@ -254,7 +254,7 @@ class Tour
     /**
      * Add theoricalSlots
      *
-     * @param \Colizen\AdminBundle\Entity\Slot $theoricalSlots
+     * @param  \Colizen\AdminBundle\Entity\Slot $theoricalSlots
      * @return Tour
      */
     public function addTheoricalSlot(\Colizen\AdminBundle\Entity\Slot $theoricalSlots)
@@ -277,7 +277,7 @@ class Tour
     /**
      * Get theoricalSlots
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTheoricalSlots()
     {

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Colizen\AdminBundle\SoapClient\Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

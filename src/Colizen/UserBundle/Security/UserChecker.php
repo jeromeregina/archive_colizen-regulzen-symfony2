@@ -34,15 +34,11 @@ class UserChecker extends BaseChecker
     {
         parent::checkPreAuth($user);
         $existingSessions = $this->em->getRepository('ColizenAdminBundle:Session')->findByUser($user);
-        foreach ($existingSessions as $es)
-        {
+        foreach ($existingSessions as $es) {
             /* @var $es ESession */
-            if (time()-$es->getTime() < $this->sessionLockTime)
-            {
+            if (time()-$es->getTime() < $this->sessionLockTime) {
                 throw new AuthenticationException('security.already_connected.flash.error');
-            }
-            else
-            {
+            } else {
                 $this->em->remove($es);
                 $this->em->flush();
             }

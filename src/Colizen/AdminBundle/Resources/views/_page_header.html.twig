@@ -10,8 +10,8 @@
             </button>
             <a class="navbar-brand regulzen_logo" href="{{ path('regulzen_interface_index') }}">&nbsp;</a>
         </div>
-        
-        
+
+
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             {{ menu is defined ? menu|raw }}
             <ul class="nav navbar-nav navbar-right">
@@ -22,14 +22,14 @@
             <ul class="nav navbar-right">
                 <li>
                   {% if latest_import_action_date %}
-                      {{ 'regulzen.info.import_last_started_at'|trans({'%date%':latest_import_action_date|date('d/m/Y'),'%time%':latest_import_action_date|date('H:i:s')}) }}  
+                      {{ 'regulzen.info.import_last_started_at'|trans({'%date%':latest_import_action_date|date('d/m/Y'),'%time%':latest_import_action_date|date('H:i:s')}) }}
                   {% else %}
                       {{ 'regulzen.info.no_existing_import_logs'|trans }}
                   {% endif %}
                 </li>
                 <li>
                   {% if latest_content_update_date %}
-                      {{ 'regulzen.info.content_last_updated_at'|trans({'%date%':latest_content_update_date|date('d/m/Y'),'%time%':latest_content_update_date|date('H:i:s')}) }}  
+                      {{ 'regulzen.info.content_last_updated_at'|trans({'%date%':latest_content_update_date|date('d/m/Y'),'%time%':latest_content_update_date|date('H:i:s')}) }}
                   {% else %}
                       {{ 'regulzen.info.no_content_updated'|trans }}
                   {% endif %}
@@ -37,4 +37,4 @@
             </ul>
         </nav>
     </div>
-</header>    
+</header>

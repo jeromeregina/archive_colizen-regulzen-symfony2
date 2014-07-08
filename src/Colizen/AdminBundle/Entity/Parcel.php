@@ -5,7 +5,6 @@ namespace Colizen\AdminBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Colizen\AdminBundle\Entity\Status;
 
 /**
  * TblParcel
@@ -37,7 +36,7 @@ class Parcel
      * @ORM\Column(name="PRCL_nb_presentations", type="integer", nullable=false, options={"default" = 1})
      */
     private $nbPresentations = 1;
- 
+
     /**
      * @var Status
      *
@@ -45,7 +44,7 @@ class Parcel
      * @ORM\JoinColumn(name="STATUS_code", referencedColumnName="STATUS_code", nullable=true)
      */
     protected $status;
-    
+
      /**
      * @var integer
      *
@@ -55,37 +54,37 @@ class Parcel
 
     /**
      * @var integer
-     * 
+     *
      * Parcel's weight in grams
-     * 
+     *
      * @ORM\Column(name="PRCL_weight", type="integer", nullable=false, options={"default" = 0})
      */
     private $weight = 0;
     /**
      * @var integer
-     * 
+     *
      * Parcel's width in centimeters
-     * 
+     *
      * @ORM\Column(name="PRCL_width", type="integer", nullable=false, options={"default" = 0})
      */
     private $width = 0;
     /**
      * @var integer
-     * 
+     *
      * Parcel's depth in centimeters
-     * 
+     *
      * @ORM\Column(name="PRCL_depth", type="integer", nullable=false, options={"default" = 0})
      */
     private $depth = 0;
     /**
      * @var integer
-     * 
+     *
      * Parcel's height in centimeters
-     * 
+     *
      * @ORM\Column(name="PRCL_height", type="integer", nullable=false, options={"default" = 0})
      */
     private $height = 0;
-    
+
     /**
      * @var Shipment
      *
@@ -97,7 +96,7 @@ class Parcel
     /**
      * @ORM\OneToMany(targetEntity="Event", mappedBy="parcel", cascade={"persist"})
      */
-    private  $events;
+    private $events;
 
     /**
      * @var \DateTime $created
@@ -153,7 +152,6 @@ class Parcel
     {
         return $this->cargopass;
     }
-
 
     /**
      * Set nbPresentations
@@ -275,11 +273,10 @@ class Parcel
         return $this->updated;
     }
 
-
     /**
      * Add events
      *
-     * @param \Colizen\AdminBundle\Entity\Event $events
+     * @param  \Colizen\AdminBundle\Entity\Event $events
      * @return Parcel
      */
     public function addEvent(\Colizen\AdminBundle\Entity\Event $events)
@@ -302,7 +299,7 @@ class Parcel
     /**
      * Get events
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEvents()
     {
@@ -312,7 +309,7 @@ class Parcel
     /**
      * Set weight
      *
-     * @param integer $weight
+     * @param  integer $weight
      * @return Parcel
      */
     public function setWeight($weight)
@@ -325,7 +322,7 @@ class Parcel
     /**
      * Get weight
      *
-     * @return integer 
+     * @return integer
      */
     public function getWeight()
     {
@@ -335,7 +332,7 @@ class Parcel
     /**
      * Set width
      *
-     * @param integer $width
+     * @param  integer $width
      * @return Parcel
      */
     public function setWidth($width)
@@ -348,7 +345,7 @@ class Parcel
     /**
      * Get width
      *
-     * @return integer 
+     * @return integer
      */
     public function getWidth()
     {
@@ -358,7 +355,7 @@ class Parcel
     /**
      * Set depth
      *
-     * @param integer $depth
+     * @param  integer $depth
      * @return Parcel
      */
     public function setDepth($depth)
@@ -371,7 +368,7 @@ class Parcel
     /**
      * Get depth
      *
-     * @return integer 
+     * @return integer
      */
     public function getDepth()
     {
@@ -381,7 +378,7 @@ class Parcel
     /**
      * Set height
      *
-     * @param integer $height
+     * @param  integer $height
      * @return Parcel
      */
     public function setHeight($height)
@@ -394,7 +391,7 @@ class Parcel
     /**
      * Get height
      *
-     * @return integer 
+     * @return integer
      */
     public function getHeight()
     {
@@ -404,7 +401,7 @@ class Parcel
     /**
      * Set statusCode
      *
-     * @param integer $statusCode
+     * @param  integer $statusCode
      * @return Parcel
      */
     public function setStatusCode($statusCode)
@@ -417,7 +414,7 @@ class Parcel
     /**
      * Get statusCode
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatusCode()
     {
@@ -427,7 +424,7 @@ class Parcel
     /**
      * Set status
      *
-     * @param \Colizen\AdminBundle\Entity\Status $status
+     * @param  \Colizen\AdminBundle\Entity\Status $status
      * @return Parcel
      */
     public function setStatus(Status $status = null)
@@ -440,7 +437,7 @@ class Parcel
     /**
      * Get status
      *
-     * @return \Colizen\AdminBundle\Entity\Status 
+     * @return \Colizen\AdminBundle\Entity\Status
      */
     public function getStatus()
     {

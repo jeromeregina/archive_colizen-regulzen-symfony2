@@ -21,7 +21,7 @@ class DateCycleFormType extends AbstractType
         ->add('cycle', 'entity', array(
                 'class' => 'ColizenAdminBundle:Cycle',
                 'property' => 'name',
-                    'query_builder' => function(EntityRepository $er) {
+                    'query_builder' => function (EntityRepository $er) {
                             return $er->getCyclesQueryBuilder();
                         },
             ))
@@ -42,4 +42,4 @@ class DateCycleFormType extends AbstractType
         return 'date_cycle';
     }
 
-} 
+}

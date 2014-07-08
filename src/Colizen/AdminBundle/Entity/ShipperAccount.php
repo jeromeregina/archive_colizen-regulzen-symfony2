@@ -25,7 +25,7 @@ class ShipperAccount
                                         self::SERVICE_LEVEL_STANDARD=>'regulzen.shipper_account.service_level.standard',
                                         self::SERVICE_LEVEL_PREMIUM=>'regulzen.shipper_account.service_level.premium',
                                     );
-    
+
     /**
      * @var integer
      *
@@ -55,27 +55,27 @@ class ShipperAccount
      * @ORM\Column(name="SHPR_status", type="integer", nullable=false, options={"default" = 0})
      */
     private $status = 0;
-    
+
     /**
      * @var integer
-     * 
+     *
      * 0 = standard
      * 1 = premium
-     * 
+     *
      * @ORM\Column(name="SHPR_service_level", type="integer", nullable=false, options={"default" = 0})
      */
     private $serviceLevel = 0;
-    
+
     /**
      * @var integer
-     * 
+     *
      * 0 = BtoB
      * 1 = BtoC
-     * 
+     *
      * @ORM\Column(name="SHPR_flow_type", type="integer", nullable=false, options={"default" = 0})
      */
     private $flow_type = 0;
-    
+
     /**
      * @var integer
      *
@@ -273,12 +273,10 @@ class ShipperAccount
         return $this;
     }
 
-
-
     /**
      * Set serviceLevel
      *
-     * @param integer $serviceLevel
+     * @param  integer        $serviceLevel
      * @return ShipperAccount
      */
     public function setServiceLevel($serviceLevel)
@@ -291,23 +289,24 @@ class ShipperAccount
     /**
      * Get serviceLevel
      *
-     * @return integer 
+     * @return integer
      */
     public function getServiceLevel()
     {
         return $this->serviceLevel;
     }
     /**
-     * 
+     *
      * @return string translatable service level label
      */
-    public function getServiceLevelLabel(){
+    public function getServiceLevelLabel()
+    {
         return self::$serviceLevelLabels[$this->getServiceLevel()];
     }
     /**
      * Set flow_type
      *
-     * @param integer $flowType
+     * @param  integer        $flowType
      * @return ShipperAccount
      */
     public function setFlowType($flowType)
@@ -320,17 +319,18 @@ class ShipperAccount
     /**
      * Get flow_type
      *
-     * @return integer 
+     * @return integer
      */
     public function getFlowType()
     {
         return $this->flow_type;
     }
     /**
-     * 
+     *
      * @return string translatable flow type label
      */
-    public function getFlowTypeLabel(){
+    public function getFlowTypeLabel()
+    {
         return self::$flowTypeLabels[$this->getFlowType()];
     }
 }

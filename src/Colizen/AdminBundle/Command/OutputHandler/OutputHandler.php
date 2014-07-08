@@ -2,9 +2,6 @@
 
 namespace Colizen\AdminBundle\Command\OutputHandler;
 
-use Colizen\AdminBundle\Command\OutputHandler\AbstractOutputHandler;
-use Symfony\Component\Console\Output\OutputInterface;
-use Doctrine\ORM\EntityManager;
 use Colizen\AdminBundle\Entity\ImportLog;
 
 /**
@@ -17,15 +14,15 @@ class OutputHandler extends AbstractOutputHandler
     {
         if ($this->hasCommandOutput())
             $this->output->writeln($message);
-        
+
         $log = new ImportLog();
         $log->setLevel($level)
             ->setMessage($message)
             ->setIsError($isError)
             ->setCargopass($cargopass);
-        
+
         $this->em->persist($log);
         $this->em->flush();
     }
-    
+
 }

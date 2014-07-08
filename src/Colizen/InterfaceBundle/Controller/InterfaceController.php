@@ -2,7 +2,6 @@
 
 namespace Colizen\InterfaceBundle\Controller;
 
-use Colizen\AdminBundle\Repository\Site;
 use Colizen\InterfaceBundle\Form\Model\DateCycleFormModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,16 +21,13 @@ class InterfaceController extends Controller
     {
         $shipments = array();
 
-
         $cycles = $this->getDoctrine()
             ->getRepository('ColizenAdminBundle:Cycle')
             ->findAll();
 
         $currentDateTime = new \DateTime('now');
-        foreach ($cycles as $cycle)
-        {
-            if ($cycle->getStart() < $currentDateTime && $currentDateTime < $cycle->getEnd())
-            {
+        foreach ($cycles as $cycle) {
+            if ($cycle->getStart() < $currentDateTime && $currentDateTime < $cycle->getEnd()) {
                 $currentCycle = $cycle;
             }
         }
@@ -41,8 +37,7 @@ class InterfaceController extends Controller
 
         $dateCycleForm = $this->createForm('date_cycle', $dateCycle);
         $dateCycleForm->handleRequest($request);
-        if ($dateCycleForm->isValid())
-        {
+        if ($dateCycleForm->isValid()) {
             $dateCycle = $dateCycleForm->getData();
         }
 

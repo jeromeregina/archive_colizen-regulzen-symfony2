@@ -4,7 +4,6 @@ namespace Colizen\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Status
@@ -12,7 +11,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="TBL_status")
  * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\Status")
  */
-class Status {
+class Status
+{
     /**
      * @var integer
      *
@@ -20,14 +20,14 @@ class Status {
      * @ORM\Id
      */
     protected $code;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="STATUS_shortname", type="string", length=4, nullable=false)
      */
     protected $shortname;
-    
+
     /**
      * @var string
      *
@@ -37,7 +37,7 @@ class Status {
     /**
      *
      * @var boolean
-     *  
+     *
      * @ORM\Column(name="STATUS_is_excluded", type="boolean", nullable=false, options={"default"=true})
      */
     protected $isExcluded;
@@ -48,7 +48,7 @@ class Status {
     * @ORM\Column(name="EVENT_created", type="datetime")
     */
    private $created;
-   
+
     /**
     * @var \DateTime $created
     *
@@ -59,7 +59,7 @@ class Status {
     /**
      * Set code
      *
-     * @param integer $code
+     * @param  integer $code
      * @return Status
      */
     public function setCode($code)
@@ -72,7 +72,7 @@ class Status {
     /**
      * Get code
      *
-     * @return integer 
+     * @return integer
      */
     public function getCode()
     {
@@ -82,7 +82,7 @@ class Status {
     /**
      * Set shortname
      *
-     * @param string $shortname
+     * @param  string $shortname
      * @return Status
      */
     public function setShortname($shortname)
@@ -95,7 +95,7 @@ class Status {
     /**
      * Get shortname
      *
-     * @return string 
+     * @return string
      */
     public function getShortname()
     {
@@ -105,7 +105,7 @@ class Status {
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Status
      */
     public function setDescription($description)
@@ -118,7 +118,7 @@ class Status {
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -128,7 +128,7 @@ class Status {
     /**
      * Set isExcluded
      *
-     * @param boolean $isExcluded
+     * @param  boolean $isExcluded
      * @return Status
      */
     public function setIsExcluded($isExcluded)
@@ -141,7 +141,7 @@ class Status {
     /**
      * Get isExcluded
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsExcluded()
     {

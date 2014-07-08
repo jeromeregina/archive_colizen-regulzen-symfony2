@@ -4,8 +4,6 @@ namespace Colizen\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
-use Colizen\AdminBundle\Entity\Shipment;
 
 /**
  * TblCycle
@@ -13,7 +11,8 @@ use Colizen\AdminBundle\Entity\Shipment;
  * @ORM\Table(name="TBL_delivery_address")
  * @ORM\Entity(repositoryClass="Colizen\AdminBundle\Repository\DeliveryAddress")
  */
-class DeliveryAddress {
+class DeliveryAddress
+{
     /**
      * @var integer
      *
@@ -96,7 +95,7 @@ class DeliveryAddress {
      * @ORM\JoinColumn(name="SHPMNT_id", referencedColumnName="SHPMNT_id", onDelete="CASCADE")
      */
     protected $shipment;
-    
+
    /**
     * @var \DateTime $created
     *
@@ -104,7 +103,7 @@ class DeliveryAddress {
     * @ORM\Column(name="DLVRADDR_created", type="datetime")
     */
    private $created;
-   
+
     /**
     * @var \DateTime $created
     *
@@ -112,11 +111,11 @@ class DeliveryAddress {
     * @ORM\Column(name="DLVRADDR_updated", type="datetime")
     */
    private $updated;
-   
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -126,7 +125,7 @@ class DeliveryAddress {
     /**
      * Set country
      *
-     * @param string $country
+     * @param  string          $country
      * @return DeliveryAddress
      */
     public function setCountry($country)
@@ -139,7 +138,7 @@ class DeliveryAddress {
     /**
      * Get country
      *
-     * @return string 
+     * @return string
      */
     public function getCountry()
     {
@@ -149,7 +148,7 @@ class DeliveryAddress {
     /**
      * Set zipcode
      *
-     * @param string $zipcode
+     * @param  string          $zipcode
      * @return DeliveryAddress
      */
     public function setZipcode($zipcode)
@@ -162,7 +161,7 @@ class DeliveryAddress {
     /**
      * Get zipcode
      *
-     * @return string 
+     * @return string
      */
     public function getZipcode()
     {
@@ -172,7 +171,7 @@ class DeliveryAddress {
     /**
      * Set city
      *
-     * @param string $city
+     * @param  string          $city
      * @return DeliveryAddress
      */
     public function setCity($city)
@@ -185,7 +184,7 @@ class DeliveryAddress {
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -195,7 +194,7 @@ class DeliveryAddress {
     /**
      * Set address
      *
-     * @param string $address
+     * @param  string          $address
      * @return DeliveryAddress
      */
     public function setAddress($address)
@@ -208,7 +207,7 @@ class DeliveryAddress {
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -218,7 +217,7 @@ class DeliveryAddress {
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string          $name
      * @return DeliveryAddress
      */
     public function setName($name)
@@ -231,7 +230,7 @@ class DeliveryAddress {
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -241,7 +240,7 @@ class DeliveryAddress {
     /**
      * Set telephone
      *
-     * @param string $telephone
+     * @param  string          $telephone
      * @return DeliveryAddress
      */
     public function setTelephone($telephone)
@@ -254,7 +253,7 @@ class DeliveryAddress {
     /**
      * Get telephone
      *
-     * @return string 
+     * @return string
      */
     public function getTelephone()
     {
@@ -264,7 +263,7 @@ class DeliveryAddress {
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string          $email
      * @return DeliveryAddress
      */
     public function setEmail($email)
@@ -277,7 +276,7 @@ class DeliveryAddress {
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -287,7 +286,7 @@ class DeliveryAddress {
     /**
      * Set longitude
      *
-     * @param string $longitude
+     * @param  string          $longitude
      * @return DeliveryAddress
      */
     public function setLongitude($longitude)
@@ -300,7 +299,7 @@ class DeliveryAddress {
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude()
     {
@@ -310,7 +309,7 @@ class DeliveryAddress {
     /**
      * Set latitude
      *
-     * @param string $latitude
+     * @param  string          $latitude
      * @return DeliveryAddress
      */
     public function setLatitude($latitude)
@@ -323,7 +322,7 @@ class DeliveryAddress {
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude()
     {
@@ -333,7 +332,7 @@ class DeliveryAddress {
     /**
      * Set additionalInformations
      *
-     * @param string $additionalInformations
+     * @param  string          $additionalInformations
      * @return DeliveryAddress
      */
     public function setAdditionalInformations($additionalInformations)
@@ -346,7 +345,7 @@ class DeliveryAddress {
     /**
      * Get additionalInformations
      *
-     * @return string 
+     * @return string
      */
     public function getAdditionalInformations()
     {
@@ -356,22 +355,22 @@ class DeliveryAddress {
     /**
      * Set shipment
      *
-     * @param \Colizen\AdminBundle\Entity\Shipment $shipment
+     * @param  \Colizen\AdminBundle\Entity\Shipment $shipment
      * @return DeliveryAddress
      */
     public function setShipment(Shipment $shipment)
     {
         $shipment->setDeliveryAddress($this);
-        
+
         $this->shipment = $shipment;
-        
+
         return $this;
     }
 
     /**
      * Get shipment
      *
-     * @return \Colizen\AdminBundle\Entity\Shipment 
+     * @return \Colizen\AdminBundle\Entity\Shipment
      */
     public function getShipment()
     {
@@ -381,7 +380,7 @@ class DeliveryAddress {
     /**
      * Set zipcodeExtended
      *
-     * @param string $zipcodeExtended
+     * @param  string          $zipcodeExtended
      * @return DeliveryAddress
      */
     public function setZipcodeExtended($zipcodeExtended)
@@ -394,7 +393,7 @@ class DeliveryAddress {
     /**
      * Get zipcodeExtended
      *
-     * @return string 
+     * @return string
      */
     public function getZipcodeExtended()
     {
@@ -404,7 +403,7 @@ class DeliveryAddress {
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime       $created
      * @return DeliveryAddress
      */
     public function setCreated($created)
@@ -417,7 +416,7 @@ class DeliveryAddress {
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -427,7 +426,7 @@ class DeliveryAddress {
     /**
      * Set updated
      *
-     * @param \DateTime $updated
+     * @param  \DateTime       $updated
      * @return DeliveryAddress
      */
     public function setUpdated($updated)
@@ -440,7 +439,7 @@ class DeliveryAddress {
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
