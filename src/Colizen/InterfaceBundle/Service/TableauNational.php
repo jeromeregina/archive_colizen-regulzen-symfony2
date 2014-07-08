@@ -43,6 +43,7 @@ class TableauNational implements TableauNationalInterface
             $sitesData[$site->getId()]['departRate']         = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['avancementRate']     = self::NOT_AVAILABLE_LABEL;
             $sitesData[$site->getId()]['echecRate']          = self::NOT_AVAILABLE_LABEL;
+            $sitesData[$site->getId()]['horsCreneauRate']    = self::NOT_AVAILABLE_LABEL;
         }
 
         // nombre d'expeditions
@@ -139,6 +140,24 @@ class TableauNational implements TableauNationalInterface
                 }
             }
         }
+
+        // Pourcentage de colis remis Hors Créneau
+        $colisHorsCreneau = $this->getSiteRepository()->countColisHorsCreneauBySite($date, $cycle);
+        foreach ($allColis as $countColis)
+        {
+            $siteId = $countColis['site']->getId();
+
+            foreach ($colisHorsCreneau as $colisHorsCreneauLine)
+            {
+                if ($siteId == $colisHorsCreneauLine['site']->getId())
+                {
+                    $value = $colisHorsCreneauLine['countColisHorsCreneau'] / $countColis['countColis'];
+                    $sitesData[$siteId]['horsCreneauRate'] = round($value, 2) . '%';
+                }
+            }
+        }
+
+        
 
 
 
