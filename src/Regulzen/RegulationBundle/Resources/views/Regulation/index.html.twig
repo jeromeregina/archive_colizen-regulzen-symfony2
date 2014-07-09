@@ -1,0 +1,146 @@
+{% extends "RegulzenRegulationBundle::layout.html.twig" %}
+
+{#{% block third_party_css %}#}
+    {#{{ parent() }}#}
+    {#<link rel="stylesheet" href="{{ asset('bundles/regulzenregulation/ace/css/ui.jqgrid.css ') }}" />#}
+{#{% endblock %}#}
+
+{#{% block javascripts %}#}
+    {#{{ parent() }}#}
+    {#<script src="{{ asset('bundles/regulzenregulation/ace/js/jqGrid/jquery.jqGrid.min.js') }}"></script>#}
+{#{% endblock %}#}
+
+
+
+{% block content %}
+{{ parent() }}
+    <div class="row ">
+        {{ form_start(dateCycleForm, { 'attr': {'class': 'form-inline'} }) }}
+
+        <div class="col-md-3 col-md-offset-3">
+            <a href="{{ path('regulzen_regulation_index') }}" title="Aller à la date et au cycle courant" style="margin-right: 20px;">
+                <i class="ace-icon fa fa-home home-icon"></i>
+            </a>
+            <div class="form-group">
+                {{ form_widget(dateCycleForm.date) }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                {{ form_widget(dateCycleForm.cycle) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_widget(dateCycleForm.valider) }}
+            </div>
+        </div>
+
+        {{ form_rest(dateCycleForm) }}
+        {{ form_end(dateCycleForm) }}
+    </div>
+    <br />
+    <div class="row">
+        <table class="table table-bordered table-striped">
+            <thead class="thin-border-bottom">
+                <tr>
+
+                    <th>Site</th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="Nombre d'expéditions">Nbr Expéditions</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="Nombre de colis (COEC et EDIR)">Nbr Colis</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="Pourcentage de dispatch (Avancement de l'étiquetage)">% Dispatch</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="Pourcentage de contrôle">% Contrôle</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="Pourcentage de colis au départ">% Départ</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="Pourcentage d'avancement">% Avancement</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="Pourcentage d'échec">% Echec</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="Pourcentage de colis remis hors créneau">% Hors Créneau</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="">Prev Tx HC</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="">Prev minutes HC</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="">Prev livreur sensible</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="">Manquant</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="">Surplus</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="">CNML</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="">Inv Tou</span>
+                    </th>
+                    <th>
+                        <i class="ace-icon fa fa-caret-right blue"></i>
+                        <span title="">% Cloture</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for siteId, siteRow in sitesData %}
+                <tr>
+                    <td>{{ siteRow['site'].name }}</td>
+                    <td>{{ siteRow['nombreExpeditions']  |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['countColisCoecEdir'] |make_na_small |raw }}</td>
+                    <td>{{ siteRow['dispatchRate']       |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['controleRate']       |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['departRate']         |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['avancementRate']     |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['echecRate']          |make_na_small |raw  }}</td>
+                    <td>{{ siteRow['horsCreneauRate']    |make_na_small |raw  }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+    <div class="row">
+        <h4>Détail des tournées du {{ dateCycleForm.vars.value.date |  date('d/m/Y') }}, Site de %site%, Cycle {{ dateCycleForm.vars.value.cycle }}</h4>
+
+    </div>
+{% endblock %}

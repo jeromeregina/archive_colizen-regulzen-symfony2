@@ -1,17 +1,20 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
+
     role_hierarchy:
+        ROLE_SUPER_ADMIN:      ROLE_ADMIN
+        ROLE_ADMIN:            ROLE_REGUL, ROLE_CUSTOMER_SERVICE
+        ROLE_REGUL:            ROLE_USER
         ROLE_CUSTOMER_SERVICE: ROLE_USER
-        ROLE_REGUL:       ROLE_USER
-        ROLE_ADMIN:       ROLE_REGUL, ROLE_CUSTOMER_SERVICE
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     session_fixation_strategy: none
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+
     firewalls:
-        dev:
+        dev_assets:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
@@ -22,13 +25,12 @@ security:
             logout:       true
             anonymous:    true
 
-
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$,    role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register,  role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/_, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/css, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_,         role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/css,       role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/customer_service, roles: [ROLE_CUSTOMER_SERVICE,ROLE_REGUL] }
         - { path: ^/, role: ROLE_REGUL }

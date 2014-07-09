@@ -1,0 +1,40 @@
+{% extends "RegulzenAdminBundle::layout.html.twig" %}
+
+{% block content -%}
+    <h1>Logs imports WebService list</h1>
+    <div class="count">
+
+    </div>
+    <table class="records_list table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'il.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Date', 'il.date') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Message', 'il.message') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Cargopass', 'il.cargopass') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Statut', 'il.statusCode') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Tournée', 'tc.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Level', 'il.level') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in pagination %}
+            <tr {% if entity.isError %}class="red danger"{% endif %}>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.message }}</td>
+                <td>{{ entity.cargopass }}</td>
+                <td>{{ entity.status.shortname }}</td>
+                <td>{{ entity.tour.tourCode.code }}</td>
+                <td>{{ entity.levelLabel|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Results: {{ pagination.getTotalItemCount }}</th>
+                <th colspan="2">{{ knp_pagination_render(pagination, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}</th>
+            </tr>
+        </tfoot>
+    </table>
+    {% endblock %}

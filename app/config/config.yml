@@ -30,13 +30,13 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - ColizenAdminBundle:Form:form_div_layout.html.twig
+            - RegulzenAdminBundle:Form:form_div_layout.html.twig
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ColizenAdminBundle, ColizenInterfaceBundle ]
+    bundles:        [ RegulzenAdminBundle, RegulzenRegulationBundle ]
     #java: /usr/bin/java
     filters:
         less:
@@ -71,12 +71,12 @@ doctrine:
         auto_mapping: true
         dql:
             numeric_functions:
-                regexp: Colizen\AdminBundle\Query\Regexp
+                regexp: Regulzen\CoreBundle\Query\Regexp
 
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Colizen\UserBundle\Entity\User
+    user_class: Regulzen\UserBundle\Entity\User
     
 # Swiftmailer Configuration
 swiftmailer:

@@ -4,8 +4,8 @@
         <!-- toggle buttons are here or inside brand container -->
 
         <div class="navbar-header pull-left">
-            <a href="{{ path('regulzen_interface_index') }}" title="Regulzen">
-                <img src="{{ asset('bundles/colizeninterface/images/logo_colizen_45.png') }}" />
+            <a href="{{ path('regulzen_regulation_index') }}" title="Regulzen">
+                <img src="{{ asset('bundles/regulzenregulation/images/logo_colizen_45.png') }}" />
             </a>
         </div>
         <!-- /.navbar-header -->
@@ -16,7 +16,7 @@
                 <!-- user buttons such as messages, notifications and user menu -->
                 {% if is_granted('ROLE_ADMIN') %}
                 <li class="red">
-                    <a href="{{ path('colizen_admin_admin_index') }}">Administration</a>
+                    <a href="{{ path('regulzen_admin_admin_index') }}">Administration</a>
                 </li>
                 {% endif %}
                 <li class="light-blue">

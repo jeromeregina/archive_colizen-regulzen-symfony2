@@ -1,0 +1,15 @@
+{% extends "RegulzenAdminBundle::layout.html.twig" %}
+
+{% from "RegulzenAdminBundle:Form:_macros.html.twig" import btn %}
+
+{% block content %}
+    <h1>Cycle creation</h1>
+
+    {{ form(form) }}
+
+   <ul class="record_actions">
+        <li>
+            {{ btn('cycle','list') }}
+        </li>
+   </ul>
+{% endblock %}

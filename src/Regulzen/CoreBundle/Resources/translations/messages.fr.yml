@@ -1,0 +1,7 @@
+regulzen:
+    mails:
+        import:
+            introduction: "Nouvelles entrées administrables trouvés lors de l'import des fichiers suivants:"
+            file: "import du fichier '%filename%':"
+            new_tour_code: un nouveau tour_code à été ajouté avec l'id %id% et est administrable à l'addresse %url%
+            new_shipper_account: un nouveau compte chargeur à été ajouté avec l'id %id% et est administrable à l'addresse %url%

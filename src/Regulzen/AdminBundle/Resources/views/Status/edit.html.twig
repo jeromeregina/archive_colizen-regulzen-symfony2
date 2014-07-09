@@ -1,0 +1,16 @@
+{% extends "RegulzenAdminBundle::layout.html.twig" %}
+
+{% from "RegulzenAdminBundle:Form:_macros.html.twig" import btn %}
+
+{% block content %}
+    <h1>Status edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        {{ btn('status','list') }}
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="regulzen_core.soapclient.czn_webservice.class">Regulzen\CoreBundle\SoapClient\RegulzenWebService</parameter>
+        <parameter key="regulzen_core.event_listener.kernel_request.class">Regulzen\AdminBundle\Listener\Request</parameter>
+        <parameter key="regulzen_core.twig.extension.class">Regulzen\CoreBundle\Twig\RegulzenTwigExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="regulzen_core.soapclient.czn_webservice" class="%regulzen_core.soapclient.czn_webservice.class%">
+            <argument>%czn_webservice%</argument>
+        </service>
+        <service id="webservice" alias="regulzen_core.soapclient.czn_webservice" />
+        <service id="kernel.listener.request" class="%regulzen_core.event_listener.kernel_request.class%">
+            <argument>%session_login_lock_time%</argument>
+            <argument type="service" id="security.context" />
+            <argument type="service" id="braincrafted_bootstrap.flash" />
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_listener" event="kernel.request" method="sessionIdleTimeCheck" />
+        </service>
+
+        <service id="regulzen_core.twig.extension" class="%regulzen_core.twig.extension.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

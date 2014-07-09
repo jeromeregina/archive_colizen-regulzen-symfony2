@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% set menu = knp_menu_render("RegulzenAdminBundle:Builder:adminMenu", { 'style': 'navbar' }) %}
+{% set _content = block('content') %}
+
+{% block main_contenainer %}
+        <div class="main-content">
+            <div class="page-content">
+                {{ _content|raw }}
+            </div>
+        </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets '@RegulzenRegulationBundle/Resources/public/ace/css/bootstrap-timepicker.css'
+        filter='cssrewrite'
+        output='/css/backoffice.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all" />
+    {% endstylesheets %}
+    {% stylesheets '@RegulzenAdminBundle/Resources/assets/css/*.less'
+        filter='less'
+        output='/css/widgets.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@RegulzenAdminBundle/Resources/assets/js/*'
+                   '@RegulzenRegulationBundle/Resources/public/ace/js/date-time/bootstrap-timepicker.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "RegulzenAdminBundle::layout.html.twig" %}
+
+{% from "RegulzenAdminBundle:Form:_macros.html.twig" import btn,bool %}
+
+{% block content %}
+    <h1>Status</h1>
+
+    {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
+
+    <table class="record_properties table-hover table-striped">
+        <tbody>
+            <tr>
+                <th>Code</th>
+                <td>{{ entity.code }}</td>
+            </tr>
+            <tr>
+                <th>Short name</th>
+                <td>{{ entity.shortname }}</td>
+            </tr>
+            <tr>
+                <th>Is Excluded?</th>
+                <td>{{ bool(entity.isExcluded) }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        {{ btn('status','list') }}
+    </li>
+    <li>
+        {{ btn('status','edit',entity.code) }}
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

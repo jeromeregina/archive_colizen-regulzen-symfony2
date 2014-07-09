@@ -1,0 +1,15 @@
+{% extends "RegulzenAdminBundle::layout.html.twig" %}
+
+{% from "RegulzenAdminBundle:Form:_macros.html.twig" import btn %}
+
+{% block content %}
+    <h1>ShipperAccount creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        {{ btn('shipper_account','list') }}
+    </li>
+</ul>
+{% endblock %}
