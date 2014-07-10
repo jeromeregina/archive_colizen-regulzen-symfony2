@@ -10,14 +10,14 @@
 
 {% block stylesheets %}
     {% stylesheets '@RegulzenRegulationBundle/Resources/public/ace/css/bootstrap-timepicker.css'
-    filter='cssrewrite'
-    output='/css/backoffice.css'
+        filter='cssrewrite'
+        output='/css/regulzen_admin.css'
     %}
     <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all" />
     {% endstylesheets %}
     {% stylesheets '@RegulzenAdminBundle/Resources/assets/css/*.less'
-    filter='less'
-    output='/css/widgets.css'
+        filter='less'
+        output='/css/widgets.css'
     %}
     <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all" />
     {% endstylesheets %}

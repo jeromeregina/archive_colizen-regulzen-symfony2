@@ -15,7 +15,7 @@
             <ul class="nav ace-nav">
                 <!-- user buttons such as messages, notifications and user menu -->
                 {% if is_granted('ROLE_ADMIN') %}
-                <li class="red">
+                <li class="purple">
                     <a href="{{ path('regulzen_admin_admin_index') }}">Administration</a>
                 </li>
                 {% endif %}
@@ -28,7 +28,7 @@
                         {% endif %}
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
-                    <ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">
+                    <ul id="regulzen-user-menu" class="user-menu dropdown-menu dropdown-menu-right dropdown-caret dropdown-close">
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">
                                 {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
