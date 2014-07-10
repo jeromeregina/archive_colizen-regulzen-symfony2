@@ -18,7 +18,7 @@
 	}
 
    > a, .navbar-nav li a {
-		background-color: @ace-nav-default;
+		background-color: @ace-nav-purple;
 		color: #FFF;
 
 		display: block;
@@ -51,8 +51,10 @@
 	}
 
 	> a:hover , > a:focus, &.open > a {
-		background-color: desaturate(darken(@ace-nav-default, 4%), 4%);
-		color: #FFF;
+//		background-color: desaturate(darken(@ace-nav-default, 4%), 4%);
+//		color: #FFF;
+      background-color: rgba(0,0,0,0.1) !important;
+      color: @navbar-text-color !important;
 	}
 
 	//different colors
@@ -118,6 +120,7 @@
 	///
 	.dropdown-menu {
 		z-index: @zindex-navbar-fixed + 1;
+        background-color: @ace-nav-purple;
 	}
  }
  
