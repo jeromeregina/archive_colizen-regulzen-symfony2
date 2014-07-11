@@ -42,7 +42,8 @@ class TourPlanning extends AbstractImporter
             fwrite($handle, $file->getContents());
             fclose($handle);
         } else {
-            $filename = $file->getFilename();
+            $filename = $file->getPathname();
+
         }
         $peo=$this->phpExcel->createPHPExcelObject($filename);
         $sheetData=$peo->getActiveSheet()->toArray(null,true,true,true);
