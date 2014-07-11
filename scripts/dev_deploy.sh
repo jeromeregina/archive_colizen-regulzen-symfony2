@@ -1,5 +1,5 @@
 #!/bin/bash
 
 php app/console cache:clear
-php app/console assets:install web
+php app/console assets:install web --symlink
 php app/console assetic:dump
