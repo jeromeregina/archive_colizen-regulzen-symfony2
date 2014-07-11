@@ -4,6 +4,7 @@ namespace Regulzen\RegulationBundle\Service;
 
 use Regulzen\CoreBundle\Entity\Cycle;
 use Doctrine\ORM\EntityManagerInterface;
+use Regulzen\CoreBundle\Entity\Site;
 
 class TableauNational implements TableauNationalInterface
 {
@@ -138,9 +139,29 @@ class TableauNational implements TableauNationalInterface
         return $sitesData;
     }
 
+    public function getTableauTournees(\DateTime $date, Cycle $cycle, Site $site)
+    {
+        $toursData = array();
+
+        $tours = $this->getTourRepository()->getSiteTours($site, $date, $cycle);
+
+        /* @var $tour \Regulzen\CoreBundle\Entity\Tour */
+        foreach ($tours as $tour)
+        {
+            $toursData[$tour->getId()]['tourCode'] = $tour->getTourCode()->getCode();
+            // TODO completer les colonnes manquantes
+        }
+
+        return $toursData;
+    }
+
     private function getSiteRepository()
     {
         return $this->entityManager->getRepository('RegulzenCoreBundle:Site');
     }
 
+    private function getTourRepository()
+    {
+        return $this->entityManager->getRepository('RegulzenCoreBundle:Tour');
+    }
 }

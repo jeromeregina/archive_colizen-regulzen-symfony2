@@ -1,0 +1,12 @@
+regulzen_regulation_index:
+    path: /
+    defaults:  { _controller: RegulzenRegulationBundle:Regulation:index }
+
+regulzen_regulation_siteTours:
+    path:   /site/{siteId}/tours
+    defaults:  { _controller: RegulzenRegulationBundle:Regulation:sitTours }
+    requirements:
+        siteId:  \d+
+        _method:  GET
+    options:
+        expose: true

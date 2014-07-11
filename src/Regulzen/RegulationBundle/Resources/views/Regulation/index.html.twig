@@ -10,6 +10,21 @@
     {#<script src="{{ asset('bundles/regulzenregulation/ace/js/jqGrid/jquery.jqGrid.min.js') }}"></script>#}
 {#{% endblock %}#}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/regulzenregulation/js/angular-1.2.19/angular.min.js') }}"></script>
+    <script type="text/javascript">
+        var ToursApp = angular.module('ToursApp', []);
+
+        var url = Routing.generate('regulzen_regulation_siteTours', {siteId: '{{ sitesData |keys |first }}', date: '{{ dateCycleForm.vars.value.date |date('Y-m-d') }}', cycle: '{{ dateCycleForm.vars.value.cycle.id }}' });
+
+        ToursApp.controller('TourTableController', function($scope, $http) {
+            $http.get(url).success(function(data){
+                $scope.tours = data;
+            });
+        });
+    </script>
+{% endblock %}
 
 
 {% block content %}
@@ -141,6 +156,26 @@
     </div>
     <div class="row">
         <h4>Détail des tournées du {{ dateCycleForm.vars.value.date |  date('d/m/Y') }}, Site de %site%, Cycle {{ dateCycleForm.vars.value.cycle }}</h4>
+        <table class="table table-bordered table-striped" ng-app="ToursApp" ng-controller="TourTableController">
+            <thead class="thin-border-bottom">
+            <tr>
+                <th>Tournée</th>
+                <th>NB Expéditions</th>
+                <th>Trigramme Livreur</th>
+                <th>NB Colis</th>
+                <th>% Dispatch</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="tour in tours">
+                    <td>{{ '{{' }} tour.tourCode }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
 
     </div>
 {% endblock %}

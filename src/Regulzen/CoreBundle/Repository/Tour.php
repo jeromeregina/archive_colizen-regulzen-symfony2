@@ -3,8 +3,9 @@
 namespace Regulzen\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Regulzen\CoreBundle\Entity\Cycle;
+use Regulzen\CoreBundle\Entity\Site;
 use Regulzen\CoreBundle\Entity\Tour as Entity;
-use Regulzen\CoreBundle\Entity\Site as SiteEntity;
 
 class Tour extends EntityRepository
 {
@@ -32,4 +33,23 @@ class Tour extends EntityRepository
            return $new;
 
         }
+
+    public function getSiteTours(Site $site, \DateTime $date, Cycle $cycle)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT t
+                           FROM RegulzenCoreBundle:Tour t
+                             JOIN t.site s
+                             JOIN t.theoricalSlots sl
+                           WHERE t.date = :date
+                             AND sl.theoricalHour > :cycleStartHour
+                             AND sl.theoricalHour < :cycleEndHour
+                             AND s.id = :siteId
+                           ')
+            ->setParameter('date', $date)
+            ->setParameter('cycleStartHour', $cycle->getStart())
+            ->setParameter('cycleEndHour',   $cycle->getEnd())
+            ->setParameter('siteId',   $site->getId())
+            ->getResult();
+    }
 }

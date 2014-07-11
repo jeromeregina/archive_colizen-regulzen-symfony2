@@ -1,7 +1,5 @@
 regulzen_regulation:
-    resource: "@RegulzenRegulationBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    resource: "@RegulzenRegulationBundle/Resources/config/routing.yml"
 
 regulzen_admin:
     resource: "@RegulzenAdminBundle/Controller/"

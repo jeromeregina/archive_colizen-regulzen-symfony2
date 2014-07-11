@@ -71,6 +71,12 @@ class TourCode
         $this->cycles = new ArrayCollection();
     }
 
+
+    public function __toString()
+    {
+        return ''.$this->code;
+    }
+
     /**
      * Get id
      *
