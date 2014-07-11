@@ -25,7 +25,9 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
+            // Regulzen Bundles
             //new BeSimple\DeploymentBundle\BeSimpleDeploymentBundle(),
             new Regulzen\CoreBundle\RegulzenCoreBundle(),
             new Regulzen\UserBundle\RegulzenUserBundle(),
