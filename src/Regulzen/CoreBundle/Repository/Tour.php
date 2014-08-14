@@ -4,7 +4,7 @@ namespace Regulzen\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Regulzen\CoreBundle\Entity\Cycle;
-use Regulzen\CoreBundle\Entity\Site;
+use Regulzen\CoreBundle\Entity\Site as SiteEntity;
 use Regulzen\CoreBundle\Entity\Tour as Entity;
 
 class Tour extends EntityRepository
@@ -34,7 +34,7 @@ class Tour extends EntityRepository
 
         }
 
-    public function getSiteTours(Site $site, \DateTime $date, Cycle $cycle)
+    public function getSiteTours(SiteEntity $site, \DateTime $date, Cycle $cycle)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT t
